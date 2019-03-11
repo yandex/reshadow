@@ -54,8 +54,12 @@ import styled from 'reshadow';
 ```js
 import {readableColor, rgba} from 'polished';
 
-const Button = ({bgcolor = 'lightgray', size = 's', children, ...props}) =>
-    styled`
+const Button = ({
+    bgcolor = 'lightgray',
+    size = 's',
+    children,
+    ...props
+}) => styled`
     button {
         cursor: pointer;
         padding: 5px 10px;
@@ -91,32 +95,31 @@ const Button = ({bgcolor = 'lightgray', size = 's', children, ...props}) =>
         font-size: 14px;
     }
 `(
-        /* use:size property would not pass to the DOM */
-        <button {...props} use:size={size}>
-            {children}
-        </button>,
-    );
+    /* use:size property would not pass to the DOM */
+    <button {...props} use:size={size}>
+        {children}
+    </button>,
+);
 ```
 
 ```js
-const Container = () =>
-    styled`
+const Container = () => styled`
     Button + Button {
         margin-left: 10px;
     }
 `(
-        <div>
-            <Button size="m" bgcolor="lightgray">
-                lightgray
-            </Button>
-            <Button size="m" bgcolor="orange">
-                orange
-            </Button>
-            <Button size="m" bgcolor="rebeccapurple">
-                rebeccapurple
-            </Button>
-        </div>,
-    );
+    <div>
+        <Button size="m" bgcolor="lightgray">
+            lightgray
+        </Button>
+        <Button size="m" bgcolor="orange">
+            orange
+        </Button>
+        <Button size="m" bgcolor="rebeccapurple">
+            rebeccapurple
+        </Button>
+    </div>,
+);
 ```
 
 ![buttons](docs/assets/2019-03-07-12-46-01.png)
@@ -133,8 +136,11 @@ import styled from 'reshadow';
 
 import styles from './styles.css';
 
-export const Button = ({size, children}) =>
-    styled(styles)(<button use:size={size}>{children}</button>);
+export const Button = ({size, children}) => styled(styles)(
+    <button use:size={size}>
+        {children}
+    </button>
+);
 ```
 
 _Button/styles.css_
@@ -160,15 +166,20 @@ const anotherStyles = css`
     }
 `;
 
-export const Button = ({size, children}) =>
-    styled(props.another && anotherStyles)`
-        button {
-            /* button styles */
-        }
-        button[|size='m'] {
-            /* button styles for the size */
-        }
-    `(<button use:size={size}>{children}</button>);
+export const Button = ({size, children}) => styled(
+    props.another && anotherStyles
+)`
+    button {
+        /* button styles */
+    }
+    button[|size='m'] {
+        /* button styles for the size */
+    }
+`(
+    <button use:size={size}>
+        {children}
+    </button>
+);
 ```
 
 ## Setup
@@ -181,12 +192,15 @@ With [CRA 2](https://github.com/facebook/create-react-app) (Create React App) or
 import React from 'react';
 import styled from 'reshadow/macro';
 
-export const Button = ({children}) =>
-    styled`
+export const Button = ({children}) => styled`
     button {
         /* button styles */
     }
-`(<button>{children}</button>);
+`(
+    <button>
+        {children}
+    </button>
+);
 ```
 
 Options (via [babel-plugin-macros config](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/author.md#config-experimental)) are the same as `reshadow` [babel options](#babel-options), but with different defaults:
