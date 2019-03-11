@@ -27,6 +27,8 @@ npm i --save reshadow@alpha
 -   All the benefits of the PostCSS ecosystem
 -   Interoperable. Use it with `React`, `Preact` or `Vue`
 
+Please check the [reshadow.dev](https://reshadow.dev) for more information and examples.
+
 ## Docs
 
 -   [Usage](#usage)
