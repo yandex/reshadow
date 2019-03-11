@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`babel should transform the code 1`] = `
+<button
+  class="__button _use--theme_normal"
+  style="--c8_0:grey"
+>
+  <div
+    class="__use--content"
+  >
+    content
+  </div>
+  <div
+    class="__use--control"
+  >
+    click
+  </div>
+</button>
+`;
+
+exports[`babel should transform the code 2`] = `
+<button
+  class="__button _use--theme_normal _type_submit _disabled"
+  disabled=""
+  style="--c8_0:grey"
+  type="submit"
+>
+  <div
+    class="__use--content"
+  >
+    content
+  </div>
+  <div
+    class="__use--control"
+  >
+    click
+  </div>
+</button>
+`;
