@@ -1,0 +1,11 @@
+dist: trusty
+language: node_js
+node_js:
+  - 8
+
+cache: yarn
+
+script:
+  - yarn --version
+  - yarn lint
+  - yarn test -- --coverage && yarn coveralls

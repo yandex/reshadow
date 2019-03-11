@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`postcss should should keep elements under html namespace 1`] = `
+".__content button {
+    color: red;
+}
+@value __elements__: '{\\"content\\":{\\"mods\\":{},\\"props\\":{}}}'"
+`;
+
+exports[`postcss should transform the code 1`] = `
+".__button {
+    color: red;
+}
+
+.__button._disabled {
+    color: grey;
+}
+
+.__button._type._type_submit {
+    border: 1px solid red;
+}
+
+@value __elements__: '{\\"button\\":{\\"mods\\":{},\\"props\\":{\\"disabled\\":[\\"\\"],\\"type\\":[\\"submit\\"]}}}'"
+`;
+
+exports[`postcss should transform the code with namespaces 1`] = `
+".__use--button,.__use--button {
+    color: red;
+}
+
+.__button .__use--content,.__button .__use--content {
+    font-weight: bold;
+}
+
+.__button._use--disabled,.__button._use--disabled {
+    color: grey;
+}
+
+.__button._use--size._use--size_m,.__button._use--size._use--size_m {
+    font-size: 14px;
+}
+
+@value __elements__: '{\\"use--button\\":{\\"mods\\":{},\\"props\\":{}},\\"button\\":{\\"mods\\":{\\"use--disabled\\":[\\"\\"],\\"use--size\\":[\\"m\\"]},\\"props\\":{}},\\"use--content\\":{\\"mods\\":{},\\"props\\":{}}}'"
+`;
