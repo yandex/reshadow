@@ -5,7 +5,6 @@ const template = require('@babel/template').default;
 const {addDefault} = require('@babel/helper-module-imports');
 const {stripIndent} = require('common-tags');
 const resolve = require('resolve');
-const createPostCSS = require('./postcss');
 
 const utils = require('../common/utils');
 
@@ -508,7 +507,7 @@ module.exports = ({types: t}, pluginOptions = {}) => {
                     // babel 6 compatibility
                     Object.assign(options, state.opts);
                     if (options.postcss && !postcss) {
-                        postcss = createPostCSS(options.postcss);
+                        postcss = require('./postcss')(options.postcss);
                     }
                     if (options.files && !cssFileRe) {
                         cssFileRe = new RegExp(options.files);
