@@ -176,8 +176,6 @@ function map(element) {
     }
 
     if (useProps) {
-        console.log(useProps);
-
         for (let key in useProps) {
             const value = useProps[key];
             cn = appendClassname(cn, PREFIX + key, value);

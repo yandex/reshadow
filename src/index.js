@@ -1,2 +1,2 @@
-export * from './reshadow/styled';
-export {default} from './reshadow/styled';
+export * from './reshadow';
+export {default} from './reshadow';
