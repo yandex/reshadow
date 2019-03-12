@@ -66,6 +66,36 @@ describe('postcss', () => {
         expect(code).toMatchSnapshot();
     });
 
+    describe('stats', () => {
+        const transform = createTransform({stats: true});
+
+        it('should transform the code with stats', () => {
+            const code = transform`
+                [type="submit"] {
+                    padding: 10px;
+                }
+
+                button {
+                    color: red;
+                }
+
+                button[disabled] {
+                    color: grey;
+                }
+
+                button[type="submit"] {
+                    border: 1px solid red;
+                }
+
+                button[use|size="s"] {
+                    font-size: 14px;
+                }
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+    });
+
     describe('bem', () => {
         const transform = createTransform({bem: true});
 

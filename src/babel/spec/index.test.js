@@ -133,7 +133,7 @@ describe('babel', () => {
     it('should transform with css-in-js code with variables with string inline style', async () => {
         const {code} = await transform.with({
             ...defaultOptions,
-            plugins: [[require.resolve('..'), {inlineStyle: true}]],
+            plugins: [[require.resolve('..'), {stringStyle: true}]],
         })`
             import React from 'react'
             import styled from 'reshadow'

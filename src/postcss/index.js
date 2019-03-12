@@ -1,11 +1,9 @@
 const postcss = require('postcss');
 const parser = require('postcss-selector-parser');
 
-/**
- * Temporary solution to skip cosmiconfig usage
- */
 const config = {
-    namespace: 'use',
+    scope: 'use',
+    stats: false,
 };
 
 const fromPairs = x =>
@@ -14,7 +12,7 @@ const fromPairs = x =>
 const sortByKeys = obj => fromPairs(Object.entries(obj).sort());
 
 module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
-    const {scope = config.namespace} = options;
+    const {scope, stats} = Object.assign({}, config, options);
 
     const processNamespace = node => {
         if (node.namespace === 'html') {
@@ -177,13 +175,18 @@ module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
             value.props = sortByKeys(props);
         });
 
-        root.append({
-            name: 'value',
-            params: `__elements__: '${JSON.stringify(elements, (key, value) => {
-                if (value instanceof Set) return Array.from(value);
+        if (stats) {
+            root.append({
+                name: 'value',
+                params: `__elements__: '${JSON.stringify(
+                    elements,
+                    (key, value) => {
+                        if (value instanceof Set) return Array.from(value);
 
-                return value;
-            })}'`,
-        });
+                        return value;
+                    },
+                )}'`,
+            });
+        }
     };
 });
