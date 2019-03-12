@@ -20,7 +20,7 @@ exports[`babel should transform the code 1`] = `
 
 exports[`babel should transform the code 2`] = `
 <button
-  class="__button _use--theme_normal _type_submit _disabled"
+  class="__button _type_submit _disabled _use--theme_normal"
   disabled=""
   style="--c8_0:grey"
   type="submit"

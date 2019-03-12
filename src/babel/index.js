@@ -55,14 +55,21 @@ const isReactFragment = node => {
 };
 
 const defaultOptions = {
+    target: 'react',
     postcss: false,
     elementFallback: true,
     files: false,
     stringStyle: false,
 };
 
-module.exports = ({types: t}, options = {}) => {
-    options = Object.assign({}, defaultOptions, options);
+module.exports = ({types: t}, pluginOptions = {}) => {
+    const options = Object.assign({}, defaultOptions, pluginOptions);
+
+    if (options.target === 'preact') {
+        if (pluginOptions.stringStyle !== undefined) {
+            options.stringStyle = true;
+        }
+    }
 
     let STYLED = new Set();
     let BINDINGS = {};
