@@ -47,11 +47,7 @@ export default (entry, options = {}) => {
         },
         optimization: {
             splitChunks: {
-                chunks(chunk) {
-                    console.log({chunk});
-                    // exclude `my-excluded-chunk`
-                    return chunk.name !== 'my-excluded-chunk';
-                },
+                chunks: 'all',
             },
         },
     });

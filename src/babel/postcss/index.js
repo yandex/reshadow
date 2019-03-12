@@ -39,7 +39,7 @@ function getScopedNameGenerator(opts) {
 
 /* css-modules */
 
-module.exports = ({plugins = [], generateScopedName}) => {
+module.exports = ({plugins = [], options = {}, generateScopedName}) => {
     generateScopedName = getScopedNameGenerator({generateScopedName});
 
     const modulesPlugins = [
@@ -67,11 +67,12 @@ module.exports = ({plugins = [], generateScopedName}) => {
 
     const processor = postcss([
         atImport({
+            ...options.import,
             sync: true,
         }),
         ...plugins,
-        nesting,
-        reshadow,
+        nesting(options.nesting),
+        reshadow(options.reshadow),
         ...modulesPlugins,
         parser.plugin,
     ]);

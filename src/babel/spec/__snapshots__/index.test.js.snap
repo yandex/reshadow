@@ -6,7 +6,6 @@ import styled, { use, set, create, css, map, __css__ } from \\"reshadow\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -29,7 +28,6 @@ import styled, { use, set, create, css, map, __css__ } from \\"reshadow\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -50,7 +48,6 @@ import styled, { set, create, css, use, map, __css__ } from \\"reshadow\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -73,7 +70,6 @@ import styled, { set, create, css, use, map, __css__ } from 'reshadow';
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -98,7 +94,6 @@ const { ...styles
     color: red;
 }
 \`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_fo1gj_1\`
 });
 const styled_c8 = create([styles]);
@@ -119,11 +114,11 @@ export default App;"
 exports[`babel postcss should process styles with css 1`] = `
 "import React from 'react';
 import styled, { css, __css__, set, create, use, map } from 'reshadow';
-const styles = (__css__(\`.___button_1cx4s_1 {
+const styles = (__css__(\`
+    .___button_1cx4s_1 {
         color: red;
     }
 \`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_1cx4s_1\`
 });
 const styled_c8 = create([styles]);
@@ -144,11 +139,11 @@ export default App;"
 exports[`babel postcss should process styles with css local name 1`] = `
 "import React from 'react';
 import styled, { css as localCss, __css__, set, create, use, map } from 'reshadow';
-const styles = (__css__(\`.___button_1cx4s_1 {
+const styles = (__css__(\`
+    .___button_1cx4s_1 {
         color: red;
     }
 \`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"__button\\": \`___button_1cx4s_1\`
 });
 const styled_c8 = create([styles]);
@@ -173,7 +168,6 @@ const styled_c8 = create([(__css__(\`.___button_1vljt_1 {
 
     color: red;
 }\`, \\"4198542548_c8\\"), {
-  \\"__elements__\\": \`'{\\"button\\":{\\"mods\\":{},\\"props\\":{}}}'\`,
   \\"title\\": \`_title_2ms0f_1\`,
   \\"__button\\": \`___button_1vljt_1 _title_2ms0f_1\`
 })]);

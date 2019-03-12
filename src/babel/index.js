@@ -5,6 +5,7 @@ const template = require('@babel/template').default;
 const {addDefault} = require('@babel/helper-module-imports');
 const {stripIndent} = require('common-tags');
 const resolve = require('resolve');
+const createPostCSS = require('./postcss');
 
 const utils = require('../common/utils');
 
@@ -54,14 +55,21 @@ const isReactFragment = node => {
 };
 
 const defaultOptions = {
+    target: 'react',
     postcss: false,
     elementFallback: true,
     files: false,
-    inlineStyle: false,
+    stringStyle: false,
 };
 
-module.exports = ({types: t}, options = {}) => {
-    options = Object.assign({}, defaultOptions, options);
+module.exports = ({types: t}, pluginOptions = {}) => {
+    const options = Object.assign({}, defaultOptions, pluginOptions);
+
+    if (options.target === 'preact') {
+        if (pluginOptions.stringStyle !== undefined) {
+            options.stringStyle = true;
+        }
+    }
 
     let STYLED = new Set();
     let BINDINGS = {};
@@ -155,7 +163,7 @@ module.exports = ({types: t}, options = {}) => {
     };
 
     const prepareExpressions = (expressions, hash) => {
-        if (options.inlineStyle) {
+        if (options.stringStyle) {
             return t.templateLiteral(
                 expressions
                     .map((x, i) => {
@@ -297,7 +305,11 @@ module.exports = ({types: t}, options = {}) => {
                     openingElement.name = t.JSXIdentifier('div');
                 } else if (utils.isCustomElement(elementName)) {
                     if (options.elementFallback) {
-                        openingElement.name = t.JSXIdentifier('div');
+                        openingElement.name = t.JSXIdentifier(
+                            typeof options.elementFallback === 'boolean'
+                                ? 'div'
+                                : options.elementFallback,
+                        );
                     }
                 } else if (!/[^A-Z]\w+/.test(elementName)) {
                     isElement = false;
@@ -496,7 +508,7 @@ module.exports = ({types: t}, options = {}) => {
                     // babel 6 compatibility
                     Object.assign(options, state.opts);
                     if (options.postcss && !postcss) {
-                        postcss = require('./postcss')(options.postcss);
+                        postcss = createPostCSS(options.postcss);
                     }
                     if (options.files && !cssFileRe) {
                         cssFileRe = new RegExp(options.files);
