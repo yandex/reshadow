@@ -25,9 +25,16 @@ npm i --save reshadow@alpha
 -   Static analysis
 -   Combine the `css-in-js` and `css-modules` approaches or choose which fits you better
 -   All the benefits of the PostCSS ecosystem
--   Interoperable. Use it with `React`, `Preact` or `Vue`
+-   Interoperable. Use it with components in [React](https://github.com/facebook/react), [Preact](https://github.com/developit/preact/), [Vue](https://github.com/vuejs/vue), [htm](https://github.com/developit/htm/).
 
 Please check the [reshadow.dev](https://reshadow.dev) for more information and examples.
+
+There are some examples on the [Сodesandbox](https://codesandbox.io):
+
+-   [React (create react app)](https://codesandbox.io/s/o9w535k0z6)
+-   [Preact](https://codesandbox.io/s/o5jrpk0zm5)
+-   [Vue](https://codesandbox.io/s/rw1r211m8p)
+-   [htm](https://codesandbox.io/s/kkxvrwz217)
 
 ## Docs
 
@@ -40,11 +47,6 @@ Please check the [reshadow.dev](https://reshadow.dev) for more information and e
 -   [Linting](#linting)
 
 ## Example
-
-Check examples on the [Сodesandbox](https://codesandbox.io):
-
--   [react (create react app)](https://codesandbox.io/s/o9w535k0z6)
--   [preact](https://codesandbox.io/s/o5jrpk0zm5)
 
 ```js
 import React from 'react';
