@@ -247,6 +247,47 @@ describe('babel', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should transform tag with just "as" attribute', async () => {
+        const {code} = await transform`
+            import React from 'react'
+            import styled, {use} from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type}) => styled(styles)(
+                <button type={type} disabled={disabled}>
+                    <content as="span">content</content>
+                </button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
+    it('should use custom elementFallback', async () => {
+        const {code} = await transform.with({
+            ...defaultOptions,
+            plugins: [[require.resolve('..'), {elementFallback: 'span'}]],
+        })`
+            import React from 'react'
+            import styled, {use} from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type}) => styled(styles)(
+                <button type={type} disabled={disabled}>
+                    <content>content</content>
+                </button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should merge attributes well', async () => {
         const {code} = await transform`
             import React from 'react'
