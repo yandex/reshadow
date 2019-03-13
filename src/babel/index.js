@@ -278,6 +278,8 @@ module.exports = (babel, pluginOptions = {}) => {
 
         let depth = 0;
 
+        const elementNames = [];
+
         p.traverse({
             JSXElement(elementPath) {
                 const {node} = elementPath;
@@ -323,6 +325,8 @@ module.exports = (babel, pluginOptions = {}) => {
                 } else if (!/[^A-Z]\w+/.test(elementName)) {
                     isElement = false;
                 }
+
+                elementNames.push(elementName);
 
                 const spreads = [];
 
@@ -418,18 +422,6 @@ module.exports = (babel, pluginOptions = {}) => {
                             openingElement.attributes.push(useAttr);
                         }
 
-                        const transformVueJSX = require('@vue/babel-plugin-transform-vue-jsx')(
-                            babel,
-                        );
-
-                        p.traverse(transformVueJSX.visitor);
-
-                        const hNode = stylesSet.expressions[1];
-                        hNode.arguments[1] = t.callExpression(
-                            t.identifier(addImport('map')),
-                            [t.stringLiteral(elementName), hNode.arguments[1]],
-                        );
-
                         return;
                     }
                 }
@@ -460,6 +452,41 @@ module.exports = (babel, pluginOptions = {}) => {
                 }
             },
         });
+
+        /**
+         * Think about more effective transformations
+         */
+        if (options.target === 'vue') {
+            const transformVueJSX = require('@vue/babel-plugin-transform-vue-jsx')(
+                babel,
+            );
+
+            p.traverse({
+                JSXElement(elementPath) {
+                    transformVueJSX.visitor.JSXElement(elementPath);
+                },
+                CallExpression(expressionPath) {
+                    const {node} = expressionPath;
+
+                    if (
+                        !(
+                            t.isIdentifier(node.callee) &&
+                            node.callee.name === 'h'
+                        )
+                    ) {
+                        return;
+                    }
+
+                    node.arguments[1] = t.callExpression(
+                        t.identifier(addImport('map')),
+                        [
+                            t.stringLiteral(elementNames.shift()),
+                            node.arguments[1],
+                        ],
+                    );
+                },
+            });
+        }
     };
 
     const traverseTaggedTemplate = p => {

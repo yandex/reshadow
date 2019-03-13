@@ -1,5 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`babel Vue should group props right 1`] = `
+"import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
+import styled, { set, create, css, use, map, __css__ } from \\"reshadow/runtime/vue\\";
+import styles from './styles';
+const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"4198542548_c8\\")]);
+new Vue({
+  el: \\"#app\\",
+  render: h => styled((set([styled_c8]), h(\\"Button\\", map(\\"Button\\", _mergeJSXProps([{
+    \\"class\\": \\"test\\",
+    \\"attrs\\": {
+      \\"size\\": \\"s\\",
+      \\"bgcolor\\": \\"red\\",
+      \\"$$style\\": {
+        \\"--c8_0\\": color
+      }
+    }
+  }, use({
+    mod: \\"value\\"
+  })])), [\\"Red\\"])))
+});"
+`;
+
+exports[`babel Vue should pass classes 1`] = `
+"import styled, { set, create, css, map, __css__ } from \\"reshadow/runtime/vue\\";
+import styles from './styles';
+const styled_c8 = create([__css__(\`Button + Button {
+    margin-left: 10px;
+}\`, \\"4198542548_c8\\")]);
+new Vue({
+  el: \\"#app\\",
+  render: h => styled((set([styled_c8]), h(\\"div\\", map(\\"div\\", {
+    \\"attrs\\": {
+      \\"className\\": styled.styles[\\"__div\\"]
+    }
+  }), [h(\\"Button\\", map(\\"Button\\", {
+    \\"attrs\\": {
+      \\"size\\": \\"s\\",
+      \\"bgcolor\\": \\"red\\"
+    }
+  }), [\\"Red\\"]), h(\\"Button\\", map(\\"Button\\", {
+    \\"attrs\\": {
+      \\"size\\": \\"m\\",
+      \\"bgcolor\\": \\"rebeccapurple\\"
+    }
+  }), [\\"Rebeccapurple\\"])])))
+});"
+`;
+
 exports[`babel macro should keep named imports 1`] = `
 "import React from 'react';
 import styled, { use, set, create, css, map, __css__ } from \\"reshadow\\";
@@ -456,26 +504,4 @@ const styled_c8 = create([__css__(\`button {
 const Button = props => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", props))));
 
 export default Button;"
-`;
-
-exports[`babel vue should group props for Vue 1`] = `
-"import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
-import styled, { set, create, css, use, map, __css__ } from \\"reshadow/runtime/vue\\";
-import styles from './styles';
-const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"4198542548_c8\\")]);
-new Vue({
-  el: \\"#app\\",
-  render: h => styled((set([styled_c8]), h(\\"Button\\", map(\\"Button\\", _mergeJSXProps([{
-    \\"class\\": \\"test\\",
-    \\"attrs\\": {
-      \\"size\\": \\"s\\",
-      \\"bgcolor\\": \\"red\\",
-      \\"$$style\\": {
-        \\"--c8_0\\": color
-      }
-    }
-  }, use({
-    mod: \\"value\\"
-  })])), [\\"Red\\"])))
-});"
 `;

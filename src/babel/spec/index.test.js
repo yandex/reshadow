@@ -363,14 +363,14 @@ describe('babel', () => {
         });
     });
 
-    describe('vue', () => {
+    describe('Vue', () => {
         const options = {
             ...defaultOptions,
             presets: [],
             plugins: [[require.resolve('..'), {target: 'vue'}]],
         };
 
-        it('should group props for Vue', async () => {
+        it('should group props right', async () => {
             const {code} = await transform.with(options)`
                 import styled from 'reshadow'
                 import styles from './styles'
@@ -383,6 +383,33 @@ describe('babel', () => {
                         <Button class="test" size="s" bgcolor="red" use:mod="value">
                             Red
                         </Button>
+                    )
+                });
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should pass classes', async () => {
+            const {code} = await transform.with(options)`
+                import styled from 'reshadow'
+                import styles from './styles'
+
+                new Vue({
+                    el: "#app",
+                    render: h => styled\`
+                        Button + Button {
+                            margin-left: 10px;
+                        }
+                    \`(
+                        <div>
+                            <Button size="s" bgcolor="red">
+                                Red
+                            </Button>
+                            <Button size="m" bgcolor="rebeccapurple">
+                                Rebeccapurple
+                            </Button>
+                        </div>
                     )
                 });
             `;
