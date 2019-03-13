@@ -278,7 +278,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
         let depth = 0;
 
-        const elementNames = [];
+        const elementMap = new Map();
 
         p.traverse({
             JSXElement(elementPath) {
@@ -326,7 +326,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     isElement = false;
                 }
 
-                elementNames.push(elementName);
+                elementMap.set(elementPath, {elementName});
 
                 const spreads = [];
 
@@ -461,6 +461,8 @@ module.exports = (babel, pluginOptions = {}) => {
                 babel,
             );
 
+            const elems = [...elementMap.values()];
+
             p.traverse({
                 JSXElement(elementPath) {
                     transformVueJSX.visitor.JSXElement(elementPath);
@@ -477,12 +479,11 @@ module.exports = (babel, pluginOptions = {}) => {
                         return;
                     }
 
+                    const {elementName} = elems.shift();
+
                     node.arguments[1] = t.callExpression(
                         t.identifier(addImport('map')),
-                        [
-                            t.stringLiteral(elementNames.shift()),
-                            node.arguments[1],
-                        ],
+                        [t.stringLiteral(elementName), node.arguments[1]],
                     );
                 },
             });
