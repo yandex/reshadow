@@ -9,7 +9,7 @@ const defaultOptions = {
     presets: [
         ['@babel/preset-react', {throwIfNamespace: false, useBuiltIns: true}],
     ],
-    plugins: [[require.resolve('..'), {useBuiltIns: true}]],
+    plugins: [[require.resolve('..')]],
 };
 
 const transformCode = (code, options = defaultOptions) =>
@@ -357,6 +357,34 @@ describe('babel', () => {
                 )
 
                 export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+    });
+
+    describe('vue', () => {
+        const options = {
+            ...defaultOptions,
+            presets: [],
+            plugins: [[require.resolve('..'), {target: 'vue'}]],
+        };
+
+        it('should group props for Vue', async () => {
+            const {code} = await transform.with(options)`
+                import styled from 'reshadow'
+                import styles from './styles'
+
+                new Vue({
+                    el: "#app",
+                    render: h => styled(styles)\`
+                        Button {color: \${color}}
+                    \`(
+                        <Button class="test" size="s" bgcolor="red" use:mod="value">
+                            Red
+                        </Button>
+                    )
+                });
             `;
 
             expect(code).toMatchSnapshot();

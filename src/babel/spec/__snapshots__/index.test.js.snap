@@ -373,7 +373,7 @@ const App = ({
 }) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  __style__: {
+  $$style: {
     \\"--c8_0\\": color,
     \\"--c8_1\\": bgcolor
   }
@@ -401,7 +401,7 @@ const App = ({
 }) => styled((set([styled_c8]), React.createElement(React.Fragment, null, React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  __style__: {
+  $$style: {
     \\"--c8_0\\": color,
     \\"--c8_1\\": bgcolor
   }
@@ -410,7 +410,7 @@ const App = ({
 })), \\"content\\"), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  __style__: {
+  $$style: {
     \\"--c8_0\\": color,
     \\"--c8_1\\": bgcolor
   }
@@ -438,7 +438,7 @@ const App = ({
 }) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  __style__: \`--c8_0:\${color};--c8_1:\${bgcolor};\`
+  $$style: \`--c8_0:\${color};--c8_1:\${bgcolor};\`
 }, use({
   theme: \\"normal\\"
 })), \\"content\\")));
@@ -456,4 +456,26 @@ const styled_c8 = create([__css__(\`button {
 const Button = props => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", props))));
 
 export default Button;"
+`;
+
+exports[`babel vue should group props for Vue 1`] = `
+"import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
+import styled, { set, create, css, use, map, __css__ } from \\"reshadow/runtime/vue\\";
+import styles from './styles';
+const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"4198542548_c8\\")]);
+new Vue({
+  el: \\"#app\\",
+  render: h => styled((set([styled_c8]), h(\\"Button\\", map(\\"Button\\", _mergeJSXProps([{
+    \\"class\\": \\"test\\",
+    \\"attrs\\": {
+      \\"size\\": \\"s\\",
+      \\"bgcolor\\": \\"red\\",
+      \\"$$style\\": {
+        \\"--c8_0\\": color
+      }
+    }
+  }, use({
+    mod: \\"value\\"
+  })])), [\\"Red\\"])))
+});"
 `;

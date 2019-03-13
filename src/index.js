@@ -1,2 +1,2 @@
-export * from './reshadow';
-export {default} from './reshadow';
+export * from './runtime';
+export {default} from './runtime';
