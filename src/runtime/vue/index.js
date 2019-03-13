@@ -1,8 +1,8 @@
-import styled, {map as _map, use, css, create, set, __css__} from '..';
+import styled, {map as _map, css, create, set, __css__, KEYS} from '..';
 
 styled.classProp = 'class';
 
-function map(element, data) {
+const map = (element, data) => {
     if (!data.attrs) return data;
     data.attrs.class = data.class;
     data.attrs.style = data.style;
@@ -12,7 +12,13 @@ function map(element, data) {
     delete data.attrs.class;
     delete data.attrs.style;
     return data;
-}
+};
+
+const use = obj => {
+    const result = {attrs: {}};
+    result.attrs[KEYS.__use__] = obj;
+    return result;
+};
 
 export {use, css, create, set, map, __css__};
 

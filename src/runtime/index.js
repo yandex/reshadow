@@ -1,10 +1,11 @@
 const _Symbol = key => (typeof Symbol !== 'undefined' ? Symbol(key) : key);
 
-const KEYS = {
+export const KEYS = {
     __id__: _Symbol('__id__'),
     __store__: _Symbol('__store__'),
     __prev__: _Symbol('__prev__'),
     __use__: _Symbol('__use__'),
+    __style__: '$$style',
 };
 
 let index = 0;
@@ -143,8 +144,6 @@ const appendClassname = (cn, key, value) => {
  */
 styled.classProp = 'className';
 
-const styleProp = '$$style';
-
 function map(element) {
     let nextProps = {};
     let cn = styles[`__${element}`] || '';
@@ -160,10 +159,14 @@ function map(element) {
         if (!currProps) continue;
 
         useProps = useProps || currProps[KEYS.__use__];
-        style = style || currProps[styleProp];
+        style = style || currProps[KEYS.__style__];
 
         for (let key in currProps) {
-            if (key === KEYS.__use__ || key === styleProp || key in nextProps) {
+            if (
+                key === KEYS.__use__ ||
+                key === KEYS.__style__ ||
+                key in nextProps
+            ) {
                 continue;
             }
 
