@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const t = require('@babel/types');
 const template = require('@babel/template').default;
+const syntaxJsx = require('@babel/plugin-syntax-jsx').default;
 const {addDefault} = require('@babel/helper-module-imports');
 const {stripIndent} = require('common-tags');
 const resolve = require('resolve');
-const createPostCSS = require('./postcss');
 
 const utils = require('../common/utils');
 
@@ -62,13 +62,20 @@ const defaultOptions = {
     stringStyle: false,
 };
 
-module.exports = ({types: t}, pluginOptions = {}) => {
+module.exports = (babel, pluginOptions = {}) => {
+    const {types: t} = babel;
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
     if (options.target === 'preact') {
         if (pluginOptions.stringStyle !== undefined) {
             options.stringStyle = true;
         }
+    }
+
+    let moduleName = 'reshadow';
+
+    if (options.target === 'vue') {
+        moduleName = 'reshadow/runtime/vue';
     }
 
     let STYLED = new Set();
@@ -106,7 +113,7 @@ module.exports = ({types: t}, pluginOptions = {}) => {
 
     const addImport = name => {
         if (!IMPORT) {
-            IMPORT = addDefault(FILE.path, 'reshadow', {nameHint: 'styled'});
+            IMPORT = addDefault(FILE.path, moduleName, {nameHint: 'styled'});
         }
 
         if (imports[name]) return imports[name];
@@ -220,11 +227,13 @@ module.exports = ({types: t}, pluginOptions = {}) => {
             quasi.expressions.length &&
             prepareExpressions(quasi.expressions, hash);
 
+        const [jsxNode] = p.node.arguments;
+
         const stylesSet = t.sequenceExpression([
             t.callExpression(t.identifier(addImport('set')), [
                 t.arrayExpression(localStyles),
             ]),
-            p.node.arguments[0],
+            jsxNode,
         ]);
 
         p.node.arguments = [stylesSet];
@@ -269,21 +278,23 @@ module.exports = ({types: t}, pluginOptions = {}) => {
 
         let depth = 0;
 
+        const elementNames = [];
+
         p.traverse({
-            JSXElement(p) {
-                const {node} = p;
+            JSXElement(elementPath) {
+                const {node} = elementPath;
 
                 if (isReactFragment(node) || cache.has(node)) return;
 
                 cache.add(node);
 
                 if (variables && depth === 0) {
-                    for (let x of p.container) {
+                    for (let x of elementPath.container) {
                         if (!t.isJSXElement(x)) continue;
 
                         x.openingElement.attributes.push(
                             t.jSXAttribute(
-                                t.JSXIdentifier('__style__'),
+                                t.JSXIdentifier('$$style'),
                                 t.JSXExpressionContainer(variables),
                             ),
                         );
@@ -315,11 +326,14 @@ module.exports = ({types: t}, pluginOptions = {}) => {
                     isElement = false;
                 }
 
+                elementNames.push(elementName);
+
                 const spreads = [];
 
                 if (openingElement.attributes.length > 0) {
                     let props = [];
                     const uses = [];
+                    const indexesToRemove = [];
                     let useAttr = null;
 
                     const getProp = (name, valueNode) => {
@@ -343,6 +357,7 @@ module.exports = ({types: t}, pluginOptions = {}) => {
                                 t.isCallExpression(attr.argument) &&
                                 attr.argument.callee.name === 'use'
                             ) {
+                                indexesToRemove.push(i);
                                 useAttr = attr;
                             } else {
                                 if (props.length) {
@@ -361,11 +376,13 @@ module.exports = ({types: t}, pluginOptions = {}) => {
                             t.isJSXIdentifier(attr.name) &&
                             attr.name.name === 'as'
                         ) {
+                            indexesToRemove.push(i);
                             openingElement.name.name = attr.value.value;
                         } else if (
                             t.isJSXNamespacedName(attr.name) &&
                             attr.name.namespace.name === 'use'
                         ) {
+                            indexesToRemove.push(i);
                             const name = attr.name.name.name;
 
                             uses.push(getProp(name, attr.value));
@@ -395,6 +412,18 @@ module.exports = ({types: t}, pluginOptions = {}) => {
 
                         spreads.push(useAttr.argument);
                     }
+
+                    if (options.target === 'vue') {
+                        indexesToRemove.forEach(i => {
+                            openingElement.attributes.splice(i, 1);
+                        });
+
+                        if (useAttr) {
+                            openingElement.attributes.push(useAttr);
+                        }
+
+                        return;
+                    }
                 }
 
                 if (spreads.length > 0) {
@@ -423,6 +452,41 @@ module.exports = ({types: t}, pluginOptions = {}) => {
                 }
             },
         });
+
+        /**
+         * Think about more effective transformations
+         */
+        if (options.target === 'vue') {
+            const transformVueJSX = require('@vue/babel-plugin-transform-vue-jsx')(
+                babel,
+            );
+
+            p.traverse({
+                JSXElement(elementPath) {
+                    transformVueJSX.visitor.JSXElement(elementPath);
+                },
+                CallExpression(expressionPath) {
+                    const {node} = expressionPath;
+
+                    if (
+                        !(
+                            t.isIdentifier(node.callee) &&
+                            node.callee.name === 'h'
+                        )
+                    ) {
+                        return;
+                    }
+
+                    node.arguments[1] = t.callExpression(
+                        t.identifier(addImport('map')),
+                        [
+                            t.stringLiteral(elementNames.shift()),
+                            node.arguments[1],
+                        ],
+                    );
+                },
+            });
+        }
     };
 
     const traverseTaggedTemplate = p => {
@@ -502,13 +566,15 @@ module.exports = ({types: t}, pluginOptions = {}) => {
 
     return {
         pre,
+        name: 'babel-plugin-reshadow',
+        inherits: syntaxJsx,
         visitor: {
             Program: {
                 enter(path, state) {
                     // babel 6 compatibility
                     Object.assign(options, state.opts);
                     if (options.postcss && !postcss) {
-                        postcss = createPostCSS(options.postcss);
+                        postcss = require('./postcss')(options.postcss);
                     }
                     if (options.files && !cssFileRe) {
                         cssFileRe = new RegExp(options.files);
@@ -571,8 +637,8 @@ module.exports = ({types: t}, pluginOptions = {}) => {
 
                 if (source.value !== SOURCE) return;
 
-                if (source.value !== 'reshadow') {
-                    source.value = 'reshadow';
+                if (source.value !== moduleName) {
+                    source.value = moduleName;
                 }
 
                 IMPORT = p.node;

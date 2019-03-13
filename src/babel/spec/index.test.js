@@ -9,7 +9,7 @@ const defaultOptions = {
     presets: [
         ['@babel/preset-react', {throwIfNamespace: false, useBuiltIns: true}],
     ],
-    plugins: [[require.resolve('..'), {useBuiltIns: true}]],
+    plugins: [[require.resolve('..')]],
 };
 
 const transformCode = (code, options = defaultOptions) =>
@@ -247,6 +247,47 @@ describe('babel', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should transform tag with just "as" attribute', async () => {
+        const {code} = await transform`
+            import React from 'react'
+            import styled, {use} from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type}) => styled(styles)(
+                <button type={type} disabled={disabled}>
+                    <content as="span">content</content>
+                </button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
+    it('should use custom elementFallback', async () => {
+        const {code} = await transform.with({
+            ...defaultOptions,
+            plugins: [[require.resolve('..'), {elementFallback: 'span'}]],
+        })`
+            import React from 'react'
+            import styled, {use} from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type}) => styled(styles)(
+                <button type={type} disabled={disabled}>
+                    <content>content</content>
+                </button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should merge attributes well', async () => {
         const {code} = await transform`
             import React from 'react'
@@ -357,6 +398,61 @@ describe('babel', () => {
                 )
 
                 export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+    });
+
+    describe('Vue', () => {
+        const options = {
+            ...defaultOptions,
+            presets: [],
+            plugins: [[require.resolve('..'), {target: 'vue'}]],
+        };
+
+        it('should group props right', async () => {
+            const {code} = await transform.with(options)`
+                import styled from 'reshadow'
+                import styles from './styles'
+
+                new Vue({
+                    el: "#app",
+                    render: h => styled(styles)\`
+                        Button {color: \${color}}
+                    \`(
+                        <Button class="test" size="s" bgcolor="red" use:mod="value">
+                            Red
+                        </Button>
+                    )
+                });
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should pass classes', async () => {
+            const {code} = await transform.with(options)`
+                import styled from 'reshadow'
+                import styles from './styles'
+
+                new Vue({
+                    el: "#app",
+                    render: h => styled\`
+                        Button + Button {
+                            margin-left: 10px;
+                        }
+                    \`(
+                        <div>
+                            <Button size="s" bgcolor="red">
+                                Red
+                            </Button>
+                            <Button size="m" bgcolor="rebeccapurple">
+                                Rebeccapurple
+                            </Button>
+                        </div>
+                    )
+                });
             `;
 
             expect(code).toMatchSnapshot();

@@ -74,6 +74,8 @@ const styled = elem => {
     return elem;
 };
 
+styled.styles = styles;
+
 const isSSR = !(
     typeof window !== 'undefined' &&
     window.document &&
@@ -141,6 +143,8 @@ const appendClassname = (cn, key, value) => {
  */
 styled.classProp = 'className';
 
+const styleProp = '$$style';
+
 function map(element) {
     let nextProps = {};
     let cn = styles[`__${element}`] || '';
@@ -156,14 +160,10 @@ function map(element) {
         if (!currProps) continue;
 
         useProps = useProps || currProps[KEYS.__use__];
-        style = style || currProps.__style__;
+        style = style || currProps[styleProp];
 
         for (let key in currProps) {
-            if (
-                key === KEYS.__use__ ||
-                key === '__style__' ||
-                key in nextProps
-            ) {
+            if (key === KEYS.__use__ || key === styleProp || key in nextProps) {
                 continue;
             }
 
@@ -200,11 +200,4 @@ function map(element) {
 
 export {use, css, create, set, map, css as __css__};
 
-export default Object.assign(styled, {
-    styles,
-    use,
-    css,
-    create,
-    set,
-    map,
-});
+export default styled;
