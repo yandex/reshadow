@@ -5,6 +5,7 @@ export const KEYS = {
     __store__: _Symbol('__store__'),
     __prev__: _Symbol('__prev__'),
     __use__: _Symbol('__use__'),
+    __elements__: '__elements__',
     __style__: '$$style',
 };
 
