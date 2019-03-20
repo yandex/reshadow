@@ -311,7 +311,8 @@ const App = ({
   name: \\"button\\"
 }, props, {
   type: \\"submit\\",
-  autofocus: true
+  autofocus: true,
+  \\"aria-hidden\\": true
 }, use({
   size: 's',
   theme: \\"normal\\"

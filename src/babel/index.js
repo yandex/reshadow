@@ -337,7 +337,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     let useAttr = null;
 
                     const getProp = (name, valueNode) => {
-                        const key = /[$0-9a-z_]/i.test(name)
+                        const key = /^[$0-9a-z_]+$/i.test(name)
                             ? t.identifier(name)
                             : t.stringLiteral(name);
 

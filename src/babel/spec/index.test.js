@@ -305,6 +305,7 @@ describe('babel', () => {
                     type="submit"
                     autofocus
                     use:theme="normal"
+                    aria-hidden
                     {...use({size: 's'})}
                 >
                     content
