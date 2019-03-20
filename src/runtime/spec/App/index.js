@@ -10,7 +10,12 @@ const App = ({disabled, type, color = 'grey'}) =>
             color: ${color};
         }
     `(
-        <button type={type} disabled={disabled} use:theme="normal">
+        <button
+            className="button"
+            type={type}
+            disabled={disabled}
+            use:theme="normal"
+        >
             {styled(styles2)(<use:content>content</use:content>)}
 
             <use:control>click</use:control>
