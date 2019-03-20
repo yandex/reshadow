@@ -83,8 +83,17 @@ const isSSR = !(
     window.document.createElement
 );
 
+let serverStyles = '';
+
+export const getStyles = () => serverStyles;
+
 const css = (code, hash) => {
-    if (isSSR) return;
+    const id = `reshadow-${hash}`;
+
+    if (isSSR) {
+        serverStyles += `<style type="text/css" id="${id}">${code}</style>`;
+        return;
+    }
 
     let container = document.getElementById('reshadow');
     if (!container) {
@@ -92,7 +101,6 @@ const css = (code, hash) => {
         container.id = 'reshadow';
         document.head.appendChild(container);
     }
-    const id = `reshadow-${hash}`;
     let css = document.getElementById(id);
     if (!css) {
         css = document.createElement('style');
