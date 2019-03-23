@@ -92,10 +92,10 @@ const css = (code, hash) => {
 };
 
 let styles = {};
-const stack = []
+const stack = [];
 
 const styled = elem => {
-    styles = stack.pop() || styles
+    styles = stack.pop() || styles;
     styled.styles = styles;
 
     return elem;
@@ -106,7 +106,7 @@ styled.styles = styles;
 const set = args => {
     const newStyles = create(args);
 
-    stack.push(styles)
+    stack.push(styles);
 
     styles = newStyles;
     styled.styles = styles;

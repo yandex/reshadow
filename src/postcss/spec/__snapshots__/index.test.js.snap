@@ -6,6 +6,17 @@ exports[`postcss should should keep elements under html namespace 1`] = `
 }"
 `;
 
+exports[`postcss should should not transform keyframes 1`] = `
+"@keyframes anim {
+    from {
+        transform: translateX(-10px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}"
+`;
+
 exports[`postcss should transform the code 1`] = `
 ".__button {
     color: red;
