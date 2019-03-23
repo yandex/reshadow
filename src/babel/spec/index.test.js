@@ -1,6 +1,8 @@
 const {stripIndent} = require('common-tags');
 const {transformAsync} = require('@babel/core');
 
+const getPlugin = options => [require.resolve('..'), options];
+
 const defaultOptions = {
     root: __dirname,
     filename: __filename,
@@ -9,7 +11,7 @@ const defaultOptions = {
     presets: [
         ['@babel/preset-react', {throwIfNamespace: false, useBuiltIns: true}],
     ],
-    plugins: [[require.resolve('..')]],
+    plugins: [getPlugin()],
 };
 
 const transformCode = (code, options = defaultOptions) =>
@@ -133,7 +135,7 @@ describe('babel', () => {
     it('should transform with css-in-js code with variables with string inline style', async () => {
         const {code} = await transform.with({
             ...defaultOptions,
-            plugins: [[require.resolve('..'), {stringStyle: true}]],
+            plugins: [getPlugin({stringStyle: true})],
         })`
             import React from 'react'
             import styled from 'reshadow'
@@ -269,7 +271,7 @@ describe('babel', () => {
     it('should use custom elementFallback', async () => {
         const {code} = await transform.with({
             ...defaultOptions,
-            plugins: [[require.resolve('..'), {elementFallback: 'span'}]],
+            plugins: [getPlugin({elementFallback: 'span'})],
         })`
             import React from 'react'
             import styled, {use} from 'reshadow'
@@ -303,6 +305,7 @@ describe('babel', () => {
                     type="submit"
                     autofocus
                     use:theme="normal"
+                    aria-hidden
                     {...use({size: 's'})}
                 >
                     content
@@ -408,7 +411,7 @@ describe('babel', () => {
         const options = {
             ...defaultOptions,
             presets: [],
-            plugins: [[require.resolve('..'), {target: 'vue'}]],
+            plugins: [getPlugin({target: 'vue'})],
         };
 
         it('should group props right', async () => {
@@ -460,18 +463,11 @@ describe('babel', () => {
     });
 
     describe('postcss', () => {
-        const options = {
-            ...defaultOptions,
-            plugins: [
-                [
-                    require.resolve('..'),
-                    {postcss: true, useBuiltIns: true, files: /\.css$/},
-                ],
-            ],
-        };
-
         it('should process styles and add them runtime', async () => {
-            const {code} = await transform.with(options)`
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [getPlugin({postcss: true})],
+            })`
                 import React from 'react'
                 import styled from 'reshadow'
 
@@ -492,7 +488,10 @@ describe('babel', () => {
         });
 
         it('should process styles with css', async () => {
-            const {code} = await transform.with(options)`
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [getPlugin({postcss: true})],
+            })`
                 import React from 'react'
                 import styled, {css} from 'reshadow'
 
@@ -515,7 +514,10 @@ describe('babel', () => {
         });
 
         it('should process styles with css local name', async () => {
-            const {code} = await transform.with(options)`
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [getPlugin({postcss: true})],
+            })`
                 import React from 'react'
                 import styled, {css as localCss} from 'reshadow'
 
@@ -538,7 +540,10 @@ describe('babel', () => {
         });
 
         it('should process styles from file', async () => {
-            const {code} = await transform.with(options)`
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [getPlugin({postcss: true, files: /\.css$/})],
+            })`
                 import React from 'react'
                 import styled from 'reshadow'
 
@@ -557,7 +562,10 @@ describe('babel', () => {
         });
 
         it('should work with css-modules imports', async () => {
-            const {code} = await transform.with(options)`
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [getPlugin({postcss: true})],
+            })`
                 import React from 'react'
                 import styled from 'reshadow'
 
@@ -571,6 +579,74 @@ describe('babel', () => {
                     }
                 \`(
                     <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should use postcss-env', async () => {
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [
+                    getPlugin({
+                        postcss: {
+                            options: {
+                                presetEnv: {
+                                    autoprefixer: {
+                                        browsers: 'last 2 versions',
+                                    },
+                                },
+                            },
+                        },
+                    }),
+                ],
+            })`
+                import React from 'react'
+                import styled from 'reshadow'
+
+                const App = ({disabled, type}) => styled\`
+                    button {
+                        transition: 1s;
+                    }
+                \`(
+                    <button type={type} disabled={disabled}>
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should use cssnano', async () => {
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [
+                    getPlugin({
+                        postcss: {
+                            options: {
+                                cssnano: true,
+                            },
+                        },
+                    }),
+                ],
+            })`
+                import React from 'react'
+                import styled from 'reshadow'
+
+                const App = ({disabled, type}) => styled\`
+                    button {
+                        display: grid;
+                    }
+                \`(
+                    <button type={type} disabled={disabled}>
                         content
                     </button>
                 )

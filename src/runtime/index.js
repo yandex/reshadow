@@ -5,12 +5,11 @@ export const KEYS = {
     __store__: _Symbol('__store__'),
     __prev__: _Symbol('__prev__'),
     __use__: _Symbol('__use__'),
+    __elements__: '__elements__',
     __style__: '$$style',
 };
 
 let index = 0;
-
-const PREFIX = 'use--';
 
 const use = obj => {
     const result = {};
@@ -47,12 +46,7 @@ const create = args => {
         for (let key in style) {
             if (key in KEYS) continue;
 
-            if (newStyles[key]) {
-                newStyles[key] += ' ';
-            } else {
-                newStyles[key] = '';
-            }
-            newStyles[key] += style[key];
+            newStyles[key] = appendClassName(style[key], newStyles[key]);
         }
 
         style[KEYS.__store__][id] = newStyles;
@@ -62,29 +56,23 @@ const create = args => {
     return newStyles;
 };
 
-let styles = {};
-
-const styled = elem => {
-    if (styles[KEYS.__prev__]) {
-        styles = styles[KEYS.__prev__];
-        styles[KEYS.__prev__] = null;
-    }
-
-    styled.styles = styles;
-
-    return elem;
-};
-
-styled.styles = styles;
-
 const isSSR = !(
     typeof window !== 'undefined' &&
     window.document &&
     window.document.createElement
 );
 
+let serverStyles = '';
+
+export const getStyles = () => serverStyles;
+
 const css = (code, hash) => {
-    if (isSSR) return;
+    const id = `reshadow-${hash}`;
+
+    if (isSSR) {
+        serverStyles += `<style type="text/css" id="${id}">${code}</style>`;
+        return;
+    }
 
     let container = document.getElementById('reshadow');
     if (!container) {
@@ -92,7 +80,6 @@ const css = (code, hash) => {
         container.id = 'reshadow';
         document.head.appendChild(container);
     }
-    const id = `reshadow-${hash}`;
     let css = document.getElementById(id);
     if (!css) {
         css = document.createElement('style');
@@ -104,16 +91,53 @@ const css = (code, hash) => {
     css.innerHTML = code;
 };
 
+let styles = {};
+const stack = [];
+
+const styled = elem => {
+    styles = stack.pop() || styles;
+    styled.styles = styles;
+
+    return elem;
+};
+
+styled.styles = styles;
+
 const set = args => {
     const newStyles = create(args);
 
-    newStyles[KEYS.__prev__] = styles;
+    stack.push(styles);
 
     styles = newStyles;
     styled.styles = styles;
 };
 
-const appendClassname = (cn, key, value) => {
+/**
+ * This prop is needed for the interop between different component frameworks
+ * TODO: think about better solution
+ */
+styled.classProp = 'className';
+
+export const USE_PREFIX = 'use--';
+export const ELEMENT_PREFIX = '__';
+export const MOD_PREFIX = '_';
+export const MOD_SEPARATOR = '_';
+
+export const parseElement = name => name.replace(ELEMENT_PREFIX, '');
+
+export const parseAttribute = name =>
+    name.replace(MOD_PREFIX, '').split(MOD_SEPARATOR);
+
+export const appendClassName = (className, cn = '') => {
+    if (className) {
+        cn += (cn ? ' ' : '') + className;
+    }
+    return cn;
+};
+export const appendElement = (styles, key, cn = '') =>
+    appendClassName(styles[ELEMENT_PREFIX + key], cn);
+
+export const appendModifier = (styles, key, value, cn = '') => {
     // isFalsy
     if (
         value === undefined ||
@@ -123,30 +147,21 @@ const appendClassname = (cn, key, value) => {
     )
         return cn;
 
-    let className = styles[`_${key}`];
-    if (className) {
-        cn += (cn ? ' ' : '') + className;
-    }
+    cn = appendClassName(styles[MOD_PREFIX + key], cn);
 
     if (typeof value !== 'boolean') {
-        className = styles[`_${key}_${value}`];
-        if (className) {
-            cn += (cn ? ' ' : '') + className;
-        }
+        cn = appendClassName(
+            styles[MOD_SEPARATOR + key + MOD_SEPARATOR + value],
+            cn,
+        );
     }
 
     return cn;
 };
 
-/**
- * This prop is needed for the interop between different component frameworks
- * TODO: think about better solution
- */
-styled.classProp = 'className';
-
 function map(element) {
     let nextProps = {};
-    let cn = styles[`__${element}`] || '';
+    let cn = appendElement(styles, element);
     let style = null;
 
     const len = arguments.length;
@@ -174,20 +189,18 @@ function map(element) {
 
             nextProps[key] = value;
 
-            cn = appendClassname(cn, key, value);
+            cn = appendModifier(styles, key, value, cn);
         }
     }
 
     if (useProps) {
         for (let key in useProps) {
             const value = useProps[key];
-            cn = appendClassname(cn, PREFIX + key, value);
+            cn = appendModifier(styles, USE_PREFIX + key, value, cn);
         }
     }
 
-    if (nextProps[styled.classProp]) {
-        cn += (cn ? ' ' : '') + nextProps[styled.classProp];
-    }
+    cn = appendClassName(nextProps[styled.classProp], cn);
 
     if (cn) nextProps[styled.classProp] = cn;
 

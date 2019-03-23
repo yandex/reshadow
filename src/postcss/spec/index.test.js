@@ -66,6 +66,21 @@ describe('postcss', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should should not transform keyframes', () => {
+        const code = transform`
+            @keyframes anim {
+                from {
+                    transform: translateX(-10px);
+                }
+                to {
+                    transform: translateX(0);
+                }
+            }
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     describe('stats', () => {
         const transform = createTransform({stats: true});
 

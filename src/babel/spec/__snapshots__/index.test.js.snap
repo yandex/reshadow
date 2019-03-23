@@ -209,6 +209,45 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel postcss should use cssnano 1`] = `
+"import React from 'react';
+import styled, { set, create, css, map, __css__ } from 'reshadow';
+const styled_c8 = create([(__css__(\`.___button_1n8fw_1{display:grid}\`, \\"4198542548_c8\\"), {
+  \\"__button\\": \`___button_1n8fw_1\`
+})]);
+
+const App = ({
+  disabled,
+  type
+}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled
+}), \\"content\\")));
+
+export default App;"
+`;
+
+exports[`babel postcss should use postcss-env 1`] = `
+"import React from 'react';
+import styled, { set, create, css, map, __css__ } from 'reshadow';
+const styled_c8 = create([(__css__(\`.___button_ltzzv_1 {
+    -webkit-transition: 1s;
+    transition: 1s;
+}\`, \\"4198542548_c8\\"), {
+  \\"__button\\": \`___button_ltzzv_1\`
+})]);
+
+const App = ({
+  disabled,
+  type
+}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled
+}), \\"content\\")));
+
+export default App;"
+`;
+
 exports[`babel postcss should work with css-modules imports 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from 'reshadow';
@@ -272,7 +311,8 @@ const App = ({
   name: \\"button\\"
 }, props, {
   type: \\"submit\\",
-  autofocus: true
+  autofocus: true,
+  \\"aria-hidden\\": true
 }, use({
   size: 's',
   theme: \\"normal\\"
