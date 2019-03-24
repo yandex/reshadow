@@ -3,4 +3,5 @@ module.exports = {
     singleQuote: true,
     trailingComma: 'all',
     bracketSpacing: false,
+    plugins: [require.resolve('./src/prettier')],
 };
