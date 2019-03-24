@@ -268,6 +268,10 @@ Rules:
 
 -   [as-attribute](src/eslint/rules/as-attribute/index.js)
 
+### Prettier
+
+Use `reshadow/prettier` if you want to improve your Developer Experience with [prettier](https://github.com/prettier/prettier).
+
 # Special Thanks
 
 -   Pavel Masalsky [@pavelrevers](https://github.com/pavelrevers)
