@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`prettier css should keep the capitalized tag 1`] = `
+"Button {
+  color: red;
+}
+
+Button[disabled] {
+  color: red;
+}
+
+Container Button content {
+  font-size: 10px;
+}
+"
+`;
+
+exports[`prettier js should keep process the callback and remove the comma dangle 1`] = `
+"const Button = components.map(x => styled\`
+  div {
+    color: green;
+  }
+\`(
+  <div {...x.props} size=\\"m\\">
+    {x.map(child => styled\`
+      child {
+        opacity: 0.5;
+      }
+    \`(<child>{child}</child>))}
+  </div>
+));
+"
+`;
+
+exports[`prettier js should keep the \`styled\` tag in arrow function and transform the css 1`] = `
+"const Button = ({ children, ...props }) => styled\`
+  Box {
+    margin-top: 10px;
+  }
+\`(
+  <Box {...props} size=\\"s\\">
+    {children}
+  </Box>
+);
+"
+`;
+
+exports[`prettier js should keep the \`styled\` tag with composition 1`] = `
+"const Button = ({ children, ...props }) => styled(style1, style2)\`
+  Box {
+    margin-top: 10px;
+  }
+  button[disabled] {
+    color: gray;
+  }
+\`(
+  <Box {...props} size=\\"s\\">
+    {children}
+  </Box>
+);
+"
+`;
+
+exports[`prettier js should keep the \`styled\` tag with long composition 1`] = `
+"const Button = ({ children, ...props }) => styled(
+  style1,
+  style2,
+  style3,
+  style4,
+  style5,
+  style6
+)\`
+  Box {
+    margin-top: 10px;
+  }
+\`(
+  <Box {...props} size=\\"s\\">
+    {children}
+  </Box>
+);
+"
+`;

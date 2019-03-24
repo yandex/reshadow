@@ -69,7 +69,7 @@ const Button = ({
         border: 2px solid ${bgcolor};
         background-color: ${rgba(bgcolor, 0.7)};
         color: ${readableColor(bgcolor)};
-        transition: background-color .5s;
+        transition: background-color 0.5s;
 
         &:hover {
             background-color: ${rgba(bgcolor, 0.9)};
@@ -81,19 +81,19 @@ const Button = ({
      * not the DOM attribute
      **/
     button[disabled] {
-        opacity: .5;
+        opacity: 0.5;
         pointer-events: none;
     }
 
     /**
      * Match on the 'use:size' prop
      */
-    button[use|size="s"] {
+    button[use|size='s'] {
         font-size: 12px;
     }
 
     /* The 'use' namespace can be omitted */
-    button[|size="m"] {
+    button[|size='m'] {
         font-size: 14px;
     }
 `(
@@ -138,11 +138,8 @@ import styled from 'reshadow';
 
 import styles from './styles.css';
 
-export const Button = ({size, children}) => styled(styles)(
-    <button use:size={size}>
-        {children}
-    </button>
-);
+export const Button = ({size, children}) =>
+    styled(styles)(<button use:size={size}>{children}</button>);
 ```
 
 _Button/styles.css_
@@ -169,7 +166,7 @@ const anotherStyles = css`
 `;
 
 export const Button = ({size, children}) => styled(
-    props.another && anotherStyles
+    props.another && anotherStyles,
 )`
     button {
         /* button styles */
@@ -177,11 +174,7 @@ export const Button = ({size, children}) => styled(
     button[|size='m'] {
         /* button styles for the size */
     }
-`(
-    <button use:size={size}>
-        {children}
-    </button>
-);
+`(<button use:size={size}>{children}</button>);
 ```
 
 ## Setup
@@ -198,11 +191,7 @@ export const Button = ({children}) => styled`
     button {
         /* button styles */
     }
-`(
-    <button>
-        {children}
-    </button>
-);
+`(<button>{children}</button>);
 ```
 
 Options (via [babel-plugin-macros config](https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/author.md#config-experimental)) are the same as `reshadow` [babel options](#babel-options), but with different defaults:
@@ -267,6 +256,18 @@ Use `reshadow/eslint` if you want to have more control about `reshadow` usage.
 Rules:
 
 -   [as-attribute](src/eslint/rules/as-attribute/index.js)
+
+### Prettier
+
+Use `reshadow/prettier` if you want to improve your Developer Experience with [prettier](https://github.com/prettier/prettier).
+
+_prettier.config.js_
+
+```js
+module.exports = {
+    plugins: ['reshadow/prettier'],
+};
+```
 
 # Special Thanks
 
