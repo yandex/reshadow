@@ -149,12 +149,18 @@ export const appendModifier = (styles, key, value, cn = '') => {
 
     cn = appendClassName(styles[MOD_PREFIX + key], cn);
 
-    if (typeof value !== 'boolean') {
-        cn = appendClassName(
-            styles[MOD_SEPARATOR + key + MOD_SEPARATOR + value],
-            cn,
-        );
-    }
+    // value should be only primitive
+    if (
+        typeof value === 'boolean' ||
+        typeof value === 'object' ||
+        typeof value === 'function'
+    )
+        return cn;
+
+    cn = appendClassName(
+        styles[MOD_SEPARATOR + key + MOD_SEPARATOR + value],
+        cn,
+    );
 
     return cn;
 };

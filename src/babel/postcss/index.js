@@ -34,7 +34,9 @@ function getScopedNameGenerator(opts) {
     const scopedNameGenerator = opts.generateScopedName || generateScopedName;
 
     if (typeof scopedNameGenerator === 'function') return scopedNameGenerator;
-    return genericNames(scopedNameGenerator, {context: process.cwd()});
+    return genericNames(scopedNameGenerator, {
+        context: process.cwd(),
+    });
 }
 
 /**
@@ -73,7 +75,9 @@ module.exports = ({plugins = [], options = {}, generateScopedName}) => {
 
         const source = fs.readFileSync(sourcePath);
 
-        cache[sourcePath] = load(source, {filename: sourcePath});
+        cache[sourcePath] = load(source, {
+            filename: sourcePath,
+        });
 
         return cache[sourcePath].tokens;
     };
