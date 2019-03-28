@@ -188,6 +188,38 @@ describe('babel', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should transform with css-in-js code with variables in nested elemnts', async () => {
+        const {code} = await transform`
+            import React from 'react'
+            import styled from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type, color, bgcolor}) => styled\`
+                div {
+                    padding: 10px;
+                }
+            \`(
+                <div>
+                    {styled\`
+                        button[disabled] {
+                            color: \${color};
+                            background-color: \${bgcolor};
+                        }
+                    \`(
+                        <button type={type} disabled={disabled}>
+                            content
+                        </button>
+                    )}
+                </div>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should keep the links to styles if they cant hoist', async () => {
         const {code} = await transform`
             import React from 'react'
