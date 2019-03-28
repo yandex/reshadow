@@ -491,6 +491,37 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel should transform with css-in-js code with variables in nested elemnts 1`] = `
+"import React from 'react';
+import styled, { set, create, css, map, __css__ } from 'reshadow';
+import styles from './styles';
+const styled_c8 = create([__css__(\`div {
+    padding: 10px;
+}\`, \\"4198542548_c8\\")]);
+const styled_12c = create([__css__(\`button[disabled] {
+    color: var(--12c_0);
+    background-color: var(--12c_1);
+}\`, \\"4198542548_12c\\")]);
+
+const App = ({
+  disabled,
+  type,
+  color,
+  bgcolor
+}) => styled((set([styled_c8]), React.createElement(\\"div\\", {
+  className: styled.styles[\\"__div\\"]
+}, styled((set([styled_12c]), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled,
+  $$style: {
+    \\"--12c_0\\": color,
+    \\"--12c_1\\": bgcolor
+  }
+}), \\"content\\"))))));
+
+export default App;"
+`;
+
 exports[`babel should transform with css-in-js code with variables in sibling nodes 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from 'reshadow';

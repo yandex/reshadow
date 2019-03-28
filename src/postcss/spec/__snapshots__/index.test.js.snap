@@ -1,8 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`postcss should should keep elements under html namespace 1`] = `
+exports[`postcss should should keep elements under the :global 1`] = `
 ".__content button {
     color: red;
+}
+
+.__button[aria-hidden] {
+    opacity: 0;
+}
+
+.__button[disabled]._use--variant._use--variant_normal {
+    background-color: gray;
 }"
 `;
 

@@ -56,10 +56,18 @@ describe('postcss', () => {
         expect(code).toMatchSnapshot();
     });
 
-    it('should should keep elements under html namespace', () => {
+    it('should should keep elements under the :global', () => {
         const code = transform`
-            content html|button {
+            content :global(button) {
                 color: red;
+            }
+
+            button:global([aria-hidden]) {
+                opacity: 0;
+            }
+
+            button:global([disabled])[|variant=normal] {
+                background-color: gray;
             }
         `;
 

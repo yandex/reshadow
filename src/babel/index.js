@@ -281,6 +281,7 @@ module.exports = (babel, pluginOptions = {}) => {
         const elementMap = new Map();
 
         p.traverse({
+            ...visitor,
             JSXElement(elementPath) {
                 const {node} = elementPath;
 
@@ -529,7 +530,7 @@ module.exports = (babel, pluginOptions = {}) => {
         let {node} = p;
         const {quasi, tag} = node;
 
-        if (tag.name !== imports.css) {
+        if (!imports.css || tag.name !== imports.css) {
             return;
         }
 

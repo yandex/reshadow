@@ -1,9 +1,19 @@
 const parser = require('postcss-selector-parser');
 
+const GLOBAL_PSEUDO = ':global';
+
+const isGlobal = node => {
+    const {parent} = node;
+    if (!(parser.isSelector(parent) && parser.isPseudo(parent.parent)))
+        return false;
+
+    return parent.parent.value === GLOBAL_PSEUDO;
+};
+
 module.exports = ({scope}) => {
     const processNamespace = node => {
-        if (node.namespace === 'html') {
-            node.namespace = '';
+        if (isGlobal(node)) {
+            node.parent.parent.replaceWith(node);
             return false;
         }
 
