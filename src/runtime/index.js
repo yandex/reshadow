@@ -66,6 +66,8 @@ let serverStyles = '';
 
 export const getStyles = () => serverStyles;
 
+const RESHADOW_ID = '__reshadow__';
+
 const css = (code, hash) => {
     const id = `reshadow-${hash}`;
 
@@ -74,10 +76,10 @@ const css = (code, hash) => {
         return;
     }
 
-    let container = document.getElementById('reshadow');
+    let container = document.getElementById(RESHADOW_ID);
     if (!container) {
         container = document.createElement('object');
-        container.id = 'reshadow';
+        container.id = RESHADOW_ID;
         document.head.appendChild(container);
     }
     let css = document.getElementById(id);
