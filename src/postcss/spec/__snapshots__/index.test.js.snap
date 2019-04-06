@@ -25,6 +25,16 @@ exports[`postcss should should not transform keyframes 1`] = `
 }"
 `;
 
+exports[`postcss should should not transform pseudo-classes like :nth-child 1`] = `
+".__tr:nth-child(2n) {
+    color: red;
+}
+
+:dir(rtl) {
+    background-color: red;
+}"
+`;
+
 exports[`postcss should transform the code 1`] = `
 ".__button {
     color: red;

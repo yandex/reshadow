@@ -89,6 +89,20 @@ describe('postcss', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should should not transform pseudo-classes like :nth-child', () => {
+        const code = transform`
+            tr:nth-child(2n) {
+                color: red;
+            }
+
+            :dir(rtl) {
+                background-color: red;
+            }
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     describe('stats', () => {
         const transform = createTransform({stats: true});
 
