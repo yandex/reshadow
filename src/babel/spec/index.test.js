@@ -281,6 +281,25 @@ describe('babel', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should not transform tag with dot element that is not under `use` namespace', async () => {
+        const {code} = await transform`
+            import React from 'react'
+            import styled from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type}) => styled(styles)(
+                <components.button type={type} disabled={disabled}>
+                    <content as="span">content</content>
+                </components.button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should transform tag with just "as" attribute', async () => {
         const {code} = await transform`
             import React from 'react'

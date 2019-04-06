@@ -321,6 +321,25 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel should not transform tag with dot element that is not under \`use\` namespace 1`] = `
+"import React from 'react';
+import styled, { set, create, map } from 'reshadow';
+import styles from './styles';
+const styled_c8 = create([styles]);
+
+const App = ({
+  disabled,
+  type
+}) => styled((set([styled_c8]), React.createElement(components.button, map(\\"components.button\\", {
+  type: type,
+  disabled: disabled
+}), React.createElement(\\"span\\", {
+  className: styled.styles[\\"__content\\"]
+}, \\"content\\"))));
+
+export default App;"
+`;
+
 exports[`babel should transform tag with dot element 1`] = `
 "import React from 'react';
 import styled, { use, set, create, map } from 'reshadow';
