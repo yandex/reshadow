@@ -1,20 +1,36 @@
 const parser = require('postcss-selector-parser');
 
+const isPseudo = node => {
+    return parser.isSelector(node) && parser.isPseudo(node.parent);
+};
+
 const GLOBAL_PSEUDO = ':global';
 
 const isGlobal = node => {
-    const {parent} = node;
-    if (!(parser.isSelector(parent) && parser.isPseudo(parent.parent)))
-        return false;
+    const {value} = node.parent;
+    return value === GLOBAL_PSEUDO;
+};
 
-    return parent.parent.value === GLOBAL_PSEUDO;
+const SKIP_PSEUDO_LIST = new Set([':dir']);
+
+const isSkippedPseudo = node => {
+    const {value} = node.parent;
+    return SKIP_PSEUDO_LIST.has(value) || value.startsWith(':nth-');
 };
 
 module.exports = ({scope}) => {
     const processNamespace = node => {
-        if (isGlobal(node)) {
-            node.parent.parent.replaceWith(node);
-            return false;
+        const {parent} = node;
+
+        if (isPseudo(parent)) {
+            if (isGlobal(parent)) {
+                parent.parent.replaceWith(node);
+                return false;
+            }
+
+            if (isSkippedPseudo(parent)) {
+                return false;
+            }
         }
 
         return (

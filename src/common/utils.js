@@ -2,8 +2,9 @@ const path = require('path');
 const stringHash = require('string-hash');
 const tags = require('./html-tags');
 
-const componentRe = /^[A-Z]/;
-const isCustomElement = name => !(componentRe.test(name) || tags.has(name));
+const componentRe = /^[A-Z][a-zA-Z]*/;
+const isCustomElement = name =>
+    !(tags.has(name) || componentRe.test(name) || name.includes('.'));
 
 const ROOT = process.cwd();
 
