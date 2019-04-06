@@ -1,6 +1,6 @@
 # reshadow ⛱️
 
-Write semantic styles and components, as the soul wants.
+Write semantic mark up and styles, as the soul wants.
 
 [![Travis branch](https://img.shields.io/travis/lttb/reshadow/master.svg?style=flat-square)](https://travis-ci.org/lttb/reshadow)
 [![Coverage Status branch](https://img.shields.io/coveralls/lttb/reshadow/master.svg?style=flat-square)](https://img.shields.io/coveralls/lttb/reshadow/master.svg?branch=master)
@@ -10,7 +10,7 @@ Write semantic styles and components, as the soul wants.
 > This project has `alpha` status, so the API and the implementation could be changed.
 
 ```sh
-npm i --save reshadow@alpha
+npm i --save reshadow
 ```
 
 **reshadow** provides the Shadow DOM developer experience, but for the Virtual DOM with the Component way.
