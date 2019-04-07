@@ -1,6 +1,6 @@
 # reshadow ⛱️
 
-Write semantic mark up and styles, as the soul wants.
+Write semantic markup and styles, as the soul wants.
 
 [![Travis branch](https://img.shields.io/travis/lttb/reshadow/master.svg?style=flat-square)](https://travis-ci.org/lttb/reshadow)
 [![Coverage Status branch](https://img.shields.io/coveralls/lttb/reshadow/master.svg?style=flat-square)](https://img.shields.io/coveralls/lttb/reshadow/master.svg?branch=master)
@@ -8,6 +8,8 @@ Write semantic mark up and styles, as the soul wants.
 [![Babel Macro](https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square)](https://github.com/kentcdodds/babel-plugin-macros)
 
 > This project has `alpha` status, so the API and the implementation could be changed.
+
+Please check the [reshadow.now.sh](https://reshadow.now.sh) website to get more information and examples.
 
 ```sh
 npm i --save reshadow
@@ -26,8 +28,6 @@ npm i --save reshadow
 -   Combine the `css-in-js` and `css-modules` approaches or choose which fits you better
 -   All the benefits of the PostCSS ecosystem
 -   Interoperable. Use it with components in [React](https://github.com/facebook/react), [Preact](https://github.com/developit/preact/), [Vue](https://github.com/vuejs/vue), [htm](https://github.com/developit/htm/).
-
-Please check the [reshadow.dev](https://reshadow.dev) for more information and examples.
 
 There are some examples on the [Сodesandbox](https://codesandbox.io):
 
