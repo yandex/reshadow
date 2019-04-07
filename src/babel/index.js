@@ -6,6 +6,7 @@ const syntaxJsx = require('@babel/plugin-syntax-jsx').default;
 const {addDefault} = require('@babel/helper-module-imports');
 const {stripIndent} = require('common-tags');
 const resolve = require('resolve');
+const stringHash = require('string-hash');
 
 const utils = require('../common/utils');
 
@@ -90,9 +91,6 @@ module.exports = (babel, pluginOptions = {}) => {
     const getHash = () => hashById(++index);
 
     let filename;
-    let fileHash;
-    let cssIndex;
-    const getFileHash = () => `${fileHash}_${hashById(++cssIndex)}`;
 
     let postcss;
     let cssFileRe = null;
@@ -102,8 +100,6 @@ module.exports = (babel, pluginOptions = {}) => {
 
         FILE = file;
         index = 1;
-        cssIndex = 1;
-        fileHash = utils.getFileHash(filename);
         STYLED = new Set();
         imports = {};
         IMPORT = null;
@@ -524,46 +520,46 @@ module.exports = (babel, pluginOptions = {}) => {
                 traverseStyled(p);
             }
         },
-    };
 
-    visitor.TaggedTemplateExpression = p => {
-        let {node} = p;
-        const {quasi, tag} = node;
+        TaggedTemplateExpression(p) {
+            let {node} = p;
+            const {quasi, tag} = node;
 
-        if (!imports.css || tag.name !== imports.css) {
-            return;
-        }
+            if (!imports.css || tag.name !== imports.css) {
+                return;
+            }
 
-        const hash = getFileHash();
+            const {raw} = quasi.quasis[0].value;
 
-        p.replaceWith(
-            t.callExpression(t.identifier(addImport('__css__')), [
-                quasi,
-                t.stringLiteral(hash),
-            ]),
-        );
+            const hash = String(stringHash(raw));
 
-        ({node} = p);
+            p.replaceWith(
+                t.callExpression(t.identifier(addImport('__css__')), [
+                    quasi,
+                    t.stringLiteral(hash),
+                ]),
+            );
 
-        if (!postcss) return;
+            ({node} = p);
 
-        const {raw} = quasi.quasis[0].value;
+            if (!postcss) return;
 
-        const result = postcss.process(raw, {from: filename});
-        const code = result.code;
-        const tokens = toObjectExpression(result.tokens);
+            const result = postcss.process(raw, {from: filename});
+            const code = result.code;
+            const tokens = toObjectExpression(result.tokens);
 
-        node.arguments[0] = t.templateLiteral(
-            [
-                t.templateElement({
-                    raw: code,
-                    cooked: code,
-                }),
-            ],
-            [],
-        );
+            node.arguments[0] = t.templateLiteral(
+                [
+                    t.templateElement({
+                        raw: code,
+                        cooked: code,
+                    }),
+                ],
+                [],
+            );
 
-        p.replaceWith(t.sequenceExpression([node, tokens]));
+            p.replaceWith(t.sequenceExpression([node, tokens]));
+        },
     };
 
     return {
@@ -593,7 +589,7 @@ module.exports = (babel, pluginOptions = {}) => {
                         basedir: path.dirname(filename),
                     });
 
-                    const code = fs.readFileSync(file);
+                    const code = fs.readFileSync(file).toString();
 
                     const append = t.taggedTemplateExpression(
                         t.identifier(addImport('css')),
