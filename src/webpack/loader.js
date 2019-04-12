@@ -1,5 +1,8 @@
-const utils = require('../common/utils');
+const path = require('path');
+
 const VirtualModulesPlugin = require('webpack-virtual-modules');
+
+const utils = require('../common/utils');
 
 const virtualModules = new VirtualModulesPlugin();
 
@@ -23,22 +26,38 @@ module.exports = function(source) {
     compiler.hooks.afterEnvironment.intercept({
         name: 'VirtualModulesPlugin',
         context: true,
-        register: tap => tap.fn(),
+        register: tap => (tap.fn(), tap),
     });
 
     virtualModules.apply(compiler);
 
+    const filepath = this.resourcePath;
+
     let index = 0;
 
-    const result = source.replace(
-        /__css__\([`'"]((.|[\r\n])*?)[`'"]((.|[\r\n])*?)\)/g,
-        (match, code) => {
-            const hash = `${utils.getFileHash(this.resource)}_${++index}`;
-            const filename = addDependency(hash, code.replace(/\\n/g, '\n'));
+    const result = source
+        .replace(
+            /__css__\([`'"]((.|[\r\n])*?)[`'"]((.|[\r\n])*?)\)/g,
+            (match, code) => {
+                const hash = `${utils.getFileHash(filepath)}_${++index}`;
+                const filename = addDependency(
+                    hash,
+                    code.replace(/\\n/g, '\n'),
+                );
 
-            return `require('${filename}')`;
-        },
-    );
+                return `require('${filename}')`;
+            },
+        )
+        .replace(/\/\*__reshadow-styles__:"(.*?)"\*\//, (match, dep) => {
+            const depPath = utils.resolveDependency({
+                filename: dep,
+                basedir: path.dirname(filepath),
+            });
+
+            this.dependency(depPath);
+
+            return '';
+        });
 
     return result;
 };
