@@ -3,7 +3,7 @@
 exports[`webpack inserts name and outputs JavaScript 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from 'reshadow';
-var styled_c8 = create([require('/.cache/reshadow/2989090479.css')]);
+var styled_c8 = create([require('/.cache/reshadow/255851011_1.css')]);
 
 var App = function App(_ref) {
   var disabled = _ref.disabled,

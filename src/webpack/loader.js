@@ -1,5 +1,4 @@
 const path = require('path');
-const stringHash = require('string-hash');
 
 const VirtualModulesPlugin = require('webpack-virtual-modules');
 
@@ -34,11 +33,13 @@ module.exports = function(source) {
 
     const filepath = this.resourcePath;
 
+    let index = 0;
+
     const result = source
         .replace(
             /__css__\([`'"]((.|[\r\n])*?)[`'"]((.|[\r\n])*?)\)/g,
             (match, code) => {
-                const hash = stringHash(code);
+                const hash = `${utils.getFileHash(filepath)}_${++index}`;
                 const filename = addDependency(
                     hash,
                     code.replace(/\\n/g, '\n'),
