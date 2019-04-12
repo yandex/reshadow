@@ -137,6 +137,8 @@ export default App;"
 exports[`babel postcss should process styles from file 1`] = `
 "import React from 'react';
 import styled, { css, __css__, set, create, use, map } from 'reshadow';
+
+/*__reshadow-styles__:\\"./styles.css\\"*/
 const { ...styles
 } = (__css__(\`.___button_fo1gj_1 {
     color: red;

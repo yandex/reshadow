@@ -5,7 +5,6 @@ const template = require('@babel/template').default;
 const syntaxJsx = require('@babel/plugin-syntax-jsx').default;
 const {addDefault} = require('@babel/helper-module-imports');
 const {stripIndent} = require('common-tags');
-const resolve = require('resolve');
 const stringHash = require('string-hash');
 
 const utils = require('../common/utils');
@@ -585,7 +584,8 @@ module.exports = (babel, pluginOptions = {}) => {
                 const {source, specifiers} = p.node;
 
                 if (cssFileRe && cssFileRe.test(source.value)) {
-                    const file = resolve.sync(source.value, {
+                    const file = utils.resolveDependency({
+                        filename: source.value,
                         basedir: path.dirname(filename),
                     });
 
@@ -626,6 +626,11 @@ module.exports = (babel, pluginOptions = {}) => {
                                 append,
                             ),
                         ]),
+                    );
+
+                    p.addComment(
+                        'leading',
+                        `__reshadow-styles__:"${source.value}"`,
                     );
 
                     return;
