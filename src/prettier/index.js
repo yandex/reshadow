@@ -12,8 +12,9 @@ const isStyledCall = tag =>
     tag.callee.name === 'styled';
 
 const isStyledCallee = callee =>
-    callee.type === 'TaggedTemplateExpression' &&
-    (isStyledTag(callee.tag) || isStyledCall(callee.tag));
+    isStyledCall(callee) ||
+    (callee.type === 'TaggedTemplateExpression' &&
+        (isStyledTag(callee.tag) || isStyledCall(callee.tag)));
 
 const isStyledBody = node =>
     node.type === 'ArrowFunctionExpression' &&

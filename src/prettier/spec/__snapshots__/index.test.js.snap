@@ -15,7 +15,7 @@ Container Button content {
 "
 `;
 
-exports[`prettier js should keep process the callback and remove the comma dangle 1`] = `
+exports[`prettier js should keep \`styled\` in the callback and remove the comma dangle 1`] = `
 "const Button = components.map(x => styled\`
   div {
     color: green;
@@ -32,7 +32,40 @@ exports[`prettier js should keep process the callback and remove the comma dangl
 "
 `;
 
-exports[`prettier js should keep the \`styled\` tag in arrow function and transform the css 1`] = `
+exports[`prettier js should keep the \`styled\` call 1`] = `
+"const Button = ({ children, styles, ...props }) => styled(styles)(
+  <Box {...props} size=\\"s\\">
+    {children}
+  </Box>
+);
+"
+`;
+
+exports[`prettier js should keep the \`styled\` call with composition 1`] = `
+"const Button = ({ children, styles, ...props }) => styled(styles, styles2)(
+  <Box {...props} size=\\"s\\">
+    {children}
+  </Box>
+);
+"
+`;
+
+exports[`prettier js should keep the \`styled\` call with long composition 1`] = `
+"const Button = ({ children, styles, ...props }) => styled(
+  styles,
+  styles2,
+  styles3,
+  styles4,
+  styles5
+)(
+  <Box {...props} size=\\"s\\">
+    {children}
+  </Box>
+);
+"
+`;
+
+exports[`prettier js should keep the \`styled\` tag and transform the css 1`] = `
 "const Button = ({ children, ...props }) => styled\`
   Box {
     margin-top: 10px;

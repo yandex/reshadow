@@ -31,11 +31,44 @@ describe('prettier', () => {
     });
 
     describe('js', () => {
-        it('should keep the `styled` tag in arrow function and transform the css', () => {
+        it('should keep the `styled` tag and transform the css', () => {
             const code = transform({parser: 'babel'})`
                 const Button = ({children, ...props}) =>
                 styled\`Box {margin-top: 10px;}
                 \`(
+                <Box {...props} size="s">{children}</Box>,
+                );
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should keep the `styled` call', () => {
+            const code = transform({parser: 'babel'})`
+                const Button = ({children, styles, ...props}) =>
+                styled(styles)(
+                <Box {...props} size="s">{children}</Box>,
+                );
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should keep the `styled` call with composition', () => {
+            const code = transform({parser: 'babel'})`
+                const Button = ({children, styles, ...props}) =>
+                styled(styles, styles2)(
+                <Box {...props} size="s">{children}</Box>,
+                );
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should keep the `styled` call with long composition', () => {
+            const code = transform({parser: 'babel'})`
+                const Button = ({children, styles, ...props}) =>
+                styled(styles, styles2, styles3, styles4, styles5)(
                 <Box {...props} size="s">{children}</Box>,
                 );
             `;
@@ -67,7 +100,7 @@ describe('prettier', () => {
             expect(code).toMatchSnapshot();
         });
 
-        it('should keep process the callback and remove the comma dangle', () => {
+        it('should keep `styled` in the callback and remove the comma dangle', () => {
             const code = transform({parser: 'babel'})`
             const Button = components.map(x => styled\`
                 div {color: green;}
