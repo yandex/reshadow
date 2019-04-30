@@ -60,11 +60,15 @@ const defaultOptions = {
     elementFallback: true,
     files: false,
     stringStyle: false,
+    ignoreProp: null,
+    underscore: false,
 };
 
 module.exports = (babel, pluginOptions = {}) => {
     const {types: t} = babel;
     const options = Object.assign({}, defaultOptions, pluginOptions);
+
+    let classNameProp = 'className';
 
     if (options.target === 'preact') {
         if (pluginOptions.stringStyle !== undefined) {
@@ -76,6 +80,10 @@ module.exports = (babel, pluginOptions = {}) => {
 
     if (options.target === 'vue') {
         moduleName = 'reshadow/runtime/vue';
+        classNameProp = 'class';
+    } else if (options.target === 'svelte') {
+        moduleName = 'reshadow/runtime/svelte';
+        classNameProp = 'class';
     }
 
     let STYLED = new Set();
@@ -299,7 +307,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
                 depth++;
 
-                const {openingElement} = node;
+                const {openingElement, closingElement} = node;
 
                 let elementName = getElementName(openingElement.name);
 
@@ -325,6 +333,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 elementMap.set(elementPath, {elementName});
 
                 const spreads = [];
+                const filtered = [];
 
                 if (openingElement.attributes.length > 0) {
                     let props = [];
@@ -383,9 +392,20 @@ module.exports = (babel, pluginOptions = {}) => {
 
                             uses.push(getProp(name, attr.value));
                         } else {
-                            const name = getElementName(attr.name);
+                            let name = getElementName(attr.name);
 
-                            props.push(getProp(name, attr.value));
+                            if (options.underscore && name.startsWith('_')) {
+                                indexesToRemove.push(i);
+                                name = name.replace('_', '');
+                                uses.push(getProp(name, attr.value));
+                            } else if (
+                                options.ignoreProp &&
+                                options.ignoreProp(name)
+                            ) {
+                                filtered.push(attr);
+                            } else {
+                                props.push(getProp(name, attr.value));
+                            }
                         }
                     });
 
@@ -434,7 +454,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 } else {
                     openingElement.attributes = [
                         t.JSXAttribute(
-                            t.JSXIdentifier('className'),
+                            t.JSXIdentifier(classNameProp),
                             t.JSXExpressionContainer(
                                 buildClassName({
                                     NAME: name,
@@ -445,6 +465,12 @@ module.exports = (babel, pluginOptions = {}) => {
                             ),
                         ),
                     ];
+                }
+
+                openingElement.attributes.push(...filtered);
+
+                if (closingElement) {
+                    closingElement.name = openingElement.name;
                 }
             },
         });

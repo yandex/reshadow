@@ -40,6 +40,28 @@ describe('babel', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should transform the code with underscore', async () => {
+        const {code} = await transform.with({
+            ...defaultOptions,
+            plugins: [getPlugin({underscore: true})],
+        })`
+            import React from 'react'
+            import styled from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({disabled, type}) => styled(styles)(
+                <button type={type} disabled={disabled} _theme="normal">
+                    content
+                </button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should transform the nested code', async () => {
         const {code} = await transform`
             import React from 'react'

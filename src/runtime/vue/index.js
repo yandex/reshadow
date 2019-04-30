@@ -20,6 +20,6 @@ const use = obj => {
     return result;
 };
 
-export {use, css, create, set, map, __css__};
+export {use, css, create, set, map, __css__, KEYS};
 
 export default styled;
