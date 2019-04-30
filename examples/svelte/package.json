@@ -1,0 +1,21 @@
+{
+    "private": true,
+    "main": "index.html",
+    "scripts": {
+        "start": "webpack-dev-server --content-base public --hot"
+    },
+    "dependencies": {
+        "reshadow": "^0.0.0",
+        "svelte": "^3.0.0"
+    },
+    "devDependencies": {
+        "css-loader": "^2.1.1",
+        "extract-css-chunks-webpack-plugin": "^4.3.2",
+        "postcss-loader": "^3.0.0",
+        "style-loader": "^0.23.1",
+        "svelte-loader": "^2.13.3",
+        "webpack": "^4.30.0",
+        "webpack-cli": "^3.3.1",
+        "webpack-dev-server": "^3.3.1"
+    }
+}
