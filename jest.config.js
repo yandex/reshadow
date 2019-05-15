@@ -5,7 +5,7 @@ module.exports = {
     collectCoverageFrom: [
         'packages/**/*.js',
         '!**/spec/**',
-        '!packages/index.js',
+        '!packages/reshadow/index.js',
         '!packages/eslint/index.js',
     ],
     transform: {
