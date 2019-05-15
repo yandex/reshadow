@@ -13,6 +13,9 @@
         "url": "https://github.com/lttb/reshadow/issues"
     },
     "homepage": "https://reshadow.dev",
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "prepublish": "../../build.sh"
     },
