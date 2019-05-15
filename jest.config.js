@@ -1,17 +1,32 @@
+const lib = '/lib/';
+
 module.exports = {
-    roots: ['<rootDir>/src/'],
-    setupTestFrameworkScriptFile: 'jest-enzyme',
-    testEnvironmentOptions: {
-        enzymeAdapter: 'react16',
-    },
-    testEnvironment: 'node',
+    testPathIgnorePatterns: [lib],
+    collectCoverageFrom: [
+        'packages/**/*.js',
+        '!**/spec/**',
+        '!packages/index.js',
+        '!packages/eslint/index.js',
+    ],
     transform: {
         '^.+\\.jsx?$': 'babel-jest',
     },
-    collectCoverageFrom: [
-        'src/**/*.js',
-        '!**/spec/**',
-        '!src/index.js',
-        '!src/eslint/index.js',
+    projects: [
+        {
+            displayName: 'client',
+            roots: ['<rootDir>/packages/reshadow'],
+            modulePathIgnorePatterns: [lib],
+            setupFilesAfterEnv: ['jest-enzyme'],
+            testEnvironment: 'enzyme',
+            testEnvironmentOptions: {
+                enzymeAdapter: 'react16',
+            },
+        },
+        {
+            displayName: 'node',
+            roots: ['<rootDir>/packages/'],
+            modulePathIgnorePatterns: [lib, '<rootDir>/packages/reshadow'],
+            testEnvironment: 'node',
+        },
     ],
 };

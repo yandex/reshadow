@@ -1,0 +1,26 @@
+{
+    "name": "@reshadow/postcss",
+    "version": "0.0.1-alpha.11",
+    "description": "reshadow PostCSS plugin",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lttb/reshadow.git"
+    },
+    "author": "Kenzhaev Artur <kenzhaev.artur@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/lttb/reshadow/issues"
+    },
+    "homepage": "https://reshadow.dev",
+    "scripts": {
+        "prepublish": "../../build.sh"
+    },
+    "dependencies": {
+        "postcss": "7.0.16",
+        "postcss-selector-parser": "6.0.2"
+    },
+    "devDependencies": {
+        "common-tags": "1.8.0"
+    }
+}

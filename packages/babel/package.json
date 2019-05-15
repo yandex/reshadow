@@ -1,0 +1,42 @@
+{
+    "name": "@reshadow/babel",
+    "version": "0.0.1-alpha.11",
+    "description": "reshadow babel plugin",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lttb/reshadow.git"
+    },
+    "author": "Kenzhaev Artur <kenzhaev.artur@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/lttb/reshadow/issues"
+    },
+    "homepage": "https://reshadow.dev",
+    "scripts": {
+        "prepublish": "../../build.sh"
+    },
+    "dependencies": {
+        "@babel/helper-module-imports": "^7.0.0",
+        "@babel/plugin-syntax-jsx": "^7.2.0",
+        "@babel/template": "^7.2.2",
+        "@babel/types": "^7.3.0",
+        "@reshadow/utils": "0.0.1-alpha.11",
+        "css-modules-loader-core": "^1.1.0",
+        "cssnano": "^4.1.10",
+        "generic-names": "^2.0.1",
+        "postcss": "^7.0.13",
+        "postcss-import-sync2": "^1.1.0",
+        "postcss-modules-extract-imports": "^2.0.0",
+        "postcss-modules-local-by-default": "^2.0.5",
+        "postcss-modules-scope": "^2.0.1",
+        "postcss-modules-values": "^2.0.0",
+        "postcss-preset-env": "^6.6.0",
+        "resolve": "^1.10.0",
+        "string-hash": "^1.1.3",
+        "synchronous-promise": "^2.0.6"
+    },
+    "optionalDependencies": {
+        "@vue/babel-plugin-transform-vue-jsx": "^1.0.0-beta.2"
+    }
+}

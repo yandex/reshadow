@@ -1,5 +1,9 @@
-node_modules/*
+**/node_modules/**
 lib
 coverage
 .vscode
 !node_modules/reshadow.js
+lerna-debug.log
+yarn-error.log
+.cache
+dist

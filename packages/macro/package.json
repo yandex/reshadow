@@ -1,0 +1,22 @@
+{
+    "name": "@reshadow/macro",
+    "version": "0.0.1-alpha.11",
+    "description": "reshadow babel-plugin-macros plugin",
+    "main": "index.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lttb/reshadow.git"
+    },
+    "author": "Kenzhaev Artur <kenzhaev.artur@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/lttb/reshadow/issues"
+    },
+    "homepage": "https://reshadow.dev",
+    "scripts": {
+        "prepublish": "../../build.sh"
+    },
+    "dependencies": {
+        "babel-plugin-macros": "2.5.1"
+    }
+}
