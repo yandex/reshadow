@@ -15,29 +15,27 @@ const {exec} = p(childProcess);
 const main = async () => {
     childProcess.execSync('rm -rf ./lib && mkdir lib');
     const pckg = require('./package.json');
-    const {dependencies} = pckg;
 
     await readdir('../packages').then(dirs =>
         Promise.all(
             dirs.map(async dir => {
                 await exec(`cp -R ../packages/${dir}/lib ./lib/${dir}`);
+
+                const libpckg = require(`../packages/${dir}/package.json`);
+                Object.assign(pckg.dependencies, libpckg.dependencies);
+                Object.assign(pckg.peerDependencies, libpckg.peerDependencies);
                 Object.assign(
-                    dependencies,
-                    require(`../packages/${dir}/package.json`).dependencies,
+                    pckg.optionalDependencies,
+                    libpckg.optionalDependencies,
                 );
             }),
         ),
     );
 
-    const nextPckg = {
-        ...pckg,
-        dependencies,
-    };
-
     childProcess.execSync('cp ../README.md lib/README.md');
     childProcess.execSync('cp ../yarn.lock lib/yarn.lock');
     childProcess.execSync(
-        `echo '${JSON.stringify(nextPckg, null, 2)}' > lib/package.json`,
+        `echo '${JSON.stringify(pckg, null, 2)}' > lib/package.json`,
     );
 };
 
