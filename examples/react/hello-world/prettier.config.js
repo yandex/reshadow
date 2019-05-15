@@ -3,5 +3,5 @@ module.exports = {
     singleQuote: true,
     trailingComma: 'all',
     bracketSpacing: false,
-    plugins: [require.resolve('./packages/prettier')],
+    plugins: [require.resolve('reshadow/prettier')],
 };

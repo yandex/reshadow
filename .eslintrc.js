@@ -1,6 +1,7 @@
 module.exports = {
     extends: [
         'standard',
+        'plugin:import/recommended',
         'plugin:flowtype/recommended',
         'plugin:react/recommended',
         'plugin:prettier/recommended',
@@ -8,7 +9,7 @@ module.exports = {
         'prettier/react',
         'prettier/standard',
     ],
-    plugins: ['flowtype', 'react', 'prettier', 'standard'],
+    plugins: ['import', 'flowtype', 'react', 'prettier', 'standard'],
     settings: {
         react: {
             version: 'detect',
@@ -39,8 +40,16 @@ module.exports = {
                 node: true,
             },
         },
+        {
+            files: ['rollup.config.js'],
+            parserOptions: {
+                sourceType: 'module',
+            },
+        },
     ],
     rules: {
         'no-sequences': 'off',
+        'import/no-unresolved': ['error', {commonjs: true}],
+        "import/no-extraneous-dependencies": ["error"],
     },
 };

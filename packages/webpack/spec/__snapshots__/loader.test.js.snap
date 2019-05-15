@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`webpack inserts name and outputs JavaScript 1`] = `
+"import React from 'react';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
+const styled_c8 = create([require('/.cache/reshadow/1409998408_1.css')]);
+
+const App = ({
+  disabled,
+  type,
+  color = 'grey'
+}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled,
+  $$style: {
+    \\"--c8_0\\": color
+  }
+}, use({
+  theme: \\"normal\\"
+})), React.createElement(\\"div\\", {
+  className: styled.styles[\\"__control\\"]
+}, \\"click\\"))));
+
+export default App;"
+`;
+
+exports[`webpack inserts name and outputs JavaScript 2`] = `
+"button[disabled] {
+    color: var(--c8_0);
+}"
+`;

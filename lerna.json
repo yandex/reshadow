@@ -1,0 +1,14 @@
+{
+    "packages": [
+        "packages/*",
+        "reshadow"
+    ],
+    "version": "0.0.1-alpha.26",
+    "npmClient": "yarn",
+    "useWorkspaces": true,
+    "command": {
+        "publish": {
+            "conventionalCommits": true
+        }
+    }
+}
