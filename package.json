@@ -16,6 +16,7 @@
     },
     "homepage": "https://reshadow.dev",
     "scripts": {
+        "build": "npx lerna run --scope '@reshadow/*' build && npx lerna run --scope 'reshadow' build",
         "test": "jest",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "lint": "eslint --ext .jsx,.js ."

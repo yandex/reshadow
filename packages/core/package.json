@@ -14,7 +14,7 @@
     },
     "homepage": "https://reshadow.dev",
     "scripts": {
-        "prepublish": "../../build.sh"
+        "build": "../../build.sh"
     },
     "devDependencies": {
         "enzyme": "^3.8.0",

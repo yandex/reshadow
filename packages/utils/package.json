@@ -17,7 +17,7 @@
         "access": "public"
     },
     "scripts": {
-        "prepublish": "../../build.sh"
+        "build": "../../build.sh"
     },
     "dependencies": {
         "html-tags": "^2.0.0",

@@ -17,7 +17,7 @@
         "access": "public"
     },
     "scripts": {
-        "prepublish": "../../build.sh"
+        "build": "../../build.sh"
     },
     "dependencies": {
         "prettier": "1.17.0"
