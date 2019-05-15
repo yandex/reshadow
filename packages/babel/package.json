@@ -27,6 +27,7 @@
         "@reshadow/utils": "^0.0.1-alpha.13",
         "css-modules-loader-core": "^1.1.0",
         "cssnano": "^4.1.10",
+        "common-tags": "1.8.0",
         "generic-names": "^2.0.1",
         "postcss": "^7.0.13",
         "postcss-import-sync2": "^1.1.0",
