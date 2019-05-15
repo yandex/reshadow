@@ -2,7 +2,8 @@
 
 cp ../../README.md lib/README.md
 
-for i in babel eslint macro postcss prettier
+for i in babel eslint macro postcss prettier webpack/loader
 do
-   echo "module.exports = require('@reshadow/$i');" > "lib/$i.js"
+    FILE="lib/$i.js"
+    mkdir -p "$(dirname "$FILE")" && echo "module.exports = require('@reshadow/$i');" > "$FILE"
 done
