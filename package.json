@@ -15,7 +15,6 @@
     },
     "homepage": "https://reshadow.dev",
     "scripts": {
-        "prepublish": "npm run lint & npm run test",
         "test": "jest",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "lint": "eslint --ext .jsx,.js ."
