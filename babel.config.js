@@ -1,19 +1,6 @@
 module.exports = {
-    presets: [
-        [
-            '@babel/preset-env',
-            {
-                targets: {
-                    node: 'current',
-                },
-            },
-        ],
-    ],
+    presets: [['@babel/preset-env']],
     overrides: [
-        {
-            test: ['./packages/core'],
-            presets: ['@babel/preset-env'],
-        },
         {
             test: ['./packages/core/**/spec/**'],
             presets: [
@@ -31,6 +18,18 @@ module.exports = {
         },
     ],
     env: {
+        test: {
+            presets: [
+                [
+                    '@babel/preset-env',
+                    {
+                        targets: {
+                            node: 'current',
+                        },
+                    },
+                ],
+            ],
+        },
         common: {
             plugins: [
                 [

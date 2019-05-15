@@ -20,11 +20,9 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@babel/core": "^7.2.2",
         "@babel/helper-module-imports": "^7.0.0",
         "@babel/plugin-syntax-jsx": "^7.2.0",
         "@babel/template": "^7.2.2",
-        "@babel/types": "^7.3.0",
         "@reshadow/postcss": "^0.0.1-alpha.21",
         "@reshadow/utils": "^0.0.1-alpha.21",
         "common-tags": "1.8.0",
@@ -41,6 +39,9 @@
         "resolve": "^1.10.0",
         "string-hash": "^1.1.3",
         "synchronous-promise": "^2.0.6"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.2.2"
     },
     "optionalDependencies": {
         "@vue/babel-plugin-transform-vue-jsx": "^1.0.0-beta.2"

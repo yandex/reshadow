@@ -16,17 +16,15 @@ const depsList = ['dependencies', 'peerDependencies', 'optionalDependencies'];
 
 const merge = (a, b) =>
     depsList.forEach(key => {
-        if (b[key]) {
-            a[key] = a[key] ? Object.assign(a[key], b[key]) : b[key];
-        }
+        if (!b[key]) return;
 
-        if (!a[key]) return;
-
-        for (let name in a[key]) {
+        for (let name in b[key]) {
             if (name.startsWith('@reshadow')) {
-                delete a[key][name];
+                delete b[key][name];
             }
         }
+
+        a[key] = a[key] ? Object.assign(a[key], b[key]) : b[key];
     });
 
 const main = async () => {
@@ -37,6 +35,10 @@ const main = async () => {
 
     await exec(
         `BABEL_ENV=common npx babel --config-file ../babel.config.js ${root} --out-dir ./lib --ignore '${root}/**/spec','${root}/**/lib','${root}/**/*.spec.js','${root}/**/node_modules'`,
+    );
+
+    await exec(
+        `npx babel --config-file ../babel.config.js index.js --out-dir ./lib`,
     );
 
     const dirs = await readdir(root);

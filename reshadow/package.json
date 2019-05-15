@@ -1,8 +1,8 @@
 {
     "name": "reshadow",
     "version": "0.0.1-alpha.23",
-    "description": "reshadow prettier plugin",
-    "main": "core/index.js",
+    "description": "reshadow",
+    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lttb/reshadow.git"
@@ -20,13 +20,6 @@
         "build": "node build"
     },
     "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.21",
-        "@reshadow/core": "^0.0.1-alpha.21",
-        "@reshadow/eslint": "^0.0.1-alpha.21",
-        "@reshadow/macro": "^0.0.1-alpha.21",
-        "@reshadow/postcss": "^0.0.1-alpha.21",
-        "@reshadow/prettier": "^0.0.1-alpha.21",
-        "@reshadow/vue": "^0.0.1-alpha.21",
-        "@reshadow/webpack": "^0.0.1-alpha.21"
+        "@reshadow/core": "^0.0.1-alpha.21"
     }
 }

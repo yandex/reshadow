@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const t = require('@babel/types');
 const template = require('@babel/template').default;
 const syntaxJsx = require('@babel/plugin-syntax-jsx').default;
 const {addDefault} = require('@babel/helper-module-imports');
@@ -13,47 +12,6 @@ const buildClassName = template.expression(`
     NAME.styles["ELEMENT"]
 `);
 
-const toObjectExpression = obj =>
-    t.objectExpression(
-        Object.entries(obj).map(([key, value]) =>
-            t.objectProperty(
-                t.stringLiteral(key),
-                t.templateLiteral(
-                    [
-                        t.templateElement({
-                            raw: value,
-                            cooked: value,
-                        }),
-                    ],
-                    [],
-                ),
-            ),
-        ),
-    );
-
-/**
- * Basic React.Fragment check
- * We can improve it by checking import aliases if needs
- */
-const isReactFragment = node => {
-    if (!node) return false;
-
-    if (t.isJSXFragment(node)) return true;
-
-    const [element] = node.arguments || [];
-
-    if (t.isIdentifier(element)) return element.name === 'Fragment';
-
-    if (t.isMemberExpression(element)) {
-        return (
-            element.object.name === 'React' &&
-            element.property.name === 'Fragment'
-        );
-    }
-
-    return false;
-};
-
 const defaultOptions = {
     target: 'react',
     postcss: false,
@@ -64,6 +22,48 @@ const defaultOptions = {
 
 module.exports = (babel, pluginOptions = {}) => {
     const {types: t} = babel;
+
+    const toObjectExpression = obj =>
+        t.objectExpression(
+            Object.entries(obj).map(([key, value]) =>
+                t.objectProperty(
+                    t.stringLiteral(key),
+                    t.templateLiteral(
+                        [
+                            t.templateElement({
+                                raw: value,
+                                cooked: value,
+                            }),
+                        ],
+                        [],
+                    ),
+                ),
+            ),
+        );
+
+    /**
+     * Basic React.Fragment check
+     * We can improve it by checking import aliases if needs
+     */
+    const isReactFragment = node => {
+        if (!node) return false;
+
+        if (t.isJSXFragment(node)) return true;
+
+        const [element] = node.arguments || [];
+
+        if (t.isIdentifier(element)) return element.name === 'Fragment';
+
+        if (t.isMemberExpression(element)) {
+            return (
+                element.object.name === 'React' &&
+                element.property.name === 'Fragment'
+            );
+        }
+
+        return false;
+    };
+
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
     if (options.target === 'preact') {
