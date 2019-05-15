@@ -12,22 +12,29 @@ const p = lib =>
 const {readdir} = p(fs);
 const {exec} = p(childProcess);
 
+const merge = (a, b) =>
+    ['dependencies', 'peerDependencies', 'optionalDependencies'].forEach(
+        key => {
+            if (!b[key]) return;
+            if (!a[key]) {
+                a[key] = b[key];
+            } else {
+                Object.assign(a[key], b[key]);
+            }
+        },
+    );
+
 const main = async () => {
     childProcess.execSync('rm -rf ./lib && mkdir lib');
-    const pckg = require('./package.json');
+
+    const pckg = {...require('./package.json')};
 
     await readdir('../packages').then(dirs =>
         Promise.all(
             dirs.map(async dir => {
                 await exec(`cp -R ../packages/${dir}/lib ./lib/${dir}`);
 
-                const libpckg = require(`../packages/${dir}/package.json`);
-                Object.assign(pckg.dependencies, libpckg.dependencies);
-                Object.assign(pckg.peerDependencies, libpckg.peerDependencies);
-                Object.assign(
-                    pckg.optionalDependencies,
-                    libpckg.optionalDependencies,
-                );
+                merge(pckg, require(`../packages/${dir}/package.json`));
             }),
         ),
     );
