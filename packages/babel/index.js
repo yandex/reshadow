@@ -75,7 +75,7 @@ module.exports = (babel, pluginOptions = {}) => {
     let moduleName = 'reshadow';
 
     if (options.target === 'vue') {
-        moduleName = 'reshadow/runtime/vue';
+        moduleName = 'reshadow/vue';
     }
 
     let STYLED = new Set();

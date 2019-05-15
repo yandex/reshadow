@@ -2,7 +2,7 @@
 
 exports[`babel Vue should group props right 1`] = `
 "import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
-import styled, { set, create, css, use, map, __css__ } from \\"reshadow/runtime/vue\\";
+import styled, { set, create, css, use, map, __css__ } from \\"reshadow/vue\\";
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"3399371458\\")]);
 new Vue({
@@ -23,7 +23,7 @@ new Vue({
 `;
 
 exports[`babel Vue should pass classes 1`] = `
-"import styled, { set, create, css, map, __css__ } from \\"reshadow/runtime/vue\\";
+"import styled, { set, create, css, map, __css__ } from \\"reshadow/vue\\";
 import styles from './styles';
 const styled_c8 = create([__css__(\`Button + Button {
     margin-left: 10px;
