@@ -1,6 +1,6 @@
 {
     "name": "reshadow",
-    "version": "0.0.1-alpha.14",
+    "version": "0.0.1-alpha.15",
     "description": "reshadow prettier plugin",
     "main": "index.js",
     "repository": {
@@ -17,9 +17,9 @@
         "prepublish": "../../build.sh && ./postbuild.sh"
     },
     "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.14",
-        "@reshadow/eslint": "^0.0.1-alpha.13",
-        "@reshadow/macro": "^0.0.1-alpha.13",
+        "@reshadow/babel": "^0.0.1-alpha.15",
+        "@reshadow/eslint": "^0.0.1-alpha.15",
+        "@reshadow/macro": "^0.0.1-alpha.15",
         "@reshadow/postcss": "^0.0.1-alpha.13",
         "@reshadow/prettier": "^0.0.1-alpha.13"
     },
