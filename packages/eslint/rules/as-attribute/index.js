@@ -1,7 +1,6 @@
 const t = require('@babel/types');
 
 const utils = require('@reshadow/utils');
-const tags = require('@reshadow/utils/html-tags');
 
 module.exports = {
     meta: {
@@ -92,7 +91,7 @@ module.exports = {
                     value = attrValue.value;
                 }
 
-                if (options.onlyExisting && !tags.has(value)) {
+                if (options.onlyExisting && !utils.tags.has(value)) {
                     context.report({
                         node: asAttr.value,
                         message: 'Nonexistent html tag',

@@ -40,6 +40,12 @@ module.exports = {
                 node: true,
             },
         },
+        {
+            files: ['rollup.config.js'],
+            parserOptions: {
+                sourceType: 'module',
+            },
+        },
     ],
     rules: {
         'no-sequences': 'off',

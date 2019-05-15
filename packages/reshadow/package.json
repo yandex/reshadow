@@ -27,7 +27,6 @@
         "enzyme": "^3.8.0",
         "enzyme-adapter-react-16": "^1.7.1",
         "react": "^16.7.0",
-        "react-dom": "^16.7.0",
-        "reshadow": "file:."
+        "react-dom": "^16.7.0"
     }
 }

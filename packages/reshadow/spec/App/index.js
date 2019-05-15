@@ -1,4 +1,6 @@
 import React from 'react';
+
+// eslint-disable-next-line
 import styled, {use} from 'reshadow';
 
 import styles from './styles';

@@ -9,6 +9,8 @@ const stringHash = require('string-hash');
 
 const utils = require('@reshadow/utils');
 
+const reshadowPostcss = require('./postcss');
+
 const buildClassName = template.expression(`
     NAME.styles["ELEMENT"]
 `);
@@ -571,7 +573,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     // babel 6 compatibility
                     Object.assign(options, state.opts);
                     if (options.postcss && !postcss) {
-                        postcss = require('./postcss')(options.postcss);
+                        postcss = reshadowPostcss(options.postcss);
                     }
                     if (options.files && !cssFileRe) {
                         cssFileRe = new RegExp(options.files);

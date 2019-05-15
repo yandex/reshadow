@@ -16,6 +16,7 @@ const resolveDependency = ({filename, basedir}) =>
     resolve.sync(filename, {basedir});
 
 module.exports = {
+    tags,
     resolveDependency,
     isCustomElement,
     getFileHash,
