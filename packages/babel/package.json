@@ -20,11 +20,13 @@
         "prepublish": "../../build.sh"
     },
     "dependencies": {
+        "@babel/core": "^7.2.2",
         "@babel/helper-module-imports": "^7.0.0",
         "@babel/plugin-syntax-jsx": "^7.2.0",
         "@babel/template": "^7.2.2",
         "@babel/types": "^7.3.0",
         "@reshadow/utils": "^0.0.1-alpha.13",
+        "@reshadow/postcss": "^0.0.1-alpha.13",
         "common-tags": "1.8.0",
         "css-modules-loader-core": "^1.1.0",
         "cssnano": "^4.1.10",

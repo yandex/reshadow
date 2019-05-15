@@ -20,6 +20,10 @@
         "prepublish": "../../build.sh"
     },
     "dependencies": {
+        "@babel/types": "^7.3.0",
         "@reshadow/utils": "^0.0.1-alpha.13"
+    },
+    "devDependencies": {
+        "eslint": "^5.15.1"
     }
 }
