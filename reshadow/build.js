@@ -16,38 +16,32 @@ const depsList = ['dependencies', 'peerDependencies', 'optionalDependencies'];
 
 const merge = (a, b) =>
     depsList.forEach(key => {
-        if (!b[key]) return;
-        if (!a[key]) {
-            a[key] = b[key];
-        } else {
-            Object.assign(a[key], b[key]);
+        if (b[key]) {
+            a[key] = a[key] ? Object.assign(a[key], b[key]) : b[key];
+        }
+
+        if (!a[key]) return;
+
+        for (let name in a[key]) {
+            if (name.startsWith('@reshadow')) {
+                delete a[key][name];
+            }
         }
     });
 
 const main = async () => {
     childProcess.execSync('rm -rf ./lib && mkdir lib');
+    const root = '../packages';
 
     const pckg = {...require('./package.json')};
 
-    await readdir('../packages').then(dirs =>
-        Promise.all(
-            dirs.map(async dir => {
-                // await exec(`cp -R ../packages/${dir}/lib ./lib/${dir}`);
-                await exec(
-                    `BABEL_ENV=common npx babel --config-file ../babel.config.js ../packages/${dir}/lib --out-dir ./lib/${dir} --ignore './**/spec/*','./**/*.spec.js','node_modules'`,
-                );
-
-                merge(pckg, require(`../packages/${dir}/package.json`));
-            }),
-        ),
+    await exec(
+        `BABEL_ENV=common npx babel --config-file ../babel.config.js ${root} --out-dir ./lib --ignore '${root}/**/spec','${root}/**/lib','${root}/**/*.spec.js','${root}/**/node_modules'`,
     );
 
-    for (let dep of depsList) {
-        for (let key in pckg[dep]) {
-            if (key.startsWith('@reshadow')) {
-                delete pckg[dep][key];
-            }
-        }
+    const dirs = await readdir(root);
+    for (let dir of dirs) {
+        merge(pckg, require(`${root}/${dir}/package.json`));
     }
 
     childProcess.execSync('cp ../README.md lib/README.md');
