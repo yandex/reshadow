@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.26](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.25...v0.0.1-alpha.26) (2019-05-15)
+
+**Note:** Version bump only for package reshadow
+
+
+
+
+
 ## [0.0.1-alpha.25](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2019-05-15)
 
 
