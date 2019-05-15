@@ -821,16 +821,18 @@
     "@parcel/utils" "^1.11.0"
     physical-cpu-count "^2.0.0"
 
-"@reshadow/babel@^0.0.1-alpha.13":
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/@reshadow/babel/-/babel-0.0.1-alpha.13.tgz#3196b3f8ef36d31b50fc97bce978ef967e51d0a6"
-  integrity sha512-OOXE2pcHeivKSvHLpbEODCUX0Hkm80j/bGmVB5RnSgNrkt/37lePVmjaiK15g7It/fJoSo1XV1OniMpJfig1IQ==
+"@reshadow/babel@^0.0.1-alpha.25":
+  version "0.0.1-alpha.25"
+  resolved "https://registry.yarnpkg.com/@reshadow/babel/-/babel-0.0.1-alpha.25.tgz#8c80476b2522998a83b1b3d0ea0a636318e9e9ff"
+  integrity sha512-d7IEg7rjw7P/MlK9QI+ssLpd/ptuJnqnkvj9Lf52Xu+yYCwro2O4L1HkD/rx5uSdeKvr0kT5ZeRbLkxgD4un/g==
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/plugin-syntax-jsx" "^7.2.0"
     "@babel/template" "^7.2.2"
     "@babel/types" "^7.3.0"
-    "@reshadow/utils" "^0.0.1-alpha.13"
+    "@reshadow/postcss" "^0.0.1-alpha.21"
+    "@reshadow/utils" "^0.0.1-alpha.21"
+    common-tags "1.8.0"
     css-modules-loader-core "^1.1.0"
     cssnano "^4.1.10"
     generic-names "^2.0.1"
@@ -847,43 +849,66 @@
   optionalDependencies:
     "@vue/babel-plugin-transform-vue-jsx" "^1.0.0-beta.2"
 
-"@reshadow/eslint@^0.0.1-alpha.13":
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/@reshadow/eslint/-/eslint-0.0.1-alpha.13.tgz#23de7d181a77a104a2011a1fe5a3d3e9a64448ad"
-  integrity sha512-+uc4/8o0MoIrOFm0l92ysOlQ2BsqGfFNj+ZxZCncULrWZMZk+4P3z7wYk59cJnaYRiQ1qWP2n180so2zx47iMA==
-  dependencies:
-    "@reshadow/utils" "^0.0.1-alpha.13"
+"@reshadow/core@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/core/-/core-0.0.1-alpha.21.tgz#482c7c56104e79a3a8ac64902cc9c3d6a17a12dc"
+  integrity sha512-lwR5A9MkWaATmaybg+n7AvRJLIQ60RyO82lf2vfLRKiUKixcT1R3hV8fGzyWGKSmDGL5pZA7arULzqwUs7+Q8w==
 
-"@reshadow/macro@^0.0.1-alpha.13":
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/@reshadow/macro/-/macro-0.0.1-alpha.13.tgz#c3aceff9cf0ff324a3d192ba7ddcacc8e3ca4471"
-  integrity sha512-CRaQ7jx7CSbUobTnEiigS+/rbbUdavWSWizDRXNz6lt7MVrtQY/EGKbAWTkexF8uoAxZKogaKmURRoWjEgRITw==
+"@reshadow/eslint@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/eslint/-/eslint-0.0.1-alpha.21.tgz#55557a3b918d9585f6f3dff0f7c8cd7d836cc6b5"
+  integrity sha512-SAKVFm6zo9+PGUyoZJs4/Mwy5gIQrhGqGLYJGh1Y3BWyZMYKgBPzeRZyPuczzl5F6Z2L1FqLNJKMSzsXWezXmg==
   dependencies:
+    "@babel/types" "^7.3.0"
+    "@reshadow/utils" "^0.0.1-alpha.21"
+
+"@reshadow/macro@^0.0.1-alpha.25":
+  version "0.0.1-alpha.25"
+  resolved "https://registry.yarnpkg.com/@reshadow/macro/-/macro-0.0.1-alpha.25.tgz#4ae8b34d7de424ae402bf92ddf19f6db3e970e56"
+  integrity sha512-cQQ5Eje941xYfsV/TTwhtlmW5YAjILPO5QfpbSTBUUTL8VeTzkRuTNT7OKSNJk3MWXQrHxhcn6LCR1kaqXIoAg==
+  dependencies:
+    "@reshadow/babel" "^0.0.1-alpha.25"
+    "@reshadow/core" "^0.0.1-alpha.21"
     babel-plugin-macros "2.5.1"
 
-"@reshadow/postcss@^0.0.1-alpha.13":
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/@reshadow/postcss/-/postcss-0.0.1-alpha.13.tgz#ded5a5cb5d947889d01c3f3ca469d62cecde60d2"
-  integrity sha512-N173NRHyLScr/KwvdUQNp64Xbz98Jn67HjFP9C6rXNuUZpkDcrypaLUz+LB0p5pXOPCnyuSPbcWaTMi2IL3G9A==
+"@reshadow/postcss@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/postcss/-/postcss-0.0.1-alpha.21.tgz#4235eaa5dc64dfadad453263e431464fb1a19ac5"
+  integrity sha512-VYHbAM84yFXWriYB6jw18SK0YjT8E3dW/2IjOC5XQVXOIv/WfTB3hmzuhGjRZ0rkguoFZIGuvQ3IUSzTLdt/Xg==
   dependencies:
     postcss "7.0.16"
     postcss-selector-parser "6.0.2"
 
-"@reshadow/prettier@^0.0.1-alpha.13":
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/@reshadow/prettier/-/prettier-0.0.1-alpha.13.tgz#48b3c95971613288dbd7a8189a83979bf7c6536b"
-  integrity sha512-FFuItY9F0fGHYQa3TVbYDOljW2Zj8SSaQDxkIXhGIqGcRzQvKum948FootiQP4mfi9u2uG26QgwKni9wI2ZjEg==
+"@reshadow/prettier@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/prettier/-/prettier-0.0.1-alpha.21.tgz#261c0dfe05564d489d27e80459b82b6dd07e9c10"
+  integrity sha512-FgHJFbTSmP7FrwHKD81RqY/Xrhyn1wdEn4gbZopIdpRtMJ1A+7r5czg2XlpdIZpwnyDEsuH/L0qM9EpceQMb3w==
   dependencies:
     prettier "1.17.0"
 
-"@reshadow/utils@^0.0.1-alpha.13":
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/@reshadow/utils/-/utils-0.0.1-alpha.13.tgz#4f57e144f5837031392fad2a0669321b53ff9003"
-  integrity sha512-ZvhTL0qG23Zf0Bm9PClmA1dj3aC4oesRlquvCyNIJscm8Kdr5KKkzS97gsBF3Lvw4Pcn4/iqY8cSrU6Clr36Wg==
+"@reshadow/utils@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/utils/-/utils-0.0.1-alpha.21.tgz#20e11992fa1ff644dfadd961612b84745e50db15"
+  integrity sha512-Dhw2Jq5Epuq7Md6u8dVfA7VwPW20FmhzkTyE7DHr0Y4t4OZB7rRK//rUiDOowbNOSy2rVd30RKQnOaQtEj6tPA==
   dependencies:
     html-tags "^2.0.0"
     resolve "^1.10.0"
     string-hash "^1.1.3"
+
+"@reshadow/vue@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/vue/-/vue-0.0.1-alpha.21.tgz#9c145d8e1d348f253e99a66be876d6c9e0f33284"
+  integrity sha512-QgzKm0nutFdj2RIrns7JRQcDbOIsiPV0O3LxGaKk6lUbkEqUX6ZRupxlPtf84S28y1cuptHKfj1mWBM5cVH5MA==
+  dependencies:
+    "@reshadow/core" "^0.0.1-alpha.21"
+
+"@reshadow/webpack@^0.0.1-alpha.21":
+  version "0.0.1-alpha.21"
+  resolved "https://registry.yarnpkg.com/@reshadow/webpack/-/webpack-0.0.1-alpha.21.tgz#22ca32a495e65296230344f6abf1280f54b190a5"
+  integrity sha512-5sZfrt2XysHtq4BHM/T/Qn3y0U47AipkbzFUiL/foK1qQ8zkzxm3bOM4PmIAhECHUQhHaM1NXMmuqpu1LR0nBQ==
+  dependencies:
+    "@reshadow/utils" "^0.0.1-alpha.21"
+    webpack-virtual-modules "0.1.10"
 
 "@types/q@^1.5.1":
   version "1.5.2"
@@ -1570,6 +1595,11 @@ commander@^2.11.0, commander@^2.19.0, commander@^2.9.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
   integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
 
+common-tags@1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.8.0.tgz#8e3153e542d4a39e9b10554434afaaf98956a937"
+  integrity sha512-6P6g0uetGpW/sdyUy/iQQCbFF0kWVMSIVSyYz7Zgjcgh8mgw8PQzDNZeyZ5DQ2gM7LBoZPHmnjz8rUthkBG5tw==
+
 component-emitter@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/component-emitter/-/component-emitter-1.3.0.tgz#16e4070fba8ae29b679f2215853ee181ab2eabc0"
@@ -1961,7 +1991,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3:
   dependencies:
     ms "2.0.0"
 
-debug@^3.2.6:
+debug@^3.0.0, debug@^3.2.6:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
   integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
@@ -5003,16 +5033,19 @@ request@^2.72.0, request@^2.87.0:
     tunnel-agent "^0.6.0"
     uuid "^3.3.2"
 
-reshadow@0.0.1-alpha.13:
-  version "0.0.1-alpha.13"
-  resolved "https://registry.yarnpkg.com/reshadow/-/reshadow-0.0.1-alpha.13.tgz#47abced32a7d32c569bf769f89d9c45594d044c3"
-  integrity sha512-ehjreRl4KCtNIuvcbCt+Eq1klrDGdZq4TTxa4CrWkWwCTZI4k/XXO7T+JRSkA7vQI8bQ4JZ8EXdgiCGTq1ttew==
+reshadow@0.0.1-alpha.26:
+  version "0.0.1-alpha.26"
+  resolved "https://registry.yarnpkg.com/reshadow/-/reshadow-0.0.1-alpha.26.tgz#24df83f6433bf714793219a16d58bb9d5728911e"
+  integrity sha512-3u4R11mpWOQZQKj6oyg/SYuB0xSd6Tv0B/O27208S51v++ZmfV19yp20KsvtPiZbfNgbRPdjV/29LLdtaTJEjg==
   dependencies:
-    "@reshadow/babel" "^0.0.1-alpha.13"
-    "@reshadow/eslint" "^0.0.1-alpha.13"
-    "@reshadow/macro" "^0.0.1-alpha.13"
-    "@reshadow/postcss" "^0.0.1-alpha.13"
-    "@reshadow/prettier" "^0.0.1-alpha.13"
+    "@reshadow/babel" "^0.0.1-alpha.25"
+    "@reshadow/core" "^0.0.1-alpha.21"
+    "@reshadow/eslint" "^0.0.1-alpha.21"
+    "@reshadow/macro" "^0.0.1-alpha.25"
+    "@reshadow/postcss" "^0.0.1-alpha.21"
+    "@reshadow/prettier" "^0.0.1-alpha.21"
+    "@reshadow/vue" "^0.0.1-alpha.21"
+    "@reshadow/webpack" "^0.0.1-alpha.21"
 
 resolve-from@^3.0.0:
   version "3.0.0"
@@ -5849,6 +5882,13 @@ webidl-conversions@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.2.tgz#a855980b1f0b6b359ba1d5d9fb39ae941faa63ad"
   integrity sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==
+
+webpack-virtual-modules@0.1.10:
+  version "0.1.10"
+  resolved "https://registry.yarnpkg.com/webpack-virtual-modules/-/webpack-virtual-modules-0.1.10.tgz#2039529cbf1007e19f6e897c8d35721cc2c41f68"
+  integrity sha1-IDlSnL8QB+Gfbol8jTVyHMLEH2g=
+  dependencies:
+    debug "^3.0.0"
 
 whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3:
   version "1.0.5"
