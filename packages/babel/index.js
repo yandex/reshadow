@@ -570,7 +570,9 @@ module.exports = (babel, pluginOptions = {}) => {
                 enter(path, state) {
                     // babel 6 compatibility
                     Object.assign(options, state.opts);
-                    if (options.postcss && !postcss) {
+                    // TODO(@lttb): sandbox io problems
+                    // eslint-disable-next-line
+                    if (false && options.postcss && !postcss) {
                         postcss = require('./postcss')(options.postcss);
                     }
                     if (options.files && !cssFileRe) {
