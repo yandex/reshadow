@@ -17,7 +17,7 @@
         "access": "public"
     },
     "scripts": {
-        "build": "../../build.sh"
+        "prepublish": "../../build.sh"
     },
     "dependencies": {
         "@reshadow/utils": "^0.0.1-alpha.16",
