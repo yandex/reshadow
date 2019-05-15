@@ -19,6 +19,11 @@
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "lint": "eslint --ext .jsx,.js ."
     },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
     "lint-staged": {
         "*.{js,jsx}": [
             "eslint",
@@ -52,6 +57,7 @@
         "extract-loader": "^3.1.0",
         "file-loader": "^3.0.1",
         "flow-bin": "^0.91.0",
+        "husky": "^2.3.0",
         "jest": "24.8.0",
         "jest-environment-enzyme": "^7.0.1",
         "jest-enzyme": "^7.0.1",
