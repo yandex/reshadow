@@ -72,10 +72,10 @@ module.exports = (babel, pluginOptions = {}) => {
         }
     }
 
-    let moduleName = 'reshadow';
+    let moduleName = '@reshadow/core';
 
     if (options.target === 'vue') {
-        moduleName = 'reshadow/vue';
+        moduleName = '@reshadow/vue';
     }
 
     let STYLED = new Set();

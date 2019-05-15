@@ -9215,14 +9215,8 @@ require-main-filename@^2.0.0:
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-2.0.0.tgz#d0b329ecc7cc0f61649f62215be69af54aa8989b"
   integrity sha512-NKN5kMDylKuldxYLSUfrbo5Tuzh4hd+2E8NPPX02mZtn1VuREQToYe/ZdlJy+J3uCpfaiGF05e7B8W0iXbQHmg==
 
-"reshadow@file:packages/reshadow":
-  version "0.0.1-alpha.16"
-  dependencies:
-    "@reshadow/babel" "^0.0.1-alpha.16"
-    "@reshadow/eslint" "^0.0.1-alpha.16"
-    "@reshadow/macro" "^0.0.1-alpha.16"
-    "@reshadow/postcss" "^0.0.1-alpha.13"
-    "@reshadow/prettier" "^0.0.1-alpha.13"
+"reshadow@file:packages/core":
+  version "0.0.1-alpha.19"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"

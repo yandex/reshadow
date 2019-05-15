@@ -1,7 +1,7 @@
 {
-    "name": "reshadow",
+    "name": "@reshadow/core",
     "version": "0.0.1-alpha.19",
-    "description": "reshadow prettier plugin",
+    "description": "reshadow core runtime",
     "main": "index.js",
     "repository": {
         "type": "git",
@@ -14,15 +14,7 @@
     },
     "homepage": "https://reshadow.dev",
     "scripts": {
-        "prepublish": "../../build.sh && ./postbuild.sh"
-    },
-    "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.19",
-        "@reshadow/eslint": "^0.0.1-alpha.19",
-        "@reshadow/macro": "^0.0.1-alpha.19",
-        "@reshadow/postcss": "^0.0.1-alpha.19",
-        "@reshadow/prettier": "^0.0.1-alpha.19",
-        "@reshadow/webpack": "^0.0.1-alpha.19"
+        "prepublish": "../../build.sh"
     },
     "devDependencies": {
         "enzyme": "^3.8.0",

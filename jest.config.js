@@ -14,7 +14,7 @@ module.exports = {
     projects: [
         {
             displayName: 'client',
-            roots: ['<rootDir>/packages/reshadow'],
+            roots: ['<rootDir>/packages/core'],
             modulePathIgnorePatterns: [lib],
             setupFilesAfterEnv: ['jest-enzyme'],
             testEnvironment: 'enzyme',
@@ -25,7 +25,7 @@ module.exports = {
         {
             displayName: 'node',
             roots: ['<rootDir>/packages/'],
-            modulePathIgnorePatterns: [lib, '<rootDir>/packages/reshadow'],
+            modulePathIgnorePatterns: [lib, '<rootDir>/packages/core'],
             testEnvironment: 'node',
         },
     ],

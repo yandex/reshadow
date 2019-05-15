@@ -1,4 +1,11 @@
-import styled, {map as _map, css, create, set, __css__, KEYS} from '..';
+import styled, {
+    map as _map,
+    css,
+    create,
+    set,
+    __css__,
+    KEYS,
+} from '@reshadow/core';
 
 styled.classProp = 'class';
 

@@ -2,7 +2,7 @@
 
 exports[`babel Vue should group props right 1`] = `
 "import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
-import styled, { set, create, css, use, map, __css__ } from \\"reshadow/vue\\";
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/vue\\";
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"3399371458\\")]);
 new Vue({
@@ -23,7 +23,7 @@ new Vue({
 `;
 
 exports[`babel Vue should pass classes 1`] = `
-"import styled, { set, create, css, map, __css__ } from \\"reshadow/vue\\";
+"import styled, { set, create, css, map, __css__ } from \\"@reshadow/vue\\";
 import styles from './styles';
 const styled_c8 = create([__css__(\`Button + Button {
     margin-left: 10px;
@@ -50,7 +50,7 @@ new Vue({
 
 exports[`babel macro should keep named imports 1`] = `
 "import React from 'react';
-import styled, { use, set, create, css, map, __css__ } from \\"reshadow\\";
+import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"790506970\\"), {
@@ -72,7 +72,7 @@ export default App;"
 
 exports[`babel macro should merge use 1`] = `
 "import React from 'react';
-import styled, { use, set, create, css, map, __css__ } from \\"reshadow\\";
+import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"790506970\\"), {
@@ -92,7 +92,7 @@ export default App;"
 
 exports[`babel macro should process module with macro 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from \\"reshadow\\";
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"790506970\\"), {
@@ -114,7 +114,7 @@ export default App;"
 
 exports[`babel postcss should process styles and add them runtime 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
 }\`, \\"790506970\\"), {
@@ -136,7 +136,7 @@ export default App;"
 
 exports[`babel postcss should process styles from file 1`] = `
 "import React from 'react';
-import styled, { css, __css__, set, create, use, map } from 'reshadow';
+import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\";
 
 /*__reshadow-styles__:\\"./styles.css\\"*/
 const { ...styles
@@ -163,7 +163,7 @@ export default App;"
 
 exports[`babel postcss should process styles with css 1`] = `
 "import React from 'react';
-import styled, { css, __css__, set, create, use, map } from 'reshadow';
+import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\";
 const styles = (__css__(\`
     .___button_1cx4s_1 {
         color: red;
@@ -188,7 +188,7 @@ export default App;"
 
 exports[`babel postcss should process styles with css local name 1`] = `
 "import React from 'react';
-import styled, { css as localCss, __css__, set, create, use, map } from 'reshadow';
+import styled, { css as localCss, __css__, set, create, use, map } from \\"@reshadow/core\\";
 const styles = (__css__(\`
     .___button_1cx4s_1 {
         color: red;
@@ -213,7 +213,7 @@ export default App;"
 
 exports[`babel postcss should use cssnano 1`] = `
 "import React from 'react';
-import styled, { set, create, css, map, __css__ } from 'reshadow';
+import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_1n8fw_1{display:grid}\`, \\"3581683094\\"), {
   \\"__button\\": \`___button_1n8fw_1\`
 })]);
@@ -231,7 +231,7 @@ export default App;"
 
 exports[`babel postcss should use postcss-env 1`] = `
 "import React from 'react';
-import styled, { set, create, css, map, __css__ } from 'reshadow';
+import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_ltzzv_1 {
     -webkit-transition: 1s;
     transition: 1s;
@@ -252,7 +252,7 @@ export default App;"
 
 exports[`babel postcss should work with css-modules imports 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_1vljt_1 {
 
     color: red;
@@ -276,7 +276,7 @@ export default App;"
 
 exports[`babel should keep the links to styles if they cant hoist 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import baseStyles from './styles';
 const styled_c8 = create([baseStyles, __css__(\`button {
     color: red;
@@ -300,7 +300,7 @@ export default App;"
 
 exports[`babel should merge attributes well 1`] = `
 "import React from 'react';
-import styled, { use, set, create, map } from 'reshadow';
+import styled, { use, set, create, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -325,7 +325,7 @@ export default App;"
 
 exports[`babel should not transform tag with dot element that is not under \`use\` namespace 1`] = `
 "import React from 'react';
-import styled, { set, create, map } from 'reshadow';
+import styled, { set, create, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -344,7 +344,7 @@ export default App;"
 
 exports[`babel should transform tag with dot element 1`] = `
 "import React from 'react';
-import styled, { use, set, create, map } from 'reshadow';
+import styled, { use, set, create, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -363,7 +363,7 @@ export default App;"
 
 exports[`babel should transform tag with just "as" attribute 1`] = `
 "import React from 'react';
-import styled, { use, set, create, map } from 'reshadow';
+import styled, { use, set, create, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -382,7 +382,7 @@ export default App;"
 
 exports[`babel should transform tag with namespace 1`] = `
 "import React from 'react';
-import styled, { use, set, create, map } from 'reshadow';
+import styled, { use, set, create, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -401,7 +401,7 @@ export default App;"
 
 exports[`babel should transform the code 1`] = `
 "import React from 'react';
-import styled, { set, create, use, map } from 'reshadow';
+import styled, { set, create, use, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -420,7 +420,7 @@ export default App;"
 
 exports[`babel should transform the nested code 1`] = `
 "import React from 'react';
-import styled, { set, create, use, map } from 'reshadow';
+import styled, { set, create, use, map } from \\"@reshadow/core\\";
 import styles from './styles';
 import styles2 from './styles2';
 const styled_c8 = create([styles]);
@@ -445,7 +445,7 @@ export default App;"
 
 exports[`babel should transform with css-in-js code 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([__css__(\`button[disabled] {
     color: red;
 }\`, \\"1643207596\\")]);
@@ -465,7 +465,7 @@ export default App;"
 
 exports[`babel should transform with css-in-js code with styles 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: red;
@@ -486,7 +486,7 @@ export default App;"
 
 exports[`babel should transform with css-in-js code with variables 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: var(--c8_0);
@@ -514,7 +514,7 @@ export default App;"
 
 exports[`babel should transform with css-in-js code with variables in nested elemnts 1`] = `
 "import React from 'react';
-import styled, { set, create, css, map, __css__ } from 'reshadow';
+import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([__css__(\`div {
     padding: 10px;
@@ -545,7 +545,7 @@ export default App;"
 
 exports[`babel should transform with css-in-js code with variables in sibling nodes 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: var(--c8_0);
@@ -582,7 +582,7 @@ export default App;"
 
 exports[`babel should transform with css-in-js code with variables with string inline style 1`] = `
 "import React from 'react';
-import styled, { set, create, css, use, map, __css__ } from 'reshadow';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: var(--c8_0);
@@ -607,7 +607,7 @@ export default App;"
 
 exports[`babel should use custom elementFallback 1`] = `
 "import React from 'react';
-import styled, { use, set, create, map } from 'reshadow';
+import styled, { use, set, create, map } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([styles]);
 
@@ -626,7 +626,7 @@ export default App;"
 
 exports[`babel should work with just spread 1`] = `
 "import React from 'react';
-import styled, { set, create, css, map, __css__ } from 'reshadow';
+import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([__css__(\`button {
     padding: 5px 10px;
 }\`, \\"1053722513\\")]);

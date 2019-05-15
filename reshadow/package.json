@@ -1,8 +1,8 @@
 {
-    "name": "@reshadow/macro",
+    "name": "reshadow",
     "version": "0.0.1-alpha.19",
-    "description": "reshadow babel-plugin-macros plugin",
-    "main": "index.js",
+    "description": "reshadow prettier plugin",
+    "main": "core/index.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/lttb/reshadow.git"
@@ -13,15 +13,17 @@
         "url": "https://github.com/lttb/reshadow/issues"
     },
     "homepage": "https://reshadow.dev",
-    "publishConfig": {
-        "access": "public"
-    },
     "scripts": {
-        "prepublish": "../../build.sh"
+        "prepublish": "node build"
     },
     "dependencies": {
         "@reshadow/babel": "^0.0.1-alpha.19",
         "@reshadow/core": "^0.0.1-alpha.19",
-        "babel-plugin-macros": "2.5.1"
+        "@reshadow/eslint": "^0.0.1-alpha.19",
+        "@reshadow/macro": "^0.0.1-alpha.19",
+        "@reshadow/postcss": "^0.0.1-alpha.19",
+        "@reshadow/prettier": "^0.0.1-alpha.19",
+        "@reshadow/vue": "^0.0.1-alpha.19",
+        "@reshadow/webpack": "^0.0.1-alpha.19"
     }
 }

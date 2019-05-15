@@ -11,11 +11,11 @@ module.exports = {
     ],
     overrides: [
         {
-            test: ['./packages/reshadow'],
+            test: ['./packages/core'],
             presets: ['@babel/preset-env'],
         },
         {
-            test: ['./packages/reshadow/**/spec/**'],
+            test: ['./packages/core/**/spec/**'],
             presets: [
                 [
                     '@babel/preset-react',
