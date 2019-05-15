@@ -30,18 +30,5 @@ module.exports = {
                 ],
             ],
         },
-        common: {
-            plugins: [
-                [
-                    'module-resolver',
-                    {
-                        root: '..',
-                        alias: {
-                            '@reshadow': '../packages',
-                        },
-                    },
-                ],
-            ],
-        },
     },
 };
