@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.25](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.24...v0.0.1-alpha.25) (2019-05-15)
+
+
+### Bug Fixes
+
+* **babel:** use @babel/types ([5ad6fe8](https://github.com/lttb/reshadow/commit/5ad6fe8))
+
+
+
+
+
 ## [0.0.1-alpha.24](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.23...v0.0.1-alpha.24) (2019-05-15)
 
 **Note:** Version bump only for package reshadow
