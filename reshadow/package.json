@@ -1,6 +1,6 @@
 {
     "name": "reshadow",
-    "version": "0.0.1-alpha.20",
+    "version": "0.0.1-alpha.21",
     "description": "reshadow prettier plugin",
     "main": "core/index.js",
     "repository": {
@@ -20,13 +20,13 @@
         "build": "node build"
     },
     "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.20",
-        "@reshadow/core": "^0.0.1-alpha.20",
-        "@reshadow/eslint": "^0.0.1-alpha.19",
-        "@reshadow/macro": "^0.0.1-alpha.20",
-        "@reshadow/postcss": "^0.0.1-alpha.19",
-        "@reshadow/prettier": "^0.0.1-alpha.19",
-        "@reshadow/vue": "^0.0.1-alpha.20",
-        "@reshadow/webpack": "^0.0.1-alpha.20"
+        "@reshadow/babel": "^0.0.1-alpha.21",
+        "@reshadow/core": "^0.0.1-alpha.21",
+        "@reshadow/eslint": "^0.0.1-alpha.21",
+        "@reshadow/macro": "^0.0.1-alpha.21",
+        "@reshadow/postcss": "^0.0.1-alpha.21",
+        "@reshadow/prettier": "^0.0.1-alpha.21",
+        "@reshadow/vue": "^0.0.1-alpha.21",
+        "@reshadow/webpack": "^0.0.1-alpha.21"
     }
 }
