@@ -7,7 +7,12 @@ const KEYS = {
     __use__: _Symbol('__use__'),
     __elements__: '__elements__',
     __style__: '$$style',
-    __styles__: '$$styles',
+    __styles__: 'styles',
+
+    /**
+     * This prop is needed for the interop between different component frameworks
+     */
+    __classProp__: 'className',
 };
 
 let index = 0;
@@ -123,12 +128,6 @@ const set = (args, newStyle) => {
     styled[KEYS.__style__] = style;
 };
 
-/**
- * This prop is needed for the interop between different component frameworks
- * TODO: think about better solution
- */
-styled.classProp = 'className';
-
 const USE_PREFIX = 'use--';
 const ELEMENT_PREFIX = '__';
 const MOD_PREFIX = '_';
@@ -217,9 +216,9 @@ function map(element) {
         }
     }
 
-    cn = appendClassName(nextProps[styled.classProp], cn);
+    cn = appendClassName(nextProps[KEYS.__classProp__], cn);
 
-    if (cn) nextProps[styled.classProp] = cn;
+    if (cn) nextProps[KEYS.__classProp__] = cn;
 
     if (vars) {
         nextProps.style =

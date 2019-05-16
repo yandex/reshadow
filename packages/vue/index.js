@@ -7,7 +7,7 @@ import styled, {
     KEYS,
 } from '@reshadow/core';
 
-styled.classProp = 'class';
+KEYS.__classProp__ = 'class';
 
 const map = (element, data) => {
     if (!data.attrs) return data;
