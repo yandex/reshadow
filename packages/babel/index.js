@@ -228,6 +228,10 @@ module.exports = (babel, pluginOptions = {}) => {
             t.arrayExpression(localStyles),
         ]);
 
+        if (variables) {
+            setCall.arguments.push(variables);
+        }
+
         const stylesSet = t.sequenceExpression([setCall, jsxNode]);
 
         p.node.arguments = [stylesSet];
@@ -286,10 +290,6 @@ module.exports = (babel, pluginOptions = {}) => {
                 if (variables && depth === 0) {
                     for (let x of elementPath.container) {
                         if (!t.isJSXElement(x)) continue;
-
-                        if (setCall.arguments.length === 1) {
-                            setCall.arguments.push(variables);
-                        }
 
                         x.openingElement.attributes.push(
                             t.jSXAttribute(
