@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/macro",
-    "version": "0.0.1-alpha.28",
+    "version": "0.0.1-alpha.29",
     "description": "reshadow babel-plugin-macros plugin",
     "main": "index.js",
     "repository": {
