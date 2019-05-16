@@ -24,6 +24,7 @@
         "@babel/plugin-syntax-jsx": "^7.2.0",
         "@babel/template": "^7.2.2",
         "@babel/types": "^7.3.0",
+        "@reshadow/core": "^0.0.1-alpha.21",
         "@reshadow/postcss": "^0.0.1-alpha.21",
         "@reshadow/utils": "^0.0.1-alpha.21",
         "common-tags": "1.8.0",

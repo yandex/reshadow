@@ -9,16 +9,16 @@ const App = ({
   disabled,
   type,
   color = 'grey'
-}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+}) => styled((set([styled_c8], {
+  \\"--c8_0\\": color
+}), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  $$style: {
-    \\"--c8_0\\": color
-  }
+  $$style: styled.$$style
 }, use({
   theme: \\"normal\\"
 })), React.createElement(\\"div\\", {
-  className: styled.styles[\\"__control\\"]
+  className: styled.$$styles[\\"__control\\"]
 }, \\"click\\"))));
 
 export default App;"
