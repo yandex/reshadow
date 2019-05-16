@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.28](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.27...v0.0.1-alpha.28) (2019-05-16)
+
+
+### Bug Fixes
+
+* **babel:** fix dynamic variables set ([a16664e](https://github.com/lttb/reshadow/commit/a16664e))
+
+
+
+
+
 ## [0.0.1-alpha.27](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.26...v0.0.1-alpha.27) (2019-05-16)
 
 

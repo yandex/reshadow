@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/macro",
-    "version": "0.0.1-alpha.27",
+    "version": "0.0.1-alpha.28",
     "description": "reshadow babel-plugin-macros plugin",
     "main": "index.js",
     "repository": {
@@ -20,8 +20,8 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.27",
-        "@reshadow/core": "^0.0.1-alpha.27",
+        "@reshadow/babel": "^0.0.1-alpha.28",
+        "@reshadow/core": "^0.0.1-alpha.28",
         "babel-plugin-macros": "2.5.1"
     }
 }

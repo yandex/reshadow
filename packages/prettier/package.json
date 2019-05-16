@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/prettier",
-    "version": "0.0.1-alpha.27",
+    "version": "0.0.1-alpha.28",
     "description": "reshadow prettier plugin",
     "main": "index.js",
     "repository": {
