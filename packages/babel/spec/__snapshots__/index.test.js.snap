@@ -7,14 +7,14 @@ import styles from './styles';
 const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"3399371458\\")]);
 new Vue({
   el: \\"#app\\",
-  render: h => styled((set([styled_c8]), h(\\"Button\\", map(\\"Button\\", _mergeJSXProps([{
+  render: h => styled((set([styled_c8], {
+    \\"--c8_0\\": color
+  }), h(\\"Button\\", map(\\"Button\\", _mergeJSXProps([{
     \\"class\\": \\"test\\",
     \\"attrs\\": {
       \\"size\\": \\"s\\",
       \\"bgcolor\\": \\"red\\",
-      \\"$$style\\": {
-        \\"--c8_0\\": color
-      }
+      \\"$$style\\": styled.$$style
     }
   }, use({
     mod: \\"value\\"
@@ -32,7 +32,7 @@ new Vue({
   el: \\"#app\\",
   render: h => styled((set([styled_c8]), h(\\"div\\", map(\\"div\\", {
     \\"attrs\\": {
-      \\"className\\": styled.styles[\\"__div\\"]
+      \\"className\\": styled.$$styles[\\"__div\\"]
     }
   }), [h(\\"Button\\", map(\\"Button\\", {
     \\"attrs\\": {
@@ -336,7 +336,7 @@ const App = ({
   type: type,
   disabled: disabled
 }), React.createElement(\\"span\\", {
-  className: styled.styles[\\"__content\\"]
+  className: styled.$$styles[\\"__content\\"]
 }, \\"content\\"))));
 
 export default App;"
@@ -355,7 +355,7 @@ const App = ({
   type: type,
   disabled: disabled
 }), React.createElement(\\"span\\", {
-  className: styled.styles[\\"__use--content\\"]
+  className: styled.$$styles[\\"__use--content\\"]
 }, \\"content\\"))));
 
 export default App;"
@@ -374,7 +374,7 @@ const App = ({
   type: type,
   disabled: disabled
 }), React.createElement(\\"span\\", {
-  className: styled.styles[\\"__content\\"]
+  className: styled.$$styles[\\"__content\\"]
 }, \\"content\\"))));
 
 export default App;"
@@ -393,7 +393,7 @@ const App = ({
   type: type,
   disabled: disabled
 }), React.createElement(\\"span\\", {
-  className: styled.styles[\\"__use--content\\"]
+  className: styled.$$styles[\\"__use--content\\"]
 }, \\"content\\"))));
 
 export default App;"
@@ -435,9 +435,9 @@ const App = ({
 }, use({
   theme: \\"normal\\"
 })), styled((set([styled_12c]), React.createElement(\\"div\\", {
-  className: styled.styles[\\"__content\\"]
+  className: styled.$$styles[\\"__content\\"]
 }, \\"content\\"))), React.createElement(\\"button\\", {
-  className: styled.styles[\\"__button\\"]
+  className: styled.$$styles[\\"__button\\"]
 }, \\"click\\"))));
 
 export default App;"
@@ -498,13 +498,13 @@ const App = ({
   type,
   color,
   bgcolor
-}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+}) => styled((set([styled_c8], {
+  \\"--c8_0\\": color,
+  \\"--c8_1\\": bgcolor
+}), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  $$style: {
-    \\"--c8_0\\": color,
-    \\"--c8_1\\": bgcolor
-  }
+  $$style: styled.$$style
 }, use({
   theme: \\"normal\\"
 })), \\"content\\")));
@@ -530,14 +530,14 @@ const App = ({
   color,
   bgcolor
 }) => styled((set([styled_c8]), React.createElement(\\"div\\", {
-  className: styled.styles[\\"__div\\"]
-}, styled((set([styled_12c]), React.createElement(\\"button\\", map(\\"button\\", {
+  className: styled.$$styles[\\"__div\\"]
+}, styled((set([styled_12c], {
+  \\"--12c_0\\": color,
+  \\"--12c_1\\": bgcolor
+}), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  $$style: {
-    \\"--12c_0\\": color,
-    \\"--12c_1\\": bgcolor
-  }
+  $$style: styled.$$style
 }), \\"content\\"))))));
 
 export default App;"
@@ -557,22 +557,19 @@ const App = ({
   type,
   color,
   bgcolor
-}) => styled((set([styled_c8]), React.createElement(React.Fragment, null, React.createElement(\\"button\\", map(\\"button\\", {
+}) => styled((set([styled_c8], {
+  \\"--c8_0\\": color,
+  \\"--c8_1\\": bgcolor
+}), React.createElement(React.Fragment, null, React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  $$style: {
-    \\"--c8_0\\": color,
-    \\"--c8_1\\": bgcolor
-  }
+  $$style: styled.$$style
 }, use({
   theme: \\"normal\\"
 })), \\"content\\"), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  $$style: {
-    \\"--c8_0\\": color,
-    \\"--c8_1\\": bgcolor
-  }
+  $$style: styled.$$style
 }, use({
   theme: \\"action\\"
 })), \\"content 2\\"))));
@@ -594,10 +591,10 @@ const App = ({
   type,
   color,
   bgcolor
-}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+}) => styled((set([styled_c8], \`--c8_0:\${color};--c8_1:\${bgcolor};\`), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
-  $$style: \`--c8_0:\${color};--c8_1:\${bgcolor};\`
+  $$style: styled.$$style
 }, use({
   theme: \\"normal\\"
 })), \\"content\\")));
@@ -618,7 +615,7 @@ const App = ({
   type: type,
   disabled: disabled
 }), React.createElement(\\"span\\", {
-  className: styled.styles[\\"__content\\"]
+  className: styled.$$styles[\\"__content\\"]
 }, \\"content\\"))));
 
 export default App;"

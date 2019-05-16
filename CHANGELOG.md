@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.27](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.26...v0.0.1-alpha.27) (2019-05-16)
+
+
+### Bug Fixes
+
+* **examples/react/hello-world:** fix symlink ([6fda9a6](https://github.com/lttb/reshadow/commit/6fda9a6))
+
+
+### Features
+
+* **core:** bring the api for the variables ([9ab611f](https://github.com/lttb/reshadow/commit/9ab611f))
+
+
+
+
+
 ## [0.0.1-alpha.26](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.25...v0.0.1-alpha.26) (2019-05-15)
 
 **Note:** Version bump only for package reshadow

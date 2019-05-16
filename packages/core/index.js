@@ -1,12 +1,13 @@
 const _Symbol = key => (typeof Symbol !== 'undefined' ? Symbol(key) : key);
 
-export const KEYS = {
+const KEYS = {
     __id__: _Symbol('__id__'),
     __store__: _Symbol('__store__'),
     __prev__: _Symbol('__prev__'),
     __use__: _Symbol('__use__'),
     __elements__: '__elements__',
     __style__: '$$style',
+    __styles__: '$$styles',
 };
 
 let index = 0;
@@ -64,7 +65,7 @@ const isSSR = !(
 
 let serverStyles = '';
 
-export const getStyles = () => serverStyles;
+const getStyles = () => serverStyles;
 
 const RESHADOW_ID = '__reshadow__';
 
@@ -94,24 +95,32 @@ const css = (code, hash) => {
 };
 
 let styles = {};
+let style;
 const stack = [];
 
 const styled = elem => {
-    styles = stack.pop() || styles;
-    styled.styles = styles;
+    const curr = stack.pop();
+
+    styles = curr[0] || styles;
+    style = curr[1] || style;
+
+    styled[KEYS.__styles__] = styles;
+    styled[KEYS.__style__] = style;
 
     return elem;
 };
 
-styled.styles = styles;
+styled[KEYS.__styles__] = styles;
 
-const set = args => {
+const set = (args, newStyle) => {
     const newStyles = create(args);
 
-    stack.push(styles);
+    stack.push([styles, style]);
 
     styles = newStyles;
-    styled.styles = styles;
+    style = newStyle;
+    styled[KEYS.__styles__] = styles;
+    styled[KEYS.__style__] = style;
 };
 
 /**
@@ -120,26 +129,26 @@ const set = args => {
  */
 styled.classProp = 'className';
 
-export const USE_PREFIX = 'use--';
-export const ELEMENT_PREFIX = '__';
-export const MOD_PREFIX = '_';
-export const MOD_SEPARATOR = '_';
+const USE_PREFIX = 'use--';
+const ELEMENT_PREFIX = '__';
+const MOD_PREFIX = '_';
+const MOD_SEPARATOR = '_';
 
-export const parseElement = name => name.replace(ELEMENT_PREFIX, '');
+const parseElement = name => name.replace(ELEMENT_PREFIX, '');
 
-export const parseAttribute = name =>
+const parseAttribute = name =>
     name.replace(MOD_PREFIX, '').split(MOD_SEPARATOR);
 
-export const appendClassName = (className, cn = '') => {
+const appendClassName = (className, cn = '') => {
     if (className) {
         cn += (cn ? ' ' : '') + className;
     }
     return cn;
 };
-export const appendElement = (styles, key, cn = '') =>
+const appendElement = (styles, key, cn = '') =>
     appendClassName(styles[ELEMENT_PREFIX + key], cn);
 
-export const appendModifier = (styles, key, value, cn = '') => {
+const appendModifier = (styles, key, value, cn = '') => {
     // isFalsy
     if (
         value === undefined ||
@@ -170,7 +179,7 @@ export const appendModifier = (styles, key, value, cn = '') => {
 function map(element) {
     let nextProps = {};
     let cn = appendElement(styles, element);
-    let style = null;
+    let vars = null;
 
     const len = arguments.length;
 
@@ -182,7 +191,7 @@ function map(element) {
         if (!currProps) continue;
 
         useProps = useProps || currProps[KEYS.__use__];
-        style = style || currProps[KEYS.__style__];
+        vars = vars || currProps[KEYS.__style__];
 
         for (let key in currProps) {
             if (
@@ -212,16 +221,43 @@ function map(element) {
 
     if (cn) nextProps[styled.classProp] = cn;
 
-    if (style) {
+    if (vars) {
         nextProps.style =
             typeof style === 'string'
-                ? style + (nextProps.style || '')
-                : Object.assign(style, nextProps.style || {});
+                ? vars + (nextProps.style || '')
+                : Object.assign(vars, nextProps.style || {});
     }
 
     return nextProps;
 }
 
-export {use, css, create, set, map, css as __css__};
+Object.defineProperty(exports, '__esModule', {
+    value: true,
+});
 
-export default styled;
+Object.assign(exports, {
+    default: styled,
+    use,
+    css,
+    create,
+    set,
+    map,
+    __css__: css,
+
+    // ssr
+    getStyles,
+
+    // utils
+    appendModifier,
+    appendElement,
+    appendClassName,
+    parseAttribute,
+    parseElement,
+
+    // constants
+    MOD_SEPARATOR,
+    MOD_PREFIX,
+    ELEMENT_PREFIX,
+    USE_PREFIX,
+    KEYS,
+});

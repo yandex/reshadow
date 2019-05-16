@@ -8,9 +8,10 @@ const {stripIndent} = require('common-tags');
 const stringHash = require('string-hash');
 
 const utils = require('@reshadow/utils');
+const {KEYS} = require('@reshadow/core');
 
 const buildClassName = template.expression(`
-    NAME.styles["ELEMENT"]
+    NAME.${KEYS.__styles__}["ELEMENT"]
 `);
 
 const toObjectExpression = obj =>
@@ -223,12 +224,11 @@ module.exports = (babel, pluginOptions = {}) => {
 
         const [jsxNode] = p.node.arguments;
 
-        const stylesSet = t.sequenceExpression([
-            t.callExpression(t.identifier(addImport('set')), [
-                t.arrayExpression(localStyles),
-            ]),
-            jsxNode,
+        const setCall = t.callExpression(t.identifier(addImport('set')), [
+            t.arrayExpression(localStyles),
         ]);
+
+        const stylesSet = t.sequenceExpression([setCall, jsxNode]);
 
         p.node.arguments = [stylesSet];
 
@@ -287,10 +287,19 @@ module.exports = (babel, pluginOptions = {}) => {
                     for (let x of elementPath.container) {
                         if (!t.isJSXElement(x)) continue;
 
+                        if (setCall.arguments.length === 1) {
+                            setCall.arguments.push(variables);
+                        }
+
                         x.openingElement.attributes.push(
                             t.jSXAttribute(
-                                t.JSXIdentifier('$$style'),
-                                t.JSXExpressionContainer(variables),
+                                t.JSXIdentifier(KEYS.__style__),
+                                t.JSXExpressionContainer(
+                                    t.memberExpression(
+                                        t.identifier(name),
+                                        t.identifier(KEYS.__style__),
+                                    ),
+                                ),
                             ),
                         );
                     }
