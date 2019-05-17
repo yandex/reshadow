@@ -4,8 +4,7 @@ const generate = require('@babel/generator').default;
 const {parse} = require('@babel/parser');
 
 const {KEYS} = require('@reshadow/core');
-
-const reshadow = require('../babel');
+const reshadow = require('@reshadow/babel');
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
