@@ -15,7 +15,7 @@ function escapeRegExp(string) {
 }
 
 const preprocess = options => ({
-    async markup({content, filename}) {
+    markup({content, filename}) {
         const placeholders = {};
 
         let script = {attributes: '', content: ''};
