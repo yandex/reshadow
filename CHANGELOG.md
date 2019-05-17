@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.33](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.32...v0.0.1-alpha.33) (2019-05-17)
+
+
+### Bug Fixes
+
+* **svelte:** remove await from preprocess ([359b916](https://github.com/lttb/reshadow/commit/359b916))
+
+
+
+
+
 ## [0.0.1-alpha.32](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.31...v0.0.1-alpha.32) (2019-05-17)
 
 

@@ -1,6 +1,6 @@
 {
     "name": "reshadow",
-    "version": "0.0.1-alpha.32",
+    "version": "0.0.1-alpha.33",
     "description": "reshadow",
     "main": "index.js",
     "repository": {
@@ -26,7 +26,7 @@
         "@reshadow/macro": "^0.0.1-alpha.31",
         "@reshadow/postcss": "^0.0.1-alpha.30",
         "@reshadow/prettier": "^0.0.1-alpha.30",
-        "@reshadow/svelte": "^0.0.1-alpha.31",
+        "@reshadow/svelte": "^0.0.1-alpha.33",
         "@reshadow/vue": "^0.0.1-alpha.31",
         "@reshadow/webpack": "^0.0.1-alpha.30"
     }
