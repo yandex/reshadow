@@ -25,7 +25,7 @@ const use = obj => {
 
 const create = args => {
     const len = args.length;
-    let newStyles = {};
+    let newStyle = {};
     let id = '';
 
     for (let i = 0; i < len; i++) {
@@ -43,23 +43,26 @@ const create = args => {
         id += '_' + style[KEYS.__id__];
 
         if (style[KEYS.__store__][id]) {
-            newStyles = style[KEYS.__store__][id];
+            newStyle = style[KEYS.__store__][id];
             continue;
         }
 
-        newStyles = Object.create(newStyles);
+        newStyle = Object.create(newStyle);
 
         for (let key in style) {
             if (key in KEYS) continue;
 
-            newStyles[key] = appendClassName(style[key], newStyles[key]);
+            newStyle[key] = appendClassName(style[key], newStyle[key]);
         }
 
-        style[KEYS.__store__][id] = newStyles;
-        newStyles[KEYS.__id__] = index;
+        style[KEYS.__store__][id] = newStyle;
+        newStyle[KEYS.__id__] = index;
+        newStyle[KEYS.__store__] = {
+            ['_' + style[KEYS.__id__]]: newStyle,
+        };
     }
 
-    return newStyles;
+    return newStyle;
 };
 
 const isSSR = !(
@@ -177,7 +180,7 @@ const appendModifier = (styles, key, value, cn = '') => {
 
 function map(element) {
     let nextProps = {};
-    let cn = appendElement(styles, element);
+    let cn = appendElement(styled[KEYS.__styles__], element);
     let vars = null;
 
     const len = arguments.length;
@@ -190,7 +193,10 @@ function map(element) {
         if (!currProps) continue;
 
         useProps = useProps || currProps[KEYS.__use__];
-        vars = vars || currProps[KEYS.__style__];
+
+        if (!vars && KEYS.__style__ in currProps) {
+            vars = styled[KEYS.__style__];
+        }
 
         for (let key in currProps) {
             if (
@@ -205,14 +211,19 @@ function map(element) {
 
             nextProps[key] = value;
 
-            cn = appendModifier(styles, key, value, cn);
+            cn = appendModifier(styled[KEYS.__styles__], key, value, cn);
         }
     }
 
     if (useProps) {
         for (let key in useProps) {
             const value = useProps[key];
-            cn = appendModifier(styles, USE_PREFIX + key, value, cn);
+            cn = appendModifier(
+                styled[KEYS.__styles__],
+                USE_PREFIX + key,
+                value,
+                cn,
+            );
         }
     }
 
@@ -242,6 +253,10 @@ Object.assign(exports, {
     set,
     map,
     __css__: css,
+    __extract__: () => ({
+        [KEYS.__styles__]: styled[[KEYS.__styles__]],
+        [KEYS.__style__]: styled[[KEYS.__style__]],
+    }),
 
     // ssr
     getStyles,
