@@ -107,7 +107,7 @@ let style;
 const stack = [];
 
 const styled = elem => {
-    const curr = stack.pop();
+    const curr = stack.pop() || [];
 
     styles = curr[0] || styles;
     style = curr[1] || style;
