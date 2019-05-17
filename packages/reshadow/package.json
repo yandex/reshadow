@@ -26,6 +26,7 @@
         "@reshadow/macro": "^0.0.1-alpha.31",
         "@reshadow/postcss": "^0.0.1-alpha.30",
         "@reshadow/prettier": "^0.0.1-alpha.30",
+        "@reshadow/svelte": "^0.0.1-alpha.31",
         "@reshadow/vue": "^0.0.1-alpha.31",
         "@reshadow/webpack": "^0.0.1-alpha.30"
     }
