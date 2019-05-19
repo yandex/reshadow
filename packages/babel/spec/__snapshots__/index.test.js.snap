@@ -642,6 +642,31 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel should transform with css-in-js code with variables without overhead 1`] = `
+"import React from 'react';
+import styled, { set, create, css, __css__ } from \\"@reshadow/core\\";
+import styles from './styles';
+const styled_c8 = create([styles, __css__(\`button {
+    color: var(--c8_0);
+    background-color: var(--c8_1);
+}\`
+/*__css_end__*/
+, \\"3608986237\\")]);
+
+const App = ({
+  color,
+  bgcolor
+}) => styled((set([styled_c8], {
+  \\"--c8_0\\": color,
+  \\"--c8_1\\": bgcolor
+}), React.createElement(\\"button\\", {
+  className: styled.styles[\\"__button\\"],
+  style: styled.$$style
+}, \\"content\\")));
+
+export default App;"
+`;
+
 exports[`babel should use custom elementFallback 1`] = `
 "import React from 'react';
 import styled, { use, set, create, map } from \\"@reshadow/core\\";

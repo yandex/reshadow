@@ -279,6 +279,7 @@ module.exports = (babel, pluginOptions = {}) => {
         let depth = 0;
 
         const elementMap = new Map();
+        const roots = new Set();
 
         p.traverse({
             ...visitor,
@@ -293,21 +294,18 @@ module.exports = (babel, pluginOptions = {}) => {
                     for (let x of elementPath.container) {
                         if (!t.isJSXElement(x)) continue;
 
-                        x.openingElement.attributes.push(
-                            t.jSXAttribute(
-                                t.JSXIdentifier(KEYS.__style__),
-                                t.JSXExpressionContainer(
-                                    t.memberExpression(
-                                        t.identifier(name),
-                                        t.identifier(KEYS.__style__),
-                                    ),
-                                ),
-                            ),
-                        );
+                        roots.add(x);
                     }
                 }
 
                 depth++;
+
+                const __style__ = roots.has(node)
+                    ? t.memberExpression(
+                          t.identifier(name),
+                          t.identifier(KEYS.__style__),
+                      )
+                    : null;
 
                 const {openingElement, closingElement} = node;
 
@@ -343,26 +341,27 @@ module.exports = (babel, pluginOptions = {}) => {
                 const spreads = [];
                 const filtered = [];
 
+                let props = [];
+                const uses = [];
+
+                const getProp = (name, valueNode) => {
+                    const key = /^[$0-9a-z_]+$/i.test(name)
+                        ? t.identifier(name)
+                        : t.stringLiteral(name);
+
+                    const value = t.isJSXExpressionContainer(valueNode)
+                        ? valueNode.expression
+                        : valueNode;
+
+                    return t.objectProperty(
+                        key,
+                        value || t.booleanLiteral(true),
+                    );
+                };
+
                 if (openingElement.attributes.length > 0) {
-                    let props = [];
-                    const uses = [];
                     const indexesToRemove = [];
                     let useAttr = null;
-
-                    const getProp = (name, valueNode) => {
-                        const key = /^[$0-9a-z_]+$/i.test(name)
-                            ? t.identifier(name)
-                            : t.stringLiteral(name);
-
-                        const value = t.isJSXExpressionContainer(valueNode)
-                            ? valueNode.expression
-                            : valueNode;
-
-                        return t.objectProperty(
-                            key,
-                            value || t.booleanLiteral(true),
-                        );
-                    };
 
                     openingElement.attributes.forEach((attr, i) => {
                         if (t.isJSXSpreadAttribute(attr)) {
@@ -438,6 +437,15 @@ module.exports = (babel, pluginOptions = {}) => {
                             openingElement.attributes.splice(i, 1);
                         });
 
+                        if (__style__) {
+                            openingElement.attributes.push(
+                                t.jSXAttribute(
+                                    t.JSXIdentifier(KEYS.__style__),
+                                    t.JSXExpressionContainer(__style__),
+                                ),
+                            );
+                        }
+
                         if (useAttr) {
                             openingElement.attributes.push(useAttr);
                         }
@@ -447,6 +455,13 @@ module.exports = (babel, pluginOptions = {}) => {
                 }
 
                 if (spreads.length > 0) {
+                    if (__style__) {
+                        props.push(getProp(KEYS.__style__, __style__));
+                        if (props.length === 1) {
+                            spreads.push(props);
+                        }
+                    }
+
                     openingElement.attributes = [
                         t.JSXSpreadAttribute(
                             t.callExpression(t.identifier(addImport('map')), [
@@ -469,6 +484,15 @@ module.exports = (babel, pluginOptions = {}) => {
                             ),
                         ),
                     ];
+
+                    if (__style__) {
+                        openingElement.attributes.push(
+                            t.jSXAttribute(
+                                t.JSXIdentifier('style'),
+                                t.JSXExpressionContainer(__style__),
+                            ),
+                        );
+                    }
                 }
 
                 openingElement.attributes.push(...filtered);

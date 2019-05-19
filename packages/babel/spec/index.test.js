@@ -132,6 +132,30 @@ describe('babel', () => {
         expect(code).toMatchSnapshot();
     });
 
+    it('should transform with css-in-js code with variables without overhead', async () => {
+        const {code} = await transform`
+            import React from 'react'
+            import styled from 'reshadow'
+
+            import styles from './styles'
+
+            const App = ({color, bgcolor}) => styled(styles)\`
+                button {
+                    color: \${color};
+                    background-color: \${bgcolor};
+                }
+            \`(
+                <button>
+                    content
+                </button>
+            )
+
+            export default App
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should transform with css-in-js code with variables with string inline style', async () => {
         const {code} = await transform.with({
             ...defaultOptions,
