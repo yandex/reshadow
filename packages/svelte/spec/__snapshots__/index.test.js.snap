@@ -7,7 +7,9 @@ export let disabled = false;
 export let size = 'm';
 const styled_c8 = create([(__css__(\`.___h1_rzsno_1 {
     color: var(--c8_0);
-}\`, \\"1692710358\\"), {
+}\`
+/*__css_end__*/
+, \\"1692710358\\"), {
   \\"__h1\\": \`___h1_rzsno_1\`
 })]);
 $: __styles__ = styled((set([styled_c8], \`--c8_0:\${color};\`), __extract__()));

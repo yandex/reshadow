@@ -37,12 +37,25 @@ module.exports = function(source) {
 
     const result = source
         .replace(
-            /__css__\([`'"]((.|[\r\n])*?)[`'"]((.|[\r\n])*?)\)/g,
+            // Regexp below should match on the CSS code from strings like that:
+            //
+            // __css__(`button {
+            //   /* Some CSS rules here... */
+            //   content: "*"; /* With some quotes maybe */
+            // }`
+            // /*__css_end__*/
+            // , "2845693891")
+            //
+            // We're using trailing block comment /*__css_end__*/ to find the end of the code.
+            /__css__\([`'"]((.|[\r\n])*?)[`'"][\r\n]\/\*__css_end__\*\/((.|[\r\n])*?)\)/g,
             (match, code) => {
                 const hash = `${utils.getFileHash(filepath)}_${++index}`;
                 const filename = addDependency(
                     hash,
-                    code.replace(/\\n/g, '\n'),
+                    code
+                        .replace(/\\"/g, '"')
+                        .replace(/\\'/g, "'")
+                        .replace(/\\n/g, '\n'),
                 );
 
                 return `require('${filename}')`;
