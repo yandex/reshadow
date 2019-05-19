@@ -1,14 +1,14 @@
 {
     "private": true,
     "name": "svelte-hello-world",
-    "version": "0.0.1-alpha.34",
+    "version": "0.0.1-alpha.35",
     "main": "index.html",
     "scripts": {
         "start": "webpack-dev-server --content-base public --hot"
     },
     "dependencies": {
-        "@reshadow/svelte": "^0.0.1-alpha.34",
-        "reshadow": "^0.0.1-alpha.34",
+        "@reshadow/svelte": "^0.0.1-alpha.35",
+        "reshadow": "^0.0.1-alpha.35",
         "svelte": "^3.0.0"
     },
     "devDependencies": {

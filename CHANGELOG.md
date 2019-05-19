@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.35](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.34...v0.0.1-alpha.35) (2019-05-19)
+
+
+### Features
+
+* **svelte:** add some tests ([bafa742](https://github.com/lttb/reshadow/commit/bafa742))
+
+
+
+
+
 ## [0.0.1-alpha.34](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.33...v0.0.1-alpha.34) (2019-05-17)
 
 
