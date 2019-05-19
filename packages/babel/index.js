@@ -458,7 +458,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     if (__style__) {
                         props.push(getProp(KEYS.__style__, __style__));
                         if (props.length === 1) {
-                            spreads.push(props);
+                            spreads.push(t.objectExpression(props));
                         }
                     }
 
