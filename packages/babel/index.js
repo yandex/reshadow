@@ -619,7 +619,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 return;
             }
 
-            if (tag.name && tag.name !== imports.css) {
+            if (!imports.css || tag.name !== imports.css) {
                 return;
             }
 
