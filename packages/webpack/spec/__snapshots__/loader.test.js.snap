@@ -27,5 +27,6 @@ export default App;"
 exports[`webpack inserts name and outputs JavaScript 2`] = `
 "button[disabled] {
     color: var(--c8_0);
+    content: \\"'\\";
 }"
 `;

@@ -4,7 +4,9 @@ exports[`babel Vue should group props right 1`] = `
 "import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/vue\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`, \\"3399371458\\")]);
+const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`
+/*__css_end__*/
+, \\"3399371458\\")]);
 new Vue({
   el: \\"#app\\",
   render: h => styled((set([styled_c8], {
@@ -27,7 +29,9 @@ exports[`babel Vue should pass classes 1`] = `
 import styles from './styles';
 const styled_c8 = create([__css__(\`Button + Button {
     margin-left: 10px;
-}\`, \\"1736617416\\")]);
+}\`
+/*__css_end__*/
+, \\"1736617416\\")]);
 new Vue({
   el: \\"#app\\",
   render: h => styled((set([styled_c8]), h(\\"div\\", map(\\"div\\", {
@@ -53,7 +57,9 @@ exports[`babel macro should keep named imports 1`] = `
 import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
-}\`, \\"790506970\\"), {
+}\`
+/*__css_end__*/
+, \\"790506970\\"), {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -75,7 +81,9 @@ exports[`babel macro should merge use 1`] = `
 import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
-}\`, \\"790506970\\"), {
+}\`
+/*__css_end__*/
+, \\"790506970\\"), {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -95,7 +103,9 @@ exports[`babel macro should process module with macro 1`] = `
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
-}\`, \\"790506970\\"), {
+}\`
+/*__css_end__*/
+, \\"790506970\\"), {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -117,7 +127,9 @@ exports[`babel postcss should process styles and add them runtime 1`] = `
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
     color: red;
-}\`, \\"790506970\\"), {
+}\`
+/*__css_end__*/
+, \\"790506970\\"), {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -143,7 +155,9 @@ const { ...styles
 } = (__css__(\`.___button_fo1gj_1 {
     color: red;
 }
-\`, \\"947371504\\"), {
+\`
+/*__css_end__*/
+, \\"947371504\\"), {
   \\"__button\\": \`___button_fo1gj_1\`
 });
 const styled_c8 = create([styles]);
@@ -168,7 +182,9 @@ const styles = (__css__(\`
     .___button_1cx4s_1 {
         color: red;
     }
-\`, \\"2958026746\\"), {
+\`
+/*__css_end__*/
+, \\"2958026746\\"), {
   \\"__button\\": \`___button_1cx4s_1\`
 });
 const styled_c8 = create([styles]);
@@ -193,7 +209,9 @@ const styles = (__css__(\`
     .___button_1cx4s_1 {
         color: red;
     }
-\`, \\"2958026746\\"), {
+\`
+/*__css_end__*/
+, \\"2958026746\\"), {
   \\"__button\\": \`___button_1cx4s_1\`
 });
 const styled_c8 = create([styles]);
@@ -214,7 +232,9 @@ export default App;"
 exports[`babel postcss should use cssnano 1`] = `
 "import React from 'react';
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_1n8fw_1{display:grid}\`, \\"3581683094\\"), {
+const styled_c8 = create([(__css__(\`.___button_1n8fw_1{display:grid}\`
+/*__css_end__*/
+, \\"3581683094\\"), {
   \\"__button\\": \`___button_1n8fw_1\`
 })]);
 
@@ -235,7 +255,9 @@ import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([(__css__(\`.___button_ltzzv_1 {
     -webkit-transition: 1s;
     transition: 1s;
-}\`, \\"1320178009\\"), {
+}\`
+/*__css_end__*/
+, \\"1320178009\\"), {
   \\"__button\\": \`___button_ltzzv_1\`
 })]);
 
@@ -256,7 +278,9 @@ import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\"
 const styled_c8 = create([(__css__(\`.___button_1vljt_1 {
 
     color: red;
-}\`, \\"4087429970\\"), {
+}\`
+/*__css_end__*/
+, \\"4087429970\\"), {
   \\"title\\": \`_title_2ms0f_1\`,
   \\"__button\\": \`___button_1vljt_1 _title_2ms0f_1\`
 })]);
@@ -280,7 +304,9 @@ import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\"
 import baseStyles from './styles';
 const styled_c8 = create([baseStyles, __css__(\`button {
     color: red;
-}\`, \\"790506970\\")]);
+}\`
+/*__css_end__*/
+, \\"790506970\\")]);
 
 const App = ({
   disabled,
@@ -448,7 +474,9 @@ exports[`babel should transform with css-in-js code 1`] = `
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([__css__(\`button[disabled] {
     color: red;
-}\`, \\"1643207596\\")]);
+}\`
+/*__css_end__*/
+, \\"1643207596\\")]);
 
 const App = ({
   disabled,
@@ -469,7 +497,9 @@ import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\"
 import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: red;
-}\`, \\"1643207596\\")]);
+}\`
+/*__css_end__*/
+, \\"1643207596\\")]);
 
 const App = ({
   disabled,
@@ -491,7 +521,9 @@ import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_1);
-}\`, \\"162741067\\")]);
+}\`
+/*__css_end__*/
+, \\"162741067\\")]);
 
 const App = ({
   disabled,
@@ -518,11 +550,15 @@ import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
 const styled_c8 = create([__css__(\`div {
     padding: 10px;
-}\`, \\"309716193\\")]);
+}\`
+/*__css_end__*/
+, \\"309716193\\")]);
 const styled_12c = create([__css__(\`button[disabled] {
     color: var(--12c_0);
     background-color: var(--12c_1);
-}\`, \\"1529897259\\")]);
+}\`
+/*__css_end__*/
+, \\"1529897259\\")]);
 
 const App = ({
   disabled,
@@ -550,7 +586,9 @@ import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_1);
-}\`, \\"162741067\\")]);
+}\`
+/*__css_end__*/
+, \\"162741067\\")]);
 
 const App = ({
   disabled,
@@ -584,7 +622,9 @@ import styles from './styles';
 const styled_c8 = create([styles, __css__(\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_1);
-}\`, \\"162741067\\")]);
+}\`
+/*__css_end__*/
+, \\"162741067\\")]);
 
 const App = ({
   disabled,
@@ -626,7 +666,9 @@ exports[`babel should work with just spread 1`] = `
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 const styled_c8 = create([__css__(\`button {
     padding: 5px 10px;
-}\`, \\"1053722513\\")]);
+}\`
+/*__css_end__*/
+, \\"1053722513\\")]);
 
 const Button = props => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", props))));
 

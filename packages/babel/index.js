@@ -534,6 +534,14 @@ module.exports = (babel, pluginOptions = {}) => {
         return false;
     };
 
+    /**
+     * Adds a comment which is very useful to extract CSS in the bundler without
+     * parsing the code back into AST.
+     */
+    const addBundlerComment = node => {
+        t.addComment(node, 'trailing', '__css_end__');
+    };
+
     const visited = new WeakSet();
 
     const visitor = {
@@ -595,6 +603,8 @@ module.exports = (babel, pluginOptions = {}) => {
 
             const hash = String(stringHash(raw));
 
+            addBundlerComment(quasi);
+
             p.replaceWith(
                 t.callExpression(t.identifier(addImport('__css__')), [
                     quasi,
@@ -610,7 +620,7 @@ module.exports = (babel, pluginOptions = {}) => {
             const code = result.code;
             const tokens = toObjectExpression(result.tokens);
 
-            node.arguments[0] = t.templateLiteral(
+            const templateLiteral = t.templateLiteral(
                 [
                     t.templateElement({
                         raw: code,
@@ -619,6 +629,8 @@ module.exports = (babel, pluginOptions = {}) => {
                 ],
                 [],
             );
+            addBundlerComment(templateLiteral);
+            node.arguments[0] = templateLiteral;
 
             p.replaceWith(t.sequenceExpression([node, tokens]));
         },
