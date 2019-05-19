@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.36](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.35...v0.0.1-alpha.36) (2019-05-19)
+
+
+### Bug Fixes
+
+* Make webpack loader handle quotes properly ([a200643](https://github.com/lttb/reshadow/commit/a200643))
+
+
+
+
+
 ## [0.0.1-alpha.30](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.28...v0.0.1-alpha.30) (2019-05-16)
 
 **Note:** Version bump only for package @reshadow/webpack

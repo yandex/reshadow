@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/webpack",
-    "version": "0.0.1-alpha.30",
+    "version": "0.0.1-alpha.36",
     "description": "reshadow webpack utils",
     "main": "index.js",
     "repository": {

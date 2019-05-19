@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.36](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.35...v0.0.1-alpha.36) (2019-05-19)
+
+**Note:** Version bump only for package @reshadow/vue
+
+
+
+
+
 ## [0.0.1-alpha.34](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.33...v0.0.1-alpha.34) (2019-05-17)
 
 **Note:** Version bump only for package @reshadow/vue
