@@ -1,7 +1,7 @@
 {
-    "name": "reshadow",
+    "name": "@reshadow/svelte",
     "version": "0.0.1-alpha.35",
-    "description": "reshadow",
+    "description": "reshadow svelte",
     "main": "index.js",
     "repository": {
         "type": "git",
@@ -17,17 +17,18 @@
         "access": "public"
     },
     "scripts": {
-        "build": "../../build.sh && ./build.sh"
+        "build": "../../build.sh"
     },
     "dependencies": {
+        "@babel/generator": "^7.4.4",
+        "@babel/parser": "^7.4.4",
+        "@babel/traverse": "^7.4.4",
+        "@babel/types": "^7.4.4",
         "@reshadow/babel": "^0.0.1-alpha.34",
         "@reshadow/core": "^0.0.1-alpha.34",
-        "@reshadow/eslint": "^0.0.1-alpha.30",
-        "@reshadow/macro": "^0.0.1-alpha.34",
-        "@reshadow/postcss": "^0.0.1-alpha.30",
-        "@reshadow/prettier": "^0.0.1-alpha.30",
-        "@reshadow/svelte": "^0.0.1-alpha.35",
-        "@reshadow/vue": "^0.0.1-alpha.34",
-        "@reshadow/webpack": "^0.0.1-alpha.30"
+        "svelte": "^3.0.0"
+    },
+    "devDependencies": {
+        "common-tags": "1.8.0"
     }
 }

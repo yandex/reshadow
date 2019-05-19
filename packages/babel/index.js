@@ -66,6 +66,8 @@ const defaultOptions = {
 module.exports = (babel, pluginOptions = {}) => {
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
+    let classProp = options.classProp || KEYS.__classProp__;
+
     if (options.target === 'preact') {
         if (pluginOptions.stringStyle !== undefined) {
             options.stringStyle = true;
@@ -307,7 +309,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
                 depth++;
 
-                const {openingElement} = node;
+                const {openingElement, closingElement} = node;
 
                 let elementName = getElementName(openingElement.name);
 
@@ -318,7 +320,13 @@ module.exports = (babel, pluginOptions = {}) => {
                 if (elementName.startsWith('use:')) {
                     elementName = elementName.replace('use:', 'use--');
                     openingElement.name = t.JSXIdentifier('div');
-                } else if (utils.isCustomElement(elementName)) {
+                } else if (
+                    utils.isCustomElement(elementName) &&
+                    !(
+                        options.filterElement &&
+                        options.filterElement(elementName)
+                    )
+                ) {
                     if (options.elementFallback) {
                         openingElement.name = t.JSXIdentifier(
                             typeof options.elementFallback === 'boolean'
@@ -333,6 +341,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 elementMap.set(elementPath, {elementName});
 
                 const spreads = [];
+                const filtered = [];
 
                 if (openingElement.attributes.length > 0) {
                     let props = [];
@@ -391,9 +400,16 @@ module.exports = (babel, pluginOptions = {}) => {
 
                             uses.push(getProp(name, attr.value));
                         } else {
-                            const name = getElementName(attr.name);
+                            let name = getElementName(attr.name);
 
-                            props.push(getProp(name, attr.value));
+                            if (
+                                options.filterProp &&
+                                options.filterProp(name)
+                            ) {
+                                filtered.push(attr);
+                            } else {
+                                props.push(getProp(name, attr.value));
+                            }
                         }
                     });
 
@@ -442,7 +458,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 } else {
                     openingElement.attributes = [
                         t.JSXAttribute(
-                            t.JSXIdentifier('className'),
+                            t.JSXIdentifier(classProp),
                             t.JSXExpressionContainer(
                                 buildClassName({
                                     NAME: name,
@@ -453,6 +469,12 @@ module.exports = (babel, pluginOptions = {}) => {
                             ),
                         ),
                     ];
+                }
+
+                openingElement.attributes.push(...filtered);
+
+                if (closingElement) {
+                    closingElement.name = openingElement.name;
                 }
             },
         });
@@ -512,9 +534,15 @@ module.exports = (babel, pluginOptions = {}) => {
         return false;
     };
 
+    const visited = new WeakSet();
+
     const visitor = {
         CallExpression(p) {
             if (STYLED.size === 0) return;
+
+            if (visited.has(p.node)) return;
+
+            visited.add(p.node);
 
             const {callee} = p.node;
 
@@ -525,6 +553,18 @@ module.exports = (babel, pluginOptions = {}) => {
 
             if (isStyledExpression(callee)) {
                 traverseStyled(p);
+                return;
+            }
+
+            if (isStyledExpression(p.node)) {
+                p.replaceWith(
+                    t.CallExpression(p.node, [
+                        t.CallExpression(
+                            t.identifier(addImport('__extract__')),
+                            [],
+                        ),
+                    ]),
+                );
             }
         },
 
@@ -532,7 +572,22 @@ module.exports = (babel, pluginOptions = {}) => {
             let {node} = p;
             const {quasi, tag} = node;
 
-            if (!imports.css || tag.name !== imports.css) {
+            if (
+                isStyledExpression(tag) ||
+                (tag.name && tag.name === imports.default)
+            ) {
+                p.replaceWith(
+                    t.CallExpression(p.node, [
+                        t.CallExpression(
+                            t.identifier(addImport('__extract__')),
+                            [],
+                        ),
+                    ]),
+                );
+                return;
+            }
+
+            if (tag.name && tag.name !== imports.css) {
                 return;
             }
 

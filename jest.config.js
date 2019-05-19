@@ -5,8 +5,10 @@ module.exports = {
     collectCoverageFrom: [
         'packages/**/*.js',
         '!**/spec/**',
-        '!packages/reshadow/index.js',
         '!packages/eslint/index.js',
+        '!packages/reshadow/index.js',
+        '!packages/svelte/index.js',
+        '!packages/vue/index.js',
     ],
     transform: {
         '^.+\\.jsx?$': 'babel-jest',
