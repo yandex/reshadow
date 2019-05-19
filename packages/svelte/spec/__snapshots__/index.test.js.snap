@@ -2,7 +2,7 @@
 
 exports[`svelte preprocess should transform the code 1`] = `
 Object {
-  "code": "<script>import styled, { __extract__, set, create, css, map, use, __css__ } from \\"@reshadow/core\\";
+  "code": "<script>import styled, { __extract__, set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 export let disabled = false;
 export let size = 'm';
 const styled_c8 = create([(__css__(\`.___h1_rzsno_1 {
@@ -19,17 +19,13 @@ $: __styles__ = styled((set([styled_c8], \`--c8_0:\${color};\`), __extract__()))
             });
             </script><style></style>
 
-  <svelte:body {...map(\\"svelte:body\\", {
-    $$style: __styles__.$style
-  })} on:click={() => console.log('body click')} />
+  <svelte:body class={styled.styles[\\"__svelte:body\\"]} style={__styles__.$$style} on:click={() => console.log('body click')} />
 
-  <h1 {...map(\\"h1\\", {
-    $$style: __styles__.$style
-  })}>hello world</h1>
+  <h1 class={styled.styles[\\"__h1\\"]} style={__styles__.$$style}>hello world</h1>
 
   <button {...map(\\"button\\", {
     disabled: true,
-    $$style: __styles__.$style
+    $$style: __styles__.$$style
   }, use({
     variant: \\"action\\",
     size: true

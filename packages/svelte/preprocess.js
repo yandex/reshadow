@@ -180,7 +180,7 @@ const preprocess = options => ({
                     `${reshadowImport}\\.${escapeRegExp(KEYS.__style__)}`,
                     'g',
                 ),
-                `__styles__.${KEYS.__style__}`,
+                `__styles__.$${KEYS.__style__}`,
             );
 
         const result = `<script${script.attributes}>${code}</script><style${
