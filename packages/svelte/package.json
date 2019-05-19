@@ -27,5 +27,8 @@
         "@reshadow/babel": "^0.0.1-alpha.34",
         "@reshadow/core": "^0.0.1-alpha.34",
         "svelte": "^3.0.0"
+    },
+    "devDependencies": {
+        "common-tags": "1.8.0"
     }
 }

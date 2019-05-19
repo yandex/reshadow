@@ -61,6 +61,7 @@ const preprocess = options => ({
                     '${$1}',
                 )}\``;
                 reshadowImport = '__styled__';
+                style = {attributes: '', content: ''};
             } else {
                 return {code: content};
             }
