@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.39](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.38...v0.0.1-alpha.39) (2019-05-20)
+
+
+### Features
+
+* **babel:** avoid variables duplication ([cd1279e](https://github.com/lttb/reshadow/commit/cd1279e))
+
+
+
+
+
 ## [0.0.1-alpha.38](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.37...v0.0.1-alpha.38) (2019-05-19)
 
 
