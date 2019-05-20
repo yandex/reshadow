@@ -136,15 +136,34 @@ module.exports = (babel, pluginOptions = {}) => {
         return localName;
     };
 
+    const createCSSVarIndexer = () => {
+        const map = {};
+
+        const getIndex = (node, i) => {
+            if (!t.isIdentifier(node)) return i;
+
+            const {name} = node;
+            if (name in map) return map[name];
+            return (map[name] = i);
+        };
+
+        return getIndex;
+    };
+
     const appendCode = ({quasi, name, hash}) => {
         const {expressions, quasis} = quasi;
         let code = '';
 
+        const getIndex = createCSSVarIndexer();
+
         quasis.forEach(({value}, i) => {
             code += value.raw;
+            const node = expressions[i];
 
-            if (expressions[i]) {
-                code += `var(--${hash}_${i})`;
+            if (node) {
+                const index = getIndex(node, i);
+
+                code += `var(--${hash}_${index})`;
             }
         });
 
@@ -167,17 +186,26 @@ module.exports = (babel, pluginOptions = {}) => {
     };
 
     const prepareExpressions = (expressions, hash) => {
+        const getIndex = createCSSVarIndexer();
+
         if (options.stringStyle) {
             return t.templateLiteral(
                 expressions
-                    .map((x, i) => {
-                        const value = (i > 0 ? ';' : '') + `--${hash}_${i}:`;
+                    .reduce((acc, x, i) => {
+                        let index = getIndex(x, i);
 
-                        return t.templateElement({
-                            raw: value,
-                            cooked: value,
-                        });
-                    })
+                        if (index !== i) return acc;
+
+                        const value =
+                            (i > 0 ? ';' : '') + `--${hash}_${index}:`;
+
+                        return acc.concat(
+                            t.templateElement({
+                                raw: value,
+                                cooked: value,
+                            }),
+                        );
+                    }, [])
                     .concat(
                         t.templateElement(
                             {
@@ -192,9 +220,15 @@ module.exports = (babel, pluginOptions = {}) => {
         }
 
         return t.objectExpression(
-            expressions.map((x, i) =>
-                t.objectProperty(t.stringLiteral(`--${hash}_${i}`), x),
-            ),
+            expressions.reduce((acc, x, i) => {
+                let index = getIndex(x, i);
+
+                if (index !== i) return acc;
+
+                return acc.concat(
+                    t.objectProperty(t.stringLiteral(`--${hash}_${index}`), x),
+                );
+            }, []),
         );
     };
 

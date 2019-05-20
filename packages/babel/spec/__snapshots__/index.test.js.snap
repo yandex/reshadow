@@ -544,6 +544,29 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel should transform with css-in-js code with variables and avoid duplication 1`] = `
+"import React from 'react';
+import styled, { set, create, css, __css__ } from \\"@reshadow/core\\";
+import styles from './styles';
+const styled_c8 = create([styles, __css__(\`button {
+    color: var(--c8_0);
+    background-color: var(--c8_0);
+}\`
+/*__css_end__*/
+, \\"3172944636\\")]);
+
+const App = ({
+  color
+}) => styled((set([styled_c8], {
+  \\"--c8_0\\": color
+}), React.createElement(\\"button\\", {
+  className: styled.styles[\\"__button\\"],
+  style: styled.$$style
+}, \\"content\\")));
+
+export default App;"
+`;
+
 exports[`babel should transform with css-in-js code with variables in nested elemnts 1`] = `
 "import React from 'react';
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
@@ -632,6 +655,32 @@ const App = ({
   color,
   bgcolor
 }) => styled((set([styled_c8], \`--c8_0:\${color};--c8_1:\${bgcolor};\`), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled,
+  $$style: styled.$$style
+}, use({
+  theme: \\"normal\\"
+})), \\"content\\")));
+
+export default App;"
+`;
+
+exports[`babel should transform with css-in-js code with variables with string inline style and avoid duplication 1`] = `
+"import React from 'react';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
+import styles from './styles';
+const styled_c8 = create([styles, __css__(\`button[disabled] {
+    color: var(--c8_0);
+    background-color: var(--c8_0);
+}\`
+/*__css_end__*/
+, \\"1346164042\\")]);
+
+const App = ({
+  disabled,
+  type,
+  color
+}) => styled((set([styled_c8], \`--c8_0:\${color};\`), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
   $$style: styled.$$style
