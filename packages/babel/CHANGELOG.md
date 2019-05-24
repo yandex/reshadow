@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.40](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.39...v0.0.1-alpha.40) (2019-05-24)
+
+
+### Features
+
+* **babel:** use postcss by default, process files ".shadow.css" ([4ac32fc](https://github.com/lttb/reshadow/commit/4ac32fc))
+
+
+
+
+
 ## [0.0.1-alpha.39](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.38...v0.0.1-alpha.39) (2019-05-20)
 
 

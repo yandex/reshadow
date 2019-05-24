@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/babel",
-    "version": "0.0.1-alpha.39",
+    "version": "0.0.1-alpha.40",
     "description": "reshadow babel plugin",
     "main": "index.js",
     "repository": {
