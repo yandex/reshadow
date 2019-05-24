@@ -6,10 +6,7 @@ const configName = 'reshadow';
 
 const plugins = new Map();
 
-const defaultConfig = {
-    postcss: true,
-    files: /\.shadow\.css$/,
-};
+const defaultConfig = {};
 
 module.exports = createMacro(
     ({references, state, babel, config = {}, source}) => {

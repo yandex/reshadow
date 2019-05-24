@@ -57,10 +57,10 @@ const isReactFragment = node => {
 
 const defaultOptions = {
     target: 'react',
-    postcss: false,
     elementFallback: true,
-    files: false,
     stringStyle: false,
+    postcss: true,
+    files: /\.shadow\.css$/,
 };
 
 module.exports = (babel, pluginOptions = {}) => {

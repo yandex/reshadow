@@ -1,7 +1,16 @@
 const {stripIndent} = require('common-tags');
 const {transformAsync} = require('@babel/core');
 
-const getPlugin = options => [require.resolve('..'), options];
+const getPlugin = options => [
+    require.resolve('..'),
+    Object.assign(
+        {
+            files: false,
+            postcss: false,
+        },
+        options,
+    ),
+];
 
 const defaultOptions = {
     root: __dirname,
