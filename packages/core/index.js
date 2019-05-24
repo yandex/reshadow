@@ -71,9 +71,20 @@ const isSSR = !(
     window.document.createElement
 );
 
-let serverStyles = '';
+const serverMap = {};
 
-const getStyles = () => serverStyles;
+const getStyles = () => ({
+    map: serverMap,
+    get css() {
+        let serverStyles = '';
+        for (let id in serverMap) {
+            serverStyles += `<style type="text/css" id="${id}">${
+                serverMap[id]
+            }</style>`;
+        }
+        return serverStyles;
+    },
+});
 
 const RESHADOW_ID = '__reshadow__';
 
@@ -81,7 +92,7 @@ const css = (code, hash) => {
     const id = `reshadow-${hash}`;
 
     if (isSSR) {
-        serverStyles += `<style type="text/css" id="${id}">${code}</style>`;
+        serverMap[id] = code;
         return;
     }
 
@@ -274,4 +285,5 @@ Object.assign(exports, {
     ELEMENT_PREFIX,
     USE_PREFIX,
     KEYS,
+    RESHADOW_ID,
 });

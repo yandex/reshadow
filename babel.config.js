@@ -13,7 +13,7 @@ module.exports = {
             ],
             plugins: [
                 '@babel/plugin-transform-modules-commonjs',
-                './packages/babel',
+                ['./packages/babel', {postcss: false}],
             ],
         },
     ],
