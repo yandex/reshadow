@@ -56,7 +56,7 @@ There are some examples on the [Сodesandbox](https://codesandbox.io):
 -   [Vue](https://codesandbox.io/s/reshadowvue-53df0)
 -   [htm](https://codesandbox.io/s/reshadowhtm-x1ves)
 -   [svelte](https://codesandbox.io/s/reshadowsvelte-bup1c)
--   [next.js](https://codesandbox.io/s/reshadownextjs-h4or9)
+-   [next.js (with server side rendering)](https://codesandbox.io/s/reshadownextjs-h4or9)
 
 ### Benchmarks
 
