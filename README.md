@@ -1,11 +1,37 @@
 # reshadow ⛱️
 
-Write semantic markup and styles, as the soul wants.
-
 [![Travis branch](https://img.shields.io/travis/lttb/reshadow/master.svg?style=flat-square)](https://travis-ci.org/lttb/reshadow)
 [![Coverage Status branch](https://img.shields.io/coveralls/lttb/reshadow/master.svg?style=flat-square)](https://img.shields.io/coveralls/lttb/reshadow/master.svg?branch=master)
 [![npm version](https://img.shields.io/npm/v/reshadow.svg?style=flat-square)](https://www.npmjs.com/package/reshadow)
 [![Babel Macro](https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square)](https://github.com/kentcdodds/babel-plugin-macros)
+
+
+Write semantic markup and styles, as the soul wants.
+
+```javascript
+import React from "react";
+import styled, {css} from "reshadow";
+
+// Write styles:
+const styles = css`
+  button {
+    width: 200px;
+  }
+  span {
+    font-size: 14px;
+  }
+`;
+
+export const Button = ({children, onClick}) => {
+  // connect the styles to the markup:
+  return styled(styles)(
+    <button onClick={onClick}>
+      <span>{children}</span>
+    </button>
+  );
+}
+```
+
 
 > This project has `alpha` status, so the API and the implementation could be changed.
 
