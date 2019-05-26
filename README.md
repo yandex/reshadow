@@ -314,3 +314,4 @@ module.exports = {
 
 -   Pavel Masalsky [@pavelrevers](https://github.com/pavelrevers)
 -   Anton Kastritskiy [@antonk52](https://github.com/antonk52)
+-   Petr Ermishkin [@quasiyoke](https://github.com/quasiyoke)
