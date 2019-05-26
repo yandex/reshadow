@@ -5,43 +5,37 @@
 [![npm version](https://img.shields.io/npm/v/reshadow.svg?style=flat-square)](https://www.npmjs.com/package/reshadow)
 [![Babel Macro](https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square)](https://github.com/kentcdodds/babel-plugin-macros)
 
+Please check the [reshadow.dev](https://reshadow.dev) website to get more information and examples.
 
-Write semantic markup and styles, as the soul wants.
+**Write semantic markup and styles, as the soul wants**.
+
+**reshadow** provides the Shadow DOM developer experience, but for the Virtual DOM with the Component way.
 
 ```javascript
-import React from "react";
-import styled, {css} from "reshadow";
+import React from 'react';
+import styled, {css} from 'reshadow';
 
 // Write styles:
 const styles = css`
-  button {
-    width: 200px;
-  }
-  span {
-    font-size: 14px;
-  }
+    button {
+        width: 200px;
+    }
+    content {
+        font-size: 14px;
+    }
 `;
 
-export const Button = ({children, onClick}) => {
-  // connect the styles to the markup:
-  return styled(styles)(
-    <button onClick={onClick}>
-      <span>{children}</span>
-    </button>
-  );
-}
+export const Button = ({children, ...props}) => {
+    // connect the styles to the markup:
+    return styled(styles)(
+        <button {...props}>
+            <content as="span">{children}</content>
+        </button>,
+    );
+};
 ```
-
 
 > This project has `alpha` status, so the API and the implementation could be changed.
-
-Please check the [reshadow.now.sh](https://reshadow.now.sh) website to get more information and examples.
-
-```sh
-npm i --save reshadow
-```
-
-**reshadow** provides the Shadow DOM developer experience, but for the Virtual DOM with the Component way.
 
 ## Features
 
@@ -57,10 +51,18 @@ npm i --save reshadow
 
 There are some examples on the [Сodesandbox](https://codesandbox.io):
 
--   [React (create react app)](https://codesandbox.io/s/o9w535k0z6)
--   [Preact](https://codesandbox.io/s/o5jrpk0zm5)
--   [Vue](https://codesandbox.io/s/rw1r211m8p)
--   [htm](https://codesandbox.io/s/kkxvrwz217)
+-   [React (create react app)](https://codesandbox.io/s/reshadowcra-9o9nq388wp)
+-   [Preact](https://codesandbox.io/s/reshadowpreact-nn1se)
+-   [Vue](https://codesandbox.io/s/reshadowvue-53df0)
+-   [htm](https://codesandbox.io/s/reshadowhtm-x1ves)
+-   [svelte](https://codesandbox.io/s/reshadowsvelte-bup1c)
+-   [next.js](https://codesandbox.io/s/reshadownextjs-h4or9)
+
+### Benchmarks
+
+There are also some css-in-js benchmarks, that are available on the codesandbox.
+
+[![reshadow benchmarks](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/cssinjsbenchmarks-yin1g)
 
 ## Docs
 
@@ -71,6 +73,18 @@ There are some examples on the [Сodesandbox](https://codesandbox.io):
     -   [postcss](#postcss)
     -   [webpack](#webpack)
 -   [Linting](#linting)
+
+```sh
+npm i --save reshadow
+```
+
+_.babelrc_
+
+```json
+{"plugins": ["reshadow/babel"]}
+```
+
+> Check the [Setup](https://reshadow.dev/setup) page to get more details (including setup with Create React App)
 
 ## Example
 
@@ -164,8 +178,9 @@ import styled from 'reshadow';
 
 import styles from './styles.css';
 
-export const Button = ({size, children}) =>
-    styled(styles)(<button use:size={size}>{children}</button>);
+export const Button = ({size, children}) => styled(styles)(
+    <button use:size={size}>{children}</button>,
+);
 ```
 
 _Button/styles.css_
