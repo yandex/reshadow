@@ -27,7 +27,7 @@ function css() {
         }
     }
 
-    const cacheKey = hash + mixinsHash;
+    const cacheKey = stringHash(hash + mixinsHash).toString(36);
 
     if (cache[cacheKey]) {
         parsed = cache[cacheKey];
@@ -45,11 +45,24 @@ function css() {
             }
         }
 
-        const code = String.raw(str, ...values);
-        parsed = parse(code, cacheKey);
+        let code = String.raw(str, ...values);
+        let keyframe = true;
+        let prefix = true;
+
+        if (/^[\r\n\s]*\w+:/.test(code)) {
+            code = '& {' + code + '}';
+            keyframe = false;
+            prefix = false;
+        }
+
+        parsed = parse(code, cacheKey, {keyframe, prefix});
 
         if (parsed.css[0] === '{') {
-            parsed.css = parsed.css.slice(1, -1);
+            parsed.css =
+                '&' +
+                parsed.css
+                    .replace(new RegExp(`\\.___${cacheKey}`, 'g'), '&')
+                    .replace(/\}\{/g, '}&{');
         } else {
             __css__(parsed.css, cacheKey);
         }

@@ -3,11 +3,17 @@ import styled, {KEYS, map, create} from '@reshadow/core';
 import {createStyled, css} from '@reshadow/runtime';
 import tags from '@reshadow/utils/html-tags';
 
+export function getDisplayName(Base) {
+    return Base.displayName || Base.name || 'Component';
+}
+
 export function jsx() {
     const args = Array.prototype.slice.call(arguments);
-    const element = args[0];
+    let element = args[0];
     if (typeof element === 'string' && !tags.has(element)) {
         args[0] = 'div';
+    } else if (typeof element === 'function') {
+        element = getDisplayName(element);
     }
     args[1] = map(element, args[1]);
     return React.createElement.apply(null, args);

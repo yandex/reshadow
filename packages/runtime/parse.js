@@ -3,7 +3,9 @@ import stylis from 'stylis';
 
 stylis.set({cascade: false});
 
-const parse = (code, hash) => {
+const parse = (code, hash, options = {}) => {
+    stylis.set(options);
+
     const tokens = {};
     const postfix = '_' + hash;
     const len = postfix.length;
@@ -11,6 +13,7 @@ const parse = (code, hash) => {
         if (context !== 2) {
             return;
         }
+
         for (let i = 0; i < selectors.length; i++) {
             if (selectors[i] === 'from' || selectors[i] === 'to') {
                 continue;
@@ -20,12 +23,12 @@ const parse = (code, hash) => {
                 selectors[i] = selectors[i].slice(0, -len);
             }
             selectors[i] = selectors[i].replace(
-                /\[(.*?)\]|([.:]?\w+)/g,
+                /\[(.*?)\]|([#.:]?\w+)/g,
                 (match, $1, $2) => {
                     let className = '';
 
                     if ($2) {
-                        if ($2[0] === '.' || $2[0] === ':') {
+                        if ($2[0] === '.' || $2[0] === ':' || $2[0] === '#') {
                             return $2;
                         }
                         const currHash = $2.slice(-len);

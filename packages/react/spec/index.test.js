@@ -105,6 +105,27 @@ describe('react', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should apply mixins with pseudo', () => {
+        const theme = css`
+            color: red;
+            border: none;
+            &:focus {
+                color: green;
+            }
+        `;
+
+        const Button = ({children}) => styled`
+            button {
+                ${theme}
+                margin: 10px;
+            }
+        `(<button>{children}</button>);
+
+        const wrapper = shallow(<Button>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should apply dynamic mixins', () => {
         const theme = ({color}) => css`
             color: ${color};
@@ -155,6 +176,28 @@ describe('react', () => {
         expect(getStyles()).toMatchSnapshot();
 
         wrapper.setProps({color: 'green', variant: 'inverse'});
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should apply composed mixins', () => {
+        const padding = css`
+            padding: 5px 10px;
+        `;
+
+        const theme = ({color}) => css`
+            color: ${color};
+            ${padding}
+        `;
+
+        const Button = ({children, color}) => styled`
+            button {
+                ${theme({color})}
+                margin: 10px;
+            }
+        `(<button>{children}</button>);
+
+        const wrapper = shallow(<Button color="red">click me</Button>);
         expect(wrapper.render()).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
     });
