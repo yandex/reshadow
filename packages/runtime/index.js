@@ -9,28 +9,61 @@ const cache = {};
 function css() {
     const str = arguments[0];
     const hash = stringHash(str.raw.join('')).toString(36);
+    let mixinsHash = '';
     let parsed;
 
     const vars = {};
+    const mixins = {};
+
     for (let i = 1, len = arguments.length; i < len; i++) {
-        const name = '--' + hash + '_' + i;
-        vars[name] = arguments[i];
+        const value = arguments[i];
+        if (typeof value === 'object') {
+            Object.assign(vars, value[KEYS.__style__]);
+            mixinsHash += '_' + value[KEYS.__hash__];
+            mixins[i] = value[KEYS.__css__];
+        } else {
+            const name = '--' + hash + '_' + i;
+            vars[name] = value;
+        }
     }
 
-    if (cache[hash]) {
-        parsed = cache[hash];
+    const cacheKey = hash + mixinsHash;
+
+    if (cache[cacheKey]) {
+        parsed = cache[cacheKey];
     } else {
+        const keys = Object.keys(vars);
+        let pointer = 0;
+
         const values = [];
-        for (let name in vars) {
-            values.push('var(' + name + ')');
+        for (let i = 1; i < arguments.length; i++) {
+            if (i in mixins) {
+                values.push(mixins[i]);
+            } else {
+                values.push('var(' + keys[pointer] + ')');
+                pointer++;
+            }
         }
+
         const code = String.raw(str, ...values);
-        parsed = parse(code, hash);
-        __css__(parsed.css, hash);
-        cache[hash] = parsed;
+        parsed = parse(code, cacheKey);
+
+        if (parsed.css[0] === '{') {
+            parsed.css = parsed.css.slice(1, -1);
+        } else {
+            __css__(parsed.css, cacheKey);
+        }
+
+        parsed.tokens[KEYS.__hash__] = cacheKey;
+        parsed.tokens[KEYS.__css__] = parsed.css;
+
+        cache[cacheKey] = parsed;
     }
-    cache[hash].tokens[KEYS.__style__] = vars;
-    return cache[hash].tokens;
+
+    const tokens = Object.create(cache[cacheKey].tokens);
+
+    tokens[KEYS.__style__] = vars;
+    return tokens;
 }
 
 function createStyled(styled) {
@@ -49,13 +82,13 @@ function createStyled(styled) {
         }
 
         set([styles, tokens]);
-        styles = null;
 
         return styled;
     }
 
     function carriedStyled() {
         const str = arguments[0];
+        styles = null;
         if (str[0] && str.raw) {
             return taggedStyled.apply(null, arguments);
         } else {

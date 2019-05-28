@@ -9,6 +9,9 @@ const KEYS = {
     __style__: '$$style',
     __styles__: 'styles',
 
+    __css__: '__css__',
+    __hash__: '__hash__',
+
     /**
      * This prop is needed for the interop between different component frameworks
      */
@@ -146,7 +149,7 @@ const set = (args, newStyle) => {
     style = newStyle;
     if (styles[KEYS.__style__]) {
         style = style
-            ? Object.assign(style, styles[KEYS.__style__])
+            ? Object.assign({}, style, styles[KEYS.__style__])
             : styles[KEYS.__style__];
     }
     styled[KEYS.__styles__] = styles;
@@ -257,7 +260,7 @@ function map(element) {
         nextProps.style =
             typeof style === 'string'
                 ? vars + (nextProps.style || '')
-                : Object.assign(vars, nextProps.style || {});
+                : Object.assign({}, vars, nextProps.style || {});
     }
 
     return nextProps;

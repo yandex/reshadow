@@ -1,5 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`react should apply conditional mixins 1`] = `
+<button
+  class="__button_r6cz3d_14y9117"
+  style="--14y9117_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply conditional mixins 2`] = `".__button_r6cz3d_14y9117{color:white;background:var(--14y9117_1);margin:10px;}"`;
+
+exports[`react should apply conditional mixins 3`] = `
+<button
+  class="__button_r6cz3d_134zod7"
+  style="--134zod7_1:green"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply conditional mixins 4`] = `".__button_r6cz3d_14y9117{color:white;background:var(--14y9117_1);margin:10px;}.__button_r6cz3d_134zod7{color:var(--134zod7_1);background:white;margin:10px;}"`;
+
+exports[`react should apply dynamic mixins 1`] = `
+<button
+  class="__button_r6cz3d_xqnn5g"
+  style="--xqnn5g_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply dynamic mixins 2`] = `".__button_r6cz3d_xqnn5g{color:var(--xqnn5g_1);border:none;margin:10px;}"`;
+
+exports[`react should apply dynamic mixins 3`] = `
+<button
+  class="__button_r6cz3d_xqnn5g"
+  style="--xqnn5g_1:green"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply dynamic mixins 4`] = `".__button_r6cz3d_xqnn5g{color:var(--xqnn5g_1);border:none;margin:10px;}"`;
+
 exports[`react should apply dynamic styles 1`] = `
 <button
   class="__button_xkvkx5"
@@ -9,7 +53,7 @@ exports[`react should apply dynamic styles 1`] = `
 </button>
 `;
 
-exports[`react should apply dynamic styles 2`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+exports[`react should apply dynamic styles 2`] = `".__button_xkvkx5{color:var(--xkvkx5_1);}"`;
 
 exports[`react should apply dynamic styles 3`] = `
 <button
@@ -20,7 +64,7 @@ exports[`react should apply dynamic styles 3`] = `
 </button>
 `;
 
-exports[`react should apply dynamic styles 4`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+exports[`react should apply dynamic styles 4`] = `".__button_xkvkx5{color:var(--xkvkx5_1);}"`;
 
 exports[`react should apply external dynamic styles 1`] = `
 <button
@@ -31,7 +75,7 @@ exports[`react should apply external dynamic styles 1`] = `
 </button>
 `;
 
-exports[`react should apply external dynamic styles 2`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+exports[`react should apply external dynamic styles 2`] = `".__button_xkvkx5{color:var(--xkvkx5_1);}"`;
 
 exports[`react should apply external dynamic styles 3`] = `
 <button
@@ -42,7 +86,7 @@ exports[`react should apply external dynamic styles 3`] = `
 </button>
 `;
 
-exports[`react should apply external dynamic styles 4`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+exports[`react should apply external dynamic styles 4`] = `".__button_xkvkx5{color:var(--xkvkx5_1);}"`;
 
 exports[`react should apply external styles 1`] = `
 <button
@@ -52,7 +96,17 @@ exports[`react should apply external styles 1`] = `
 </button>
 `;
 
-exports[`react should apply external styles 2`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+exports[`react should apply external styles 2`] = `".__button_3rhptm{color:red;}"`;
+
+exports[`react should apply mixins 1`] = `
+<button
+  class="__button_r6cz3d_n7730n"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply mixins 2`] = `".__button_r6cz3d_n7730n{color:red;border:none;margin:10px;}"`;
 
 exports[`react should apply styles 1`] = `
 <button

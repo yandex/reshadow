@@ -55,7 +55,9 @@ const parse = (code, hash) => {
             );
         }
     });
+
     const result = stylis('_' + hash, code);
+
     return {css: result, tokens};
 };
 

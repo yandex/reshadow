@@ -18,9 +18,9 @@ export {css, create};
 const reactStyled = createStyled(elem => {
     let style = styled[KEYS.__style__];
     let result = styled(elem);
-    if (style) {
+    if (style && result) {
         result = React.cloneElement(result, {
-            style: Object.assign(style, result.props.style),
+            style: Object.assign({}, style, result.props.style),
         });
     }
     return result;
