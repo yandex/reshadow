@@ -1,5 +1,8 @@
 const lib = '/lib/';
 
+const react = ['<rootDir>/packages/react'];
+const runtime = ['<rootDir>/packages/core'];
+
 module.exports = {
     testPathIgnorePatterns: [lib],
     collectCoverageFrom: [
@@ -16,7 +19,7 @@ module.exports = {
     projects: [
         {
             displayName: 'client',
-            roots: ['<rootDir>/packages/core'],
+            roots: [...react, ...runtime],
             modulePathIgnorePatterns: [lib],
             setupFilesAfterEnv: ['jest-enzyme'],
             testEnvironment: 'enzyme',
@@ -27,7 +30,7 @@ module.exports = {
         {
             displayName: 'node',
             roots: ['<rootDir>/packages/'],
-            modulePathIgnorePatterns: [lib, '<rootDir>/packages/core'],
+            modulePathIgnorePatterns: [lib, ...react, ...runtime],
             testEnvironment: 'node',
         },
     ],

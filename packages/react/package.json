@@ -1,7 +1,7 @@
 {
-    "name": "reshadow",
+    "name": "@reshadow/react",
     "version": "0.0.1-alpha.41",
-    "description": "reshadow",
+    "description": "reshadow react",
     "main": "index.js",
     "repository": {
         "type": "git",
@@ -20,15 +20,17 @@
         "build": "../../build.sh && ./build.sh"
     },
     "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.41",
         "@reshadow/core": "^0.0.1-alpha.41",
-        "@reshadow/eslint": "^0.0.1-alpha.30",
-        "@reshadow/macro": "^0.0.1-alpha.41",
-        "@reshadow/postcss": "^0.0.1-alpha.30",
-        "@reshadow/prettier": "^0.0.1-alpha.30",
-        "@reshadow/react": "^0.0.1-alpha.41",
-        "@reshadow/svelte": "^0.0.1-alpha.41",
-        "@reshadow/vue": "^0.0.1-alpha.41",
-        "@reshadow/webpack": "^0.0.1-alpha.36"
+        "@reshadow/runtime": "^0.0.1-alpha.41",
+        "@reshadow/utils": "^0.0.1-alpha.30"
+    },
+    "optionalDependencies": {
+        "react": ">=15"
+    },
+    "devDependencies": {
+        "enzyme": "^3.8.0",
+        "enzyme-adapter-react-16": "^1.7.1",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0"
     }
 }

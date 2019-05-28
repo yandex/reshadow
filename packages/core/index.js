@@ -27,6 +27,7 @@ const create = args => {
     const len = args.length;
     let newStyle = {};
     let id = '';
+    const vars = {};
 
     for (let i = 0; i < len; i++) {
         let style = args[i];
@@ -41,6 +42,10 @@ const create = args => {
         }
 
         id += '_' + style[KEYS.__id__];
+
+        if (style[KEYS.__style__]) {
+            Object.assign(vars, style[KEYS.__style__]);
+        }
 
         if (style[KEYS.__store__][id]) {
             newStyle = style[KEYS.__store__][id];
@@ -60,6 +65,7 @@ const create = args => {
         newStyle[KEYS.__store__] = {
             ['_' + style[KEYS.__id__]]: newStyle,
         };
+        newStyle[KEYS.__style__] = vars;
     }
 
     return newStyle;
@@ -138,6 +144,11 @@ const set = (args, newStyle) => {
 
     styles = newStyles;
     style = newStyle;
+    if (styles[KEYS.__style__]) {
+        style = style
+            ? Object.assign(style, styles[KEYS.__style__])
+            : styles[KEYS.__style__];
+    }
     styled[KEYS.__styles__] = styles;
     styled[KEYS.__style__] = style;
 };

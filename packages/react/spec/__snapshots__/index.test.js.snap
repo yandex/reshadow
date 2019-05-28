@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`react should apply dynamic styles 1`] = `
+<button
+  class="__button_xkvkx5"
+  style="--xkvkx5_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply dynamic styles 2`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+
+exports[`react should apply dynamic styles 3`] = `
+<button
+  class="__button_xkvkx5"
+  style="--xkvkx5_1:green"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply dynamic styles 4`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+
+exports[`react should apply external dynamic styles 1`] = `
+<button
+  class="__button_xkvkx5"
+  style="--xkvkx5_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply external dynamic styles 2`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+
+exports[`react should apply external dynamic styles 3`] = `
+<button
+  class="__button_xkvkx5"
+  style="--xkvkx5_1:green"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply external dynamic styles 4`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+
+exports[`react should apply external styles 1`] = `
+<button
+  class="__button_3rhptm"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply external styles 2`] = `".__button_3rhptm{color:red;}.__button_xkvkx5{color:var(--xkvkx5_1);}"`;
+
+exports[`react should apply styles 1`] = `
+<button
+  class="__button_3rhptm"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply styles 2`] = `".__button_3rhptm{color:red;}"`;

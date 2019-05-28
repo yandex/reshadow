@@ -2,7 +2,7 @@ module.exports = {
     presets: [['@babel/preset-env']],
     overrides: [
         {
-            test: ['./packages/core/**/spec/**'],
+            test: ['./packages/core/**/spec/**', './packages/react/**/spec/**'],
             presets: [
                 [
                     '@babel/preset-react',

@@ -1,2 +1,2 @@
-export * from '@reshadow/core';
-export {default} from '@reshadow/core';
+export * from '@reshadow/react';
+export {default} from '@reshadow/react';

@@ -10077,7 +10077,7 @@ react-test-renderer@^16.0.0-0:
     react-is "^16.8.6"
     scheduler "^0.13.6"
 
-react@^16.7.0, react@^16.8.6:
+react@>=15, react@^16.7.0, react@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha512-pC0uMkhLaHm11ZSJULfOBqV4tIZkx87ZLvbbQYunNixAAvjnC+snJCg0XQXn9VIsttVsbZP/H/ewzgsd5fxKXw==
@@ -10485,7 +10485,7 @@ reshadow@0.0.1-alpha.26:
     "@reshadow/webpack" "^0.0.1-alpha.21"
 
 "reshadow@file:packages/core":
-  version "0.0.1-alpha.30"
+  version "0.0.1-alpha.41"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -11417,6 +11417,11 @@ stylehacks@^4.0.0:
     browserslist "^4.0.0"
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
+
+stylis@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.4.tgz#f665f25f5e299cf3d64654ab949a57c768b73fbe"
+  integrity sha512-8/3pSmthWM7lsPBKv7NXkzn2Uc9W7NotcwGNpJaa3k7WMM1XDCA4MgT5k/8BIexd5ydZdboXtU90XH9Ec4Bv/Q==
 
 supports-color@^2.0.0:
   version "2.0.0"
