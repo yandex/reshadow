@@ -138,3 +138,35 @@ exports[`react should apply styles 1`] = `
 `;
 
 exports[`react should apply styles 2`] = `".__button_olz31h{color:red;}"`;
+
+exports[`react styled should apply dynamic styles 1`] = `
+<button
+  class="__button_pfqxug"
+  color="red"
+  style="--1rwcy7d_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`react styled should apply dynamic styles 2`] = `".__button_pfqxug{color:var(--1rwcy7d_1);}"`;
+
+exports[`react styled should apply for Component 1`] = `
+<button
+  class="__Component_2z40fb"
+>
+  click me
+</button>
+`;
+
+exports[`react styled should apply for Component 2`] = `".__Component_2z40fb{color:red;}"`;
+
+exports[`react styled should apply styles 1`] = `
+<button
+  class="__button_lmktmf"
+>
+  click me
+</button>
+`;
+
+exports[`react styled should apply styles 2`] = `".__button_lmktmf{color:red;}"`;
