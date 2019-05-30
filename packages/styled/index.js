@@ -92,7 +92,8 @@ const reshadowStyled = createReshadowStyled((element, as, props) => {
 
 const createStyled = tag => {
     const create = (options = {}) => (strs, ...values) => {
-        const element = typeof tag === 'function' ? getDisplayName(tag) : tag;
+        const isComponent = typeof tag !== 'string';
+        const element = isComponent ? getDisplayName(tag) : tag;
         const elementClassName = '.__root__';
         const wrapper = (options.wrap || wrap)(elementClassName, [...strs]);
 
@@ -115,15 +116,18 @@ const createStyled = tag => {
             }
 
             innerRender(contextTheme) {
-                const {props, filtered} = filterProps(this.props);
+                // eslint-disable-next-line
+                const {props, $$ref, filtered} = this.props;
+
+                // eslint-disable-next-line
+                let localMixin = props.css;
+                delete props.css;
 
                 if (options.attrs) {
                     for (let attr in options.attrs) {
                         const value = options.attrs[attr];
                         props[attr] =
-                            typeof value === 'function'
-                                ? value(this.props)
-                                : value;
+                            typeof value === 'function' ? value(props) : value;
                     }
                 }
                 props.theme = props.theme || contextTheme;
@@ -131,8 +135,6 @@ const createStyled = tag => {
                 const localValues = this.mapValues(props);
 
                 let localWrapper = wrapper;
-                // eslint-disable-next-line
-                let localMixin = this.props.css;
 
                 if (localMixin) {
                     localWrapper = wrap(elementClassName, [...strs, '']);
@@ -151,9 +153,15 @@ const createStyled = tag => {
                 const args = [localWrapper];
 
                 args.push.apply(args, localValues);
-                for (let i = 0; i < filtered.length; i++) {
-                    delete props[filtered[i]];
+
+                if (!isComponent) {
+                    for (let i = 0; i < filtered.length; i++) {
+                        delete props[filtered[i]];
+                    }
                 }
+
+                props.ref = $$ref;
+
                 return (options.styled || reshadowStyled).apply(null, args)(
                     'root__',
                     as,
@@ -170,14 +178,23 @@ const createStyled = tag => {
             }
         }
 
-        StyledComponent.displayName = `styled.${element}`;
+        const WrappedComponent = React.forwardRef((currentProps, $$ref) => {
+            const {props, filtered} = filterProps(currentProps);
+            return React.createElement(StyledComponent, {
+                props,
+                $$ref,
+                filtered,
+            });
+        });
 
-        StyledComponent.withComponent = name =>
+        WrappedComponent.displayName = `styled.${element}`;
+
+        WrappedComponent.withComponent = name =>
             createStyled(name)(strs, ...values);
 
-        StyledComponent.styledComponentId = 'id';
+        WrappedComponent.styledComponentId = 'id';
 
-        return StyledComponent;
+        return WrappedComponent;
     };
 
     const result = create();
