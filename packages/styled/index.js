@@ -1,18 +1,17 @@
 import React from 'react';
-import {css as __css__, jsx, getDisplayName} from '@reshadow/react';
-import {createStyled as createReshadowStyled} from '@reshadow/runtime';
+import {jsx, getDisplayName} from '@reshadow/react';
+import {
+    keyframes,
+    createStyled as createReshadowStyled,
+    wrap,
+    css as __css__,
+} from '@reshadow/runtime';
 import coreStyled, {KEYS} from '@reshadow/core';
 import tags from '@reshadow/utils/html-tags';
 import {ThemeContext} from 'theming';
 import isReactProp from 'is-react-prop';
 
 const ThemeConsumer = ThemeContext.Consumer;
-
-const wrap = (element, arr) => {
-    arr[0] = `${element} {` + arr[0];
-    arr[arr.length - 1] = arr[arr.length - 1] + '}';
-    return arr;
-};
 
 const styledProps = ['as', 'theme'];
 const blacklist = new Set([...styledProps, 'color']);
@@ -195,6 +194,6 @@ export function isStyledComponent(target) {
     return target && typeof target.styledComponentId === 'string';
 }
 
-export {css, ThemeConsumer};
+export {css, keyframes, ThemeConsumer};
 
 export default styled;

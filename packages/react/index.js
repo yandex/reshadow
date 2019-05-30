@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, {KEYS, map, use, create} from '@reshadow/core';
-import {createStyled, css} from '@reshadow/runtime';
+import {createStyled, css, keyframes} from '@reshadow/runtime';
 import tags from '@reshadow/utils/html-tags';
 
 export function getDisplayName(Base) {
@@ -19,7 +19,7 @@ export function jsx() {
     return React.createElement.apply(null, args);
 }
 
-export {css, use, create};
+export {css, use, create, keyframes};
 
 const reactStyled = createStyled(elem => {
     let style = styled[KEYS.__style__];

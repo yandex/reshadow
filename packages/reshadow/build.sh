@@ -9,7 +9,6 @@ filelist=(
     postcss
     prettier
     react
-    react/styled
     svelte
     svelte/preprocess
     vue

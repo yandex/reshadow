@@ -15,14 +15,20 @@ const parse = (code, hash, options = {}) => {
         }
 
         for (let i = 0; i < selectors.length; i++) {
-            if (selectors[i] === 'from' || selectors[i] === 'to') {
+            let selector = selectors[i];
+
+            if (
+                selector === 'from' ||
+                selector === 'to' ||
+                selector[selector.length - 1] === '%'
+            ) {
                 continue;
             }
-            const currHash = selectors[i].slice(-len);
+            const currHash = selector.slice(-len);
             if (currHash === postfix) {
-                selectors[i] = selectors[i].slice(0, -len);
+                selector = selector.slice(0, -len);
             }
-            selectors[i] = selectors[i].replace(
+            selectors[i] = selector.replace(
                 /\[(.*?)\]|([#.:]?\w+)/g,
                 (match, $1, $2) => {
                     let className = '';

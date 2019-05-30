@@ -1,7 +1,7 @@
 const lib = '/lib/';
 
 const react = ['<rootDir>/packages/react', '<rootDir>/packages/styled'];
-const runtime = ['<rootDir>/packages/core'];
+const runtime = ['<rootDir>/packages/core', '<rootDir>/packages/runtime'];
 
 module.exports = {
     testPathIgnorePatterns: [lib],

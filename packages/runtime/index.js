@@ -134,4 +134,16 @@ function createStyled(styled, processCSS = defaultCSS) {
     return carriedStyled;
 }
 
-export {createStyled, createCSS, defaultCSS as css};
+const wrap = (element, arr) => {
+    arr[0] = `${element} {` + arr[0];
+    arr[arr.length - 1] = arr[arr.length - 1] + '}';
+    return arr;
+};
+
+const keyframes = (strs, ...values) => {
+    const strings = wrap('@keyframes ', [...strs]);
+    const tokens = defaultCSS(strings, ...values);
+    return '_' + tokens[KEYS.__hash__];
+};
+
+export {createStyled, createCSS, defaultCSS as css, wrap, keyframes};

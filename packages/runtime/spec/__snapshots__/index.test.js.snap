@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`runtime should work with keyframes 1`] = `"_n9lfwi"`;
+
+exports[`runtime should work with keyframes 2`] = `"@-webkit-keyframes _n9lfwi{0%,25%{opacity:0;}100%{opacity:1;}}@keyframes _n9lfwi{0%,25%{opacity:0;}100%{opacity:1;}}"`;
