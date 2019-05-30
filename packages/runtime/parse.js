@@ -48,14 +48,20 @@ const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
                         if ($2[0] === '.') {
                             className = $2.slice(1);
 
-                            if (className === __root__) {
-                                tokens[__root__] = postfix;
-                                return '.' + postfix;
+                            let isRoot = false;
+                            className = className.replace(__root__, () => {
+                                isRoot = true;
+                                return postfix;
+                            });
+
+                            if (isRoot) {
+                                tokens[__root__] = className;
+                                return '.' + className;
                             }
 
                             if (!classes) {
                                 tokens[className] = className;
-                                return $2;
+                                return '.' + className;
                             }
                         } else if (elements) {
                             className = '__' + $2;
