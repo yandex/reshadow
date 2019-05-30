@@ -1,12 +1,12 @@
 import React from 'react';
-import {jsx, getDisplayName} from '@reshadow/react';
+import {getDisplayName} from '@reshadow/react';
 import {
     keyframes,
     createStyled as createReshadowStyled,
     wrap,
-    css as __css__,
+    createCSS,
 } from '@reshadow/runtime';
-import coreStyled, {KEYS} from '@reshadow/core';
+import coreStyled, {KEYS, map} from '@reshadow/core';
 import tags from '@reshadow/utils/html-tags';
 import {ThemeContext} from 'theming';
 import isReactProp from 'is-react-prop';
@@ -27,6 +27,11 @@ const filterProps = props => {
     });
     return {props: nextProps, filtered};
 };
+
+const __css__ = createCSS({
+    elements: false,
+    classes: false,
+});
 
 const re = /\w+:[\s\r\n]*$/;
 
@@ -67,14 +72,14 @@ function css() {
     };
 }
 
-const reshadowStyled = createReshadowStyled((as, props) => {
+const reshadowStyled = createReshadowStyled((element, as, props) => {
     let style = coreStyled[KEYS.__style__];
 
     if (style) {
         props.style = Object.assign({}, style, props.style);
     }
 
-    const result = jsx(as, props);
+    const result = React.createElement(as, map(element, props));
 
     if (style && result.props.style === props.style) {
         return result;
@@ -88,7 +93,8 @@ const reshadowStyled = createReshadowStyled((as, props) => {
 const createStyled = tag => {
     const create = (options = {}) => (strs, ...values) => {
         const element = typeof tag === 'function' ? getDisplayName(tag) : tag;
-        const wrapper = (options.wrap || wrap)(element, [...strs]);
+        const elementClassName = '.__root__';
+        const wrapper = (options.wrap || wrap)(elementClassName, [...strs]);
 
         class StyledComponent extends React.Component {
             constructor() {
@@ -129,7 +135,7 @@ const createStyled = tag => {
                 let localMixin = this.props.css;
 
                 if (localMixin) {
-                    localWrapper = wrap(element, [...strs, '']);
+                    localWrapper = wrap(elementClassName, [...strs, '']);
 
                     while (typeof localMixin === 'function') {
                         localMixin = localMixin(props);
@@ -149,6 +155,7 @@ const createStyled = tag => {
                     delete props[filtered[i]];
                 }
                 return (options.styled || reshadowStyled).apply(null, args)(
+                    'root__',
                     as,
                     props,
                 );

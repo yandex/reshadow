@@ -3,7 +3,12 @@ import stringHash from 'string-hash';
 import defaultParse from './parse';
 import obj2css from './obj2css';
 
-const createCSS = ({parse = defaultParse} = {}) => {
+const createCSS = ({
+    parse = defaultParse,
+    elements = true,
+    attributes = true,
+    classes = true,
+} = {}) => {
     const cache = {};
 
     function css() {
@@ -55,24 +60,16 @@ const createCSS = ({parse = defaultParse} = {}) => {
             }
 
             let code = String.raw({raw: str}, ...values);
-            let keyframe = true;
-            let prefix = true;
+            let isMixin = /^[\r\n\s]*\w+:/.test(code);
 
-            if (/^[\r\n\s]*\w+:/.test(code)) {
-                code = '& {' + code + '}';
-                keyframe = false;
-                prefix = false;
-            }
+            parsed = parse(code, cacheKey, {
+                elements,
+                attributes,
+                classes,
+                isMixin,
+            });
 
-            parsed = parse(code, cacheKey, {keyframe, prefix});
-
-            if (parsed.css[0] === '{') {
-                parsed.css =
-                    '&' +
-                    parsed.css
-                        .replace(new RegExp(`\\.___${cacheKey}`, 'g'), '&')
-                        .replace(/\}\{/g, '}&{');
-            } else {
+            if (!isMixin) {
                 __css__(parsed.css, cacheKey);
             }
 
@@ -141,9 +138,11 @@ const wrap = (element, arr) => {
 };
 
 const keyframes = (strs, ...values) => {
-    const strings = wrap('@keyframes ', [...strs]);
-    const tokens = defaultCSS(strings, ...values);
-    return '_' + tokens[KEYS.__hash__];
+    const code = String.raw(strs, ...values);
+    const hash = stringHash(code).toString(36);
+    const strings = wrap(`@keyframes ${hash}`, [...strs]);
+    defaultCSS(strings, ...values);
+    return hash;
 };
 
 export {createStyled, createCSS, defaultCSS as css, wrap, keyframes};

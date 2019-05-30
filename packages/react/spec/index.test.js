@@ -87,6 +87,22 @@ describe('react', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should apply global styles', () => {
+        const styles = ({color}) => css`
+            :global(button) + :global(button) {
+                color: ${color};
+            }
+        `;
+
+        const Button = ({children, color}) => styled(styles({color}))(
+            <button>{children}</button>,
+        );
+
+        const wrapper = shallow(<Button color="red">click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should apply mixins', () => {
         const theme = css`
             color: red;

@@ -1,15 +1,21 @@
 import {USE_PREFIX} from '@reshadow/core';
 import stylis from 'stylis';
 
-stylis.set({cascade: false});
+const __root__ = '__root__';
 
-const parse = (code, hash, options = {}) => {
+const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
+    const options = {
+        global: false,
+        keyframes: !isMixin,
+        prefix: !isMixin,
+    };
+
     stylis.set(options);
 
     const tokens = {};
     const postfix = '_' + hash;
-    const len = postfix.length;
-    stylis.use(null)((context, content, selectors) => {
+
+    stylis.use(null)((context, content, selectors, parent, line, column) => {
         if (context !== 2) {
             return;
         }
@@ -24,25 +30,37 @@ const parse = (code, hash, options = {}) => {
             ) {
                 continue;
             }
-            const currHash = selector.slice(-len);
-            if (currHash === postfix) {
-                selector = selector.slice(0, -len);
-            }
+
             selectors[i] = selector.replace(
-                /\[(.*?)\]|([#.:]?\w+)/g,
-                (match, $1, $2) => {
+                /:global\((.*?)\)|\[(.*?)\]|([#.:]?\w+)/g,
+                (match, $0, $1, $2) => {
                     let className = '';
 
+                    if ($0) {
+                        return $0;
+                    }
+
                     if ($2) {
-                        if ($2[0] === '.' || $2[0] === ':' || $2[0] === '#') {
+                        if ($2[0] === ':' || $2[0] === '#') {
                             return $2;
                         }
-                        const currHash = $2.slice(-len);
-                        if (currHash === postfix) {
-                            $2 = $2.slice(0, -len);
+
+                        if ($2[0] === '.') {
+                            className = $2.slice(1);
+
+                            if (className === __root__) {
+                                tokens[__root__] = postfix;
+                                return '.' + postfix;
+                            }
+
+                            if (!classes) {
+                                tokens[className] = className;
+                                return $2;
+                            }
+                        } else if (elements) {
+                            className = '__' + $2;
                         }
-                        className = '__' + $2;
-                    } else {
+                    } else if ($1 && attributes) {
                         const attr = $1.replace(/[\s\n\r'"]/g, '').split('=');
                         let name = attr[0];
                         const value = attr[1];
@@ -58,6 +76,8 @@ const parse = (code, hash, options = {}) => {
                         }
                     }
 
+                    if (!className) return match;
+
                     tokens[className] = className + postfix;
                     return '.' + tokens[className];
                 },
@@ -65,7 +85,7 @@ const parse = (code, hash, options = {}) => {
         }
     });
 
-    const result = stylis('_' + hash, code);
+    const result = stylis(isMixin ? '&' : '', code);
 
     return {css: result, tokens};
 };

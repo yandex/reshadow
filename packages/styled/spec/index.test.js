@@ -38,6 +38,20 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should apply nested styles', () => {
+        const Button = styled.button`
+            color: red;
+
+            & span {
+                margin-right: 10px;
+            }
+        `;
+
+        const wrapper = render(<Button>click me</Button>);
+        expect(wrapper).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should apply styles for Component', () => {
         const Button = styled(props => <button {...props} />)`
             color: red;
