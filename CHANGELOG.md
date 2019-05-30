@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.46](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.45...v0.0.1-alpha.46) (2019-05-30)
+
+
+### Bug Fixes
+
+* **styled:** use global selectors ([3ed8e46](https://github.com/lttb/reshadow/commit/3ed8e46))
+
+
+
+
+
 ## [0.0.1-alpha.45](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.44...v0.0.1-alpha.45) (2019-05-30)
 
 
