@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/runtime",
-    "version": "0.0.1-alpha.43",
+    "version": "0.0.1-alpha.44",
     "description": "reshadow runtime",
     "main": "index.js",
     "repository": {
@@ -20,8 +20,8 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@reshadow/core": "^0.0.1-alpha.42",
         "@emotion/unitless": "0.7.3",
+        "@reshadow/core": "^0.0.1-alpha.42",
         "string-hash": "^1.1.3",
         "stylis": "^3.5.4"
     }
