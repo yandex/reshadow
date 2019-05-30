@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.45](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.44...v0.0.1-alpha.45) (2019-05-30)
+
+
+### Features
+
+* **runtime:** add keyframes ([5f19687](https://github.com/lttb/reshadow/commit/5f19687))
+
+
+
+
+
 ## [0.0.1-alpha.44](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.43...v0.0.1-alpha.44) (2019-05-30)
 
 
