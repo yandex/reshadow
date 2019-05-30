@@ -139,7 +139,7 @@ const wrap = (element, arr) => {
 
 const keyframes = (strs, ...values) => {
     const code = String.raw(strs, ...values);
-    const hash = stringHash(code).toString(36);
+    const hash = '_' + stringHash(code).toString(36);
     const strings = wrap(`@keyframes ${hash}`, [...strs]);
     defaultCSS(strings, ...values);
     return hash;
