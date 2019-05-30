@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.47](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.46...v0.0.1-alpha.47) (2019-05-30)
+
+
+### Bug Fixes
+
+* **runtimes:** fix keyframes ([67fc1ac](https://github.com/lttb/reshadow/commit/67fc1ac))
+
+
+
+
+
 ## [0.0.1-alpha.46](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.45...v0.0.1-alpha.46) (2019-05-30)
 
 

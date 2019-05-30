@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.47](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.46...v0.0.1-alpha.47) (2019-05-30)
+
+**Note:** Version bump only for package @reshadow/styled
+
+
+
+
+
 ## [0.0.1-alpha.46](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.45...v0.0.1-alpha.46) (2019-05-30)
 
 
