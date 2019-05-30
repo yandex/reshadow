@@ -1,6 +1,6 @@
 const lib = '/lib/';
 
-const react = ['<rootDir>/packages/react'];
+const react = ['<rootDir>/packages/react', '<rootDir>/packages/styled'];
 const runtime = ['<rootDir>/packages/core'];
 
 module.exports = {

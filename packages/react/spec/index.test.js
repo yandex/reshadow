@@ -202,41 +202,20 @@ describe('react', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
-    describe('styled', () => {
-        beforeEach(() => {
-            jest.isolateModules(() => {
-                ({default: styled, css} = require('../styled'));
-            });
-        });
+    it('should apply object mixins', () => {
+        const padding = {
+            padding: '5px 10px',
+        };
 
-        it('should apply styles', () => {
-            const Button = styled.button`
-                color: red;
-            `;
+        const Button = ({children}) => styled`
+            button {
+                ${padding}
+                margin: 10px;
+            }
+        `(<button>{children}</button>);
 
-            const wrapper = render(<Button>click me</Button>);
-            expect(wrapper).toMatchSnapshot();
-            expect(getStyles()).toMatchSnapshot();
-        });
-
-        it('should apply for Component', () => {
-            const Button = styled(props => <button {...props} />)`
-                color: red;
-            `;
-
-            const wrapper = render(<Button>click me</Button>);
-            expect(wrapper).toMatchSnapshot();
-            expect(getStyles()).toMatchSnapshot();
-        });
-
-        it('should apply dynamic styles', () => {
-            const Button = styled.button`
-                color: ${props => props.color};
-            `;
-
-            const wrapper = render(<Button color="red">click me</Button>);
-            expect(wrapper).toMatchSnapshot();
-            expect(getStyles()).toMatchSnapshot();
-        });
+        const wrapper = shallow(<Button>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
     });
 });

@@ -129,6 +129,16 @@ exports[`react should apply mixins with pseudo 1`] = `
 
 exports[`react should apply mixins with pseudo 2`] = `".__button_1tuwmo{margin:10px;}.__button_1tuwmo{color:red;border:none;}.__button_1tuwmo:focus{color:green;}"`;
 
+exports[`react should apply object mixins 1`] = `
+<button
+  class="__button_qjpl95"
+>
+  click me
+</button>
+`;
+
+exports[`react should apply object mixins 2`] = `".__button_qjpl95{margin:10px;}.__button_qjpl95{padding:5px 10px;}"`;
+
 exports[`react should apply styles 1`] = `
 <button
   class="__button_olz31h"
@@ -138,35 +148,3 @@ exports[`react should apply styles 1`] = `
 `;
 
 exports[`react should apply styles 2`] = `".__button_olz31h{color:red;}"`;
-
-exports[`react styled should apply dynamic styles 1`] = `
-<button
-  class="__button_pfqxug"
-  color="red"
-  style="--1rwcy7d_1:red"
->
-  click me
-</button>
-`;
-
-exports[`react styled should apply dynamic styles 2`] = `".__button_pfqxug{color:var(--1rwcy7d_1);}"`;
-
-exports[`react styled should apply for Component 1`] = `
-<button
-  class="__Component_2z40fb"
->
-  click me
-</button>
-`;
-
-exports[`react styled should apply for Component 2`] = `".__Component_2z40fb{color:red;}"`;
-
-exports[`react styled should apply styles 1`] = `
-<button
-  class="__button_lmktmf"
->
-  click me
-</button>
-`;
-
-exports[`react styled should apply styles 2`] = `".__button_lmktmf{color:red;}"`;

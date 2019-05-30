@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, {KEYS, map, create} from '@reshadow/core';
+import styled, {KEYS, map, use, create} from '@reshadow/core';
 import {createStyled, css} from '@reshadow/runtime';
 import tags from '@reshadow/utils/html-tags';
 
@@ -19,7 +19,7 @@ export function jsx() {
     return React.createElement.apply(null, args);
 }
 
-export {css, create};
+export {css, use, create};
 
 const reactStyled = createStyled(elem => {
     let style = styled[KEYS.__style__];

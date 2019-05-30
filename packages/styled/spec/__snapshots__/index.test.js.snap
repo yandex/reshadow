@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`styled should apply dynamic styles 1`] = `
+<button
+  class="__button_1av1867"
+  style="--10xhand_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should apply dynamic styles 2`] = `".__button_1av1867{color:var(--10xhand_1);}"`;
+
+exports[`styled should apply styles 1`] = `
+<button
+  class="__button_ug1qba"
+>
+  click me
+</button>
+`;
+
+exports[`styled should apply styles 2`] = `".__button_ug1qba{color:red;}"`;
+
+exports[`styled should apply styles for Component 1`] = `
+<button
+  class="__Component_13w4d4m"
+>
+  click me
+</button>
+`;
+
+exports[`styled should apply styles for Component 2`] = `".__Component_13w4d4m{color:red;}"`;
+
+exports[`styled should create global style 1`] = `null`;
+
+exports[`styled should create global style 2`] = `"body{color:var(--10pagwf_1);}"`;
+
+exports[`styled should work with as 1`] = `
+<a
+  href="#"
+  style="--10xhand_1:red"
+>
+  click me
+</a>
+`;
+
+exports[`styled should work with attrs 1`] = `
+<button
+  class="__button_1av1867"
+  name="red"
+  style="--10xhand_1:red"
+  type="submit"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with css prop 1`] = `
+<button
+  class="__button_9986m2"
+  style="--10xhand_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with css prop 2`] = `".__button_9986m2{color:var(--10xhand_1);}.__button_9986m2{padding:5px 10px;}"`;
+
+exports[`styled should work with css prop function 1`] = `
+<button
+  class="__button_9986m2"
+  style="--10xhand_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with css prop function 2`] = `".__button_9986m2{color:var(--10xhand_1);}.__button_9986m2{padding:5px 10px;}"`;
+
+exports[`styled should work with css prop with tagged literal 1`] = `
+<button
+  class="__button_9986m2"
+  style="--10xhand_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with css prop with tagged literal 2`] = `".__button_9986m2{color:var(--10xhand_1);}.__button_9986m2{padding:5px 10px;}"`;
+
+exports[`styled should work with mixins 1`] = `
+<button
+  class="__button_1erxgl3"
+  style="--67jqub_2:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with mixins 2`] = `".__button_1erxgl3{color:var(--67jqub_2);}.__button_1erxgl3{padding:10px;}"`;
+
+exports[`styled should work with nested mixins 1`] = `
+<button
+  class="__button_51tp81"
+  style="--pjcj95_1:black"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with nested mixins 2`] = `".__button_51tp81{color:var(--pjcj95_1);}"`;
+
+exports[`styled should work with nested mixins 3`] = `
+<button
+  class="__button_51tp81"
+  style="--pjcj95_1:white"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with nested mixins 4`] = `".__button_51tp81{color:var(--pjcj95_1);}"`;
+
+exports[`styled should work with nested mixins 5`] = `
+<button
+  class="__button_dkbp5r"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with nested mixins 6`] = `".__button_51tp81{color:var(--pjcj95_1);}.__button_dkbp5r{color:blue;}"`;
+
+exports[`styled should work with theme 1`] = `
+<button
+  class="__button_1av1867"
+  style="--10xhand_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with theme 2`] = `".__button_1av1867{color:var(--10xhand_1);}"`;
