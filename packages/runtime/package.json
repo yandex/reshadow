@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/runtime",
-    "version": "0.0.1-alpha.47",
+    "version": "0.0.1-alpha.48",
     "description": "reshadow runtime",
     "main": "index.js",
     "repository": {
