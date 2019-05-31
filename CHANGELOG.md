@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.49](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.48...v0.0.1-alpha.49) (2019-05-31)
+
+
+### Features
+
+* **babel:** add processFiles option ([e5c586f](https://github.com/lttb/reshadow/commit/e5c586f))
+
+
+
+
+
 ## [0.0.1-alpha.48](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.47...v0.0.1-alpha.48) (2019-05-30)
 
 
