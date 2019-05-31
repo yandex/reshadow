@@ -696,6 +696,34 @@ describe('babel', () => {
             expect(code).toMatchSnapshot();
         });
 
+        it('should inline styles from file but ignore them', async () => {
+            const {code} = await transform.with({
+                ...defaultOptions,
+                plugins: [
+                    getPlugin({
+                        postcss: true,
+                        files: /\.css$/,
+                        processFiles: false,
+                    }),
+                ],
+            })`
+                import React from 'react'
+                import styled from 'reshadow'
+
+                import styles from './styles.css'
+
+                const App = ({disabled, type}) => styled(styles)(
+                    <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
         it('should work with css-modules imports', async () => {
             const {code} = await transform.with({
                 ...defaultOptions,

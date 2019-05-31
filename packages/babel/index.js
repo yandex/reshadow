@@ -61,6 +61,7 @@ const defaultOptions = {
     stringStyle: false,
     postcss: true,
     files: /\.shadow\.css$/,
+    processFiles: true,
 };
 
 module.exports = (babel, pluginOptions = {}) => {
@@ -81,6 +82,7 @@ module.exports = (babel, pluginOptions = {}) => {
     }
 
     let STYLED = new Set();
+    let IGNORE_TAGS = new Set();
     let BINDINGS = {};
     let imports = {};
     let IMPORT = null;
@@ -102,6 +104,7 @@ module.exports = (babel, pluginOptions = {}) => {
         FILE = file;
         index = 1;
         STYLED = new Set();
+        IGNORE_TAGS = new Set();
         imports = {};
         IMPORT = null;
         cache = new Set();
@@ -110,7 +113,17 @@ module.exports = (babel, pluginOptions = {}) => {
 
     const addImport = name => {
         if (!IMPORT) {
-            IMPORT = addDefault(FILE.path, moduleName, {nameHint: 'styled'});
+            addDefault(FILE.path, moduleName, {
+                nameHint: 'styled',
+            });
+
+            [{node: IMPORT}] = FILE.path.get('body').filter(p => {
+                const {node} = p;
+                return (
+                    t.isImportDeclaration(node) &&
+                    node.source.value === moduleName
+                );
+            });
         }
 
         if (imports[name]) return imports[name];
@@ -638,6 +651,8 @@ module.exports = (babel, pluginOptions = {}) => {
             let {node} = p;
             const {quasi, tag} = node;
 
+            const isIgnored = IGNORE_TAGS.has(node);
+
             if (
                 isStyledExpression(tag) ||
                 (tag.name && tag.name === imports.default)
@@ -672,7 +687,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
             ({node} = p);
 
-            if (!postcss) return;
+            if (!postcss || isIgnored) return;
 
             const result = postcss.process(raw, {from: filename});
             const code = result.code;
@@ -737,6 +752,10 @@ module.exports = (babel, pluginOptions = {}) => {
                             [],
                         ),
                     );
+
+                    if (!options.processFiles) {
+                        IGNORE_TAGS.add(append);
+                    }
 
                     p.replaceWith(
                         t.variableDeclaration('const', [

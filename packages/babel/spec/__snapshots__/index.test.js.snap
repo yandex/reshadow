@@ -122,6 +122,34 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel postcss should inline styles from file but ignore them 1`] = `
+"import React from 'react';
+import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\";
+
+/*__reshadow-styles__:\\"./styles.css\\"*/
+const { ...styles
+} = __css__(\`button {
+    color: red;
+}
+\`
+/*__css_end__*/
+, \\"947371504\\");
+
+const styled_c8 = create([styles]);
+
+const App = ({
+  disabled,
+  type
+}) => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled
+}, use({
+  theme: \\"normal\\"
+})), \\"content\\")));
+
+export default App;"
+`;
+
 exports[`babel postcss should process styles and add them runtime 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
