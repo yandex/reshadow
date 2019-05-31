@@ -738,8 +738,8 @@ module.exports = (babel, pluginOptions = {}) => {
                         basedir: path.dirname(filename),
                     });
 
-                    const code = fs.readFileSync(file).toString();
-                    fs.readFileSync(file)
+                    const code = fs
+                        .readFileSync(file)
                         .toString()
                         // escape backticks and backslashes
                         .replace(/[`\\]/g, '\\$&');
