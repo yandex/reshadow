@@ -1,8 +1,12 @@
+const react = ['core', 'react', 'styled'].map(
+    x => `./packages/${x}/**/spec/**`,
+);
+
 module.exports = {
     presets: [['@babel/preset-env']],
     overrides: [
         {
-            test: ['./packages/core/**/spec/**'],
+            test: react,
             presets: [
                 [
                     '@babel/preset-react',

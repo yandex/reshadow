@@ -1,7 +1,7 @@
 {
-    "name": "@reshadow/svelte",
-    "version": "0.0.1-alpha.42",
-    "description": "reshadow svelte",
+    "name": "@reshadow/runtime",
+    "version": "0.0.1-alpha.48",
+    "description": "reshadow runtime",
     "main": "index.js",
     "repository": {
         "type": "git",
@@ -20,15 +20,9 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@babel/generator": "^7.4.4",
-        "@babel/parser": "^7.4.4",
-        "@babel/traverse": "^7.4.4",
-        "@babel/types": "^7.4.4",
-        "@reshadow/babel": "^0.0.1-alpha.42",
+        "@emotion/unitless": "0.7.3",
         "@reshadow/core": "^0.0.1-alpha.42",
-        "svelte": "^3.0.0"
-    },
-    "devDependencies": {
-        "common-tags": "1.8.0"
+        "string-hash": "^1.1.3",
+        "stylis": "^3.5.4"
     }
 }

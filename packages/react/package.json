@@ -1,7 +1,7 @@
 {
-    "name": "@reshadow/svelte",
-    "version": "0.0.1-alpha.42",
-    "description": "reshadow svelte",
+    "name": "@reshadow/react",
+    "version": "0.0.1-alpha.48",
+    "description": "reshadow react",
     "main": "index.js",
     "repository": {
         "type": "git",
@@ -20,15 +20,17 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@babel/generator": "^7.4.4",
-        "@babel/parser": "^7.4.4",
-        "@babel/traverse": "^7.4.4",
-        "@babel/types": "^7.4.4",
-        "@reshadow/babel": "^0.0.1-alpha.42",
         "@reshadow/core": "^0.0.1-alpha.42",
-        "svelte": "^3.0.0"
+        "@reshadow/runtime": "^0.0.1-alpha.48",
+        "@reshadow/utils": "^0.0.1-alpha.30"
+    },
+    "optionalDependencies": {
+        "react": ">=15"
     },
     "devDependencies": {
-        "common-tags": "1.8.0"
+        "enzyme": "^3.8.0",
+        "enzyme-adapter-react-16": "^1.7.1",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0"
     }
 }
