@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.51](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.50...v0.0.1-alpha.51) (2019-05-31)
+
+
+### Bug Fixes
+
+* **babel:** escape backticks and backslashes ([59dc07b](https://github.com/lttb/reshadow/commit/59dc07b))
+
+
+
+
+
 ## [0.0.1-alpha.50](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.49...v0.0.1-alpha.50) (2019-05-31)
 
 
