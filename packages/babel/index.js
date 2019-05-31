@@ -739,6 +739,10 @@ module.exports = (babel, pluginOptions = {}) => {
                     });
 
                     const code = fs.readFileSync(file).toString();
+                    fs.readFileSync(file)
+                        .toString()
+                        // escape backticks and backslashes
+                        .replace(/[`\\]/g, '\\$&');
 
                     const append = t.taggedTemplateExpression(
                         t.identifier(addImport('css')),
