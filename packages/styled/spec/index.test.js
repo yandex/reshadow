@@ -235,11 +235,22 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
-    it('should work with mixins as strings', () => {
+    it('should work with string mixins', () => {
         const padding = `
             padding: 10px;
         `;
 
+        const Button = styled.button`
+            ${padding}
+        `;
+
+        const wrapper = render(<Button width={100}>click me</Button>);
+
+        expect(wrapper).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should work with dynamic mixins', () => {
         const dynamicMixin = ({width}) =>
             css`
                 transform: translateX(${({width}) => `-${2 * width}`}px);
@@ -247,13 +258,16 @@ describe('styled', () => {
             `;
 
         const Button = styled.button`
-            ${padding}
             ${dynamicMixin}
         `;
 
-        const wrapper = render(<Button width={100}>click me</Button>);
+        const wrapper = shallow(<Button width={0}>click me</Button>);
 
-        expect(wrapper).toMatchSnapshot();
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+
+        wrapper.setProps({width: 100});
+        expect(wrapper.render()).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
     });
 

@@ -130,6 +130,30 @@ exports[`styled should work with css prop with tagged literal 1`] = `
 
 exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
 
+exports[`styled should work with dynamic mixins 1`] = `
+<button
+  class="_miwxjj"
+  style="--auziqq_1:-0px;--auziqq_2:0px"
+  width="0"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with dynamic mixins 2`] = `"._miwxjj{-webkit-transform:translateX(var(--auziqq_1));-ms-transform:translateX(var(--auziqq_1));transform:translateX(var(--auziqq_1));margin:var(--auziqq_2);}"`;
+
+exports[`styled should work with dynamic mixins 3`] = `
+<button
+  class="_miwxjj"
+  style="--auziqq_1:-200px;--auziqq_2:100px"
+  width="100"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with dynamic mixins 4`] = `"._miwxjj{-webkit-transform:translateX(var(--auziqq_1));-ms-transform:translateX(var(--auziqq_1));transform:translateX(var(--auziqq_1));margin:var(--auziqq_2);}"`;
+
 exports[`styled should work with mixins 1`] = `
 <button
   class="_wopuxb"
@@ -140,18 +164,6 @@ exports[`styled should work with mixins 1`] = `
 `;
 
 exports[`styled should work with mixins 2`] = `"._wopuxb{padding:10px;color:var(--1txtmwt_4);}._wopuxb::after{content:'';}._wopuxb::before{content:'';}"`;
-
-exports[`styled should work with mixins as strings 1`] = `
-<button
-  class="_q0rwq0"
-  style="--auziqq_1:-200px;--auziqq_2:100px"
-  width="100"
->
-  click me
-</button>
-`;
-
-exports[`styled should work with mixins as strings 2`] = `"._q0rwq0{padding:10px;-webkit-transform:translateX(var(--auziqq_1));-ms-transform:translateX(var(--auziqq_1));transform:translateX(var(--auziqq_1));margin:var(--auziqq_2);}"`;
 
 exports[`styled should work with nested mixins 1`] = `
 <button
@@ -184,6 +196,17 @@ exports[`styled should work with nested mixins 5`] = `
 `;
 
 exports[`styled should work with nested mixins 6`] = `"._4ykgti{color:var(--pjcj95_1);}._g1uhfs{color:blue;}"`;
+
+exports[`styled should work with string mixins 1`] = `
+<button
+  class="_zip2hf"
+  width="100"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with string mixins 2`] = `"._zip2hf{padding:10px;}"`;
 
 exports[`styled should work with theme 1`] = `
 <button

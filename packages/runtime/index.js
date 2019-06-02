@@ -34,7 +34,7 @@ const createCSS = ({
         for (let i = 1, len = arguments.length; i < len; i++) {
             let value = arguments[i];
 
-            if (!value) {
+            if (value === null || value === undefined) {
                 mixins[i] = '';
             } else if (typeof value === 'object') {
                 if (KEYS.__style__ in value) {
