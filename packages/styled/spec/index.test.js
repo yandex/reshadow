@@ -257,6 +257,32 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should deal with specificity', () => {
+        const style = css`
+            flex: 1;
+        `;
+
+        const Wrap = styled(({start, end, max, ...props}) => <h4 {...props} />)`
+            :after {
+                ${style};
+                flex: ${({start}) => start && '20'};
+            }
+            :before {
+                ${style};
+                flex: ${({end}) => end && '20'};
+            }
+        `;
+
+        const wrapper = render(
+            <Wrap start end>
+                title
+            </Wrap>,
+        );
+
+        expect(wrapper).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should work with nested mixins', () => {
         const complexMixin = css`
             color: ${props => (props.whiteColor ? 'white' : 'black')};

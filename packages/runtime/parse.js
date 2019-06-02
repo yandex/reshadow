@@ -1,7 +1,9 @@
 import {USE_PREFIX} from '@reshadow/core';
-import stylis from 'stylis';
+import Stylis from '@emotion/stylis';
 
 const __root__ = '__root__';
+
+const stylis = new Stylis();
 
 const parse = (
     code,
@@ -9,17 +11,44 @@ const parse = (
     {isMixin, elements, attributes, onlyNamespaced, classes},
 ) => {
     const options = {
-        global: false,
-        keyframes: !isMixin,
         prefix: !isMixin,
     };
 
     stylis.set(options);
 
-    const tokens = {};
+    const tokens = Object.create(null);
     const postfix = '_' + hash;
 
-    stylis.use(null)((context, content, selectors, parent, line, column) => {
+    const rules = Object.create(null);
+
+    let skip = false;
+
+    stylis.use(null)(function(
+        context,
+        content,
+        selectors,
+        parent,
+        line,
+        column,
+    ) {
+        if (skip) return;
+
+        if (context === -2) {
+            skip = true;
+
+            let result = '';
+            for (let selector in rules) {
+                result += selector + '{' + rules[selector] + '}';
+            }
+            return result;
+        }
+
+        if (context === 3) {
+            for (let i = 0; i < selectors.length; i++) {
+                rules[selectors[i]] = content;
+            }
+        }
+
         if (context !== 2) {
             return;
         }
@@ -96,6 +125,9 @@ const parse = (
                     return '.' + tokens[className];
                 },
             );
+
+            rules[selectors[i]] = rules[selectors[i]] || '';
+            rules[selectors[i]] += content;
         }
     });
 

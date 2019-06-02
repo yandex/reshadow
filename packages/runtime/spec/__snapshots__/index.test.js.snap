@@ -2,4 +2,4 @@
 
 exports[`runtime should work with keyframes 1`] = `"_qrjiv5"`;
 
-exports[`runtime should work with keyframes 2`] = `"@-webkit-keyframes _qrjiv5{0%,25%{opacity:0;}100%{opacity:1;}}@keyframes _qrjiv5{0%,25%{opacity:0;}100%{opacity:1;}}"`;
+exports[`runtime should work with keyframes 2`] = `"@keyframes _qrjiv5{0%,25%{opacity:0;}100%{opacity:1;}}"`;

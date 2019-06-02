@@ -9,7 +9,7 @@ exports[`react should apply composed mixins 1`] = `
 </button>
 `;
 
-exports[`react should apply composed mixins 2`] = `".__button_lm3xvp{margin:10px;}.__button_lm3xvp{color:var(--1owzm37_1);}.__button_lm3xvp{padding:5px 10px;}"`;
+exports[`react should apply composed mixins 2`] = `".__button_lm3xvp{padding:5px 10px;color:var(--1owzm37_1);margin:10px;}"`;
 
 exports[`react should apply conditional mixins 1`] = `
 <button
@@ -20,7 +20,7 @@ exports[`react should apply conditional mixins 1`] = `
 </button>
 `;
 
-exports[`react should apply conditional mixins 2`] = `".__button_nzpf5v{margin:10px;}.__button_nzpf5v{color:white;background:var(--14y9117_1);}"`;
+exports[`react should apply conditional mixins 2`] = `".__button_nzpf5v{color:white;background:var(--14y9117_1);margin:10px;}"`;
 
 exports[`react should apply conditional mixins 3`] = `
 <button
@@ -31,7 +31,7 @@ exports[`react should apply conditional mixins 3`] = `
 </button>
 `;
 
-exports[`react should apply conditional mixins 4`] = `".__button_nzpf5v{margin:10px;}.__button_nzpf5v{color:white;background:var(--14y9117_1);}.__button_1pj7rgr{margin:10px;}.__button_1pj7rgr{color:var(--134zod7_1);background:white;}"`;
+exports[`react should apply conditional mixins 4`] = `".__button_nzpf5v{color:white;background:var(--14y9117_1);margin:10px;}.__button_1pj7rgr{color:var(--134zod7_1);background:white;margin:10px;}"`;
 
 exports[`react should apply dynamic mixins 1`] = `
 <button
@@ -42,7 +42,7 @@ exports[`react should apply dynamic mixins 1`] = `
 </button>
 `;
 
-exports[`react should apply dynamic mixins 2`] = `".__button_1hzemul{margin:10px;}.__button_1hzemul{color:var(--xqnn5g_1);border:none;}"`;
+exports[`react should apply dynamic mixins 2`] = `".__button_1hzemul{color:var(--xqnn5g_1);border:none;margin:10px;}"`;
 
 exports[`react should apply dynamic mixins 3`] = `
 <button
@@ -53,7 +53,7 @@ exports[`react should apply dynamic mixins 3`] = `
 </button>
 `;
 
-exports[`react should apply dynamic mixins 4`] = `".__button_1hzemul{margin:10px;}.__button_1hzemul{color:var(--xqnn5g_1);border:none;}"`;
+exports[`react should apply dynamic mixins 4`] = `".__button_1hzemul{color:var(--xqnn5g_1);border:none;margin:10px;}"`;
 
 exports[`react should apply dynamic styles 1`] = `
 <button
@@ -127,7 +127,7 @@ exports[`react should apply mixins 1`] = `
 </button>
 `;
 
-exports[`react should apply mixins 2`] = `".__button_13d2oc0{margin:10px;}.__button_13d2oc0{color:red;border:none;}"`;
+exports[`react should apply mixins 2`] = `".__button_13d2oc0{color:red;border:none;margin:10px;}"`;
 
 exports[`react should apply mixins with pseudo 1`] = `
 <button
@@ -137,7 +137,7 @@ exports[`react should apply mixins with pseudo 1`] = `
 </button>
 `;
 
-exports[`react should apply mixins with pseudo 2`] = `".__button_1tuwmo{margin:10px;}.__button_1tuwmo{color:red;border:none;}.__button_1tuwmo:focus{color:green;}"`;
+exports[`react should apply mixins with pseudo 2`] = `".__button_1tuwmo:focus{color:green;}.__button_1tuwmo{color:red;border:none;margin:10px;}"`;
 
 exports[`react should apply object mixins 1`] = `
 <button
@@ -147,7 +147,7 @@ exports[`react should apply object mixins 1`] = `
 </button>
 `;
 
-exports[`react should apply object mixins 2`] = `".__button_qjpl95{margin:10px;}.__button_qjpl95{padding:5px 10px;}"`;
+exports[`react should apply object mixins 2`] = `".__button_qjpl95{padding:5px 10px;margin:10px;}"`;
 
 exports[`react should apply styles 1`] = `
 <button

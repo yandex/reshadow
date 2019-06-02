@@ -19,7 +19,7 @@ exports[`styled should apply nested styles 1`] = `
 </button>
 `;
 
-exports[`styled should apply nested styles 2`] = `"._5jpyup{color:red;}._5jpyup span{margin-right:10px;}"`;
+exports[`styled should apply nested styles 2`] = `"._5jpyup span{margin-right:10px;}._5jpyup{color:red;}"`;
 
 exports[`styled should apply styles 1`] = `
 <button
@@ -45,6 +45,17 @@ exports[`styled should create global style 1`] = `null`;
 
 exports[`styled should create global style 2`] = `"body{color:var(--10pagwf_1);}"`;
 
+exports[`styled should deal with specificity 1`] = `
+<h4
+  class="_12w6gee"
+  style="--egcu4c_2:20;--egcu4c_4:20"
+>
+  title
+</h4>
+`;
+
+exports[`styled should deal with specificity 2`] = `"._12w6gee:after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--egcu4c_2);-ms-flex:var(--egcu4c_2);flex:var(--egcu4c_2);}._12w6gee:before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--egcu4c_4);-ms-flex:var(--egcu4c_4);flex:var(--egcu4c_4);}"`;
+
 exports[`styled should process only namespaced attributes 1`] = `
 <button
   class="_13armfq _use--size_m_13armfq"
@@ -53,7 +64,7 @@ exports[`styled should process only namespaced attributes 1`] = `
 </button>
 `;
 
-exports[`styled should process only namespaced attributes 2`] = `"._13armfq{color:red;}._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}"`;
+exports[`styled should process only namespaced attributes 2`] = `"._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}._13armfq{color:red;}"`;
 
 exports[`styled should process only namespaced attributes 3`] = `
 <button
@@ -63,7 +74,7 @@ exports[`styled should process only namespaced attributes 3`] = `
 </button>
 `;
 
-exports[`styled should process only namespaced attributes 4`] = `"._13armfq{color:red;}._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}"`;
+exports[`styled should process only namespaced attributes 4`] = `"._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}._13armfq{color:red;}"`;
 
 exports[`styled should work with as 1`] = `
 <a
@@ -95,7 +106,7 @@ exports[`styled should work with css prop 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);}._1eg04s3{padding:5px 10px;}"`;
+exports[`styled should work with css prop 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
 
 exports[`styled should work with css prop function 1`] = `
 <button
@@ -106,7 +117,7 @@ exports[`styled should work with css prop function 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop function 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);}._1eg04s3{padding:5px 10px;}"`;
+exports[`styled should work with css prop function 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
 
 exports[`styled should work with css prop with tagged literal 1`] = `
 <button
@@ -117,7 +128,7 @@ exports[`styled should work with css prop with tagged literal 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);}._1eg04s3{padding:5px 10px;}"`;
+exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
 
 exports[`styled should work with mixins 1`] = `
 <button
@@ -128,7 +139,7 @@ exports[`styled should work with mixins 1`] = `
 </button>
 `;
 
-exports[`styled should work with mixins 2`] = `"._wopuxb{color:var(--1txtmwt_4);}._wopuxb{padding:10px;}._wopuxb::after{content:'';}._wopuxb::before{content:'';}"`;
+exports[`styled should work with mixins 2`] = `"._wopuxb{padding:10px;color:var(--1txtmwt_4);}._wopuxb::after{content:'';}._wopuxb::before{content:'';}"`;
 
 exports[`styled should work with mixins as strings 1`] = `
 <button
@@ -140,7 +151,7 @@ exports[`styled should work with mixins as strings 1`] = `
 </button>
 `;
 
-exports[`styled should work with mixins as strings 2`] = `"._1g58xwt{padding:10px;}._1g58xwt{-webkit-transform:translateX(var(--11qe8pu_1));-ms-transform:translateX(var(--11qe8pu_1));transform:translateX(var(--11qe8pu_1));margin:var(--11qe8pu_2);}"`;
+exports[`styled should work with mixins as strings 2`] = `"._1g58xwt{padding:10px;-webkit-transform:translateX(var(--11qe8pu_1));-ms-transform:translateX(var(--11qe8pu_1));transform:translateX(var(--11qe8pu_1));margin:var(--11qe8pu_2);}"`;
 
 exports[`styled should work with nested mixins 1`] = `
 <button
