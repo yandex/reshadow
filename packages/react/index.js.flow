@@ -1,0 +1,22 @@
+/* @flow */
+
+/* eslint-disable no-redeclare */
+
+import {createElement, type Node} from 'react';
+
+declare function taggedStyled<S: string[]>(S, ...any[]): <A: Node>(A) => A;
+declare function taggedStyled<A: Node>(A): A;
+
+declare function styled<S: {[key: string]: string}>(
+    ...S[]
+): typeof taggedStyled;
+declare function styled<S: string[]>(S, ...any[]): <A: Node>(A) => A;
+
+declare export function use({...}): {||};
+
+declare export function css<S: string[]>(S, ...any[]): {[key: string]: string};
+declare export function keyframes<S: string[]>(S, ...any[]): string;
+
+declare export var jsx: typeof createElement;
+
+export default styled;
