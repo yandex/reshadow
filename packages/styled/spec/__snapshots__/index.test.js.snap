@@ -130,6 +130,18 @@ exports[`styled should work with mixins 1`] = `
 
 exports[`styled should work with mixins 2`] = `"._wopuxb{color:var(--1txtmwt_4);}._wopuxb{padding:10px;}._wopuxb::after{content:'';}._wopuxb::before{content:'';}"`;
 
+exports[`styled should work with mixins as strings 1`] = `
+<button
+  class="_1g58xwt"
+  style="--11qe8pu_1:-200px;--11qe8pu_2:100px"
+  width="100"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with mixins as strings 2`] = `"._1g58xwt{padding:10px;}._1g58xwt{-webkit-transform:translateX(var(--11qe8pu_1));-ms-transform:translateX(var(--11qe8pu_1));transform:translateX(var(--11qe8pu_1));margin:var(--11qe8pu_2);}"`;
+
 exports[`styled should work with nested mixins 1`] = `
 <button
   class="_4ykgti"

@@ -235,6 +235,28 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should work with mixins as strings', () => {
+        const padding = `
+            padding: 10px;
+        `;
+
+        const dynamicMixin = ({width}) =>
+            css`
+                transform: translateX(${({width}) => `-${2 * width}`}px);
+                margin: ${width}px;
+            `;
+
+        const Button = styled.button`
+            ${padding}
+            ${dynamicMixin}
+        `;
+
+        const wrapper = render(<Button width={100}>click me</Button>);
+
+        expect(wrapper).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should work with nested mixins', () => {
         const complexMixin = css`
             color: ${props => (props.whiteColor ? 'white' : 'black')};

@@ -35,20 +35,39 @@ const __css__ = createCSS({
     onlyNamespaced: true,
 });
 
-const re = /\w+:[\s\r\n]*$/;
+const unitRe = /^[\s\n\r]*(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|%)[\s\n\r]*[,;)]/;
+const mixin = value => {
+    if (value[0] === "'" || value[0] === '"' || value.indexOf(':') === -1) {
+        return value;
+    }
+
+    return __css__([value]);
+};
 
 function css() {
-    const str = arguments[0];
+    const str = [...arguments[0]];
     const functions = {};
+    const functionUnits = {};
     const args = [str];
 
     for (let i = 1, len = arguments.length; i < len; i++) {
         const value = arguments[i];
         args[i] = value;
+        const matchUnit = str[i] && str[i].match(unitRe);
         if (typeof value === 'function') {
             functions[i] = value;
-        } else if (typeof value === 'string' && !re.test(str[i - 1])) {
-            args[i] = __css__([value]);
+        } else if (typeof value === 'string') {
+            args[i] = mixin(value);
+        }
+        if (matchUnit) {
+            if (functions[i]) {
+                functionUnits[i] = matchUnit[1];
+            } else {
+                args[i] += matchUnit[1];
+            }
+
+            const match = matchUnit[0];
+            str[i] = match[match.length - 1] + str[i].slice(match.length);
         }
     }
 
@@ -62,11 +81,15 @@ function css() {
         const nextArgs = Object.create(args);
         for (let index in functions) {
             let value = functions[index](data);
-            if (typeof value === 'string' && !re.test(str[index - 1])) {
-                value = __css__([value]);
+            if (typeof value === 'string') {
+                value = mixin(value);
             }
 
             while (typeof value === 'function') value = value(data);
+
+            if (functionUnits[index]) {
+                value += functionUnits[index];
+            }
 
             nextArgs[index] = value;
         }
@@ -147,11 +170,11 @@ const createStyled = tag => {
                         localMixin = localMixin(props);
                     }
 
-                    localValues.push(
-                        typeof localMixin === 'string'
-                            ? css([localMixin])
-                            : localMixin,
-                    );
+                    if (typeof localMixin === 'string') {
+                        localMixin = css([localMixin]);
+                    }
+
+                    localValues.push(localMixin);
                 }
 
                 const args = [localWrapper];
