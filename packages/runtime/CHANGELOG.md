@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.55](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.54...v0.0.1-alpha.55) (2019-06-02)
+
+
+### Features
+
+* **runtime):** move dynamic units to the runtime ([4134c07](https://github.com/lttb/reshadow/commit/4134c07))
+
+
+
+
+
 ## [0.0.1-alpha.54](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.53...v0.0.1-alpha.54) (2019-06-02)
 
 
