@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.54](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.53...v0.0.1-alpha.54) (2019-06-02)
+
+
+### Features
+
+* **runtime:** use @emotion/stylis, merge mixins into the class to avoid specificity ([e43e634](https://github.com/lttb/reshadow/commit/e43e634))
+
+
+
+
+
 ## [0.0.1-alpha.53](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.52...v0.0.1-alpha.53) (2019-06-02)
 
 
