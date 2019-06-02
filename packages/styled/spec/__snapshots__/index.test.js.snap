@@ -101,14 +101,14 @@ exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{
 
 exports[`styled should work with mixins 1`] = `
 <button
-  class="_zzt5ow"
-  style="--1cxyzr1_2:red"
+  class="_wopuxb"
+  style="--1txtmwt_4:red"
 >
   click me
 </button>
 `;
 
-exports[`styled should work with mixins 2`] = `"._zzt5ow{color:var(--1cxyzr1_2);}._zzt5ow{padding:10px;}"`;
+exports[`styled should work with mixins 2`] = `"._wopuxb{color:var(--1txtmwt_4);}._wopuxb{padding:10px;}._wopuxb::after{content:'';}._wopuxb::before{content:'';}"`;
 
 exports[`styled should work with nested mixins 1`] = `
 <button

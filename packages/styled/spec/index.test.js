@@ -182,8 +182,22 @@ describe('styled', () => {
             padding: 10px;
         `;
 
+        const after = css`
+            &::after {
+                content: '';
+            }
+        `;
+
+        const before = css`
+            ::before {
+                content: '';
+            }
+        `;
+
         const Button = styled.button`
             ${padding}
+            ${after}
+            ${before}
             color: ${props => props.color};
         `;
 

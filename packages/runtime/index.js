@@ -3,6 +3,14 @@ import stringHash from 'string-hash';
 import defaultParse from './parse';
 import obj2css from './obj2css';
 
+const mixinRe = /^[\r\n\s]*(&|::?[\w-]+|[\w-]+:)/;
+const checkMixin = code => {
+    const match = code.match(mixinRe);
+    if (!match) return false;
+    if (match[1] === ':global') return false;
+    return true;
+};
+
 const createCSS = ({
     parse = defaultParse,
     elements = true,
@@ -60,7 +68,7 @@ const createCSS = ({
             }
 
             let code = String.raw({raw: str}, ...values);
-            let isMixin = /^[\r\n\s]*\w+:/.test(code);
+            let isMixin = checkMixin(code);
 
             parsed = parse(code, cacheKey, {
                 elements,
