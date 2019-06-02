@@ -6,7 +6,7 @@ import {
     wrap,
     createCSS,
 } from '@reshadow/runtime';
-import coreStyled, {KEYS, map} from '@reshadow/core';
+import coreStyled, {KEYS, map, use} from '@reshadow/core';
 import tags from '@reshadow/utils/html-tags';
 import {ThemeContext} from 'theming';
 import isReactProp from 'is-react-prop';
@@ -31,6 +31,8 @@ const filterProps = props => {
 const __css__ = createCSS({
     elements: false,
     classes: false,
+    attributes: true,
+    onlyNamespaced: true,
 });
 
 const re = /\w+:[\s\r\n]*$/;
@@ -79,7 +81,9 @@ const reshadowStyled = createReshadowStyled((element, as, props) => {
         props.style = Object.assign({}, style, props.style);
     }
 
-    const result = React.createElement(as, map(element, props));
+    Object.assign(props, map(element, use(props)));
+
+    const result = React.createElement(as, props);
 
     if (style && result.props.style === props.style) {
         return result;

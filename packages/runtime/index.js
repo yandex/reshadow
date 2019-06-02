@@ -16,6 +16,7 @@ const createCSS = ({
     elements = true,
     attributes = true,
     classes = true,
+    onlyNamespaced = false,
 } = {}) => {
     const cache = {};
 
@@ -74,6 +75,7 @@ const createCSS = ({
                 elements,
                 attributes,
                 classes,
+                onlyNamespaced,
                 isMixin,
             });
 

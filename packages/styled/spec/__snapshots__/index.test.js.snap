@@ -45,6 +45,26 @@ exports[`styled should create global style 1`] = `null`;
 
 exports[`styled should create global style 2`] = `"body{color:var(--10pagwf_1);}"`;
 
+exports[`styled should process only namespaced attributes 1`] = `
+<button
+  class="_13armfq _use--size_m_13armfq"
+>
+  click me
+</button>
+`;
+
+exports[`styled should process only namespaced attributes 2`] = `"._13armfq{color:red;}._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}"`;
+
+exports[`styled should process only namespaced attributes 3`] = `
+<button
+  class="_13armfq _use--size_s_13armfq"
+>
+  click me
+</button>
+`;
+
+exports[`styled should process only namespaced attributes 4`] = `"._13armfq{color:red;}._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}"`;
+
 exports[`styled should work with as 1`] = `
 <a
   class="_sna6ae"

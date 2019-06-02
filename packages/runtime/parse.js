@@ -3,7 +3,11 @@ import stylis from 'stylis';
 
 const __root__ = '__root__';
 
-const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
+const parse = (
+    code,
+    hash,
+    {isMixin, elements, attributes, onlyNamespaced, classes},
+) => {
     const options = {
         global: false,
         keyframes: !isMixin,
@@ -73,6 +77,10 @@ const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
 
                         if (name[0] === '|') {
                             name = USE_PREFIX + name.slice(1);
+                        } else if (name.slice(0, 4) === 'use|') {
+                            name = USE_PREFIX + name.slice(4);
+                        } else if (onlyNamespaced) {
+                            return match;
                         }
 
                         if (value) {

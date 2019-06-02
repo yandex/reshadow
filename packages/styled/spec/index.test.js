@@ -52,6 +52,34 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should process only namespaced attributes', () => {
+        const Button = styled.button`
+            color: red;
+
+            &[use|size='m'] {
+                font-size: 14px;
+            }
+
+            &[|size='s'] {
+                font-size: 14px;
+            }
+
+            &[disabled] {
+                opacity: 0.5;
+            }
+        `;
+
+        Button.defaultProps = {size: 'm'};
+
+        const wrapper = shallow(<Button>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+
+        wrapper.setProps({size: 's'});
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should apply styles for Component', () => {
         const Button = styled(props => <button {...props} />)`
             color: red;
