@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/react",
-    "version": "0.0.1-alpha.49",
+    "version": "0.0.1-alpha.52",
     "description": "reshadow react",
     "main": "index.js",
     "repository": {
@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@reshadow/core": "^0.0.1-alpha.49",
-        "@reshadow/runtime": "^0.0.1-alpha.49",
+        "@reshadow/runtime": "^0.0.1-alpha.52",
         "@reshadow/utils": "^0.0.1-alpha.30"
     },
     "optionalDependencies": {
