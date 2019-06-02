@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.56](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.54...v0.0.1-alpha.56) (2019-06-02)
+
+
+### Bug Fixes
+
+* **runtime:** skip only null and undefined values ([1f85fdf](https://github.com/lttb/reshadow/commit/1f85fdf))
+
+
+### Features
+
+* **runtime:** move dynamic units to the runtime ([965ec27](https://github.com/lttb/reshadow/commit/965ec27))
+
+
+
+
+
 ## [0.0.1-alpha.55](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.54...v0.0.1-alpha.55) (2019-06-02)
 
 
