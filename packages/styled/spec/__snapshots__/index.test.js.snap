@@ -143,15 +143,15 @@ exports[`styled should work with mixins 2`] = `"._wopuxb{padding:10px;color:var(
 
 exports[`styled should work with mixins as strings 1`] = `
 <button
-  class="_1g58xwt"
-  style="--11qe8pu_1:-200px;--11qe8pu_2:100px"
+  class="_q0rwq0"
+  style="--auziqq_1:-200px;--auziqq_2:100px"
   width="100"
 >
   click me
 </button>
 `;
 
-exports[`styled should work with mixins as strings 2`] = `"._1g58xwt{padding:10px;-webkit-transform:translateX(var(--11qe8pu_1));-ms-transform:translateX(var(--11qe8pu_1));transform:translateX(var(--11qe8pu_1));margin:var(--11qe8pu_2);}"`;
+exports[`styled should work with mixins as strings 2`] = `"._q0rwq0{padding:10px;-webkit-transform:translateX(var(--auziqq_1));-ms-transform:translateX(var(--auziqq_1));transform:translateX(var(--auziqq_1));margin:var(--auziqq_2);}"`;
 
 exports[`styled should work with nested mixins 1`] = `
 <button

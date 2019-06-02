@@ -11,6 +11,8 @@ const checkMixin = code => {
     return true;
 };
 
+const unitRe = /^[\s\n\r]*(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|%)[\s\n\r]*[,;)]/;
+
 const createCSS = ({
     parse = defaultParse,
     elements = true,
@@ -21,7 +23,7 @@ const createCSS = ({
     const cache = {};
 
     function css() {
-        const str = arguments[0];
+        const str = [...arguments[0]];
         const hash = stringHash(str.join('')).toString(36);
         let mixinsHash = '';
         let parsed;
@@ -30,7 +32,8 @@ const createCSS = ({
         const mixins = {};
 
         for (let i = 1, len = arguments.length; i < len; i++) {
-            const value = arguments[i];
+            let value = arguments[i];
+
             if (!value) {
                 mixins[i] = '';
             } else if (typeof value === 'object') {
@@ -46,6 +49,15 @@ const createCSS = ({
                 }
             } else {
                 const name = '--' + hash + '_' + i;
+
+                const matchUnit = str[i] && str[i].match(unitRe);
+                if (matchUnit) {
+                    const match = matchUnit[0];
+                    value += matchUnit[1];
+                    str[i] =
+                        match[match.length - 1] + str[i].slice(match.length);
+                }
+
                 vars[name] = value;
             }
         }
