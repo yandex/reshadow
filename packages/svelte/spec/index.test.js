@@ -16,6 +16,7 @@ describe('svelte preprocess', () => {
             <script>
                 import styled from 'reshadow'
 
+                export let name = 'name'
                 export let disabled = false
                 export let size = 'm'
                 export let variant = 'action'
@@ -29,7 +30,7 @@ describe('svelte preprocess', () => {
 
             <svelte:body on:click={() => console.log('body click')} />
 
-            <h1>hello world</h1>
+            <h1>hello {name}</h1>
 
             <button :state="pending" :variant={variant} :{size} {disabled}>click me</button>
         `;
