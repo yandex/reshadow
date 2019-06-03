@@ -56,25 +56,36 @@ exports[`styled should deal with specificity 1`] = `
 
 exports[`styled should deal with specificity 2`] = `"._12w6gee:after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--egcu4c_2);-ms-flex:var(--egcu4c_2);flex:var(--egcu4c_2);}._12w6gee:before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--egcu4c_4);-ms-flex:var(--egcu4c_4);flex:var(--egcu4c_4);}"`;
 
-exports[`styled should process only namespaced attributes 1`] = `
+exports[`styled should process namespaced attributes and dont pass them 1`] = `
 <button
-  class="_13armfq _use--size_m_13armfq"
+  class="_zgczid _use--disabled_zgczid _use--size_m_zgczid"
 >
   click me
 </button>
 `;
 
-exports[`styled should process only namespaced attributes 2`] = `"._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}._13armfq{color:red;}"`;
+exports[`styled should process namespaced attributes and dont pass them 2`] = `"._zgczid._use--size_m_zgczid{font-size:14px;}._zgczid._use--size_s_zgczid{font-size:14px;}._zgczid._use--disabled_zgczid{opacity:0.5;}._zgczid{color:red;}"`;
 
-exports[`styled should process only namespaced attributes 3`] = `
+exports[`styled should process namespaced attributes and dont pass them 3`] = `
 <button
-  class="_13armfq _use--size_s_13armfq"
+  class="_zgczid _use--disabled_zgczid _use--size_s_zgczid"
 >
   click me
 </button>
 `;
 
-exports[`styled should process only namespaced attributes 4`] = `"._13armfq._use--size_m_13armfq{font-size:14px;}._13armfq._use--size_s_13armfq{font-size:14px;}._13armfq[disabled]{opacity:0.5;}._13armfq{color:red;}"`;
+exports[`styled should process namespaced attributes and dont pass them 4`] = `"._zgczid._use--size_m_zgczid{font-size:14px;}._zgczid._use--size_s_zgczid{font-size:14px;}._zgczid._use--disabled_zgczid{opacity:0.5;}._zgczid{color:red;}"`;
+
+exports[`styled should process root props 1`] = `
+<button
+  class="_zdj1v2 _disabled_zdj1v2"
+  disabled=""
+>
+  click me
+</button>
+`;
+
+exports[`styled should process root props 2`] = `"._zdj1v2._disabled_zdj1v2 + [disabled] + ._zdj1v2._disabled_zdj1v2{opacity:0.5;}"`;
 
 exports[`styled should work with as 1`] = `
 <a

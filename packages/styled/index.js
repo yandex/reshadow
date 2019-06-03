@@ -6,7 +6,7 @@ import {
     wrap,
     createCSS,
 } from '@reshadow/runtime';
-import coreStyled, {KEYS, map, use} from '@reshadow/core';
+import coreStyled, {KEYS, map} from '@reshadow/core';
 import tags from '@reshadow/utils/html-tags';
 import {ThemeContext} from 'theming';
 import isReactProp from 'is-react-prop';
@@ -88,7 +88,7 @@ const reshadowStyled = createReshadowStyled((element, as, props) => {
         props.style = Object.assign({}, style, props.style);
     }
 
-    Object.assign(props, map(element, use(props)));
+    props = map(element, props);
 
     const result = React.createElement(as, props);
 

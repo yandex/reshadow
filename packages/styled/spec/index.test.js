@@ -52,7 +52,19 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
-    it('should process only namespaced attributes', () => {
+    it('should process root props', () => {
+        const Button = styled.button`
+            &[disabled] + [disabled] + &[disabled] {
+                opacity: 0.5;
+            }
+        `;
+
+        const wrapper = shallow(<Button disabled>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should process namespaced attributes and dont pass them', () => {
         const Button = styled.button`
             color: red;
 
@@ -64,14 +76,14 @@ describe('styled', () => {
                 font-size: 14px;
             }
 
-            &[disabled] {
+            &[|disabled] {
                 opacity: 0.5;
             }
         `;
 
         Button.defaultProps = {size: 'm'};
 
-        const wrapper = shallow(<Button>click me</Button>);
+        const wrapper = shallow(<Button disabled>click me</Button>);
         expect(wrapper.render()).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
 

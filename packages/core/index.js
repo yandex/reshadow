@@ -207,6 +207,7 @@ function map(element) {
     let nextProps = {};
     let cn = appendElement(styled[KEYS.__styles__], element);
     let vars = null;
+    let uses = styled[KEYS.__styles__][KEYS.__use__] || {};
 
     const len = arguments.length;
 
@@ -234,9 +235,22 @@ function map(element) {
 
             const value = currProps[key];
 
-            nextProps[key] = value;
-
             cn = appendModifier(styled[KEYS.__styles__], key, value, cn);
+
+            if (key in uses) {
+                cn = appendModifier(
+                    styled[KEYS.__styles__],
+                    USE_PREFIX + key,
+                    value,
+                    cn,
+                );
+
+                if (uses[key][value]) {
+                    continue;
+                }
+            }
+
+            nextProps[key] = value;
         }
     }
 
