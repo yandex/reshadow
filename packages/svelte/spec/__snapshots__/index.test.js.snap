@@ -5,6 +5,7 @@ Object {
   "code": "<script>import styled, { __extract__, set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 export let disabled = false;
 export let size = 'm';
+export let variant = 'action';
 const styled_c8 = create([(__css__(\`.___h1_rzsno_1 {
     color: var(--c8_0);
 }\`
@@ -24,11 +25,12 @@ $: __styles__ = styled((set([styled_c8], \`--c8_0:\${color};\`), __extract__()))
   <h1 class={styled.styles[\\"__h1\\"]} style={__styles__.$$style}>hello world</h1>
 
   <button {...map(\\"button\\", {
-    disabled: true,
+    disabled: disabled,
     $$style: __styles__.$$style
   }, use({
-    variant: \\"action\\",
-    size: true
+    state: \\"pending\\",
+    variant: variant,
+    size: size
   }))}>click me</button>",
 }
 `;

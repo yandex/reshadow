@@ -78,7 +78,20 @@ const preprocess = options => ({
             })
             .replace(/use:/gms, '__use__:')
             // replace expressions like (:attr) with (__use__:attr)
-            .replace(/([^\]]?[\s\r\n]+):(\w+)/gms, '$1use:$2')
+            .replace(/([^\]]?[\s\r\n]+)(:?\w+)/gms, (match, $1, $2) => {
+                let attr = $1;
+
+                if ($2[0] === ':') {
+                    $2 = $2.slice(1);
+                    attr += `use:${$2}`;
+                } else {
+                    attr += $2;
+                }
+                if ($2.startsWith('__PLACEHOLDER__')) {
+                    return `${attr}=${$2}`;
+                }
+                return attr;
+            })
             // replace expression name=value with name="__QUOTE__value__QUOTE__"
             .replace(/(\w+)=(\w+)/gms, '$1="__QUOTE__$2__QUOTE__"')
             // svelte syntax
@@ -168,10 +181,10 @@ const preprocess = options => ({
          */
         markup = markup
             .replace(/__BRACKET__/g, '{')
-            .replace(/__QUOTE__/g, '')
+            .replace(/"?__QUOTE__"?/g, '')
             .replace(/__use__/g, 'use')
             .replace(/__PLACEHOLDER__\d+__/g, match => {
-                return placeholders[match];
+                return placeholders[match].slice(1, -1);
             })
             .replace(/\{(\w+)\}:/g, '$1:')
             // use __styles__ instead of styled to improve the dynamic values changes reaction

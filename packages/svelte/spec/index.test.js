@@ -18,6 +18,7 @@ describe('svelte preprocess', () => {
 
                 export let disabled = false
                 export let size = 'm'
+                export let variant = 'action'
 
                 styled\`
                     h1 {
@@ -30,7 +31,7 @@ describe('svelte preprocess', () => {
 
             <h1>hello world</h1>
 
-            <button :variant="action" :{size} {disabled}>click me</button>
+            <button :state="pending" :variant={variant} :{size} {disabled}>click me</button>
         `;
 
         expect(code).toMatchSnapshot();
