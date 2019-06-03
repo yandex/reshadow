@@ -9,7 +9,7 @@ exports[`react should apply composed mixins 1`] = `
 </button>
 `;
 
-exports[`react should apply composed mixins 2`] = `".__button_lm3xvp{padding:5px 10px;color:var(--1owzm37_1);margin:10px;}"`;
+exports[`react should apply composed mixins 2`] = `".__button_lm3xvp{color:var(--1owzm37_1);padding:5px 10px;margin:10px;}"`;
 
 exports[`react should apply conditional mixins 1`] = `
 <button

@@ -288,19 +288,29 @@ describe('styled', () => {
             flex: 1;
         `;
 
+        const isBadge = ({color}) =>
+            color &&
+            css`
+                ${style}
+                border-radius: 1rem;
+                background-color: ${({color}) => color};
+            `;
+
         const Wrap = styled(({start, end, max, ...props}) => <h4 {...props} />)`
-            :after {
+            ::after {
                 ${style};
                 flex: ${({start}) => start && '20'};
+                ${isBadge}
             }
-            :before {
+            ::before {
                 ${style};
                 flex: ${({end}) => end && '20'};
+                ${isBadge}
             }
         `;
 
         const wrapper = render(
-            <Wrap start end>
+            <Wrap color="red" start end>
                 title
             </Wrap>,
         );

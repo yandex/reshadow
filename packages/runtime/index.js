@@ -47,6 +47,11 @@ const createCSS = ({
                 mixinsHash += '_' + value[KEYS.__hash__];
                 mixins[i] = value[KEYS.__css__];
 
+                /** replace &{...} for mixins */
+                if (mixins[i].slice(0, 2) === '&{') {
+                    mixins[i] = mixins[i].slice(2, -1);
+                }
+
                 mixinTokens.push(value);
                 Object.assign(mixinUses, value[KEYS.__use__]);
             } else {

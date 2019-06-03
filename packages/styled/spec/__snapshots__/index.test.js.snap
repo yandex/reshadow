@@ -47,14 +47,15 @@ exports[`styled should create global style 2`] = `"body{color:var(--10pagwf_1);}
 
 exports[`styled should deal with specificity 1`] = `
 <h4
-  class="_12w6gee"
-  style="--egcu4c_2:20;--egcu4c_4:20"
+  class="_1or1rjp"
+  color="red"
+  style="--6s77bw_2:20;--2smzwp_2:red;--6s77bw_5:20"
 >
   title
 </h4>
 `;
 
-exports[`styled should deal with specificity 2`] = `"._12w6gee:after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--egcu4c_2);-ms-flex:var(--egcu4c_2);flex:var(--egcu4c_2);}._12w6gee:before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--egcu4c_4);-ms-flex:var(--egcu4c_4);flex:var(--egcu4c_4);}"`;
+exports[`styled should deal with specificity 2`] = `"._1or1rjp::after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--6s77bw_2);-ms-flex:var(--6s77bw_2);flex:var(--6s77bw_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}._1or1rjp::before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--2smzwp_2);-ms-flex:var(--2smzwp_2);flex:var(--2smzwp_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}"`;
 
 exports[`styled should process namespaced attributes and dont pass them 1`] = `
 <button
@@ -117,7 +118,7 @@ exports[`styled should work with css prop 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
+exports[`styled should work with css prop 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);padding:5px 10px;}"`;
 
 exports[`styled should work with css prop function 1`] = `
 <button
@@ -128,7 +129,7 @@ exports[`styled should work with css prop function 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop function 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
+exports[`styled should work with css prop function 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);padding:5px 10px;}"`;
 
 exports[`styled should work with css prop with tagged literal 1`] = `
 <button
@@ -139,7 +140,7 @@ exports[`styled should work with css prop with tagged literal 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{padding:5px 10px;color:var(--1v6vp2v_1);}"`;
+exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);padding:5px 10px;}"`;
 
 exports[`styled should work with dynamic mixins 1`] = `
 <button
@@ -174,7 +175,7 @@ exports[`styled should work with mixins 1`] = `
 </button>
 `;
 
-exports[`styled should work with mixins 2`] = `"._wopuxb{padding:10px;color:var(--1txtmwt_4);}._wopuxb::after{content:'';}._wopuxb::before{content:'';}"`;
+exports[`styled should work with mixins 2`] = `"._wopuxb::after{content:'';}._wopuxb::before{content:'';}._wopuxb{padding:10px;color:var(--1txtmwt_4);}"`;
 
 exports[`styled should work with nested mixins 1`] = `
 <button
