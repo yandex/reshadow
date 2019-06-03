@@ -1,6 +1,6 @@
 {
     "name": "reshadow",
-    "version": "0.0.1-alpha.56",
+    "version": "0.0.1-alpha.57",
     "description": "reshadow",
     "main": "index.js",
     "repository": {
@@ -20,15 +20,15 @@
         "build": "../../build.sh && ./build.sh"
     },
     "dependencies": {
-        "@reshadow/babel": "^0.0.1-alpha.51",
-        "@reshadow/core": "^0.0.1-alpha.49",
+        "@reshadow/babel": "^0.0.1-alpha.57",
+        "@reshadow/core": "^0.0.1-alpha.57",
         "@reshadow/eslint": "^0.0.1-alpha.30",
-        "@reshadow/macro": "^0.0.1-alpha.51",
+        "@reshadow/macro": "^0.0.1-alpha.57",
         "@reshadow/postcss": "^0.0.1-alpha.30",
         "@reshadow/prettier": "^0.0.1-alpha.30",
-        "@reshadow/react": "^0.0.1-alpha.56",
-        "@reshadow/svelte": "^0.0.1-alpha.51",
-        "@reshadow/vue": "^0.0.1-alpha.49",
+        "@reshadow/react": "^0.0.1-alpha.57",
+        "@reshadow/svelte": "^0.0.1-alpha.57",
+        "@reshadow/vue": "^0.0.1-alpha.57",
         "@reshadow/webpack": "^0.0.1-alpha.49"
     }
 }
