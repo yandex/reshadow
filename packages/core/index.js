@@ -248,11 +248,25 @@ function map(element) {
 
             cn = appendModifier(currStyles, key, value, cn);
 
-            if (key + '_' + true in uses || key + '_' + value) {
-                cn = appendModifier(currStyles, USE_PREFIX + key, value, cn);
+            const valueType = typeof value;
 
-                if (uses[key + '_' + value]) {
-                    continue;
+            if (
+                valueType === 'string' ||
+                valueType === 'boolean' ||
+                valueType === 'number'
+            ) {
+                const useKey = key + '_' + value;
+                if (key + '_' + true in uses || useKey in uses) {
+                    cn = appendModifier(
+                        currStyles,
+                        USE_PREFIX + key,
+                        value,
+                        cn,
+                    );
+
+                    if (uses[useKey]) {
+                        continue;
+                    }
                 }
             }
 
