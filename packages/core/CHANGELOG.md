@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.62](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.61...v0.0.1-alpha.62) (2019-06-03)
+
+
+### Bug Fixes
+
+* **core:** fix modifier key check ([c10b2bc](https://github.com/lttb/reshadow/commit/c10b2bc))
+
+
+
+
+
 ## [0.0.1-alpha.57](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.56...v0.0.1-alpha.57) (2019-06-03)
 
 
