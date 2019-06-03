@@ -81,7 +81,7 @@ function css() {
     };
 }
 
-const reshadowStyled = createReshadowStyled((element, as, props) => {
+const reshadowStyled = createReshadowStyled((element, as, props, filtered) => {
     let style = coreStyled[KEYS.__style__];
 
     if (style) {
@@ -89,6 +89,12 @@ const reshadowStyled = createReshadowStyled((element, as, props) => {
     }
 
     props = map(element, props);
+
+    if (filtered) {
+        for (let i = 0; i < filtered.length; i++) {
+            delete props[filtered[i]];
+        }
+    }
 
     const result = React.createElement(as, props);
 
@@ -106,6 +112,12 @@ const createStyled = tag => {
         const isComponent = typeof tag !== 'string';
         const element = isComponent ? getDisplayName(tag) : tag;
         const elementClassName = '.__root__';
+
+        if (typeof strs === 'function') {
+            values = [strs];
+            strs = ['', ''];
+        }
+
         const wrapper = (options.wrap || wrap)(elementClassName, [...strs]);
 
         class StyledComponent extends React.Component {
@@ -165,18 +177,13 @@ const createStyled = tag => {
 
                 args.push.apply(args, localValues);
 
-                if (!isComponent) {
-                    for (let i = 0; i < filtered.length; i++) {
-                        delete props[filtered[i]];
-                    }
-                }
-
                 props.ref = $$ref;
 
                 return (options.styled || reshadowStyled).apply(null, args)(
                     'root__',
                     as,
                     props,
+                    !isComponent && filtered,
                 );
             }
 
@@ -223,7 +230,7 @@ tags.forEach(tag => {
 });
 
 export * from 'theming';
-export {createGlobalStyle} from './global';
+export {createGlobalStyle} from '@reshadow/styled/global';
 
 export function isStyledComponent(target) {
     return target && typeof target.styledComponentId === 'string';

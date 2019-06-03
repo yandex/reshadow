@@ -229,3 +229,14 @@ exports[`styled should work with theme 1`] = `
 `;
 
 exports[`styled should work with theme 2`] = `"._sna6ae{color:var(--1v6vp2v_1);}"`;
+
+exports[`styled supports function interface 1`] = `
+<button
+  class="_51xj47 _use--color_1ntyugu"
+  style="--ajx7i6_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled supports function interface 2`] = `"._51xj47._use--color_1ntyugu{color:var(--ajx7i6_1);}"`;

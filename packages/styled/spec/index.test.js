@@ -344,4 +344,18 @@ describe('styled', () => {
         expect(wrapper.render()).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
     });
+
+    it('supports function interface', () => {
+        const Button = styled.button(
+            props => css`
+                &[|color] {
+                    color: ${props.color};
+                }
+            `,
+        );
+
+        const wrapper = shallow(<Button color="red">click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
 });

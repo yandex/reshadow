@@ -30,7 +30,8 @@ const create = args => {
     const len = args.length;
     let newStyle = {};
     let id = '';
-    const vars = {};
+    let vars = null;
+    let uses = null;
 
     for (let i = 0; i < len; i++) {
         let style = args[i];
@@ -47,7 +48,11 @@ const create = args => {
         id += '_' + style[KEYS.__id__];
 
         if (style[KEYS.__style__]) {
-            Object.assign(vars, style[KEYS.__style__]);
+            vars = Object.assign(vars || {}, style[KEYS.__style__]);
+        }
+
+        if (style[KEYS.__use__]) {
+            uses = Object.assign(uses || {}, style[KEYS.__use__]);
         }
 
         if (style[KEYS.__store__][id]) {
@@ -68,7 +73,12 @@ const create = args => {
         newStyle[KEYS.__store__] = {
             ['_' + style[KEYS.__id__]]: newStyle,
         };
+    }
+
+    if (vars || use) {
+        newStyle = Object.create(newStyle);
         newStyle[KEYS.__style__] = vars;
+        newStyle[KEYS.__use__] = uses;
     }
 
     return newStyle;
@@ -204,10 +214,11 @@ const appendModifier = (styles, key, value, cn = '') => {
 };
 
 function map(element) {
+    const currStyles = styled[KEYS.__styles__];
     let nextProps = {};
-    let cn = appendElement(styled[KEYS.__styles__], element);
+    let cn = appendElement(currStyles, element);
     let vars = null;
-    let uses = styled[KEYS.__styles__][KEYS.__use__] || {};
+    let uses = currStyles[KEYS.__use__] || {};
 
     const len = arguments.length;
 
@@ -235,17 +246,12 @@ function map(element) {
 
             const value = currProps[key];
 
-            cn = appendModifier(styled[KEYS.__styles__], key, value, cn);
+            cn = appendModifier(currStyles, key, value, cn);
 
-            if (key in uses) {
-                cn = appendModifier(
-                    styled[KEYS.__styles__],
-                    USE_PREFIX + key,
-                    value,
-                    cn,
-                );
+            if (key + '_' + true in uses || key + '_' + value) {
+                cn = appendModifier(currStyles, USE_PREFIX + key, value, cn);
 
-                if (uses[key][value]) {
+                if (uses[key + '_' + value]) {
                     continue;
                 }
             }
@@ -257,12 +263,7 @@ function map(element) {
     if (useProps) {
         for (let key in useProps) {
             const value = useProps[key];
-            cn = appendModifier(
-                styled[KEYS.__styles__],
-                USE_PREFIX + key,
-                value,
-                cn,
-            );
+            cn = appendModifier(currStyles, USE_PREFIX + key, value, cn);
         }
     }
 

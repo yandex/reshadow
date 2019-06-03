@@ -129,9 +129,9 @@ const parse = (
                         }
 
                         if (isModifier) {
-                            tokens[KEYS.__use__][name] =
-                                tokens[KEYS.__use__][name] || {};
-                            tokens[KEYS.__use__][name][value || true] = true;
+                            tokens[KEYS.__use__][
+                                name + '_' + (value || true)
+                            ] = true;
                             name = USE_PREFIX + name;
                         }
 

@@ -30,6 +30,8 @@ const createCSS = ({
 
         const vars = {};
         const mixins = {};
+        const mixinTokens = [];
+        const mixinUses = {};
 
         for (let i = 1, len = arguments.length; i < len; i++) {
             let value = arguments[i];
@@ -37,16 +39,16 @@ const createCSS = ({
             if (value === null || value === undefined) {
                 mixins[i] = '';
             } else if (typeof value === 'object') {
-                if (KEYS.__style__ in value) {
-                    Object.assign(vars, value[KEYS.__style__]);
-                    mixinsHash += '_' + value[KEYS.__hash__];
-                    mixins[i] = value[KEYS.__css__];
-                } else {
-                    const result = css([obj2css(value)]);
-                    Object.assign(vars, result[KEYS.__style__]);
-                    mixinsHash += '_' + result[KEYS.__hash__];
-                    mixins[i] = result[KEYS.__css__];
+                if (!(KEYS.__style__ in value)) {
+                    value = css([obj2css(value)]);
                 }
+
+                Object.assign(vars, value[KEYS.__style__]);
+                mixinsHash += '_' + value[KEYS.__hash__];
+                mixins[i] = value[KEYS.__css__];
+
+                mixinTokens.push(value);
+                Object.assign(mixinUses, value[KEYS.__use__]);
             } else {
                 const name = '--' + hash + '_' + i;
 
@@ -94,6 +96,8 @@ const createCSS = ({
             if (!isMixin) {
                 __css__(parsed.css, cacheKey);
             }
+
+            parsed.tokens = create([parsed.tokens].concat(mixinTokens));
 
             parsed.tokens[KEYS.__hash__] = cacheKey;
             parsed.tokens[KEYS.__css__] = parsed.css;
