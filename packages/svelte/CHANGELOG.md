@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.61](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.60...v0.0.1-alpha.61) (2019-06-03)
+
+
+### Bug Fixes
+
+* **svelte:** use @reshadow/core for the runtime ([703668d](https://github.com/lttb/reshadow/commit/703668d))
+
+
+
+
+
 ## [0.0.1-alpha.59](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.58...v0.0.1-alpha.59) (2019-06-03)
 
 
