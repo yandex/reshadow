@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.60](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.59...v0.0.1-alpha.60) (2019-06-03)
+
+
+### Bug Fixes
+
+* **runtime:** fix mixins apply order ([1584d66](https://github.com/lttb/reshadow/commit/1584d66))
+
+
+
+
+
 ## [0.0.1-alpha.59](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.58...v0.0.1-alpha.59) (2019-06-03)
 
 
