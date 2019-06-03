@@ -55,7 +55,7 @@ const preprocess = options => ({
          */
         if (!reshadowImport) {
             if (style.attributes.includes('reshadow')) {
-                script.content += `import __styled__ from "reshadow";__styled__\`${style.content.replace(
+                script.content += `import __styled__ from "@reshadow/core";__styled__\`${style.content.replace(
                     /val\((\w+)\)/gms,
                     // eslint-disable-next-line
                     '${$1}',
