@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.59](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.58...v0.0.1-alpha.59) (2019-06-03)
+
+**Note:** Version bump only for package svelte-hello-world
+
+
+
+
+
 ## [0.0.1-alpha.58](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.57...v0.0.1-alpha.58) (2019-06-03)
 
 **Note:** Version bump only for package svelte-hello-world
