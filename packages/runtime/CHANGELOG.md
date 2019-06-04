@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.64](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.63...v0.0.1-alpha.64) (2019-06-04)
+
+
+### Bug Fixes
+
+* **runtime:** fix dynamic vars setting ([abe3f12](https://github.com/lttb/reshadow/commit/abe3f12))
+
+
+
+
+
 ## [0.0.1-alpha.63](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.62...v0.0.1-alpha.63) (2019-06-04)
 
 **Note:** Version bump only for package @reshadow/runtime
