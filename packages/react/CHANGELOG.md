@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.63](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.62...v0.0.1-alpha.63) (2019-06-04)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
+## [0.0.1-alpha.62](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.61...v0.0.1-alpha.62) (2019-06-03)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
+## [0.0.1-alpha.60](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.59...v0.0.1-alpha.60) (2019-06-03)
+
+
+### Bug Fixes
+
+* **runtime:** fix mixins apply order ([1584d66](https://github.com/lttb/reshadow/commit/1584d66))
+
+
+
+
+
+## [0.0.1-alpha.57](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.56...v0.0.1-alpha.57) (2019-06-03)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
+## [0.0.1-alpha.56](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.54...v0.0.1-alpha.56) (2019-06-02)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
+## [0.0.1-alpha.55](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.54...v0.0.1-alpha.55) (2019-06-02)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
+## [0.0.1-alpha.54](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.53...v0.0.1-alpha.54) (2019-06-02)
+
+
+### Features
+
+* **runtime:** use @emotion/stylis, merge mixins into the class to avoid specificity ([e43e634](https://github.com/lttb/reshadow/commit/e43e634))
+
+
+
+
+
+## [0.0.1-alpha.53](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.52...v0.0.1-alpha.53) (2019-06-02)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
+## [0.0.1-alpha.52](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.51...v0.0.1-alpha.52) (2019-06-02)
+
+**Note:** Version bump only for package @reshadow/react
+
+
+
+
+
 ## [0.0.1-alpha.49](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.48...v0.0.1-alpha.49) (2019-05-31)
 
 **Note:** Version bump only for package @reshadow/react

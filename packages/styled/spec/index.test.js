@@ -52,6 +52,46 @@ describe('styled', () => {
         expect(getStyles()).toMatchSnapshot();
     });
 
+    it('should process root props', () => {
+        const Button = styled.button`
+            &[disabled] + [disabled] + &[disabled] {
+                opacity: 0.5;
+            }
+        `;
+
+        const wrapper = shallow(<Button disabled>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should process namespaced attributes and dont pass them', () => {
+        const Button = styled.button`
+            color: red;
+
+            &[use|size='m'] {
+                font-size: 14px;
+            }
+
+            &[|size='s'] {
+                font-size: 14px;
+            }
+
+            &[|disabled] {
+                opacity: 0.5;
+            }
+        `;
+
+        Button.defaultProps = {size: 'm'};
+
+        const wrapper = shallow(<Button disabled>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+
+        wrapper.setProps({size: 's'});
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
     it('should apply styles for Component', () => {
         const Button = styled(props => <button {...props} />)`
             color: red;
@@ -182,12 +222,98 @@ describe('styled', () => {
             padding: 10px;
         `;
 
+        const after = css`
+            &::after {
+                content: '';
+            }
+        `;
+
+        const before = css`
+            ::before {
+                content: '';
+            }
+        `;
+
         const Button = styled.button`
             ${padding}
+            ${after}
+            ${before}
             color: ${props => props.color};
         `;
 
         const wrapper = render(<Button color="red">click me</Button>);
+
+        expect(wrapper).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should work with string mixins', () => {
+        const padding = `
+            padding: 10px;
+        `;
+
+        const Button = styled.button`
+            ${padding}
+        `;
+
+        const wrapper = render(<Button width={100}>click me</Button>);
+
+        expect(wrapper).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should work with dynamic mixins', () => {
+        const dynamicMixin = ({width}) =>
+            css`
+                transform: translateX(${({width}) => `-${2 * width}`}px);
+                margin: ${width}px;
+            `;
+
+        const Button = styled.button`
+            ${dynamicMixin}
+        `;
+
+        const wrapper = shallow(<Button width={0}>click me</Button>);
+
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+
+        wrapper.setProps({width: 100});
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should deal with specificity', () => {
+        const style = css`
+            flex: 1;
+        `;
+
+        const isBadge = ({color}) =>
+            color &&
+            css`
+                ${style}
+                border-radius: 1rem;
+                background-color: ${({color}) => color};
+            `;
+
+        const Wrap = styled(({start, end, max, ...props}) => <h4 {...props} />)`
+            ::after {
+                ${style};
+                flex: ${({start}) => start && '20'};
+                ${isBadge}
+            }
+            ::before {
+                ${style};
+                flex: ${({end}) => end && '20'};
+                ${isBadge}
+            }
+        `;
+
+        const wrapper = render(
+            <Wrap color="red" start end>
+                title
+            </Wrap>,
+        );
 
         expect(wrapper).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
@@ -225,6 +351,20 @@ describe('styled', () => {
 
         const wrapper = shallow(<GlobalStyle whiteColor />);
 
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('supports function interface', () => {
+        const Button = styled.button(
+            props => css`
+                &[|color] {
+                    color: ${props.color};
+                }
+            `,
+        );
+
+        const wrapper = shallow(<Button color="red">click me</Button>);
         expect(wrapper.render()).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
     });

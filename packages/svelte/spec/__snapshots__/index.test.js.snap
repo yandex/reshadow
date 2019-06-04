@@ -2,9 +2,12 @@
 
 exports[`svelte preprocess should transform the code 1`] = `
 Object {
-  "code": "<script>import styled, { __extract__, set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
+  "code": "<script>import {__init__ as __reshadow__} from '@reshadow/svelte';
+import {beforeUpdate as __bu__, afterUpdate as __au__} from 'svelte';import styled, { __extract__, set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
+export let name = 'name';
 export let disabled = false;
 export let size = 'm';
+export let variant = 'action';
 const styled_c8 = create([(__css__(\`.___h1_rzsno_1 {
     color: var(--c8_0);
 }\`
@@ -13,22 +16,23 @@ const styled_c8 = create([(__css__(\`.___h1_rzsno_1 {
   \\"__h1\\": \`___h1_rzsno_1\`
 })]);
 $: __styles__ = styled((set([styled_c8], \`--c8_0:\${color};\`), __extract__()));
-;require('@reshadow/svelte').__init__(require('svelte'), () => __styles__, () => {
-                styled = styled;
-                map = map;
-            });
-            </script><style></style>
+;const __getStyles__ = () => __styles__;
+__reshadow__({beforeUpdate: __bu__, afterUpdate: __au__}, __getStyles__, () => {
+    styled = styled;
+    map = map;
+});</script>
 
   <svelte:body class={styled.styles[\\"__svelte:body\\"]} style={__styles__.$$style} on:click={() => console.log('body click')} />
 
-  <h1 class={styled.styles[\\"__h1\\"]} style={__styles__.$$style}>hello world</h1>
+  <h1 class={styled.styles[\\"__h1\\"]} style={__styles__.$$style}>hello {name}</h1>
 
   <button {...map(\\"button\\", {
-    disabled: true,
+    disabled: disabled,
     $$style: __styles__.$$style
   }, use({
-    variant: \\"action\\",
-    size: true
+    state: \\"pending\\",
+    variant: variant,
+    size: size
   }))}>click me</button>",
 }
 `;

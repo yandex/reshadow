@@ -1,21 +1,55 @@
-import {USE_PREFIX} from '@reshadow/core';
-import stylis from 'stylis';
+import {USE_PREFIX, KEYS} from '@reshadow/core';
+import Stylis from '@emotion/stylis';
 
 const __root__ = '__root__';
 
-const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
+const stylis = new Stylis();
+
+const parse = (
+    code,
+    hash,
+    {isMixin, elements, attributes, onlyNamespaced, classes},
+) => {
     const options = {
-        global: false,
-        keyframes: !isMixin,
         prefix: !isMixin,
     };
 
     stylis.set(options);
 
-    const tokens = {};
+    const tokens = Object.create(null);
+    tokens[KEYS.__use__] = {};
     const postfix = '_' + hash;
 
-    stylis.use(null)((context, content, selectors, parent, line, column) => {
+    const rules = Object.create(null);
+
+    let skip = false;
+
+    stylis.use(null)(function(
+        context,
+        content,
+        selectors,
+        parent,
+        line,
+        column,
+    ) {
+        if (skip) return;
+
+        if (context === -2) {
+            skip = true;
+
+            let result = '';
+            for (let selector in rules) {
+                result += selector + '{' + rules[selector] + '}';
+            }
+            return result;
+        }
+
+        if (context === 3) {
+            for (let i = 0; i < selectors.length; i++) {
+                rules[selectors[i]] = content;
+            }
+        }
+
         if (context !== 2) {
             return;
         }
@@ -31,24 +65,36 @@ const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
                 continue;
             }
 
+            let isRoot = false;
+
             selectors[i] = selector.replace(
-                /:global\((.*?)\)|\[(.*?)\]|([#.:]?\w+)/g,
-                (match, $0, $1, $2) => {
+                /:global\((.*?)\)|\[(.*?)\]|([#.:]?\w+)|([^\w])/g,
+                (match, $0, $1, $2, $3) => {
                     let className = '';
 
                     if ($0) {
                         return $0;
                     }
 
+                    if ($3) {
+                        isRoot = false;
+                        return $3;
+                    }
+
                     if ($2) {
-                        if ($2[0] === ':' || $2[0] === '#') {
+                        if ($2[0] === '#') {
+                            isRoot = false;
+                            return $2;
+                        }
+
+                        if ($2[0] === ':') {
                             return $2;
                         }
 
                         if ($2[0] === '.') {
                             className = $2.slice(1);
 
-                            let isRoot = false;
+                            isRoot = false;
                             className = className.replace(__root__, () => {
                                 isRoot = true;
                                 return postfix;
@@ -69,10 +115,24 @@ const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
                     } else if ($1 && attributes) {
                         const attr = $1.replace(/[\s\n\r'"]/g, '').split('=');
                         let name = attr[0];
+                        let isModifier = false;
                         const value = attr[1];
 
                         if (name[0] === '|') {
-                            name = USE_PREFIX + name.slice(1);
+                            name = name.slice(1);
+                            isModifier = true;
+                        } else if (name.slice(0, 4) === 'use|') {
+                            name = name.slice(4);
+                            isModifier = true;
+                        } else if (onlyNamespaced && !isRoot) {
+                            return match;
+                        }
+
+                        if (isModifier) {
+                            tokens[KEYS.__use__][
+                                name + '_' + (value || true)
+                            ] = true;
+                            name = USE_PREFIX + name;
                         }
 
                         if (value) {
@@ -88,6 +148,9 @@ const parse = (code, hash, {isMixin, elements, attributes, classes}) => {
                     return '.' + tokens[className];
                 },
             );
+
+            rules[selectors[i]] = rules[selectors[i]] || '';
+            rules[selectors[i]] += content;
         }
     });
 

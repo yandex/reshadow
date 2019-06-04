@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/babel",
-    "version": "0.0.1-alpha.51",
+    "version": "0.0.1-alpha.63",
     "description": "reshadow babel plugin",
     "main": "index.js",
     "repository": {
@@ -24,7 +24,7 @@
         "@babel/plugin-syntax-jsx": "^7.2.0",
         "@babel/template": "^7.2.2",
         "@babel/types": "^7.3.0",
-        "@reshadow/core": "^0.0.1-alpha.49",
+        "@reshadow/core": "^0.0.1-alpha.63",
         "@reshadow/postcss": "^0.0.1-alpha.30",
         "@reshadow/utils": "^0.0.1-alpha.30",
         "common-tags": "1.8.0",

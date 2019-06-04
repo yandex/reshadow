@@ -3,40 +3,68 @@ import stringHash from 'string-hash';
 import defaultParse from './parse';
 import obj2css from './obj2css';
 
+const mixinRe = /^[\r\n\s]*(&|::?[\w-]+|[\w-]+:)/;
+const checkMixin = code => {
+    const match = code.match(mixinRe);
+    if (!match) return false;
+    if (match[1] === ':global') return false;
+    return true;
+};
+
+const unitRe = /^[\s\n\r]*(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|%)[\s\n\r]*[,;)]/;
+
 const createCSS = ({
     parse = defaultParse,
     elements = true,
     attributes = true,
     classes = true,
+    onlyNamespaced = false,
 } = {}) => {
     const cache = {};
 
     function css() {
-        const str = arguments[0];
+        const str = [...arguments[0]];
         const hash = stringHash(str.join('')).toString(36);
         let mixinsHash = '';
         let parsed;
 
         const vars = {};
         const mixins = {};
+        const mixinTokens = [];
+        const mixinUses = {};
 
         for (let i = 1, len = arguments.length; i < len; i++) {
-            const value = arguments[i];
-            if (!value) {
+            let value = arguments[i];
+
+            if (value === null || value === undefined) {
                 mixins[i] = '';
             } else if (typeof value === 'object') {
-                if (KEYS.__style__ in value) {
-                    Object.assign(vars, value[KEYS.__style__]);
-                    mixinsHash += '_' + value[KEYS.__hash__];
-                    mixins[i] = value[KEYS.__css__];
-                } else {
-                    const result = css([obj2css(value)]);
-                    Object.assign(vars, result[KEYS.__style__]);
-                    mixinsHash += '_' + result[KEYS.__hash__];
-                    mixins[i] = result[KEYS.__css__];
+                if (!(KEYS.__style__ in value)) {
+                    value = css([obj2css(value)]);
                 }
+
+                Object.assign(vars, value[KEYS.__style__]);
+                mixinsHash += '_' + value[KEYS.__hash__];
+                mixins[i] = value[KEYS.__css__];
+
+                /** replace &{...} for mixins */
+                if (mixins[i].slice(0, 2) === '&{') {
+                    mixins[i] = mixins[i].slice(2, -1);
+                }
+
+                mixinTokens.push(value);
+                Object.assign(mixinUses, value[KEYS.__use__]);
             } else {
                 const name = '--' + hash + '_' + i;
+
+                const matchUnit = str[i] && str[i].match(unitRe);
+                if (matchUnit) {
+                    const match = matchUnit[0];
+                    value += matchUnit[1];
+                    str[i] =
+                        match[match.length - 1] + str[i].slice(match.length);
+                }
+
                 vars[name] = value;
             }
         }
@@ -60,18 +88,21 @@ const createCSS = ({
             }
 
             let code = String.raw({raw: str}, ...values);
-            let isMixin = /^[\r\n\s]*\w+:/.test(code);
+            let isMixin = checkMixin(code);
 
             parsed = parse(code, cacheKey, {
                 elements,
                 attributes,
                 classes,
+                onlyNamespaced,
                 isMixin,
             });
 
             if (!isMixin) {
                 __css__(parsed.css, cacheKey);
             }
+
+            parsed.tokens = create([parsed.tokens].concat(mixinTokens));
 
             parsed.tokens[KEYS.__hash__] = cacheKey;
             parsed.tokens[KEYS.__css__] = parsed.css;

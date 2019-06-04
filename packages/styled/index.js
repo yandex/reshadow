@@ -31,22 +31,31 @@ const filterProps = props => {
 const __css__ = createCSS({
     elements: false,
     classes: false,
+    attributes: true,
+    onlyNamespaced: true,
 });
 
-const re = /\w+:[\s\r\n]*$/;
+const mixin = value => {
+    if (value[0] === "'" || value[0] === '"' || value.indexOf(':') === -1) {
+        return value;
+    }
+
+    return __css__([value]);
+};
 
 function css() {
-    const str = arguments[0];
+    const str = [...arguments[0]];
     const functions = {};
     const args = [str];
 
     for (let i = 1, len = arguments.length; i < len; i++) {
         const value = arguments[i];
         args[i] = value;
+
         if (typeof value === 'function') {
             functions[i] = value;
-        } else if (typeof value === 'string' && !re.test(str[i - 1])) {
-            args[i] = __css__([value]);
+        } else if (typeof value === 'string') {
+            args[i] = mixin(value);
         }
     }
 
@@ -60,8 +69,8 @@ function css() {
         const nextArgs = Object.create(args);
         for (let index in functions) {
             let value = functions[index](data);
-            if (typeof value === 'string' && !re.test(str[index - 1])) {
-                value = __css__([value]);
+            if (typeof value === 'string') {
+                value = mixin(value);
             }
 
             while (typeof value === 'function') value = value(data);
@@ -72,14 +81,22 @@ function css() {
     };
 }
 
-const reshadowStyled = createReshadowStyled((element, as, props) => {
+const reshadowStyled = createReshadowStyled((element, as, props, filtered) => {
     let style = coreStyled[KEYS.__style__];
 
     if (style) {
         props.style = Object.assign({}, style, props.style);
     }
 
-    const result = React.createElement(as, map(element, props));
+    props = map(element, props);
+
+    if (filtered) {
+        for (let i = 0; i < filtered.length; i++) {
+            delete props[filtered[i]];
+        }
+    }
+
+    const result = React.createElement(as, props);
 
     if (style && result.props.style === props.style) {
         return result;
@@ -95,6 +112,12 @@ const createStyled = tag => {
         const isComponent = typeof tag !== 'string';
         const element = isComponent ? getDisplayName(tag) : tag;
         const elementClassName = '.__root__';
+
+        if (typeof strs === 'function') {
+            values = [strs];
+            strs = ['', ''];
+        }
+
         const wrapper = (options.wrap || wrap)(elementClassName, [...strs]);
 
         class StyledComponent extends React.Component {
@@ -143,22 +166,16 @@ const createStyled = tag => {
                         localMixin = localMixin(props);
                     }
 
-                    localValues.push(
-                        typeof localMixin === 'string'
-                            ? css([localMixin])
-                            : localMixin,
-                    );
+                    if (typeof localMixin === 'string') {
+                        localMixin = css([localMixin]);
+                    }
+
+                    localValues.push(localMixin);
                 }
 
                 const args = [localWrapper];
 
                 args.push.apply(args, localValues);
-
-                if (!isComponent) {
-                    for (let i = 0; i < filtered.length; i++) {
-                        delete props[filtered[i]];
-                    }
-                }
 
                 props.ref = $$ref;
 
@@ -166,6 +183,7 @@ const createStyled = tag => {
                     'root__',
                     as,
                     props,
+                    !isComponent && filtered,
                 );
             }
 
@@ -212,7 +230,7 @@ tags.forEach(tag => {
 });
 
 export * from 'theming';
-export {createGlobalStyle} from './global';
+export {createGlobalStyle} from '@reshadow/styled/global';
 
 export function isStyledComponent(target) {
     return target && typeof target.styledComponentId === 'string';

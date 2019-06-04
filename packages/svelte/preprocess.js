@@ -6,6 +6,8 @@ const {parse} = require('@babel/parser');
 const {KEYS} = require('@reshadow/core');
 const reshadow = require('@reshadow/babel');
 
+const {stripIndent} = require('common-tags');
+
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
  */
@@ -55,7 +57,9 @@ const preprocess = options => ({
          */
         if (!reshadowImport) {
             if (style.attributes.includes('reshadow')) {
-                script.content += `import __styled__ from "reshadow";__styled__\`${style.content.replace(
+                script.content =
+                    'import __styled__ from "reshadow";\n' + script.content;
+                script.content += `;__styled__\`${style.content.replace(
                     /val\((\w+)\)/gms,
                     // eslint-disable-next-line
                     '${$1}',
@@ -70,6 +74,7 @@ const preprocess = options => ({
         let index = 0;
 
         code = code
+            .replace(/([^\]]?[\s\r\n]+):\{(\w+)\}/gms, '$1:$2={$2}')
             // replace {...} to __PLACEHOLDER__<id>__
             .replace(/(\{\w+\})/gms, (match, $1) => {
                 const id = `__PLACEHOLDER__${index++}__`;
@@ -148,6 +153,12 @@ const preprocess = options => ({
             `$: __styles__ = ${reshadowImport}(`,
         );
 
+        code =
+            stripIndent`
+                import {__init__ as __reshadow__} from '@reshadow/svelte';
+                import {beforeUpdate as __bu__, afterUpdate as __au__} from 'svelte';\n
+            ` + code;
+
         /**
          * Invalidate the map and styled function on styles update
          *
@@ -155,10 +166,12 @@ const preprocess = options => ({
          */
         code =
             code +
-            `;require('@reshadow/svelte').__init__(require('svelte'), () => __styles__, () => {
-                ${reshadowImport} = ${reshadowImport};
-                ${imports.map} = ${imports.map};
-            });
+            stripIndent`
+                ;const __getStyles__ = () => __styles__;
+                __reshadow__({beforeUpdate: __bu__, afterUpdate: __au__}, __getStyles__, () => {
+                    ${reshadowImport} = ${reshadowImport};
+                    ${imports.map ? `${imports.map} = ${imports.map};` : ''}
+                });
             `;
 
         let [, markup] = chunks[1].match(/<>(.*?)<\/>/ms);
@@ -168,12 +181,18 @@ const preprocess = options => ({
          */
         markup = markup
             .replace(/__BRACKET__/g, '{')
-            .replace(/__QUOTE__/g, '')
             .replace(/__use__/g, 'use')
             .replace(/__PLACEHOLDER__\d+__/g, match => {
                 return placeholders[match];
             })
-            .replace(/\{(\w+)\}:/g, '$1:')
+            .replace(/"?}?__QUOTE__{?"?/g, '')
+            .replace(/\{(\w+)\}:(\s*true)?/g, (match, $1, $2) => {
+                if ($2) {
+                    return `${$1}: ${$1}`;
+                }
+
+                return `${$1}:`;
+            })
             // use __styles__ instead of styled to improve the dynamic values changes reaction
             .replace(
                 new RegExp(
@@ -183,9 +202,12 @@ const preprocess = options => ({
                 `__styles__.$${KEYS.__style__}`,
             );
 
-        const result = `<script${script.attributes}>${code}</script><style${
-            style.attributes
-        }>${style.content}</style>${markup}`;
+        let result = `<script${script.attributes}>${code}</script>`;
+        if (style.content) {
+            result += `<style${style.attributes}>${style.content}</style>`;
+        }
+
+        result += markup;
 
         return {code: result};
     },

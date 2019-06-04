@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.63](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.62...v0.0.1-alpha.63) (2019-06-04)
+
+
+### Bug Fixes
+
+* **svelte:** fix svelte preprocess ([5e60204](https://github.com/lttb/reshadow/commit/5e60204))
+
+
+
+
+
+## [0.0.1-alpha.62](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.61...v0.0.1-alpha.62) (2019-06-03)
+
+
+### Bug Fixes
+
+* **core:** fix modifier key check ([c10b2bc](https://github.com/lttb/reshadow/commit/c10b2bc))
+
+
+
+
+
+## [0.0.1-alpha.57](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.56...v0.0.1-alpha.57) (2019-06-03)
+
+
+### Features
+
+* **runtime:** support nested elements in mixins and styled functions ([1a2ee38](https://github.com/lttb/reshadow/commit/1a2ee38))
+* **styled:** filter namespaced attributes ([b4779af](https://github.com/lttb/reshadow/commit/b4779af))
+
+
+
+
+
 ## [0.0.1-alpha.49](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.48...v0.0.1-alpha.49) (2019-05-31)
 
 **Note:** Version bump only for package @reshadow/core

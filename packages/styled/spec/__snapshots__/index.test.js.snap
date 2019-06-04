@@ -19,7 +19,7 @@ exports[`styled should apply nested styles 1`] = `
 </button>
 `;
 
-exports[`styled should apply nested styles 2`] = `"._5jpyup{color:red;}._5jpyup span{margin-right:10px;}"`;
+exports[`styled should apply nested styles 2`] = `"._5jpyup span{margin-right:10px;}._5jpyup{color:red;}"`;
 
 exports[`styled should apply styles 1`] = `
 <button
@@ -44,6 +44,49 @@ exports[`styled should apply styles for Component 2`] = `"._1if0x5c{color:red;}"
 exports[`styled should create global style 1`] = `null`;
 
 exports[`styled should create global style 2`] = `"body{color:var(--10pagwf_1);}"`;
+
+exports[`styled should deal with specificity 1`] = `
+<h4
+  class="_1or1rjp"
+  color="red"
+  style="--6s77bw_2:20;--2smzwp_2:red;--6s77bw_5:20"
+>
+  title
+</h4>
+`;
+
+exports[`styled should deal with specificity 2`] = `"._1or1rjp::after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--6s77bw_2);-ms-flex:var(--6s77bw_2);flex:var(--6s77bw_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}._1or1rjp::before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--2smzwp_2);-ms-flex:var(--2smzwp_2);flex:var(--2smzwp_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}"`;
+
+exports[`styled should process namespaced attributes and dont pass them 1`] = `
+<button
+  class="_zgczid _use--disabled_zgczid _use--size_m_zgczid"
+>
+  click me
+</button>
+`;
+
+exports[`styled should process namespaced attributes and dont pass them 2`] = `"._zgczid._use--size_m_zgczid{font-size:14px;}._zgczid._use--size_s_zgczid{font-size:14px;}._zgczid._use--disabled_zgczid{opacity:0.5;}._zgczid{color:red;}"`;
+
+exports[`styled should process namespaced attributes and dont pass them 3`] = `
+<button
+  class="_zgczid _use--disabled_zgczid _use--size_s_zgczid"
+>
+  click me
+</button>
+`;
+
+exports[`styled should process namespaced attributes and dont pass them 4`] = `"._zgczid._use--size_m_zgczid{font-size:14px;}._zgczid._use--size_s_zgczid{font-size:14px;}._zgczid._use--disabled_zgczid{opacity:0.5;}._zgczid{color:red;}"`;
+
+exports[`styled should process root props 1`] = `
+<button
+  class="_zdj1v2 _disabled_zdj1v2"
+  disabled=""
+>
+  click me
+</button>
+`;
+
+exports[`styled should process root props 2`] = `"._zdj1v2._disabled_zdj1v2 + [disabled] + ._zdj1v2._disabled_zdj1v2{opacity:0.5;}"`;
 
 exports[`styled should work with as 1`] = `
 <a
@@ -75,7 +118,7 @@ exports[`styled should work with css prop 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);}._1eg04s3{padding:5px 10px;}"`;
+exports[`styled should work with css prop 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);padding:5px 10px;}"`;
 
 exports[`styled should work with css prop function 1`] = `
 <button
@@ -86,7 +129,7 @@ exports[`styled should work with css prop function 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop function 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);}._1eg04s3{padding:5px 10px;}"`;
+exports[`styled should work with css prop function 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);padding:5px 10px;}"`;
 
 exports[`styled should work with css prop with tagged literal 1`] = `
 <button
@@ -97,18 +140,42 @@ exports[`styled should work with css prop with tagged literal 1`] = `
 </button>
 `;
 
-exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);}._1eg04s3{padding:5px 10px;}"`;
+exports[`styled should work with css prop with tagged literal 2`] = `"._1eg04s3{color:var(--1v6vp2v_1);padding:5px 10px;}"`;
 
-exports[`styled should work with mixins 1`] = `
+exports[`styled should work with dynamic mixins 1`] = `
 <button
-  class="_zzt5ow"
-  style="--1cxyzr1_2:red"
+  class="_miwxjj"
+  style="--auziqq_1:-0px;--auziqq_2:0px"
+  width="0"
 >
   click me
 </button>
 `;
 
-exports[`styled should work with mixins 2`] = `"._zzt5ow{color:var(--1cxyzr1_2);}._zzt5ow{padding:10px;}"`;
+exports[`styled should work with dynamic mixins 2`] = `"._miwxjj{-webkit-transform:translateX(var(--auziqq_1));-ms-transform:translateX(var(--auziqq_1));transform:translateX(var(--auziqq_1));margin:var(--auziqq_2);}"`;
+
+exports[`styled should work with dynamic mixins 3`] = `
+<button
+  class="_miwxjj"
+  style="--auziqq_1:-200px;--auziqq_2:100px"
+  width="100"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with dynamic mixins 4`] = `"._miwxjj{-webkit-transform:translateX(var(--auziqq_1));-ms-transform:translateX(var(--auziqq_1));transform:translateX(var(--auziqq_1));margin:var(--auziqq_2);}"`;
+
+exports[`styled should work with mixins 1`] = `
+<button
+  class="_wopuxb"
+  style="--1txtmwt_4:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with mixins 2`] = `"._wopuxb::after{content:'';}._wopuxb::before{content:'';}._wopuxb{padding:10px;color:var(--1txtmwt_4);}"`;
 
 exports[`styled should work with nested mixins 1`] = `
 <button
@@ -142,6 +209,17 @@ exports[`styled should work with nested mixins 5`] = `
 
 exports[`styled should work with nested mixins 6`] = `"._4ykgti{color:var(--pjcj95_1);}._g1uhfs{color:blue;}"`;
 
+exports[`styled should work with string mixins 1`] = `
+<button
+  class="_zip2hf"
+  width="100"
+>
+  click me
+</button>
+`;
+
+exports[`styled should work with string mixins 2`] = `"._zip2hf{padding:10px;}"`;
+
 exports[`styled should work with theme 1`] = `
 <button
   class="_sna6ae"
@@ -152,3 +230,14 @@ exports[`styled should work with theme 1`] = `
 `;
 
 exports[`styled should work with theme 2`] = `"._sna6ae{color:var(--1v6vp2v_1);}"`;
+
+exports[`styled supports function interface 1`] = `
+<button
+  class="_51xj47 _use--color_1ntyugu"
+  style="--ajx7i6_1:red"
+>
+  click me
+</button>
+`;
+
+exports[`styled supports function interface 2`] = `"._51xj47._use--color_1ntyugu{color:var(--ajx7i6_1);}"`;

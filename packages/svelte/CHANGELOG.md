@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.63](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.62...v0.0.1-alpha.63) (2019-06-04)
+
+
+### Bug Fixes
+
+* **svelte:** fix svelte preprocess ([5e60204](https://github.com/lttb/reshadow/commit/5e60204))
+
+
+
+
+
+## [0.0.1-alpha.62](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.61...v0.0.1-alpha.62) (2019-06-03)
+
+**Note:** Version bump only for package @reshadow/svelte
+
+
+
+
+
+## [0.0.1-alpha.61](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.60...v0.0.1-alpha.61) (2019-06-03)
+
+
+### Bug Fixes
+
+* **svelte:** use @reshadow/core for the runtime ([703668d](https://github.com/lttb/reshadow/commit/703668d))
+
+
+
+
+
+## [0.0.1-alpha.59](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.58...v0.0.1-alpha.59) (2019-06-03)
+
+
+### Bug Fixes
+
+* **svelte:** fix variables interpolation ([1ff22b3](https://github.com/lttb/reshadow/commit/1ff22b3))
+
+
+
+
+
+## [0.0.1-alpha.58](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.57...v0.0.1-alpha.58) (2019-06-03)
+
+
+### Bug Fixes
+
+* **svelte:** fix modifiers ([38d2c83](https://github.com/lttb/reshadow/commit/38d2c83))
+
+
+
+
+
+## [0.0.1-alpha.57](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.56...v0.0.1-alpha.57) (2019-06-03)
+
+**Note:** Version bump only for package @reshadow/svelte
+
+
+
+
+
 ## [0.0.1-alpha.51](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.50...v0.0.1-alpha.51) (2019-05-31)
 
 **Note:** Version bump only for package @reshadow/svelte
