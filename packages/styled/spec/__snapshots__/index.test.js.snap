@@ -49,13 +49,13 @@ exports[`styled should deal with specificity 1`] = `
 <h4
   class="_1or1rjp"
   color="red"
-  style="--6s77bw_2:20;--2smzwp_2:red;--6s77bw_5:20"
+  style="--6s77bw_2:20;--6s77bw_5:20;--2smzwp_2:red"
 >
   title
 </h4>
 `;
 
-exports[`styled should deal with specificity 2`] = `"._1or1rjp::after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--6s77bw_2);-ms-flex:var(--6s77bw_2);flex:var(--6s77bw_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}._1or1rjp::before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--2smzwp_2);-ms-flex:var(--2smzwp_2);flex:var(--2smzwp_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}"`;
+exports[`styled should deal with specificity 2`] = `"._1or1rjp::after{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--6s77bw_2);-ms-flex:var(--6s77bw_2);flex:var(--6s77bw_2);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}._1or1rjp::before{-webkit-flex:1;-ms-flex:1;flex:1;-webkit-flex:var(--6s77bw_5);-ms-flex:var(--6s77bw_5);flex:var(--6s77bw_5);-webkit-flex:1;-ms-flex:1;flex:1;border-radius:1rem;background-color:var(--2smzwp_2);}"`;
 
 exports[`styled should process namespaced attributes and dont pass them 1`] = `
 <button

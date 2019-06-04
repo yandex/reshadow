@@ -30,6 +30,7 @@ const createCSS = ({
 
         const vars = {};
         const mixins = {};
+        const mixinVars = {};
         const mixinTokens = [];
         const mixinUses = {};
 
@@ -43,7 +44,7 @@ const createCSS = ({
                     value = css([obj2css(value)]);
                 }
 
-                Object.assign(vars, value[KEYS.__style__]);
+                Object.assign(mixinVars, value[KEYS.__style__]);
                 mixinsHash += '_' + value[KEYS.__hash__];
                 mixins[i] = value[KEYS.__css__];
 
@@ -112,7 +113,7 @@ const createCSS = ({
 
         const tokens = Object.create(cache[cacheKey].tokens);
 
-        tokens[KEYS.__style__] = vars;
+        tokens[KEYS.__style__] = Object.assign(vars, mixinVars);
         return tokens;
     }
 
