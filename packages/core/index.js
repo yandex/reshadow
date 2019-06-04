@@ -295,11 +295,8 @@ function map(element) {
     return nextProps;
 }
 
-Object.defineProperty(exports, '__esModule', {
-    value: true,
-});
-
-Object.assign(exports, {
+module.exports = {
+    __esModule: true,
     default: styled,
     use,
     css,
@@ -329,4 +326,4 @@ Object.assign(exports, {
     USE_PREFIX,
     KEYS,
     RESHADOW_ID,
-});
+};
