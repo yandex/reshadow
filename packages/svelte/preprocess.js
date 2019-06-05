@@ -7,7 +7,7 @@ const {parse} = require('@babel/parser');
 const {KEYS} = require('@reshadow/core');
 const reshadow = require('@reshadow/babel');
 
-const stripIndent = require('strip-indent');
+const {stripIndent} = require('common-tags');
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
@@ -160,12 +160,11 @@ const preprocess = options => ({
             `$: __styles__ = ${reshadowImport}(`,
         );
 
-        code = stripIndent(
-            `
+        code =
+            stripIndent`
                 import {__init__ as __reshadow__} from '@reshadow/svelte';
                 import {beforeUpdate as __bu__, afterUpdate as __au__} from 'svelte';\n
-            ` + code,
-        );
+            ` + code;
 
         /**
          * Invalidate the map and styled function on styles update
@@ -174,13 +173,13 @@ const preprocess = options => ({
          */
         code =
             code +
-            stripIndent(`
+            stripIndent`
                 ;const __getStyles__ = () => __styles__;
                 __reshadow__({beforeUpdate: __bu__, afterUpdate: __au__}, __getStyles__, () => {
                     ${reshadowImport} = ${reshadowImport};
                     ${imports.map ? `${imports.map} = ${imports.map};` : ''}
                 });
-            `);
+            `;
 
         let [, markup] = chunks[1].match(/<>(.*?)<\/>/ms);
 
