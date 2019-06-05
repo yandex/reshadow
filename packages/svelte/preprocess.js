@@ -28,7 +28,7 @@ const preprocess = options => ({
         let code = content
             .replace(
                 /<script(.*?)>(.*?)<\/script>/gms,
-                (match, attributes, content) => {
+                (_, attributes, content) => {
                     if (attributes.includes(`context="module"`)) {
                         script.content += content;
                     } else {
@@ -41,7 +41,7 @@ const preprocess = options => ({
             )
             .replace(
                 /<style(.*?)>(.*)<\/style>/ms,
-                (match, attributes, content) => {
+                (_, attributes, content) => {
                     style = {attributes, content};
                     return '';
                 },
@@ -82,7 +82,7 @@ const preprocess = options => ({
         code = code
             .replace(/([^\]]?[\s\r\n]+):\{(\w+)\}/gms, '$1:$2={$2}')
             // replace {...} to __PLACEHOLDER__<id>__
-            .replace(/(\{\w+\})/gms, (match, $1) => {
+            .replace(/(\{\w+\})/gms, (_, $1) => {
                 const id = `__PLACEHOLDER__${index++}__`;
                 placeholders[id] = $1;
                 return id;
@@ -192,7 +192,7 @@ const preprocess = options => ({
                 return placeholders[match];
             })
             .replace(/"?}?__QUOTE__{?"?/g, '')
-            .replace(/\{(\w+)\}:(\s*true)?/g, (match, $1, $2) => {
+            .replace(/\{(\w+)\}:(\s*true)?/g, (_, $1, $2) => {
                 if ($2) {
                     return `${$1}: ${$1}`;
                 }
