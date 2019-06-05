@@ -51,12 +51,6 @@ const preprocess = options => ({
         /**
          * Get the default reshadow import name
          */
-        /*
-            if:
-                import styled from 'reshadow';
-            then:
-                styled
-        */
         let [, reshadowImport] =
             script.content.match(
                 new RegExp(
