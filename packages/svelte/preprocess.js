@@ -27,9 +27,15 @@ const preprocess = options => ({
          */
         let code = content
             .replace(
-                /<script(.*?)>(.*)<\/script>/ms,
+                /<script(.*?)>(.*?)<\/script>/gms,
                 (match, attributes, content) => {
-                    script = {attributes, content};
+                    if (attributes.includes(`context="module"`)) {
+                        script.content += content;
+                    } else {
+                        script.attributes += attributes;
+                        script.content += content;
+                    }
+
                     return '';
                 },
             )
