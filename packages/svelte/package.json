@@ -26,7 +26,7 @@
         "@babel/types": "^7.4.4",
         "@reshadow/babel": "^0.0.1-alpha.63",
         "@reshadow/core": "^0.0.1-alpha.63",
-        "common-tags": "1.8.0",
-        "svelte": "^3.0.0"
+        "strip-indent": "^3.0.0",
+        "svelte": "^3.4.4"
     }
 }

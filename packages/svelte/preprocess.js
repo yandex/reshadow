@@ -1,3 +1,4 @@
+const svelte = require('svelte/compiler');
 const traverse = require('@babel/traverse').default;
 const t = require('@babel/types');
 const generate = require('@babel/generator').default;
@@ -6,7 +7,7 @@ const {parse} = require('@babel/parser');
 const {KEYS} = require('@reshadow/core');
 const reshadow = require('@reshadow/babel');
 
-const {stripIndent} = require('common-tags');
+const stripIndent = require('strip-indent');
 
 /**
  * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Escaping
@@ -17,6 +18,12 @@ function escapeRegExp(string) {
 
 const preprocess = options => ({
     markup({content, filename}) {
+        const parsedContent = svelte.parse(content);
+        content = content.slice(
+            parsedContent.html.start,
+            parsedContent.html.end,
+        );
+
         const placeholders = {};
 
         let script = {attributes: '', content: ''};
@@ -27,15 +34,9 @@ const preprocess = options => ({
          */
         let code = content
             .replace(
-                /<script(.*?)>(.*?)<\/script>/gms,
+                /<script(.*?)>(.*)<\/script>/ms,
                 (_, attributes, content) => {
-                    if (attributes.includes(`context="module"`)) {
-                        script.content += content;
-                    } else {
-                        script.attributes += attributes;
-                        script.content += content;
-                    }
-
+                    script = {attributes, content};
                     return '';
                 },
             )
@@ -50,6 +51,12 @@ const preprocess = options => ({
         /**
          * Get the default reshadow import name
          */
+        /*
+            if:
+                import styled from 'reshadow';
+            then:
+                styled
+        */
         let [, reshadowImport] =
             script.content.match(
                 new RegExp(
@@ -159,11 +166,12 @@ const preprocess = options => ({
             `$: __styles__ = ${reshadowImport}(`,
         );
 
-        code =
-            stripIndent`
+        code = stripIndent(
+            `
                 import {__init__ as __reshadow__} from '@reshadow/svelte';
                 import {beforeUpdate as __bu__, afterUpdate as __au__} from 'svelte';\n
-            ` + code;
+            ` + code,
+        );
 
         /**
          * Invalidate the map and styled function on styles update
@@ -172,18 +180,18 @@ const preprocess = options => ({
          */
         code =
             code +
-            stripIndent`
+            stripIndent(`
                 ;const __getStyles__ = () => __styles__;
                 __reshadow__({beforeUpdate: __bu__, afterUpdate: __au__}, __getStyles__, () => {
                     ${reshadowImport} = ${reshadowImport};
                     ${imports.map ? `${imports.map} = ${imports.map};` : ''}
                 });
-            `;
+            `);
 
         let [, markup] = chunks[1].match(/<>(.*?)<\/>/ms);
 
         /**
-         * Restore orignial values
+         * Restore original values
          */
         markup = markup
             .replace(/__BRACKET__/g, '{')
