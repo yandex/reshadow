@@ -128,13 +128,12 @@ import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\"
 
 /*__reshadow-styles__:\\"./styles.css\\"*/
 const { ...styles
-} = __css__(\`button {
+} = (__css__(\`button {
     color: red;
 }
 \`
 /*__css_end__*/
-, \\"947371504\\");
-
+, \\"947371504\\"), {});
 const styled_c8 = create([styles]);
 
 const App = ({

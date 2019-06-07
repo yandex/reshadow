@@ -2959,6 +2959,11 @@ callsites@^3.0.0:
   resolved "https://registry.yarnpkg.com/callsites/-/callsites-3.1.0.tgz#b3630abd8943432f54b3f0519238e33cd7df2f73"
   integrity sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==
 
+camelcase-css@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/camelcase-css/-/camelcase-css-2.0.1.tgz#ee978f6947914cc30c6b44741b6ed1df7f043fd5"
+  integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
+
 camelcase-keys@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/camelcase-keys/-/camelcase-keys-2.1.0.tgz#308beeaffdf28119051efa1d932213c91b8f92e7"
@@ -9277,6 +9282,14 @@ postcss-initial@^3.0.0:
     lodash.template "^4.2.4"
     postcss "^7.0.2"
 
+postcss-js@^2.0.0:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/postcss-js/-/postcss-js-2.0.1.tgz#4154e906ff410930afab63a24210be1b831e89a9"
+  integrity sha512-8XQGohCbj6+kq8e3w6WlexkGaSjb5S8zoXnH49eB8JC6+qN2kQW+ib6fTjRgCpRRN9eeFOhMlD0NDjThW1DCBg==
+  dependencies:
+    camelcase-css "^2.0.1"
+    postcss "^7.0.14"
+
 postcss-lab-function@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/postcss-lab-function/-/postcss-lab-function-2.0.1.tgz#bb51a6856cd12289ab4ae20db1e3821ef13d7d2e"
@@ -9379,6 +9392,17 @@ postcss-minify-selectors@^4.0.2:
     has "^1.0.0"
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
+
+postcss-mixins@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/postcss-mixins/-/postcss-mixins-6.2.1.tgz#f2a6abb449410929a184b23fbef7c96898cf01e5"
+  integrity sha512-XfItKgFHAPKa4mayLVwoASYzzRLyW64mEtsVZz7LT7ElrprVZx9D5ivqOi5oQCkUxyiLs9sjg4aiRxr+gK9xkQ==
+  dependencies:
+    globby "^8.0.1"
+    postcss "^7.0.6"
+    postcss-js "^2.0.0"
+    postcss-simple-vars "^5.0.1"
+    sugarss "^2.0.0"
 
 postcss-modules-extract-imports@1.1.0:
   version "1.1.0"
@@ -9693,6 +9717,13 @@ postcss-selector-parser@^5.0.0, postcss-selector-parser@^5.0.0-rc.3, postcss-sel
     cssesc "^2.0.0"
     indexes-of "^1.0.1"
     uniq "^1.0.1"
+
+postcss-simple-vars@^5.0.1, postcss-simple-vars@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/postcss-simple-vars/-/postcss-simple-vars-5.0.2.tgz#e2f81b3d0847ddd4169816b6d141b91d51e6e22e"
+  integrity sha512-xWIufxBoINJv6JiLb7jl5oElgp+6puJwvT5zZHliUSydoLz4DADRB3NDDsYgfKVwojn4TDLiseoC65MuS8oGGg==
+  dependencies:
+    postcss "^7.0.14"
 
 postcss-svgo@^4.0.2:
   version "4.0.2"
@@ -10512,7 +10543,7 @@ reshadow@0.0.1-alpha.26:
     "@reshadow/webpack" "^0.0.1-alpha.21"
 
 "reshadow@file:packages/core":
-  version "0.0.1-alpha.49"
+  version "0.0.1-alpha.64"
 
 resolve-cwd@^2.0.0:
   version "2.0.0"
@@ -11449,6 +11480,13 @@ stylis@3.5.4:
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/stylis/-/stylis-3.5.4.tgz#f665f25f5e299cf3d64654ab949a57c768b73fbe"
   integrity sha512-8/3pSmthWM7lsPBKv7NXkzn2Uc9W7NotcwGNpJaa3k7WMM1XDCA4MgT5k/8BIexd5ydZdboXtU90XH9Ec4Bv/Q==
+
+sugarss@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-2.0.0.tgz#ddd76e0124b297d40bf3cca31c8b22ecb43bc61d"
+  integrity sha512-WfxjozUk0UVA4jm+U1d736AUpzSrNsQcIbyOkoE364GrtWmIrFdk5lksEupgWMD4VaT/0kVx1dobpiDumSgmJQ==
+  dependencies:
+    postcss "^7.0.2"
 
 supports-color@^2.0.0:
   version "2.0.0"

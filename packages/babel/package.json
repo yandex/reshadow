@@ -33,11 +33,13 @@
         "generic-names": "^2.0.1",
         "postcss": "^7.0.13",
         "postcss-import-sync2": "^1.1.0",
+        "postcss-mixins": "^6.2.1",
         "postcss-modules-extract-imports": "^2.0.0",
         "postcss-modules-local-by-default": "^2.0.5",
         "postcss-modules-scope": "^2.0.1",
         "postcss-modules-values": "^2.0.0",
         "postcss-preset-env": "^6.6.0",
+        "postcss-simple-vars": "^5.0.2",
         "resolve": "^1.10.0",
         "string-hash": "^1.1.3",
         "synchronous-promise": "^2.0.6"

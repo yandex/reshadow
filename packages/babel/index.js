@@ -687,9 +687,16 @@ module.exports = (babel, pluginOptions = {}) => {
 
             ({node} = p);
 
-            if (!postcss || isIgnored) return;
+            if (!postcss) return;
 
-            const result = postcss.process(raw, {from: filename});
+            let result;
+
+            if (isIgnored) {
+                result = {code: raw, tokens: {}};
+            } else {
+                result = postcss.process(raw, {from: filename});
+            }
+
             const code = result.code;
             const tokens = toObjectExpression(result.tokens);
 

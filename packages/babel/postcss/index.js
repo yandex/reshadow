@@ -3,6 +3,8 @@ const fs = require('fs');
 const postcss = require('postcss');
 const postcssPresetEnv = require('postcss-preset-env');
 const atImport = require('postcss-import-sync2');
+const mixins = require('postcss-mixins');
+const vars = require('postcss-simple-vars');
 
 const localByDefault = require('postcss-modules-local-by-default');
 const extractImports = require('postcss-modules-extract-imports');
@@ -83,28 +85,58 @@ module.exports = ({plugins = [], options = {}, generateScopedName}) => {
     };
 
     const parser = new Parser(pathFetcher);
+    const processorPlugins = [];
 
-    const processorPlugins = [
-        atImport({
-            ...options.import,
-            sync: true,
-        }),
-        ...plugins,
-        syncPlugin(
-            postcssPresetEnv(
-                options.presetEnv || {
-                    features: {
-                        'nesting-rules': true,
+    if (options.import !== null)
+        processorPlugins.push(
+            atImport({
+                ...options.import,
+                sync: true,
+            }),
+        );
+
+    processorPlugins.push(...plugins);
+
+    if (options.mixins !== null) {
+        processorPlugins.push(
+            mixins({
+                ...options.mixins,
+            }),
+        );
+    }
+
+    if (options.vars !== null) {
+        processorPlugins.push(
+            vars({
+                ...options.vars,
+            }),
+        );
+    }
+
+    if (options.presetEnv !== null) {
+        processorPlugins.push(
+            syncPlugin(
+                postcssPresetEnv(
+                    options.presetEnv || {
+                        features: {
+                            'nesting-rules': true,
+                        },
                     },
-                },
+                ),
             ),
-        ),
-        reshadow(options.reshadow),
-        ...modulesPlugins,
-        parser.plugin,
-    ];
+        );
+    }
 
-    if (options.cssnano || process.env.NODE_ENV === 'production') {
+    if (options.reshadow !== null) {
+        processorPlugins.push(reshadow(options.reshadow));
+    }
+
+    processorPlugins.push(...modulesPlugins, parser.plugin);
+
+    if (
+        options.cssnano ||
+        (options.cssnano !== null && process.env.NODE_ENV === 'production')
+    ) {
         /**
          * `preset` option is required to force `cssnano` use `preset` instead of config search
          */
