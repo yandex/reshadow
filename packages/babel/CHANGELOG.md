@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.65](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.64...v0.0.1-alpha.65) (2019-06-07)
+
+
+### Features
+
+* **babel:** update postcss plugins config ([4bb6668](https://github.com/lttb/reshadow/commit/4bb6668))
+
+
+
+
+
 ## [0.0.1-alpha.64](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.63...v0.0.1-alpha.64) (2019-06-04)
 
 **Note:** Version bump only for package @reshadow/babel
