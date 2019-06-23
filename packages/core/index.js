@@ -75,6 +75,8 @@ let serverStyles = '';
 
 const getStyles = () => serverStyles;
 
+const clearStyles = () => serverStyles = '';
+
 const RESHADOW_ID = '__reshadow__';
 
 const css = (code, hash) => {
@@ -260,6 +262,9 @@ Object.assign(exports, {
 
     // ssr
     getStyles,
+
+    // testing
+    clearStyles,
 
     // utils
     appendModifier,
