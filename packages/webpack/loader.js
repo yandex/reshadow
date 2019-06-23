@@ -47,7 +47,7 @@ module.exports = function(source) {
             // , "2845693891")
             //
             // We're using trailing block comment /*__css_end__*/ to find the end of the code.
-            /__css__\([`'"]((.|[\r\n])*?)[`'"][\r\n]\/\*__css_end__\*\/((.|[\r\n])*?)\)/g,
+            /__css__\([`'"]((.|[\r\n])*?)[`'"][\r\n]\/\*__css_end__\*\/(([\r\n?|\n])*?)\)/g,
             (match, code) => {
                 const hash = `${utils.getFileHash(filepath)}_${++index}`;
                 const filename = addDependency(
