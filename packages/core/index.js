@@ -262,8 +262,6 @@ Object.assign(exports, {
 
     // ssr
     getStyles,
-
-    // testing
     clearStyles,
 
     // utils
