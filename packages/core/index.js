@@ -75,7 +75,11 @@ let serverStyles = '';
 
 const getStyles = () => serverStyles;
 
-const clearStyles = () => serverStyles = '';
+/* eslint-disable no-undef */
+const clearStyles = () => {
+    serverStyles = '';
+};
+/* eslint-disable no-undef */
 
 const RESHADOW_ID = '__reshadow__';
 
