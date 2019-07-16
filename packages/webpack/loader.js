@@ -7,7 +7,8 @@ const utils = require('@reshadow/utils');
 const virtualModules = new VirtualModulesPlugin();
 
 const addDependency = (hash, code) => {
-    const filename = `/.cache/reshadow/${hash}.css`;
+    const dirname = path.dirname(process.argv[1]);
+    const filename = path.resolve(dirname, `/.cache/reshadow/${hash}.css`);
 
     virtualModules.writeModule(filename, code);
 
