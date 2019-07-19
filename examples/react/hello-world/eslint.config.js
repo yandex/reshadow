@@ -1,3 +1,3 @@
 module.exports = {
-    plugins: [require.resolve('reshadow/eslint')],
+    plugins: [require.resolve('@reshadow/eslint')],
 };

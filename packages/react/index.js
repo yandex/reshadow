@@ -22,7 +22,7 @@ export function jsx() {
 export {css, use, create, keyframes};
 
 const reactStyled = createStyled(elem => {
-    let style = styled[KEYS.__style__];
+    const style = styled[KEYS.__style__];
     let result = styled(elem);
     if (style && result) {
         result = React.cloneElement(result, {

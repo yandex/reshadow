@@ -30,7 +30,7 @@ module.exports = {
         ],
     },
     create: function(context) {
-        let [options = {}] = context.options;
+        const [options = {}] = context.options;
 
         return {
             JSXOpeningElement(node) {
@@ -41,7 +41,7 @@ module.exports = {
                 if (!utils.isCustomElement(name)) return;
 
                 let asAttr;
-                for (let attr of node.attributes) {
+                for (const attr of node.attributes) {
                     if (
                         !(
                             t.isJSXAttribute(attr) &&

@@ -24,9 +24,9 @@ module.exports = class SyncParser extends AsyncParser {
     }
 
     fetchImport(importNode, relativeTo, depNr) {
-        let file = importNode.selector.match(importRegexp)[1];
+        const file = importNode.selector.match(importRegexp)[1];
 
-        let depTrace = this.trace + String.fromCharCode(depNr);
+        const depTrace = this.trace + String.fromCharCode(depNr);
         const exports = this.pathFetcher(file, relativeTo, depTrace);
         importNode.each(decl => {
             if (decl.type === 'decl') {

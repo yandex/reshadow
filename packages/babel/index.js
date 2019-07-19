@@ -67,7 +67,7 @@ const defaultOptions = {
 module.exports = (babel, pluginOptions = {}) => {
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
-    let classProp = options.classProp || KEYS.__classProp__;
+    const classProp = options.classProp || KEYS.__classProp__;
 
     if (options.target === 'preact') {
         if (pluginOptions.stringStyle !== undefined) {
@@ -205,7 +205,7 @@ module.exports = (babel, pluginOptions = {}) => {
             return t.templateLiteral(
                 expressions
                     .reduce((acc, x, i) => {
-                        let index = getIndex(x, i);
+                        const index = getIndex(x, i);
 
                         if (index !== i) return acc;
 
@@ -234,7 +234,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
         return t.objectExpression(
             expressions.reduce((acc, x, i) => {
-                let index = getIndex(x, i);
+                const index = getIndex(x, i);
 
                 if (index !== i) return acc;
 
@@ -255,7 +255,7 @@ module.exports = (babel, pluginOptions = {}) => {
         const globalStyles = [];
         const localStyles = [t.identifier(hashName)];
 
-        for (let arg of callee.arguments || []) {
+        for (const arg of callee.arguments || []) {
             if (!t.isIdentifier(arg)) {
                 localStyles.push(arg);
                 continue;
@@ -338,7 +338,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 cache.add(node);
 
                 if (variables && depth === 0) {
-                    for (let x of elementPath.container) {
+                    for (const x of elementPath.container) {
                         if (!t.isJSXElement(x)) continue;
 
                         roots.add(x);
@@ -446,7 +446,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
                             uses.push(getProp(name, attr.value));
                         } else {
-                            let name = getElementName(attr.name);
+                            const name = getElementName(attr.name);
 
                             if (
                                 options.filterProp &&
@@ -800,7 +800,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     return;
                 }
 
-                let SOURCE = options.source || 'reshadow';
+                const SOURCE = options.source || 'reshadow';
 
                 if (source.value !== SOURCE) return;
 
@@ -810,7 +810,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
                 IMPORT = p.node;
 
-                for (let spec of specifiers) {
+                for (const spec of specifiers) {
                     if (t.isImportDefaultSpecifier(spec)) {
                         const name = spec.local.name;
                         STYLED.add(name);

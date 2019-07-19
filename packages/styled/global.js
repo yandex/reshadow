@@ -19,7 +19,7 @@ class GlobalStyle extends React.Component {
         // eslint-disable-next-line
         const {style} = this.props;
         if (style) {
-            for (let name in style) {
+            for (const name in style) {
                 document.documentElement.style.setProperty(name, style[name]);
             }
         }
@@ -29,7 +29,7 @@ class GlobalStyle extends React.Component {
 }
 
 const globalReshadowStyled = createReshadowStyled((as, props) => {
-    let style = coreStyled[KEYS.__style__];
+    const style = coreStyled[KEYS.__style__];
 
     props.style = style;
 

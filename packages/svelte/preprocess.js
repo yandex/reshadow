@@ -89,7 +89,7 @@ const preprocess = options => ({
             // svelte syntax
             .replace(/\{([\s\n\r]*)([#:/])/gms, '__BRACKET__$1$2');
 
-        let ast = parse(
+        const ast = parse(
             `${script.content};__reshadow__;${reshadowImport}\`
                 color: \${__};
             \`(<>${code}</>);`,
@@ -133,7 +133,7 @@ const preprocess = options => ({
             ImportDeclaration(p) {
                 const {source, specifiers} = p.node;
                 if (source.value !== '@reshadow/core') return;
-                for (let spec of specifiers) {
+                for (const spec of specifiers) {
                     if (!t.isImportSpecifier(spec)) continue;
                     if (spec.imported.name === 'map') {
                         imports.map = spec.local.name;
