@@ -38,7 +38,7 @@ const parse = (
             skip = true;
 
             let result = '';
-            for (let selector in rules) {
+            for (const selector in rules) {
                 result += selector + '{' + rules[selector] + '}';
             }
             return result;
@@ -55,7 +55,7 @@ const parse = (
         }
 
         for (let i = 0; i < selectors.length; i++) {
-            let selector = selectors[i];
+            const selector = selectors[i];
 
             if (
                 selector === 'from' ||

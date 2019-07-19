@@ -67,7 +67,7 @@ function css() {
 
     return data => {
         const nextArgs = Object.create(args);
-        for (let index in functions) {
+        for (const index in functions) {
             let value = functions[index](data);
             if (typeof value === 'string') {
                 value = mixin(value);
@@ -82,7 +82,7 @@ function css() {
 }
 
 const reshadowStyled = createReshadowStyled((element, as, props, filtered) => {
-    let style = coreStyled[KEYS.__style__];
+    const style = coreStyled[KEYS.__style__];
 
     if (style) {
         props.style = Object.assign({}, style, props.style);
@@ -147,7 +147,7 @@ const createStyled = tag => {
                 delete props.css;
 
                 if (options.attrs) {
-                    for (let attr in options.attrs) {
+                    for (const attr in options.attrs) {
                         const value = options.attrs[attr];
                         props[attr] =
                             typeof value === 'function' ? value(props) : value;

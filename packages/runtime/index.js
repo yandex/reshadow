@@ -88,8 +88,8 @@ const createCSS = ({
                 }
             }
 
-            let code = String.raw({raw: str}, ...values);
-            let isMixin = checkMixin(code);
+            const code = String.raw({raw: str}, ...values);
+            const isMixin = checkMixin(code);
 
             parsed = parse(code, cacheKey, {
                 elements,

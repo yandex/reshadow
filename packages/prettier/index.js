@@ -64,7 +64,7 @@ module.exports = {
                 const [functionGroup] = result.parts;
 
                 // Function presented with a pair of an arrow ('=>') and the body
-                let [, bodyGroup] = functionGroup.contents.parts;
+                const [, bodyGroup] = functionGroup.contents.parts;
                 const body = bodyGroup.contents;
 
                 // remove indent

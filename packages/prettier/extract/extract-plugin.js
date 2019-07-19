@@ -6,7 +6,7 @@ const _parsers = {
     babel: jsParser.parsers.babel,
 };
 
-let _plugins = {};
+const _plugins = {};
 
 const createParser = (parser, printer) => ({
     [parser]: {

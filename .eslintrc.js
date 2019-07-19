@@ -50,6 +50,7 @@ module.exports = {
     rules: {
         'no-sequences': 'off',
         'import/no-unresolved': ['error', {commonjs: true}],
-        "import/no-extraneous-dependencies": ["error"],
+        'import/no-extraneous-dependencies': ['error'],
+        'react/prop-types': 'off',
     },
 };

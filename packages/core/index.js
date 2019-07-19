@@ -34,7 +34,7 @@ const create = args => {
     let uses = null;
 
     for (let i = 0; i < len; i++) {
-        let style = args[i];
+        const style = args[i];
 
         if (!style) continue;
 
@@ -62,7 +62,7 @@ const create = args => {
 
         newStyle = Object.create(newStyle);
 
-        for (let key in style) {
+        for (const key in style) {
             if (key in KEYS) continue;
 
             newStyle[key] = appendClassName(style[key], newStyle[key]);
@@ -96,10 +96,8 @@ const getStyles = () => ({
     map: serverMap,
     get css() {
         let serverStyles = '';
-        for (let id in serverMap) {
-            serverStyles += `<style type="text/css" id="${id}">${
-                serverMap[id]
-            }</style>`;
+        for (const id in serverMap) {
+            serverStyles += `<style type="text/css" id="${id}">${serverMap[id]}</style>`;
         }
         return serverStyles;
     },
@@ -221,17 +219,17 @@ const appendModifier = (styles, key, value, cn = '') => {
 
 function map(element) {
     const currStyles = styled[KEYS.__styles__];
-    let nextProps = {};
+    const nextProps = {};
     let cn = appendElement(currStyles, element);
     let vars = null;
-    let uses = currStyles[KEYS.__use__] || {};
+    const uses = currStyles[KEYS.__use__] || {};
 
     const len = arguments.length;
 
     let useProps;
 
     for (let i = len - 1; i > 0; i--) {
-        let currProps = arguments[i];
+        const currProps = arguments[i];
 
         if (!currProps) continue;
 
@@ -241,7 +239,7 @@ function map(element) {
             vars = styled[KEYS.__style__];
         }
 
-        for (let key in currProps) {
+        for (const key in currProps) {
             if (
                 key === KEYS.__use__ ||
                 key === KEYS.__style__ ||
@@ -281,7 +279,7 @@ function map(element) {
     }
 
     if (useProps) {
-        for (let key in useProps) {
+        for (const key in useProps) {
             const value = useProps[key];
             cn = appendModifier(currStyles, USE_PREFIX + key, value, cn);
         }
