@@ -20,13 +20,13 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@babel/generator": "^7.4.4",
-        "@babel/parser": "^7.4.4",
-        "@babel/traverse": "^7.4.4",
-        "@babel/types": "^7.4.4",
+        "@babel/generator": "^7.5.5",
+        "@babel/parser": "^7.5.5",
+        "@babel/traverse": "^7.5.5",
+        "@babel/types": "^7.5.5",
         "@reshadow/babel": "^0.0.1-alpha.65",
         "@reshadow/core": "^0.0.1-alpha.64",
         "common-tags": "1.8.0",
-        "svelte": "^3.0.0"
+        "svelte": "^3.6.7"
     }
 }

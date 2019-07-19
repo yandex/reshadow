@@ -29,8 +29,8 @@
         "theming": "3.2.0"
     },
     "devDependencies": {
-        "enzyme": "^3.8.0",
-        "enzyme-adapter-react-16": "^1.7.1",
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.14.0",
         "react": "^16.7.0",
         "react-dom": "^16.7.0"
     }

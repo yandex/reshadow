@@ -20,8 +20,8 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@emotion/stylis": "0.8.3",
-        "@emotion/unitless": "0.7.3",
+        "@emotion/stylis": "0.8.4",
+        "@emotion/unitless": "0.7.4",
         "@reshadow/core": "^0.0.1-alpha.64",
         "string-hash": "^1.1.3"
     }

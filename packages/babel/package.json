@@ -23,7 +23,7 @@
         "@babel/helper-module-imports": "^7.0.0",
         "@babel/plugin-syntax-jsx": "^7.2.0",
         "@babel/template": "^7.2.2",
-        "@babel/types": "^7.3.0",
+        "@babel/types": "^7.5.5",
         "@reshadow/core": "^0.0.1-alpha.64",
         "@reshadow/postcss": "^0.0.1-alpha.30",
         "@reshadow/utils": "^0.0.1-alpha.30",
@@ -31,21 +31,21 @@
         "css-modules-loader-core": "^1.1.0",
         "cssnano": "^4.1.10",
         "generic-names": "^2.0.1",
-        "postcss": "^7.0.13",
+        "postcss": "^7.0.17",
         "postcss-import-sync2": "^1.1.0",
-        "postcss-mixins": "^6.2.1",
+        "postcss-mixins": "^6.2.2",
         "postcss-modules-extract-imports": "^2.0.0",
-        "postcss-modules-local-by-default": "^2.0.5",
+        "postcss-modules-local-by-default": "^3.0.2",
         "postcss-modules-scope": "^2.0.1",
-        "postcss-modules-values": "^2.0.0",
-        "postcss-preset-env": "^6.6.0",
+        "postcss-modules-values": "^3.0.0",
+        "postcss-preset-env": "^6.7.0",
         "postcss-simple-vars": "^5.0.2",
-        "resolve": "^1.10.0",
+        "resolve": "^1.11.1",
         "string-hash": "^1.1.3",
-        "synchronous-promise": "^2.0.6"
+        "synchronous-promise": "^2.0.9"
     },
     "devDependencies": {
-        "@babel/core": "^7.2.2"
+        "@babel/core": "^7.5.5"
     },
     "optionalDependencies": {
         "@vue/babel-plugin-transform-vue-jsx": "^1.0.0-beta.2"

@@ -20,10 +20,10 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@babel/types": "^7.3.0",
+        "@babel/types": "^7.5.5",
         "@reshadow/utils": "^0.0.1-alpha.30"
     },
     "devDependencies": {
-        "eslint": "^5.15.1"
+        "eslint": "^6.0.1"
     }
 }

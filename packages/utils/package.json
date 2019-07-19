@@ -20,8 +20,8 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "html-tags": "^2.0.0",
-        "resolve": "^1.10.0",
+        "html-tags": "^3.0.0",
+        "resolve": "^1.11.1",
         "string-hash": "^1.1.3"
     }
 }

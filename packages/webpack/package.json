@@ -25,15 +25,15 @@
     },
     "devDependencies": {
         "babel-loader": "^8.0.5",
-        "css-loader": "^2.1.0",
+        "css-loader": "^3.1.0",
         "extract-loader": "^3.1.0",
-        "file-loader": "^3.0.1",
+        "file-loader": "^4.1.0",
         "memory-fs": "^0.4.1",
         "postcss-loader": "^3.0.0",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
-        "reshadow": "file:../core",
+        "reshadow": "0.0.1-alpha.65",
         "style-loader": "^0.23.1",
-        "webpack": "^4.29.0"
+        "webpack": "^4.36.1"
     }
 }

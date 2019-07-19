@@ -20,7 +20,7 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "prettier": "1.17.0"
+        "prettier": "1.18.2"
     },
     "devDependencies": {
         "common-tags": "1.8.0"
