@@ -105,6 +105,12 @@ const getStyles = () => ({
     },
 });
 
+/* eslint-disable no-undef */
+const clearStyles = () => {
+    serverStyles = '';
+};
+/* eslint-disable no-undef */
+
 const RESHADOW_ID = '__reshadow__';
 
 const css = (code, hash) => {
@@ -311,6 +317,7 @@ module.exports = {
 
     // ssr
     getStyles,
+    clearStyles,
 
     // utils
     appendModifier,
