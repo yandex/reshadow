@@ -169,14 +169,29 @@ module.exports = (babel, pluginOptions = {}) => {
 
         const getIndex = createCSSVarIndexer();
 
+        let isInsideComment = false;
         quasis.forEach(({value}, i) => {
             code += value.raw;
+
+            if (!isInsideComment) {
+                // there can be multiple comments in a single quasi
+                const lastCommentOpenning = value.raw.lastIndexOf('/*');
+                const lastCommentClosing = value.raw.lastIndexOf('*/');
+                isInsideComment = lastCommentOpenning > lastCommentClosing;
+            } else {
+                isInsideComment = !value.raw.includes('*/');
+            }
+
             const node = expressions[i];
-
             if (node) {
-                const index = getIndex(node, i);
-
-                code += `var(--${hash}_${index})`;
+                if (isInsideComment) {
+                    code += `\${${
+                        t.isIdentifier(node) ? node.name : 'someVar'
+                    }}`;
+                } else {
+                    const index = getIndex(node, i);
+                    code += `var(--${hash}_${index})`;
+                }
             }
         });
 
