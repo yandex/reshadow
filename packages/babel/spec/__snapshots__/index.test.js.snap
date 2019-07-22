@@ -69,7 +69,6 @@ const App = ({
   disabled,
   type
 }) => styled((set([styled_c8, styles], {
-  \\"--c8_0\\": type,
   \\"--c8_1\\": disabled
 }), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
@@ -103,9 +102,7 @@ const App = ({
   disabled,
   type
 }) => styled((set([styled_c8, styles], {
-  \\"--c8_0\\": type,
   \\"--c8_1\\": disabled,
-  \\"--c8_2\\": getHeight(type),
   \\"--c8_3\\": color
 }), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,

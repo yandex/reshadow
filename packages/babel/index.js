@@ -213,16 +213,36 @@ module.exports = (babel, pluginOptions = {}) => {
         return append;
     };
 
-    const prepareExpressions = (expressions, hash) => {
+    const prepareExpressions = ({expressions, quasis}, hash) => {
         const getIndex = createCSSVarIndexer();
 
         if (options.stringStyle) {
+            let isInsideComment = false;
             return t.templateLiteral(
                 expressions
                     .reduce((acc, x, i) => {
                         const index = getIndex(x, i);
 
                         if (index !== i) return acc;
+
+                        if (!isInsideComment) {
+                            const rawString = quasis[i].value.raw;
+                            // there can be multiple comments in a single quasi
+                            const lastCommentOpenning = rawString.lastIndexOf(
+                                '/*',
+                            );
+                            const lastCommentClosing = rawString.lastIndexOf(
+                                '*/',
+                            );
+                            isInsideComment =
+                                lastCommentOpenning > lastCommentClosing;
+                        } else {
+                            isInsideComment = !quasis[i].value.raw.includes(
+                                '*/',
+                            );
+                        }
+
+                        if (isInsideComment) return acc;
 
                         const value =
                             (i > 0 ? ';' : '') + `--${hash}_${index}:`;
@@ -247,11 +267,28 @@ module.exports = (babel, pluginOptions = {}) => {
             );
         }
 
+        let isInsideComment = false;
+
         return t.objectExpression(
             expressions.reduce((acc, x, i) => {
                 const index = getIndex(x, i);
 
                 if (index !== i) return acc;
+
+                // similar to appendCode
+                // an attempt to not create css custom properties
+                // for commented template placeholder expressions
+                if (!isInsideComment) {
+                    const rawString = quasis[i].value.raw;
+                    // there can be multiple comments in a single quasi
+                    const lastCommentOpenning = rawString.lastIndexOf('/*');
+                    const lastCommentClosing = rawString.lastIndexOf('*/');
+                    isInsideComment = lastCommentOpenning > lastCommentClosing;
+                } else {
+                    isInsideComment = !quasis[i].value.raw.includes('*/');
+                }
+
+                if (isInsideComment) return acc;
 
                 return acc.concat(
                     t.objectProperty(t.stringLiteral(`--${hash}_${index}`), x),
@@ -284,7 +321,7 @@ module.exports = (babel, pluginOptions = {}) => {
         const variables =
             quasi &&
             quasi.expressions.length &&
-            prepareExpressions(quasi.expressions, hash);
+            prepareExpressions(quasi, hash);
 
         const [jsxNode] = p.node.arguments;
 
