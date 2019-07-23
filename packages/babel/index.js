@@ -64,6 +64,23 @@ const defaultOptions = {
     processFiles: true,
 };
 
+const getIsInsideComment = (isInsideComment, lastString) => {
+    /**
+     * if we were inside a comment check if comment ended
+     */
+    if (isInsideComment) return !lastString.includes('*/');
+
+    /**
+     * if we were outside a comment check if comment started
+     */
+
+    // there can be multiple comments in a single quasi
+    const lastCommentOpenning = lastString.lastIndexOf('/*');
+    const lastCommentClosing = lastString.lastIndexOf('*/');
+
+    return lastCommentOpenning > lastCommentClosing;
+};
+
 module.exports = (babel, pluginOptions = {}) => {
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
@@ -169,14 +186,22 @@ module.exports = (babel, pluginOptions = {}) => {
 
         const getIndex = createCSSVarIndexer();
 
+        let isInsideComment = false;
         quasis.forEach(({value}, i) => {
             code += value.raw;
+
+            isInsideComment = getIsInsideComment(isInsideComment, value.raw);
+
             const node = expressions[i];
-
             if (node) {
-                const index = getIndex(node, i);
-
-                code += `var(--${hash}_${index})`;
+                if (isInsideComment) {
+                    code += `\${${
+                        t.isIdentifier(node) ? node.name : 'someVar'
+                    }}`;
+                } else {
+                    const index = getIndex(node, i);
+                    code += `var(--${hash}_${index})`;
+                }
             }
         });
 
@@ -198,16 +223,24 @@ module.exports = (babel, pluginOptions = {}) => {
         return append;
     };
 
-    const prepareExpressions = (expressions, hash) => {
+    const prepareExpressions = ({expressions, quasis}, hash) => {
         const getIndex = createCSSVarIndexer();
 
         if (options.stringStyle) {
+            let isInsideComment = false;
             return t.templateLiteral(
                 expressions
                     .reduce((acc, x, i) => {
                         const index = getIndex(x, i);
 
                         if (index !== i) return acc;
+
+                        isInsideComment = getIsInsideComment(
+                            isInsideComment,
+                            quasis[i].value.raw,
+                        );
+
+                        if (isInsideComment) return acc;
 
                         const value =
                             (i > 0 ? ';' : '') + `--${hash}_${index}:`;
@@ -232,11 +265,25 @@ module.exports = (babel, pluginOptions = {}) => {
             );
         }
 
+        let isInsideComment = false;
+
         return t.objectExpression(
             expressions.reduce((acc, x, i) => {
                 const index = getIndex(x, i);
 
                 if (index !== i) return acc;
+
+                /**
+                 * similar to appendCode
+                 * an attempt to avoid creation of redundant css custom properties
+                 * for commented template placeholder expressions
+                 */
+                isInsideComment = getIsInsideComment(
+                    isInsideComment,
+                    quasis[i].value.raw,
+                );
+
+                if (isInsideComment) return acc;
 
                 return acc.concat(
                     t.objectProperty(t.stringLiteral(`--${hash}_${index}`), x),
@@ -269,7 +316,7 @@ module.exports = (babel, pluginOptions = {}) => {
         const variables =
             quasi &&
             quasi.expressions.length &&
-            prepareExpressions(quasi.expressions, hash);
+            prepareExpressions(quasi, hash);
 
         const [jsxNode] = p.node.arguments;
 

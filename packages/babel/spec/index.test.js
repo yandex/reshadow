@@ -499,6 +499,106 @@ describe('babel', () => {
             expect(code).toMatchSnapshot();
         });
 
+        it('should process styles with comments', async () => {
+            const {code} = await transform.with(options)`
+                import React from 'react'
+                import styled from '../../macro'
+
+                const App = ({disabled, type}) => styled(styles)\`
+                    /* extremely insightful comment */
+                    button {
+                        color: red;
+                    }
+                \`(
+                    <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should NOT process a variable inside a comment', async () => {
+            const {code} = await transform.with(options)`
+                import React from 'react'
+                import styled from '../../macro'
+
+                const App = ({disabled, type}) => styled(styles)\`
+                    /* extremely insightful comment w/ \${type} */
+                    button {
+                        color: red;
+                        height: \${disabled};
+                    }
+                \`(
+                    <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should NOT process a variable inside a comment, multiple comments', async () => {
+            const {code} = await transform.with(options)`
+                import React from 'react'
+                import styled from '../../macro'
+                import getHeight from './utils'
+
+                const App = ({disabled, type}) => styled(styles)\`
+                    /* extremely insightful comment w/ \${type} */
+                    button {
+                        /* yet another comment */
+                        color: red;
+                        height: \${disabled};
+                        /* height: \${getHeight(type)}; */
+                        background: \${color};
+                    }
+                \`(
+                    <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
+        it('should NOT process a variable inside a comment, multiple comments in a single quasi', async () => {
+            const {code} = await transform.with(options)`
+                import React from 'react'
+                import styled from '../../macro'
+                import getHeight from './utils'
+
+                const App = ({disabled, type}) => styled(styles)\`
+                    /* extremely insightful comment w/ \${type} */
+                    button {
+                        /* yet another comment */
+                        color: red;
+                        height: \${disabled};
+                        /* height: \${getHeight(type)}; */
+                        /* more comments */
+                        background: \${color};
+                    }
+                \`(
+                    <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
         it('should keep named imports', async () => {
             const {code} = await transform.with(options)`
                 import React from 'react'
