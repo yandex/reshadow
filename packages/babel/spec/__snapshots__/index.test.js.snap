@@ -115,6 +115,41 @@ const App = ({
 export default App;"
 `;
 
+exports[`babel macro should NOT process a variable inside a comment, multiple comments in a single quasi 1`] = `
+"import React from 'react';
+import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
+import getHeight from './utils';
+const styled_c8 = create([(__css__(\`/* extremely insightful comment w/ \${type} */
+.___button_1sfi5_1 {
+    /* yet another comment */
+    color: red;
+    height: var(--c8_1);
+    /* height: \${someVar}; */
+    /* more comments */
+    background: var(--c8_3);
+}\`
+/*__css_end__*/
+, \\"3895876906\\"), {
+  \\"__button\\": \`___button_1sfi5_1\`
+})]);
+
+const App = ({
+  disabled,
+  type
+}) => styled((set([styled_c8, styles], {
+  \\"--c8_1\\": disabled,
+  \\"--c8_3\\": color
+}), React.createElement(\\"button\\", map(\\"button\\", {
+  type: type,
+  disabled: disabled,
+  $$style: styled.$$style
+}, use({
+  theme: \\"normal\\"
+})), \\"content\\")));
+
+export default App;"
+`;
+
 exports[`babel macro should keep named imports 1`] = `
 "import React from 'react';
 import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";

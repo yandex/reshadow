@@ -571,6 +571,34 @@ describe('babel', () => {
             expect(code).toMatchSnapshot();
         });
 
+        it('should NOT process a variable inside a comment, multiple comments in a single quasi', async () => {
+            const {code} = await transform.with(options)`
+                import React from 'react'
+                import styled from '../../macro'
+                import getHeight from './utils'
+
+                const App = ({disabled, type}) => styled(styles)\`
+                    /* extremely insightful comment w/ \${type} */
+                    button {
+                        /* yet another comment */
+                        color: red;
+                        height: \${disabled};
+                        /* height: \${getHeight(type)}; */
+                        /* more comments */
+                        background: \${color};
+                    }
+                \`(
+                    <button type={type} disabled={disabled} use:theme="normal">
+                        content
+                    </button>
+                )
+
+                export default App
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+
         it('should keep named imports', async () => {
             const {code} = await transform.with(options)`
                 import React from 'react'

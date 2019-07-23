@@ -64,6 +64,23 @@ const defaultOptions = {
     processFiles: true,
 };
 
+const getIsInsideComment = (isInsideComment, lastString) => {
+    /**
+     * if we were inside a comment check if comment ended
+     */
+    if (isInsideComment) return !lastString.includes('*/');
+
+    /**
+     * if we were outside a comment check if comment started
+     */
+
+    // there can be multiple comments in a single quasi
+    const lastCommentOpenning = lastString.lastIndexOf('/*');
+    const lastCommentClosing = lastString.lastIndexOf('*/');
+
+    return lastCommentOpenning > lastCommentClosing;
+};
+
 module.exports = (babel, pluginOptions = {}) => {
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
@@ -173,14 +190,7 @@ module.exports = (babel, pluginOptions = {}) => {
         quasis.forEach(({value}, i) => {
             code += value.raw;
 
-            if (!isInsideComment) {
-                // there can be multiple comments in a single quasi
-                const lastCommentOpenning = value.raw.lastIndexOf('/*');
-                const lastCommentClosing = value.raw.lastIndexOf('*/');
-                isInsideComment = lastCommentOpenning > lastCommentClosing;
-            } else {
-                isInsideComment = !value.raw.includes('*/');
-            }
+            isInsideComment = getIsInsideComment(isInsideComment, value.raw);
 
             const node = expressions[i];
             if (node) {
@@ -225,22 +235,10 @@ module.exports = (babel, pluginOptions = {}) => {
 
                         if (index !== i) return acc;
 
-                        if (!isInsideComment) {
-                            const rawString = quasis[i].value.raw;
-                            // there can be multiple comments in a single quasi
-                            const lastCommentOpenning = rawString.lastIndexOf(
-                                '/*',
-                            );
-                            const lastCommentClosing = rawString.lastIndexOf(
-                                '*/',
-                            );
-                            isInsideComment =
-                                lastCommentOpenning > lastCommentClosing;
-                        } else {
-                            isInsideComment = !quasis[i].value.raw.includes(
-                                '*/',
-                            );
-                        }
+                        isInsideComment = getIsInsideComment(
+                            isInsideComment,
+                            quasis[i].value.raw,
+                        );
 
                         if (isInsideComment) return acc;
 
@@ -275,18 +273,15 @@ module.exports = (babel, pluginOptions = {}) => {
 
                 if (index !== i) return acc;
 
-                // similar to appendCode
-                // an attempt to not create css custom properties
-                // for commented template placeholder expressions
-                if (!isInsideComment) {
-                    const rawString = quasis[i].value.raw;
-                    // there can be multiple comments in a single quasi
-                    const lastCommentOpenning = rawString.lastIndexOf('/*');
-                    const lastCommentClosing = rawString.lastIndexOf('*/');
-                    isInsideComment = lastCommentOpenning > lastCommentClosing;
-                } else {
-                    isInsideComment = !quasis[i].value.raw.includes('*/');
-                }
+                /**
+                 * similar to appendCode
+                 * an attempt to avoid creation of redundant css custom properties
+                 * for commented template placeholder expressions
+                 */
+                isInsideComment = getIsInsideComment(
+                    isInsideComment,
+                    quasis[i].value.raw,
+                );
 
                 if (isInsideComment) return acc;
 
