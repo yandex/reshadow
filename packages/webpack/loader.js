@@ -1,6 +1,9 @@
 const path = require('path');
 const os = require('os');
 const findCacheDir = require('find-cache-dir');
+const loaderUtils = require('loader-utils');
+const mkdirp = require('mkdirp');
+const fs = require('fs');
 
 const VirtualModulesPlugin = require('webpack-virtual-modules');
 
@@ -9,30 +12,77 @@ const utils = require('@reshadow/utils');
 const virtualModules = new VirtualModulesPlugin();
 
 let cacheDirectory;
+let options;
 
-module.exports = function(source) {
-    cacheDirectory =
-        cacheDirectory || findCacheDir({name: 'reshadow'}) || os.tmpdir();
+const makeLoader = loader =>
+    function(...args) {
+        // Make the loader async
+        const callback = this.async();
 
+        loader
+            .apply(this, args)
+            .then(args => callback(null, ...args), err => callback(err));
+    };
+
+async function loader(source, inputSourceMap) {
     if (this.cacheable) this.cacheable();
 
-    const {compiler} = this._compilation;
+    options =
+        options ||
+        Object.assign(
+            {
+                getFilepath: filepath => {
+                    const hash = `${utils.getFileHash(filepath)}_${++index}`;
+                    const filename = `${hash}.css`;
 
-    /**
-     * We need to tap 'after-environment' hook by hands,
-     * because there is no 'official' register for the plugin
-     */
-    compiler.hooks.afterEnvironment.intercept({
-        name: 'VirtualModulesPlugin',
-        context: true,
-        register: tap => (tap.fn(), tap),
-    });
+                    return path.resolve(cacheDirectory, filename);
+                },
+                virtualFS: true,
+            },
+            loaderUtils.getOptions(this),
+        );
 
-    virtualModules.apply(compiler);
+    cacheDirectory =
+        cacheDirectory ||
+        options.cacheDirectory ||
+        findCacheDir({name: 'reshadow'}) ||
+        os.tmpdir();
 
-    const filepath = this.resourcePath;
+    let writeModule;
+
+    if (options.virtualFS) {
+        const {compiler} = this._compilation;
+
+        /**
+         * We need to tap 'after-environment' hook by hands,
+         * because there is no 'official' register for the plugin
+         */
+        compiler.hooks.afterEnvironment.intercept({
+            name: 'VirtualModulesPlugin',
+            context: true,
+            register: tap => (tap.fn(), tap),
+        });
+
+        virtualModules.apply(compiler);
+
+        writeModule = (filepath, content) => {
+            virtualModules.writeModule(filepath, content);
+        };
+    } else {
+        writeModule = (filepath, content) => {
+            return new Promise(resolve => {
+                mkdirp(path.dirname(filepath), () => {
+                    fs.writeFile(filepath, content, resolve);
+                });
+            });
+        };
+    }
+
+    const {resourcePath} = this;
 
     let index = 0;
+
+    const queue = [];
 
     const result = source
         .replace(
@@ -57,24 +107,27 @@ module.exports = function(source) {
                 );
                 code = code.trim().replace(/^[`'"]([\s\S]*?)[`'"]$/, '$1');
 
-                const hash = `${utils.getFileHash(filepath)}_${++index}`;
-                const filename = `${hash}.css`;
+                const filepath = options.getFilepath(resourcePath);
 
-                virtualModules.writeModule(
-                    path.resolve(cacheDirectory, filename),
-                    code
-                        .replace(/\\"/g, '"')
-                        .replace(/\\'/g, "'")
-                        .replace(/\\n/g, '\n'),
+                queue.push(
+                    writeModule(
+                        filepath,
+                        code
+                            .replace(/\\"/g, '"')
+                            .replace(/\\'/g, "'")
+                            .replace(/\\n/g, '\n'),
+                    ),
                 );
 
-                return `require('.cache/reshadow/${filename}')`;
+                const [requirePath] = filepath.split('node_modules/').slice(-1);
+
+                return `require('${requirePath}')`;
             },
         )
         .replace(/\/\*__reshadow-styles__:"(.*?)"\*\//, (match, dep) => {
             const depPath = utils.resolveDependency({
                 filename: dep,
-                basedir: path.dirname(filepath),
+                basedir: path.dirname(resourcePath),
             });
 
             this.dependency(depPath);
@@ -82,5 +135,9 @@ module.exports = function(source) {
             return '';
         });
 
-    return result;
-};
+    await Promise.all(queue);
+
+    return [result, inputSourceMap];
+}
+
+module.exports = makeLoader(loader);
