@@ -38,16 +38,25 @@ module.exports = function(source) {
         .replace(
             // Regexp below should match on the CSS code from strings like that:
             //
-            // __css__(`button {
-            //   /* Some CSS rules here... */
-            //   content: "*"; /* With some quotes maybe */
-            // }`
-            // /*__css_end__*/
+            // /*__reshadow_css_start__*/
+            // __css__(
+            //   /*__inner_css_start__*/
+            //   `button {
+            //     /* Some CSS rules here... */
+            //     content: "*"; /* With some quotes maybe */
+            //   }`
+            //   /*__inner_css_end__*/
             // , "2845693891")
+            // /*__reshadow_css_end__*/
             //
-            // We're using trailing block comment /*__css_end__*/ to find the end of the code.
-            /__css__\([`'"]((.|\r\n|\r|\n)*?)[`'"](\r\n|\r|\n)\/\*__css_end__\*\/((.|\r\n|\r|\n)*?)\)/g,
-            (match, code) => {
+            // We're using comment blocks to find the end of the code to extract.
+            /\/\*__reshadow_css_start__\*\/([\s\S]*)\/\*__reshadow_css_end__\*\//g,
+            (match, codeBlock) => {
+                let [, code] = codeBlock.match(
+                    /__inner_css_start__\*\/([\s\S]*)\/\*__inner_css_end__/,
+                );
+                code = code.trim().replace(/^[`'"]([\s\S]*?)[`'"]$/, '$1');
+
                 const hash = `${utils.getFileHash(filepath)}_${++index}`;
                 const filename = `${hash}.css`;
 

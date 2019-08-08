@@ -656,8 +656,12 @@ module.exports = (babel, pluginOptions = {}) => {
      * Adds a comment which is very useful to extract CSS in the bundler without
      * parsing the code back into AST.
      */
-    const addBundlerComment = node => {
-        t.addComment(node, 'trailing', '__css_end__');
+    const wrapBundlerComments = node => {
+        t.addComment(node, 'leading', `__reshadow_css_start__`);
+        t.addComment(node, 'trailing', `__reshadow_css_end__`);
+
+        t.addComment(node.arguments[0], 'leading', `__inner_css_start__`);
+        t.addComment(node.arguments[0], 'trailing', `__inner_css_end__`);
     };
 
     const visited = new WeakSet();
@@ -723,7 +727,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
             const hash = String(stringHash(raw));
 
-            addBundlerComment(quasi);
+            // addTrailingBundlerComment(quasi);
 
             p.replaceWith(
                 t.callExpression(t.identifier(addImport('__css__')), [
@@ -734,7 +738,10 @@ module.exports = (babel, pluginOptions = {}) => {
 
             ({node} = p);
 
-            if (!postcss) return;
+            if (!postcss) {
+                wrapBundlerComments(node);
+                return;
+            }
 
             let result;
 
@@ -756,10 +763,12 @@ module.exports = (babel, pluginOptions = {}) => {
                 ],
                 [],
             );
-            addBundlerComment(templateLiteral);
+            // addTrailingBundlerComment(templateLiteral);
             node.arguments[0] = templateLiteral;
 
             p.replaceWith(t.sequenceExpression([node, tokens]));
+
+            wrapBundlerComments(node);
         },
     };
 

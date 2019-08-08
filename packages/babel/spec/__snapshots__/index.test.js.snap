@@ -4,9 +4,15 @@ exports[`babel Vue should group props right 1`] = `
 "import _mergeJSXProps from \\"@vue/babel-helper-vue-jsx-merge-props\\";
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/vue\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`Button {color: var(--c8_0)}\`
-/*__css_end__*/
-, \\"3399371458\\")]);
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`Button {color: var(--c8_0)}\`
+/*__inner_css_end__*/
+, \\"3399371458\\")
+/*__reshadow_css_end__*/
+]);
 new Vue({
   el: \\"#app\\",
   render: h => styled((set([styled_c8], {
@@ -27,11 +33,17 @@ new Vue({
 exports[`babel Vue should pass classes 1`] = `
 "import styled, { set, create, css, map, __css__ } from \\"@reshadow/vue\\";
 import styles from './styles';
-const styled_c8 = create([__css__(\`Button + Button {
+const styled_c8 = create([
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`Button + Button {
     margin-left: 10px;
 }\`
-/*__css_end__*/
-, \\"1736617416\\")]);
+/*__inner_css_end__*/
+, \\"1736617416\\")
+/*__reshadow_css_end__*/
+]);
 new Vue({
   el: \\"#app\\",
   render: h => styled((set([styled_c8]), h(\\"div\\", map(\\"div\\", {
@@ -55,13 +67,19 @@ new Vue({
 exports[`babel macro should NOT process a variable inside a comment 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`/* extremely insightful comment w/ \${type} */
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`/* extremely insightful comment w/ \${type} */
 .___button_1pj20_1 {
     color: red;
     height: var(--c8_1);
 }\`
-/*__css_end__*/
-, \\"3720444030\\"), {
+/*__inner_css_end__*/
+, \\"3720444030\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_1pj20_1\`
 })]);
 
@@ -85,7 +103,11 @@ exports[`babel macro should NOT process a variable inside a comment, multiple co
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import getHeight from './utils';
-const styled_c8 = create([(__css__(\`/* extremely insightful comment w/ \${type} */
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`/* extremely insightful comment w/ \${type} */
 .___button_eg4jy_1 {
     /* yet another comment */
     color: red;
@@ -93,8 +115,10 @@ const styled_c8 = create([(__css__(\`/* extremely insightful comment w/ \${type}
     /* height: \${someVar}; */
     background: var(--c8_3);
 }\`
-/*__css_end__*/
-, \\"873612821\\"), {
+/*__inner_css_end__*/
+, \\"873612821\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_eg4jy_1\`
 })]);
 
@@ -119,7 +143,11 @@ exports[`babel macro should NOT process a variable inside a comment, multiple co
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import getHeight from './utils';
-const styled_c8 = create([(__css__(\`/* extremely insightful comment w/ \${type} */
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`/* extremely insightful comment w/ \${type} */
 .___button_1sfi5_1 {
     /* yet another comment */
     color: red;
@@ -128,8 +156,10 @@ const styled_c8 = create([(__css__(\`/* extremely insightful comment w/ \${type}
     /* more comments */
     background: var(--c8_3);
 }\`
-/*__css_end__*/
-, \\"3895876906\\"), {
+/*__inner_css_end__*/
+, \\"3895876906\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_1sfi5_1\`
 })]);
 
@@ -153,11 +183,17 @@ export default App;"
 exports[`babel macro should keep named imports 1`] = `
 "import React from 'react';
 import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_d2nb2_1 {
     color: red;
 }\`
-/*__css_end__*/
-, \\"790506970\\"), {
+/*__inner_css_end__*/
+, \\"790506970\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -177,11 +213,17 @@ export default App;"
 exports[`babel macro should merge use 1`] = `
 "import React from 'react';
 import styled, { use, set, create, css, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_d2nb2_1 {
     color: red;
 }\`
-/*__css_end__*/
-, \\"790506970\\"), {
+/*__inner_css_end__*/
+, \\"790506970\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -199,11 +241,17 @@ export default App;"
 exports[`babel macro should process module with macro 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_d2nb2_1 {
     color: red;
 }\`
-/*__css_end__*/
-, \\"790506970\\"), {
+/*__inner_css_end__*/
+, \\"790506970\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -223,12 +271,18 @@ export default App;"
 exports[`babel macro should process styles with comments 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`/* extremely insightful comment */
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`/* extremely insightful comment */
 .___button_xwari_1 {
     color: red;
 }\`
-/*__css_end__*/
-, \\"2049633721\\"), {
+/*__inner_css_end__*/
+, \\"2049633721\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_xwari_1\`
 })]);
 
@@ -251,12 +305,18 @@ import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\"
 
 /*__reshadow-styles__:\\"./styles.css\\"*/
 const { ...styles
-} = (__css__(\`button {
+} = (
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button {
     color: red;
 }
 \`
-/*__css_end__*/
-, \\"947371504\\"), {});
+/*__inner_css_end__*/
+, \\"947371504\\")
+/*__reshadow_css_end__*/
+, {});
 const styled_c8 = create([styles]);
 
 const App = ({
@@ -275,11 +335,17 @@ export default App;"
 exports[`babel postcss should process styles and add them runtime 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_d2nb2_1 {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_d2nb2_1 {
     color: red;
 }\`
-/*__css_end__*/
-, \\"790506970\\"), {
+/*__inner_css_end__*/
+, \\"790506970\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_d2nb2_1\`
 })]);
 
@@ -302,12 +368,18 @@ import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\"
 
 /*__reshadow-styles__:\\"./styles.css\\"*/
 const { ...styles
-} = (__css__(\`.___button_fo1gj_1 {
+} = (
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_fo1gj_1 {
     color: red;
 }
 \`
-/*__css_end__*/
-, \\"947371504\\"), {
+/*__inner_css_end__*/
+, \\"947371504\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_fo1gj_1\`
 });
 const styled_c8 = create([styles]);
@@ -328,13 +400,19 @@ export default App;"
 exports[`babel postcss should process styles with css 1`] = `
 "import React from 'react';
 import styled, { css, __css__, set, create, use, map } from \\"@reshadow/core\\";
-const styles = (__css__(\`
+const styles = (
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`
     .___button_1cx4s_1 {
         color: red;
     }
 \`
-/*__css_end__*/
-, \\"2958026746\\"), {
+/*__inner_css_end__*/
+, \\"2958026746\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_1cx4s_1\`
 });
 const styled_c8 = create([styles]);
@@ -355,13 +433,19 @@ export default App;"
 exports[`babel postcss should process styles with css local name 1`] = `
 "import React from 'react';
 import styled, { css as localCss, __css__, set, create, use, map } from \\"@reshadow/core\\";
-const styles = (__css__(\`
+const styles = (
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`
     .___button_1cx4s_1 {
         color: red;
     }
 \`
-/*__css_end__*/
-, \\"2958026746\\"), {
+/*__inner_css_end__*/
+, \\"2958026746\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_1cx4s_1\`
 });
 const styled_c8 = create([styles]);
@@ -382,9 +466,15 @@ export default App;"
 exports[`babel postcss should use cssnano 1`] = `
 "import React from 'react';
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_1n8fw_1{display:grid}\`
-/*__css_end__*/
-, \\"3581683094\\"), {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_1n8fw_1{display:grid}\`
+/*__inner_css_end__*/
+, \\"3581683094\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_1n8fw_1\`
 })]);
 
@@ -402,12 +492,18 @@ export default App;"
 exports[`babel postcss should use postcss-env 1`] = `
 "import React from 'react';
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_ltzzv_1 {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_ltzzv_1 {
     -webkit-transition: 1s;
     transition: 1s;
 }\`
-/*__css_end__*/
-, \\"1320178009\\"), {
+/*__inner_css_end__*/
+, \\"1320178009\\")
+/*__reshadow_css_end__*/
+, {
   \\"__button\\": \`___button_ltzzv_1\`
 })]);
 
@@ -425,12 +521,18 @@ export default App;"
 exports[`babel postcss should work with css-modules imports 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(__css__(\`.___button_1vljt_1 {
+const styled_c8 = create([(
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`.___button_1vljt_1 {
 
     color: red;
 }\`
-/*__css_end__*/
-, \\"4087429970\\"), {
+/*__inner_css_end__*/
+, \\"4087429970\\")
+/*__reshadow_css_end__*/
+, {
   \\"title\\": \`_title_2ms0f_1\`,
   \\"__button\\": \`___button_1vljt_1 _title_2ms0f_1\`
 })]);
@@ -452,11 +554,17 @@ exports[`babel should keep the links to styles if they cant hoist 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import baseStyles from './styles';
-const styled_c8 = create([baseStyles, __css__(\`button {
+const styled_c8 = create([baseStyles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button {
     color: red;
 }\`
-/*__css_end__*/
-, \\"790506970\\")]);
+/*__inner_css_end__*/
+, \\"790506970\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -622,11 +730,17 @@ export default App;"
 exports[`babel should transform with css-in-js code 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([__css__(\`button[disabled] {
+const styled_c8 = create([
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: red;
 }\`
-/*__css_end__*/
-, \\"1643207596\\")]);
+/*__inner_css_end__*/
+, \\"1643207596\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -645,11 +759,17 @@ exports[`babel should transform with css-in-js code with styles 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button[disabled] {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: red;
 }\`
-/*__css_end__*/
-, \\"1643207596\\")]);
+/*__inner_css_end__*/
+, \\"1643207596\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -668,12 +788,18 @@ exports[`babel should transform with css-in-js code with variables 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button[disabled] {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_1);
 }\`
-/*__css_end__*/
-, \\"162741067\\")]);
+/*__inner_css_end__*/
+, \\"162741067\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -698,12 +824,18 @@ exports[`babel should transform with css-in-js code with variables and avoid dup
 "import React from 'react';
 import styled, { set, create, css, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button {
     color: var(--c8_0);
     background-color: var(--c8_0);
 }\`
-/*__css_end__*/
-, \\"3172944636\\")]);
+/*__inner_css_end__*/
+, \\"3172944636\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   color
@@ -721,17 +853,29 @@ exports[`babel should transform with css-in-js code with variables in nested ele
 "import React from 'react';
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([__css__(\`div {
+const styled_c8 = create([
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`div {
     padding: 10px;
 }\`
-/*__css_end__*/
-, \\"309716193\\")]);
-const styled_12c = create([__css__(\`button[disabled] {
+/*__inner_css_end__*/
+, \\"309716193\\")
+/*__reshadow_css_end__*/
+]);
+const styled_12c = create([
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: var(--12c_0);
     background-color: var(--12c_1);
 }\`
-/*__css_end__*/
-, \\"1529897259\\")]);
+/*__inner_css_end__*/
+, \\"1529897259\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -756,12 +900,18 @@ exports[`babel should transform with css-in-js code with variables in sibling no
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button[disabled] {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_1);
 }\`
-/*__css_end__*/
-, \\"162741067\\")]);
+/*__inner_css_end__*/
+, \\"162741067\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -792,12 +942,18 @@ exports[`babel should transform with css-in-js code with variables with string i
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button[disabled] {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_1);
 }\`
-/*__css_end__*/
-, \\"162741067\\")]);
+/*__inner_css_end__*/
+, \\"162741067\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -819,12 +975,18 @@ exports[`babel should transform with css-in-js code with variables with string i
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button[disabled] {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button[disabled] {
     color: var(--c8_0);
     background-color: var(--c8_0);
 }\`
-/*__css_end__*/
-, \\"1346164042\\")]);
+/*__inner_css_end__*/
+, \\"1346164042\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   disabled,
@@ -845,12 +1007,18 @@ exports[`babel should transform with css-in-js code with variables without overh
 "import React from 'react';
 import styled, { set, create, css, __css__ } from \\"@reshadow/core\\";
 import styles from './styles';
-const styled_c8 = create([styles, __css__(\`button {
+const styled_c8 = create([styles,
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button {
     color: var(--c8_0);
     background-color: var(--c8_1);
 }\`
-/*__css_end__*/
-, \\"3608986237\\")]);
+/*__inner_css_end__*/
+, \\"3608986237\\")
+/*__reshadow_css_end__*/
+]);
 
 const App = ({
   color,
@@ -888,11 +1056,17 @@ export default App;"
 exports[`babel should work with just spread 1`] = `
 "import React from 'react';
 import styled, { set, create, css, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([__css__(\`button {
+const styled_c8 = create([
+/*__reshadow_css_start__*/
+__css__(
+/*__inner_css_start__*/
+\`button {
     padding: 5px 10px;
 }\`
-/*__css_end__*/
-, \\"1053722513\\")]);
+/*__inner_css_end__*/
+, \\"1053722513\\")
+/*__reshadow_css_end__*/
+]);
 
 const Button = props => styled((set([styled_c8]), React.createElement(\\"button\\", map(\\"button\\", props))));
 

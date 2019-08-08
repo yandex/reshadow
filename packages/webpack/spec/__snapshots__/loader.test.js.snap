@@ -3,7 +3,9 @@
 exports[`webpack inserts name and outputs JavaScript 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(require('.cache/reshadow/1409998408_1.css'), {
+const styled_c8 = create([(
+require('.cache/reshadow/1409998408_1.css')
+, {
   \\"__button\\": \`___button_1m9qx_1\`,
   \\"_disabled\\": \`__disabled_1m9qx_1\`
 })]);
