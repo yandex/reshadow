@@ -105,19 +105,21 @@ module.exports = (babel, pluginOptions = {}) => {
     let IMPORT = null;
     let cache = new Set();
     let FILE = null;
-
-    let index;
-    const hashById = id => Math.round(id * 100).toString(16);
-    const getHash = () => hashById(++index);
+    let FILENAME_HASH = '';
 
     let filename;
 
     let postcss;
     let cssFileRe = null;
 
+    let index;
+    const hashById = id => Math.round(id * 100).toString(16);
+    const getHash = () => hashById(++index);
+
     const pre = file => {
         ({filename} = file.opts);
 
+        FILENAME_HASH = stringHash(filename || '').toString(36);
         FILE = file;
         index = 1;
         STYLED = new Set();
@@ -180,6 +182,8 @@ module.exports = (babel, pluginOptions = {}) => {
         return getIndex;
     };
 
+    const getCSSVarName = index => `--${FILENAME_HASH}_${index}`;
+
     const appendCode = ({quasi, name, hash}) => {
         const {expressions, quasis} = quasi;
         let code = '';
@@ -200,7 +204,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     }}`;
                 } else {
                     const index = getIndex(node, i);
-                    code += `var(--${hash}_${index})`;
+                    code += `var(${getCSSVarName(index)})`;
                 }
             }
         });
@@ -243,7 +247,7 @@ module.exports = (babel, pluginOptions = {}) => {
                         if (isInsideComment) return acc;
 
                         const value =
-                            (i > 0 ? ';' : '') + `--${hash}_${index}:`;
+                            (i > 0 ? ';' : '') + getCSSVarName(index) + ':';
 
                         return acc.concat(
                             t.templateElement({
@@ -286,7 +290,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 if (isInsideComment) return acc;
 
                 return acc.concat(
-                    t.objectProperty(t.stringLiteral(`--${hash}_${index}`), x),
+                    t.objectProperty(t.stringLiteral(getCSSVarName(index)), x),
                 );
             }, []),
         );
@@ -725,7 +729,7 @@ module.exports = (babel, pluginOptions = {}) => {
 
             const {raw} = quasi.quasis[0].value;
 
-            const hash = String(stringHash(raw));
+            const hash = stringHash(raw).toString(36);
 
             // addTrailingBundlerComment(quasi);
 
