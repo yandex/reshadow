@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.67](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.66...v0.0.1-alpha.67) (2019-08-08)
+
+
+### Features
+
+* set target for the node scripts transpiling ([0348728](https://github.com/lttb/reshadow/commit/0348728))
+* **webpack:** support real fs and optional css chunk path getter ([ffca1d6](https://github.com/lttb/reshadow/commit/ffca1d6))
+
+
+
+
+
 ## [0.0.1-alpha.66](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.65...v0.0.1-alpha.66) (2019-08-08)
 
 
