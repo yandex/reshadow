@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/webpack",
-    "version": "0.0.1-alpha.49",
+    "version": "0.0.1-alpha.66",
     "description": "reshadow webpack utils",
     "main": "index.js",
     "repository": {
@@ -20,7 +20,7 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@reshadow/utils": "^0.0.1-alpha.30",
+        "@reshadow/utils": "^0.0.1-alpha.66",
         "find-cache-dir": "^3.0.0",
         "webpack-virtual-modules": "0.1.10"
     },
@@ -33,7 +33,7 @@
         "postcss-loader": "^3.0.0",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
-        "reshadow": "0.0.1-alpha.65",
+        "reshadow": "^0.0.1-alpha.66",
         "style-loader": "^0.23.1",
         "webpack": "^4.36.1"
     }

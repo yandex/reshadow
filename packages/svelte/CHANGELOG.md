@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.66](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.65...v0.0.1-alpha.66) (2019-08-08)
+
+
+### Bug Fixes
+
+* fix lint errors ([c78e96c](https://github.com/lttb/reshadow/commit/c78e96c))
+* **babel:** avoid css vars hashing collisions ([072ab49](https://github.com/lttb/reshadow/commit/072ab49))
+* **babel, webpack:** improve css code extracting ([82f119e](https://github.com/lttb/reshadow/commit/82f119e))
+
+
+
+
+
 ## [0.0.1-alpha.65](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.64...v0.0.1-alpha.65) (2019-06-07)
 
 **Note:** Version bump only for package @reshadow/svelte

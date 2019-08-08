@@ -1,6 +1,9 @@
 {
-    "packages": ["packages/*", "reshadow"],
-    "version": "0.0.1-alpha.65",
+    "packages": [
+        "packages/*",
+        "reshadow"
+    ],
+    "version": "0.0.1-alpha.66",
     "npmClient": "yarn",
     "useWorkspaces": true,
     "command": {
