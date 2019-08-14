@@ -5,9 +5,9 @@
 [![npm version](https://img.shields.io/npm/v/reshadow.svg?style=flat-square)](https://www.npmjs.com/package/reshadow)
 [![Babel Macro](https://img.shields.io/badge/babel--macro-%F0%9F%8E%A3-f5da55.svg?style=flat-square)](https://github.com/kentcdodds/babel-plugin-macros)
 
-Please check the [reshadow.dev](https://reshadow.dev) website to get more information and examples.
+### Markup and styles that feel right.
 
-**Write semantic markup and styles, as the soul wants**.
+Please check the [reshadow.dev](https://reshadow.dev) website to get more information and examples.
 
 **reshadow** provides the Shadow DOM developer experience, but for the Virtual DOM with the Component way.
 
