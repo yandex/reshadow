@@ -81,6 +81,8 @@ const getIsInsideComment = (isInsideComment, lastString) => {
     return lastCommentOpenning > lastCommentClosing;
 };
 
+const PROJECT_ROOT = process.cwd();
+
 module.exports = (babel, pluginOptions = {}) => {
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
@@ -119,7 +121,9 @@ module.exports = (babel, pluginOptions = {}) => {
     const pre = file => {
         ({filename} = file.opts);
 
-        FILENAME_HASH = stringHash(filename || '').toString(36);
+        FILENAME_HASH = stringHash(
+            path.relative(PROJECT_ROOT, filename || ''),
+        ).toString(36);
         FILE = file;
         index = 1;
         STYLED = new Set();

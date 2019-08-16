@@ -6,8 +6,8 @@ import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\"
 const styled_c8 = create([(
 require('.cache/reshadow/1409998408_1.css')
 , {
-  \\"__button\\": \`___button_1ckty_1\`,
-  \\"_disabled\\": \`__disabled_1ckty_1\`
+  \\"__button\\": \`___button_16ihb_1\`,
+  \\"_disabled\\": \`__disabled_16ihb_1\`
 })]);
 
 const App = ({
@@ -15,7 +15,7 @@ const App = ({
   type,
   color = 'grey'
 }) => styled((set([styled_c8], {
-  \\"--r5apxh_0\\": color
+  \\"--nbh5qg_0\\": color
 }), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
@@ -30,8 +30,8 @@ export default App;"
 `;
 
 exports[`webpack inserts name and outputs JavaScript 2`] = `
-".___button_1ckty_1.__disabled_1ckty_1 {
-    color: var(--r5apxh_0);
+".___button_16ihb_1.__disabled_16ihb_1 {
+    color: var(--nbh5qg_0);
     content: \\"'\\";
 }"
 `;
