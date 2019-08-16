@@ -100,10 +100,10 @@ async function loader(source, inputSourceMap) {
             // /*__reshadow_css_end__*/
             //
             // We're using comment blocks to find the end of the code to extract.
-            /\/\*__reshadow_css_start__\*\/([\s\S]*)\/\*__reshadow_css_end__\*\//g,
+            /\/\*__reshadow_css_start__\*\/([\s\S]*?)\/\*__reshadow_css_end__\*\//g,
             (match, codeBlock) => {
                 let [, code] = codeBlock.match(
-                    /__inner_css_start__\*\/([\s\S]*)\/\*__inner_css_end__/,
+                    /__inner_css_start__\*\/([\s\S]*?)\/\*__inner_css_end__/,
                 );
                 code = code.trim().replace(/^[`'"]([\s\S]*?)[`'"]$/, '$1');
 
