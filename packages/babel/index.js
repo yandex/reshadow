@@ -81,6 +81,8 @@ const getIsInsideComment = (isInsideComment, lastString) => {
     return lastCommentOpenning > lastCommentClosing;
 };
 
+const PROJECT_ROOT = process.cwd();
+
 module.exports = (babel, pluginOptions = {}) => {
     const options = Object.assign({}, defaultOptions, pluginOptions);
 
@@ -105,19 +107,23 @@ module.exports = (babel, pluginOptions = {}) => {
     let IMPORT = null;
     let cache = new Set();
     let FILE = null;
-
-    let index;
-    const hashById = id => Math.round(id * 100).toString(16);
-    const getHash = () => hashById(++index);
+    let FILENAME_HASH = '';
 
     let filename;
 
     let postcss;
     let cssFileRe = null;
 
+    let index;
+    const hashById = id => Math.round(id * 100).toString(16);
+    const getHash = () => hashById(++index);
+
     const pre = file => {
         ({filename} = file.opts);
 
+        FILENAME_HASH = stringHash(
+            path.relative(PROJECT_ROOT, filename || ''),
+        ).toString(36);
         FILE = file;
         index = 1;
         STYLED = new Set();
@@ -180,6 +186,8 @@ module.exports = (babel, pluginOptions = {}) => {
         return getIndex;
     };
 
+    const getCSSVarName = index => `--${FILENAME_HASH}_${index}`;
+
     const appendCode = ({quasi, name, hash}) => {
         const {expressions, quasis} = quasi;
         let code = '';
@@ -200,7 +208,7 @@ module.exports = (babel, pluginOptions = {}) => {
                     }}`;
                 } else {
                     const index = getIndex(node, i);
-                    code += `var(--${hash}_${index})`;
+                    code += `var(${getCSSVarName(index)})`;
                 }
             }
         });
@@ -243,7 +251,7 @@ module.exports = (babel, pluginOptions = {}) => {
                         if (isInsideComment) return acc;
 
                         const value =
-                            (i > 0 ? ';' : '') + `--${hash}_${index}:`;
+                            (i > 0 ? ';' : '') + getCSSVarName(index) + ':';
 
                         return acc.concat(
                             t.templateElement({
@@ -286,7 +294,7 @@ module.exports = (babel, pluginOptions = {}) => {
                 if (isInsideComment) return acc;
 
                 return acc.concat(
-                    t.objectProperty(t.stringLiteral(`--${hash}_${index}`), x),
+                    t.objectProperty(t.stringLiteral(getCSSVarName(index)), x),
                 );
             }, []),
         );
@@ -656,8 +664,12 @@ module.exports = (babel, pluginOptions = {}) => {
      * Adds a comment which is very useful to extract CSS in the bundler without
      * parsing the code back into AST.
      */
-    const addBundlerComment = node => {
-        t.addComment(node, 'trailing', '__css_end__');
+    const wrapBundlerComments = node => {
+        t.addComment(node, 'leading', `__reshadow_css_start__`);
+        t.addComment(node, 'trailing', `__reshadow_css_end__`);
+
+        t.addComment(node.arguments[0], 'leading', `__inner_css_start__`);
+        t.addComment(node.arguments[0], 'trailing', `__inner_css_end__`);
     };
 
     const visited = new WeakSet();
@@ -721,9 +733,9 @@ module.exports = (babel, pluginOptions = {}) => {
 
             const {raw} = quasi.quasis[0].value;
 
-            const hash = String(stringHash(raw));
+            const hash = stringHash(raw).toString(36);
 
-            addBundlerComment(quasi);
+            // addTrailingBundlerComment(quasi);
 
             p.replaceWith(
                 t.callExpression(t.identifier(addImport('__css__')), [
@@ -734,7 +746,10 @@ module.exports = (babel, pluginOptions = {}) => {
 
             ({node} = p);
 
-            if (!postcss) return;
+            if (!postcss) {
+                wrapBundlerComments(node);
+                return;
+            }
 
             let result;
 
@@ -756,10 +771,12 @@ module.exports = (babel, pluginOptions = {}) => {
                 ],
                 [],
             );
-            addBundlerComment(templateLiteral);
+            // addTrailingBundlerComment(templateLiteral);
             node.arguments[0] = templateLiteral;
 
             p.replaceWith(t.sequenceExpression([node, tokens]));
+
+            wrapBundlerComments(node);
         },
     };
 

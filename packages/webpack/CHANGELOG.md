@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.68](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.67...v0.0.1-alpha.68) (2019-08-16)
+
+
+### Bug Fixes
+
+* **webpack:** css content resolving by loader ([186d59c](https://github.com/lttb/reshadow/commit/186d59c))
+
+
+
+
+
+## [0.0.1-alpha.67](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.66...v0.0.1-alpha.67) (2019-08-08)
+
+
+### Features
+
+* **webpack:** support real fs and optional css chunk path getter ([ffca1d6](https://github.com/lttb/reshadow/commit/ffca1d6))
+
+
+
+
+
+## [0.0.1-alpha.66](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.65...v0.0.1-alpha.66) (2019-08-08)
+
+
+### Bug Fixes
+
+* **babel:** avoid css vars hashing collisions ([072ab49](https://github.com/lttb/reshadow/commit/072ab49))
+* **babel, webpack:** improve css code extracting ([82f119e](https://github.com/lttb/reshadow/commit/82f119e))
+* **webpack:** fix webpack loader ([3482355](https://github.com/lttb/reshadow/commit/3482355))
+
+
+
+
+
 ## [0.0.1-alpha.49](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.48...v0.0.1-alpha.49) (2019-05-31)
 
 **Note:** Version bump only for package @reshadow/webpack

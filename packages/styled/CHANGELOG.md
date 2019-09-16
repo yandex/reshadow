@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.66](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.65...v0.0.1-alpha.66) (2019-08-08)
+
+
+### Bug Fixes
+
+* fix lint errors ([c78e96c](https://github.com/lttb/reshadow/commit/c78e96c))
+
+
+
+
+
 ## [0.0.1-alpha.64](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.63...v0.0.1-alpha.64) (2019-06-04)
 
 

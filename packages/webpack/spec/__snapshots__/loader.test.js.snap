@@ -3,9 +3,11 @@
 exports[`webpack inserts name and outputs JavaScript 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";
-const styled_c8 = create([(require('.cache/reshadow/1409998408_1.css'), {
-  \\"__button\\": \`___button_1m9qx_1\`,
-  \\"_disabled\\": \`__disabled_1m9qx_1\`
+const styled_c8 = create([(
+require('.cache/reshadow/1409998408_1.css')
+, {
+  \\"__button\\": \`___button_16ihb_1\`,
+  \\"_disabled\\": \`__disabled_16ihb_1\`
 })]);
 
 const App = ({
@@ -13,7 +15,7 @@ const App = ({
   type,
   color = 'grey'
 }) => styled((set([styled_c8], {
-  \\"--c8_0\\": color
+  \\"--nbh5qg_0\\": color
 }), React.createElement(\\"button\\", map(\\"button\\", {
   type: type,
   disabled: disabled,
@@ -28,8 +30,8 @@ export default App;"
 `;
 
 exports[`webpack inserts name and outputs JavaScript 2`] = `
-".___button_1m9qx_1.__disabled_1m9qx_1 {
-    color: var(--c8_0);
+".___button_16ihb_1.__disabled_16ihb_1 {
+    color: var(--nbh5qg_0);
     content: \\"'\\";
 }"
 `;

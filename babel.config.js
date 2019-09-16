@@ -6,6 +6,25 @@ module.exports = {
     presets: [['@babel/preset-env']],
     overrides: [
         {
+            test: [
+                'packages/babel',
+                'packages/eslint',
+                'packages/postcss',
+                'packages/prettier',
+                'packages/webpack',
+            ],
+            presets: [
+                [
+                    '@babel/preset-env',
+                    {
+                        targets: {
+                            node: 8,
+                        },
+                    },
+                ],
+            ],
+        },
+        {
             test: react,
             presets: [
                 [
