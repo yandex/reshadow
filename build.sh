@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 rm -rf ./lib
-npx babel --config-file ../../babel.config.js . --out-dir lib --ignore './**/spec/*','./**/*.spec.js','node_modules'
-npx copyfiles -e './**/spec/**' -e './**/*.spec.js' package.json README.md yarn.lock -a lib
+npx copyfiles -e './**/spec/**' -e './**/*.spec.js' -e './lib' ./* -a lib
+npx babel --config-file ../../babel.config.js . --out-dir lib --ignore './**/spec/*','./**/*.spec.js','./lib','node_modules'
 cp ../../LICENSE ./lib/LICENSE
