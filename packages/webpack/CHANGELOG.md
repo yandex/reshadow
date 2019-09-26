@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.69](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.68...v0.0.1-alpha.69) (2019-09-26)
+
+
+### Bug Fixes
+
+* **babel:** update snapshots, fix css var hash generating ([5a5ab7d](https://github.com/lttb/reshadow/commit/5a5ab7d))
+
+
+
+
+
 ## [0.0.1-alpha.68](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.67...v0.0.1-alpha.68) (2019-08-16)
 
 
