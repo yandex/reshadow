@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/postcss",
-    "version": "0.0.1-alpha.69",
+    "version": "0.0.1-alpha.70",
     "description": "reshadow PostCSS plugin",
     "main": "index.js",
     "repository": {
