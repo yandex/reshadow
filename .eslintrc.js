@@ -52,5 +52,12 @@ module.exports = {
         'import/no-unresolved': ['error', {commonjs: true}],
         'import/no-extraneous-dependencies': ['error'],
         'react/prop-types': 'off',
+        'no-restricted-syntax': 'off',
+        'global-require': 'off',
+        'no-plusplus': 'off',
+        'no-continue': 'off',
+        'no-underscore-dangle': 'off',
+        'react/jsx-filename-extension': 'off',
+        'react/jsx-props-no-spreading': 'off',
     },
 };

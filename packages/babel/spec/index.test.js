@@ -3,13 +3,11 @@ const {transformAsync} = require('@babel/core');
 
 const getPlugin = options => [
     require.resolve('..'),
-    Object.assign(
-        {
-            files: false,
-            postcss: false,
-        },
-        options,
-    ),
+    {
+        files: false,
+        postcss: false,
+        ...options,
+    },
 ];
 
 const defaultOptions = {
@@ -30,6 +28,101 @@ const transform = code => transformCode(code);
 transform.with = params => code => transformCode(code, params);
 
 describe('babel', () => {
+    it('draft', async () => {
+        const {code} = await transform`
+            import React from 'react'
+            import styled, {css, use} from 'reshadow'
+
+            const getStyles = ({color, padding, bg}) => css\`
+                color: \${color};
+                padding: \${padding}px;
+                background: url(\${bg});
+
+                \${mixin};
+            \`
+
+            const typo = css\`
+                font-size: 20px;
+            \`
+
+            const padding = css\`
+                padding: \${padding[0]}px \${padding[1]}px;
+            \`
+
+            const Button = () => styled\`
+                color: red;
+            \`(<button />)
+
+            const MyButton = () => styled(typo)\`
+                button {
+                    background: red;
+                }
+            \`(
+                <button />
+            )
+
+            const SuperButton = ({color}) => styled\`
+                color: \${color};
+
+                \${mixin};
+                \${padding};
+
+                &[disabled] {
+                    \${transparent};
+                }
+            \`(
+                <button />
+            )
+
+            const Lol = () => styled(typo)\`
+                color: red;
+            \`(
+                <button disabled use:size="x" {...use({variant: 'normal'})} />
+            )
+
+            const Kek = () => styled(typo)\`
+                color: red;
+            \`(
+                <use.container>
+                    <button use:size={size} {...use(mods)} />
+                    <use:content />
+                    <lol as="span">help me</lol>
+                    <Button as={x ? Container : 'hah'}>not me</Button>
+                </use.container>
+            )
+
+            const Kok = () => styled(typo)\`
+                color: red;
+            \`(
+                <use.container>
+                    {items.map(x => styled(style2)(styled(style)(
+                        <item>{x}</item>
+                    )))}
+                </use.container>
+            )
+
+            const KAKA = () => styled(styles)(
+                a ? <button /> : <input />
+            )
+
+            const Button2 = ({size = 's', shape = 'rounded', ...props}) => styled\`
+                button {
+                    color: \${'red'};
+                }
+
+                button[type="button"] {
+                    \${_color};
+                    \${box({size, shape})};
+                    \${typo({size})};
+                    \${color('green')};
+                    \${color('red')({hover: true})};
+                }
+            \`(<button type="button" {...props} />);
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should transform the code', async () => {
         const {code} = await transform`
             import React from 'react'

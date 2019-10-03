@@ -1,4 +1,5 @@
 const parser = require('postcss-selector-parser');
+const stringHash = require('string-hash');
 
 const isPseudo = node => {
     return parser.isSelector(node) && parser.isPseudo(node.parent);
@@ -44,15 +45,22 @@ module.exports = ({scope}) => {
     const ELEM_PREFIX = '__';
 
     let elements = {};
+    let composes = {};
+    let selectorState = {};
+
+    let elementName = '';
 
     const addElem = tag => {
         elements[tag] = elements[tag] || {mods: {}, props: {}};
+
+        elementName = tag;
 
         return elements[tag];
     };
 
     const addMod = node => {
-        let {attribute, value = ''} = node;
+        const {attribute} = node;
+        let {value = ''} = node;
 
         let prev = node.prev();
 
@@ -81,7 +89,7 @@ module.exports = ({scope}) => {
         const elem = addElem(tag);
 
         if (node.namespace) {
-            name = `${scope}--${attribute}`;
+            name = `-${attribute}`;
             type = 'mods';
         } else {
             name = attribute;
@@ -91,7 +99,9 @@ module.exports = ({scope}) => {
         const values = elem[type];
 
         values[name] = values[name] || new Set();
-        values[name].add(value);
+        values[name].add(value || true);
+
+        selectorState[name] = value || true;
 
         const modName = MOD_PREFIX + name;
 
@@ -112,6 +122,22 @@ module.exports = ({scope}) => {
 
     const transform = selectors => {
         const hashes = new Set();
+
+        selectorState = {};
+
+        selectors.walkPseudos(node => {
+            if (!processNamespace(node)) {
+                return;
+            }
+
+            const {value} = node;
+
+            if (value !== ':root') return;
+
+            node.replaceWith(
+                parser.attribute({attribute: 'root', namespace: 'use'}),
+            );
+        });
 
         selectors.walkAttributes(node => {
             if (!processNamespace(node)) {
@@ -161,16 +187,61 @@ module.exports = ({scope}) => {
 
             node.replaceWith(parser.className({value: className}));
         });
+
+        if (Object.keys(selectorState).length > 0) {
+            const hash = stringHash(rule.selector).toString(16);
+            const hashSelector = `_${hash}`;
+
+            let inc = 0;
+
+            rule.walkDecls('composes', decl => {
+                // composesRule.append(decl.clone());
+                // decl.remove();
+
+                inc++;
+            });
+
+            const vars = {};
+
+            rule.walkAtRules('__PLACEHOLDER__', atRule => {
+                vars[atRule.params.replace(/_(.*?)_/, '$1')] = true;
+                inc++;
+                atRule.remove();
+            });
+
+            if (inc > 0) {
+                const composesRule = rule.clone({selector: `.${hashSelector}`});
+
+                rule.parent.insertAfter(rule, composesRule);
+
+                // remove the original rule
+                rule.remove();
+
+                // rule.selector = composesRule.selector;
+
+                selectorState.__keys__ = Object.keys(selectorState).length;
+
+                selectorState.__value__ = hashSelector;
+                if (rule.nodes.length === inc) {
+                    selectorState.__empty__ = true;
+                }
+                if (Object.keys(vars).length > 0) {
+                    selectorState.__vars__ = vars;
+                }
+                composes[elementName] = composes[elementName] || [];
+                composes[elementName].push(selectorState);
+            }
+        }
     };
 
     const processor = parser(transform);
 
     return {
         get state() {
-            return {elements};
+            return {elements, composes};
         },
         set state(values) {
-            ({elements} = values);
+            ({elements = {}, composes = {}} = values);
         },
         run(currentRule) {
             rule = currentRule;

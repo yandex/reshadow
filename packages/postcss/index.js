@@ -12,13 +12,12 @@ const fromPairs = x =>
 const sortByKeys = obj => fromPairs(Object.entries(obj).sort());
 
 module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
-    const {scope, stats} = Object.assign({}, config, options);
+    const {scope, stats} = {...config, ...options};
 
     const transform = createTransform({scope});
 
     return (root, result) => {
-        const elements = {};
-        transform.state = {elements};
+        transform.state = {};
 
         root.walkRules(ruleDecl => {
             const rule = ruleDecl;
@@ -39,6 +38,15 @@ module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
 
             rule.selector = selector;
         });
+
+        const {elements, composes} = transform.state;
+
+        if (Object.keys(composes).length > 0) {
+            root.append({
+                name: 'value',
+                params: `__comp__: '${JSON.stringify(composes)}'`,
+            });
+        }
 
         Object.entries(elements).forEach(([, value]) => {
             const {mods, props} = value;

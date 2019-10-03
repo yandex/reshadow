@@ -21,7 +21,8 @@
     },
     "dependencies": {
         "postcss": "7.0.17",
-        "postcss-selector-parser": "6.0.2"
+        "postcss-selector-parser": "6.0.2",
+        "string-hash": "^1.1.3"
     },
     "devDependencies": {
         "common-tags": "1.8.0"

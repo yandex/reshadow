@@ -19,7 +19,7 @@ module.exports = createMacro(
         const plugin = plugins.get(config);
         const program = state.file.path;
 
-        plugin.visitor.Program.enter(program, state);
+        plugin.pre(state);
 
         program.traverse(plugin.visitor);
 

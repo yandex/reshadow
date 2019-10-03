@@ -1,5 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`postcss draft 1`] = `
+""
+`;
+
 exports[`postcss should should keep elements under the :global 1`] = `
 ".__content button {
     color: red;
@@ -32,6 +36,20 @@ exports[`postcss should should not transform pseudo-classes like :nth-child 1`] 
 
 :dir(rtl) {
     background-color: red;
+}"
+`;
+
+exports[`postcss should transform :root 1`] = `
+":root {
+    color: red;
+}
+
+:root._disabled {
+    color: grey;
+}
+
+:root._type._type_submit {
+    border: 1px solid red;
 }"
 `;
 

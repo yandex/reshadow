@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+
 const _Symbol = key => (typeof Symbol !== 'undefined' ? Symbol(key) : key);
 
 const KEYS = {
@@ -5,6 +7,7 @@ const KEYS = {
     __store__: _Symbol('__store__'),
     __prev__: _Symbol('__prev__'),
     __use__: _Symbol('__use__'),
+    __composes__: _Symbol('__composes__'),
     __elements__: '__elements__',
     __style__: '$$style',
     __styles__: 'styles',
@@ -26,26 +29,27 @@ const use = obj => {
     return result;
 };
 
-const create = args => {
-    const len = args.length;
+function create() {
+    const len = arguments.length;
     let newStyle = {};
     let id = '';
     let vars = null;
     let uses = null;
+    const composes = {};
 
     for (let i = 0; i < len; i++) {
-        const style = args[i];
+        const style = arguments[i];
 
         if (!style) continue;
 
         if (!(KEYS.__id__ in style)) {
             style[KEYS.__id__] = ++index;
             style[KEYS.__store__] = {
-                ['_' + style[KEYS.__id__]]: style,
+                [`_${style[KEYS.__id__]}`]: style,
             };
         }
 
-        id += '_' + style[KEYS.__id__];
+        id += `_${style[KEYS.__id__]}`;
 
         if (style[KEYS.__style__]) {
             vars = Object.assign(vars || {}, style[KEYS.__style__]);
@@ -53,6 +57,16 @@ const create = args => {
 
         if (style[KEYS.__use__]) {
             uses = Object.assign(uses || {}, style[KEYS.__use__]);
+        }
+
+        if (style.__comp__) {
+            if (typeof style.__comp__ === 'string') {
+                style.__comp__ = JSON.parse(style.__comp__.slice(1, -1));
+            }
+            for (const elem in style.__comp__) {
+                composes[elem] = composes[elem] || [];
+                composes[elem].push(...style.__comp__[elem]);
+            }
         }
 
         if (style[KEYS.__store__][id]) {
@@ -71,8 +85,10 @@ const create = args => {
         style[KEYS.__store__][id] = newStyle;
         newStyle[KEYS.__id__] = index;
         newStyle[KEYS.__store__] = {
-            ['_' + style[KEYS.__id__]]: newStyle,
+            [`_${style[KEYS.__id__]}`]: newStyle,
         };
+
+        newStyle.__comp__ = composes;
     }
 
     if (vars || use) {
@@ -82,7 +98,7 @@ const create = args => {
     }
 
     return newStyle;
-};
+}
 
 const isSSR = !(
     typeof window !== 'undefined' &&
@@ -111,7 +127,7 @@ const clearStyles = () => {
 
 const RESHADOW_ID = '__reshadow__';
 
-const css = (code, hash) => {
+const inject = (code, hash, styles) => {
     const id = `reshadow-${hash}`;
 
     if (isSSR) {
@@ -134,13 +150,50 @@ const css = (code, hash) => {
     }
 
     css.innerHTML = code;
+
+    styles.__hash__ = hash;
+    return styles;
+};
+
+const __fn__ = styles => {
+    const fn = props => {
+        const result = __map__(styles, {'-root': true, ...props});
+        return result;
+    };
+    Object.setPrototypeOf(fn, styles);
+    return fn;
+};
+
+const __css__ = (styles, mappers = {}) => {
+    const hash = styles.__hash__;
+    if (typeof styles.__comp__ === 'string') {
+        styles.__comp__ = JSON.parse(styles.__comp__.slice(1, -1));
+    }
+    return Object.assign(__fn__(styles), {
+        __with__() {
+            const _styles = Object.create(styles);
+            const vars = {};
+
+            const len = arguments.length;
+            for (let i = 0; i < len; i++) {
+                const name = `--_${hash}-${i}`;
+                vars[name] = arguments[i];
+                if (i in mappers) {
+                    vars[name] = mappers[i][0] + vars[name] + mappers[i][1];
+                }
+            }
+
+            _styles[KEYS.__style__] = vars;
+            return __fn__(_styles);
+        },
+    });
 };
 
 let styles = {};
 let style;
 const stack = [];
 
-const styled = elem => {
+const _styled = elem => {
     const curr = stack.pop() || [];
 
     styles = curr[0] || styles;
@@ -152,25 +205,27 @@ const styled = elem => {
     return elem;
 };
 
-styled[KEYS.__styles__] = styles;
-
-const set = (args, newStyle) => {
-    const newStyles = create(args);
+function styled() {
+    const newStyles = create.apply(null, arguments);
 
     stack.push([styles, style]);
 
     styles = newStyles;
-    style = newStyle;
+    style = styles[KEYS.__style__];
     if (styles[KEYS.__style__]) {
         style = style
-            ? Object.assign({}, style, styles[KEYS.__style__])
+            ? {...style, ...styles[KEYS.__style__]}
             : styles[KEYS.__style__];
     }
     styled[KEYS.__styles__] = styles;
     styled[KEYS.__style__] = style;
-};
 
-const USE_PREFIX = 'use--';
+    return _styled;
+}
+
+styled[KEYS.__styles__] = styles;
+
+const USE_PREFIX = '-';
 const ELEMENT_PREFIX = '__';
 const MOD_PREFIX = '_';
 const MOD_SEPARATOR = '_';
@@ -217,12 +272,99 @@ const appendModifier = (styles, key, value, cn = '') => {
     return cn;
 };
 
+function processCompositionQueue(queue, done, key, value) {
+    const nextQueue = [];
+
+    for (const compose of queue) {
+        if (compose[key] === value) {
+            compose.__$keys__--;
+            if (compose.__$keys__ === 0) {
+                done.push(compose);
+            } else {
+                nextQueue.push(compose);
+            }
+        } else if (!(key in compose)) {
+            nextQueue.push(compose);
+        }
+    }
+
+    return nextQueue;
+}
+
+function buildQueue(element, styles) {
+    const currStyles = styles;
+    const composes = currStyles.__comp__ || {};
+
+    const elementComposes = composes[element] || [];
+    const commonComposes = composes.__common__ || [];
+    const queue = [];
+    for (
+        let i = 0,
+            len = Math.max(elementComposes.length, commonComposes.length);
+        i < len;
+        i++
+    ) {
+        if (elementComposes[i]) {
+            elementComposes[i].__$keys__ = Number(elementComposes[i].__keys__);
+            queue.push(elementComposes[i]);
+        }
+        if (commonComposes[i]) {
+            commonComposes[i].__$keys__ = Number(commonComposes[i].__keys__);
+            queue.push(commonComposes[i]);
+        }
+    }
+    return queue;
+}
+
+function __map__(styles, props) {
+    let cn = '';
+    const currStyles = styles;
+    const currProps = props;
+    const vars = {...styles[KEYS.__style__]};
+
+    let queue = buildQueue('', currStyles);
+    const done = [];
+
+    for (const key in currProps) {
+        if (key === KEYS.__use__ || key === KEYS.__style__) {
+            continue;
+        }
+
+        const value = currProps[key];
+
+        cn = appendModifier(currStyles, key, value, cn);
+
+        queue = processCompositionQueue(queue, done, key, value);
+    }
+
+    for (let i = 0; i < done.length; i++) {
+        const currDone = done[i];
+        let composed = currStyles[currDone.__value__];
+        composed = composed.replace(/\\:/g, ':');
+        cn = appendClassName(composed, cn);
+        if (currDone.__vars__) {
+            for (const v in currDone.__vars__) {
+                const key = `--_${v}`;
+                if (!(key in vars)) continue;
+                cn = appendClassName(vars[key]['_-root'], cn);
+                Object.assign(vars, vars[key][KEYS.__style__]);
+                delete vars[key];
+            }
+        }
+    }
+
+    return {[KEYS.__style__]: vars, '_-root': cn};
+}
+
 function map(element) {
     const currStyles = styled[KEYS.__styles__];
     const nextProps = {};
     let cn = appendElement(currStyles, element);
-    let vars = null;
+    const vars = {...styled[KEYS.__style__]};
     const uses = currStyles[KEYS.__use__] || {};
+
+    let queue = buildQueue(element, currStyles);
+    const done = [];
 
     const len = arguments.length;
 
@@ -234,10 +376,6 @@ function map(element) {
         if (!currProps) continue;
 
         useProps = useProps || currProps[KEYS.__use__];
-
-        if (!vars && KEYS.__style__ in currProps) {
-            vars = styled[KEYS.__style__];
-        }
 
         for (const key in currProps) {
             if (
@@ -259,8 +397,8 @@ function map(element) {
                 valueType === 'boolean' ||
                 valueType === 'number'
             ) {
-                const useKey = key + '_' + value;
-                if (key + '_' + true in uses || useKey in uses) {
+                const useKey = `${key}_${value}`;
+                if (`${key}_${true}` in uses || useKey in uses) {
                     cn = appendModifier(
                         currStyles,
                         USE_PREFIX + key,
@@ -275,17 +413,38 @@ function map(element) {
             }
 
             nextProps[key] = value;
+
+            queue = processCompositionQueue(queue, done, key, value);
         }
     }
 
     if (useProps) {
-        for (const key in useProps) {
-            const value = useProps[key];
-            cn = appendModifier(currStyles, USE_PREFIX + key, value, cn);
+        for (const mod in useProps) {
+            const value = useProps[mod];
+            const key = USE_PREFIX + mod;
+            cn = appendModifier(currStyles, key, value, cn);
+
+            queue = processCompositionQueue(queue, done, key, value);
         }
     }
 
     cn = appendClassName(nextProps[KEYS.__classProp__], cn);
+
+    for (let i = 0; i < done.length; i++) {
+        const currDone = done[i];
+        let composed = currStyles[currDone.__value__];
+        composed = composed.replace(/\\:/g, ':');
+        cn = appendClassName(composed, cn);
+        if (currDone.__vars__) {
+            for (const v in currDone.__vars__) {
+                const key = `--_${v}`;
+                if (!(key in vars)) continue;
+                cn = appendClassName(vars[key]['_-root'], cn);
+                Object.assign(vars, vars[key][KEYS.__style__]);
+                delete vars[key];
+            }
+        }
+    }
 
     if (cn) nextProps[KEYS.__classProp__] = cn;
 
@@ -293,7 +452,7 @@ function map(element) {
         nextProps.style =
             typeof style === 'string'
                 ? vars + (nextProps.style || '')
-                : Object.assign({}, vars, nextProps.style || {});
+                : Object.assign(vars, nextProps.style || {});
     }
 
     return nextProps;
@@ -303,11 +462,10 @@ module.exports = {
     __esModule: true,
     default: styled,
     use,
-    css,
+    inject,
     create,
-    set,
     map,
-    __css__: css,
+    __css__,
     __extract__: () => ({
         [KEYS.__styles__]: styled[[KEYS.__styles__]],
         [KEYS.__style__]: styled[[KEYS.__style__]],

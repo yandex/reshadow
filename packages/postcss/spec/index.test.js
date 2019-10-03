@@ -12,6 +12,29 @@ const createTransform = (options = {}) => {
 const transform = createTransform();
 
 describe('postcss', () => {
+    it('draft', () => {
+        const code = transform`
+            button {
+                color: red;
+            }
+
+            [type="button"][disabled] {
+                composes: hahaha;
+            }
+
+            button[disabled] {
+                color: grey;
+                composes: lol;
+            }
+
+            button[type="submit"] {
+                border: 1px solid red;
+            }
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
     it('should transform the code', () => {
         const code = transform`
             button {
@@ -23,6 +46,24 @@ describe('postcss', () => {
             }
 
             button[type="submit"] {
+                border: 1px solid red;
+            }
+        `;
+
+        expect(code).toMatchSnapshot();
+    });
+
+    it('should transform :root', () => {
+        const code = transform`
+            :root {
+                color: red;
+            }
+
+            :root[disabled] {
+                color: grey;
+            }
+
+            :root[type="submit"] {
                 border: 1px solid red;
             }
         `;
@@ -68,6 +109,10 @@ describe('postcss', () => {
 
             button:global([disabled])[|variant=normal] {
                 background-color: gray;
+            }
+
+            :global(:root) {
+                padding: 10px;
             }
         `;
 

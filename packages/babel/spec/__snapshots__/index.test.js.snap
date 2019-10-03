@@ -64,6 +64,8 @@ new Vue({
 });"
 `;
 
+exports[`babel draft 1`] = `""`;
+
 exports[`babel macro should NOT process a variable inside a comment 1`] = `
 "import React from 'react';
 import styled, { set, create, css, use, map, __css__ } from \\"@reshadow/core\\";

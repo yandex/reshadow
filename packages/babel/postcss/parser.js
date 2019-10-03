@@ -7,6 +7,7 @@ const resolve = require('resolve');
 const path = require('path');
 
 const AsyncParser = require('css-modules-loader-core/lib/parser');
+
 const importRegexp = /^:import\((.+)\)$/;
 
 const pathFetcher = (filepath, relativeTo) =>
