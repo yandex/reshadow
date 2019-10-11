@@ -4,7 +4,7 @@ declare function id<A extends JSX.Element>(node: A): A;
 
 declare function taggedStyled(
   strs: TemplateStringsArray,
-  ...values: any[]
+  ...values: (string | number)[]
 ): typeof id;
 declare function taggedStyled<A extends JSX.Element>(node: A): A;
 
@@ -13,7 +13,7 @@ declare function styled<S extends { [key: string]: string }>(
 ): typeof taggedStyled;
 declare function styled(
   strs: TemplateStringsArray,
-  ...values: any[]
+  ...values: (string | number)[]
 ): typeof id;
 
 export declare var use: (<S extends { [key: string]: any }>(value: S) => {}) & {
@@ -26,7 +26,7 @@ export declare function css(
 ): { [key: string]: string };
 export declare function keyframes(
   strs: TemplateStringsArray,
-  ...values: any[]
+  ...values: (string | number)[]
 ): string;
 
 declare var jsx: typeof createElement;
