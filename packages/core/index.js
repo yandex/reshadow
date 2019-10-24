@@ -38,7 +38,7 @@ const create = args => {
 
         if (!style) continue;
 
-        if (!(KEYS.__id__ in style)) {
+        if (!style[KEYS.__id__]) {
             style[KEYS.__id__] = ++index;
             style[KEYS.__store__] = {
                 ['_' + style[KEYS.__id__]]: style,
