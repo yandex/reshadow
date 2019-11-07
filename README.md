@@ -270,7 +270,12 @@ Add `reshadow/postcss` to the plugin list.
 
 ```js
 module.exports = {
-    plugins: ['reshadow/postcss'],
+    plugins: [require('reshadow/postcss')],
+
+    // Or object style
+    // plugins: {
+    //     'reshadow/postcss': true,
+    // },
 };
 ```
 
