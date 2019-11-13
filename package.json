@@ -1,4 +1,5 @@
 {
+    "name": "reshadow-org",
     "private": true,
     "workspaces": [
         "packages/*",
@@ -16,6 +17,7 @@
     },
     "homepage": "https://reshadow.dev",
     "scripts": {
+        "prepublishOnly": "npm run build",
         "build": "npx lerna run --scope '@reshadow/*' build && npx lerna run --scope 'reshadow' build",
         "test": "jest",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
