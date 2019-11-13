@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.71](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.70...v0.0.1-alpha.71) (2019-10-24)
+
+
+### Features
+
+* **core:** fix IE11 symbol bug ([e81a481](https://github.com/lttb/reshadow/commit/e81a481))
+
+
+
+
+
 ## [0.0.1-alpha.70](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.69...v0.0.1-alpha.70) (2019-09-30)
 
 **Note:** Version bump only for package @reshadow/core
