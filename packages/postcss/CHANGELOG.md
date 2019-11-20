@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.72](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.71...v0.0.1-alpha.72) (2019-11-20)
+
+
+### Features
+
+* **postcss:** root plugin option ([551d2f5](https://github.com/lttb/reshadow/commit/551d2f5))
+
+
+
+
+
 ## [0.0.1-alpha.70](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.69...v0.0.1-alpha.70) (2019-09-30)
 
 **Note:** Version bump only for package @reshadow/postcss

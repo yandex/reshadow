@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/webpack",
-    "version": "0.0.1-alpha.71",
+    "version": "0.0.1-alpha.72",
     "description": "reshadow webpack utils",
     "main": "index.js",
     "repository": {
@@ -35,7 +35,7 @@
         "postcss-loader": "^3.0.0",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
-        "reshadow": "^0.0.1-alpha.71",
+        "reshadow": "^0.0.1-alpha.72",
         "style-loader": "^0.23.1",
         "webpack": "^4.36.1"
     }
