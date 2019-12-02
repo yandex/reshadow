@@ -7,7 +7,7 @@ import {createElement, type Node, type ComponentType} from 'react';
 declare function taggedStyled<S: string[]>(S, ...any[]): <A: Node>(A) => A;
 declare function taggedStyled<A: Node>(A): A;
 
-declare function styled<S: {[key: string]: string}>(
+declare function styled<S: ?{[key: string]: string}>(
     ...S[]
 ): typeof taggedStyled;
 declare function styled<S: string[]>(S, ...any[]): <A: Node>(A) => A;
@@ -16,6 +16,10 @@ declare export var use: (({}) => {||}) & {[string]: ComponentType<any>};
 
 declare export function css<S: string[]>(S, ...any[]): {[key: string]: string};
 declare export function keyframes<S: string[]>(S, ...any[]): string;
+
+/** TODO: improve types for helpers */
+declare export function create(Object[]): {[key: string]: string};
+declare export function map(string, ...args: Object[]): Object;
 
 declare export var jsx: typeof createElement;
 
