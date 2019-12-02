@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.73](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.72...v0.0.1-alpha.73) (2019-12-02)
+
+
+### Features
+
+* **react:** add types for helpers ([62e1337](https://github.com/lttb/reshadow/commit/62e1337))
+
+
+
+
+
 ## [0.0.1-alpha.71](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.70...v0.0.1-alpha.71) (2019-10-24)
 
 **Note:** Version bump only for package @reshadow/react
