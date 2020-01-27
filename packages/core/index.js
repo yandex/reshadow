@@ -111,6 +111,8 @@ const clearStyles = () => {
 
 const RESHADOW_ID = '__reshadow__';
 
+const appendChildToDocumentHead = element => document.head.appendChild(element);
+
 const css = (code, hash) => {
     const id = `reshadow-${hash}`;
 
@@ -123,8 +125,16 @@ const css = (code, hash) => {
     if (!container) {
         container = document.createElement('object');
         container.id = RESHADOW_ID;
-        document.head.appendChild(container);
+
+        if (document.head) {
+            appendChildToDocumentHead(container);
+        } else {
+            document.addEventListener('DOMContentLoaded', () => {
+                appendChildToDocumentHead(container);
+            });
+        }
     }
+
     let css = document.getElementById(id);
     if (!css) {
         css = document.createElement('style');
