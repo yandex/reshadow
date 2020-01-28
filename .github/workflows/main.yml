@@ -13,8 +13,6 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: "8.x"
-            - name: Install yarn
-              uses: borales/actions-yarn@v2.0.0
             - name: Install dependencies
               uses: borales/actions-yarn@v2.0.0
               with:
@@ -22,7 +20,7 @@ jobs:
             - name: Running linter
               uses: borales/actions-yarn@v2.0.0
               with:
-                  cmd: lint -- --ignore-pattern '/examples/'
+                  cmd: lint --ignore-pattern '/examples/'
 
     test:
         name: Tests
@@ -34,8 +32,6 @@ jobs:
               uses: actions/setup-node@v1
               with:
                   node-version: "8.x"
-            - name: Install yarn
-              uses: borales/actions-yarn@v2.0.0
             - name: Install dependencies
               uses: borales/actions-yarn@v2.0.0
               with:
@@ -43,8 +39,8 @@ jobs:
             - name: Running tests
               uses: borales/actions-yarn@v2.0.0
               with:
-                  cmd: test -- --coverage
-            - name: Coverage
-              uses: borales/actions-yarn@v2.0.0
+                  cmd: test --coverage
+            - name: Check coverage
+              uses: coverallsapp/github-action@master
               with:
-                  cmd: coveralls
+                  github-token: ${{ secrets.GITHUB_TOKEN }}
