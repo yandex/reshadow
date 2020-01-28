@@ -3,8 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-    build:
-        name: Build
+    lint:
+        name: Lint
         runs-on: ubuntu-latest
 
         steps:
@@ -19,13 +19,6 @@ jobs:
               uses: borales/actions-yarn@v2.0.0
               with:
                   cmd: install
-
-    lint:
-        name: Lint
-        needs: build
-        runs-on: ubuntu-latest
-
-        steps:
             - name: Running linter
               uses: borales/actions-yarn@v2.0.0
               with:
@@ -33,10 +26,20 @@ jobs:
 
     test:
         name: Tests
-        needs: build
         runs-on: ubuntu-latest
 
         steps:
+            - uses: actions/checkout@v2
+            - name: Use Node.js 8.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "8.x"
+            - name: Install yarn
+              uses: borales/actions-yarn@v2.0.0
+            - name: Install dependencies
+              uses: borales/actions-yarn@v2.0.0
+              with:
+                  cmd: install
             - name: Running tests
               uses: borales/actions-yarn@v2.0.0
               with:
