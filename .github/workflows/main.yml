@@ -1,0 +1,33 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js 8.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: '8.x'
+    - name: Install yarn
+      uses: borales/actions-yarn@v2.0.0
+    - name: Install dependencies
+      run: yarn install
+
+  lint:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Lint
+        run: yarn lint -- --ignore-pattern '/examples/'
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Running tests
+      run: yarn test -- --coverage && yarn coveralls
