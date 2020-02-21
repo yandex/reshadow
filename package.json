@@ -21,18 +21,6 @@
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "lint": "eslint --ext .jsx,.js ."
     },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.{js,jsx}": [
-            "eslint",
-            "git add",
-            "npm test -- -b --findRelatedTests"
-        ]
-    },
     "devDependencies": {
         "@arkweid/lefthook": "^0.7.1",
         "@babel/cli": "^7.5.5",
