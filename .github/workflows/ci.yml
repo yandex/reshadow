@@ -21,19 +21,19 @@ jobs:
                   node-version: "8.x"
 
             - name: Install dependencies
-              uses: borales/actions-yarn@v2.0.0
+              uses: borales/actions-yarn@v2.1.0
               with:
                   cmd: install
 
             - name: Running linter
               if: matrix.kind == 'lint'
-              uses: borales/actions-yarn@v2.0.0
+              uses: borales/actions-yarn@v2.1.0
               with:
                   cmd: lint --ignore-pattern '/examples/'
 
             - name: Running tests
               if: matrix.kind == 'unit_tests'
-              uses: borales/actions-yarn@v2.0.0
+              uses: borales/actions-yarn@v2.1.0
               with:
                   cmd: test --coverage
 
