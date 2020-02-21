@@ -1,53 +1,44 @@
-name: CI
+name: ci
 
 on: [push]
 
 jobs:
-    lint:
-        name: "Lint (OS: ${{ matrix.os }})"
+    build:
+        name: "{{ matrix.kind }} on ${{ matrix.os }}"
         runs-on: ${{ matrix.os }}
         timeout-minutes: 60
         strategy:
             matrix:
                 os: [macOS-latest, windows-2019, ubuntu-18.04]
+                kind: ["lint", "unit_tests"]
 
         steps:
             - uses: actions/checkout@v2
+
             - name: Use Node.js 8.x
               uses: actions/setup-node@v1
               with:
                   node-version: "8.x"
+
             - name: Install dependencies
               uses: borales/actions-yarn@v2.0.0
               with:
                   cmd: install
+
             - name: Running linter
+              if: matrix.kind == 'lint'
               uses: borales/actions-yarn@v2.0.0
               with:
                   cmd: lint --ignore-pattern '/examples/'
 
-    test:
-        name: "Unit-tests (OS: ${{ matrix.os }})"
-        runs-on: ${{ matrix.os }}
-        strategy:
-            matrix:
-                os: [macOS-latest, windows-2019, ubuntu-18.04]
-
-        steps:
-            - uses: actions/checkout@v2
-            - name: Use Node.js 8.x
-              uses: actions/setup-node@v1
-              with:
-                  node-version: "8.x"
-            - name: Install dependencies
-              uses: borales/actions-yarn@v2.0.0
-              with:
-                  cmd: install
             - name: Running tests
+              if: matrix.kind == 'unit_tests'
               uses: borales/actions-yarn@v2.0.0
               with:
                   cmd: test --coverage
+
             - name: Check coverage
+              if: matrix.kind == 'unit_tests'
               uses: coverallsapp/github-action@master
               with:
                   github-token: ${{ secrets.GITHUB_TOKEN }}
