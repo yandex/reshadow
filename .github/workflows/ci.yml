@@ -4,8 +4,12 @@ on: [push]
 
 jobs:
     lint:
-        name: Lint
-        runs-on: ubuntu-latest
+        name: "Lint (OS: ${{ matrix.os }})"
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 60
+        strategy:
+            matrix:
+                os: [macOS-latest, windows-2019, ubuntu-18.04]
 
         steps:
             - uses: actions/checkout@v2
@@ -23,8 +27,11 @@ jobs:
                   cmd: lint --ignore-pattern '/examples/'
 
     test:
-        name: Tests
-        runs-on: ubuntu-latest
+        name: "Unit-tests (OS: ${{ matrix.os }})"
+        runs-on: ${{ matrix.os }}
+        strategy:
+            matrix:
+                os: [macOS-latest, windows-2019, ubuntu-18.04]
 
         steps:
             - uses: actions/checkout@v2
