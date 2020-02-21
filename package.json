@@ -62,7 +62,6 @@
         "jest-environment-enzyme": "^7.0.1",
         "jest-enzyme": "^7.0.1",
         "lerna": "^3.16.1",
-        "lint-staged": "^9.2.0",
         "prettier": "^1.18.2",
         "rollup": "^1.17.0",
         "rollup-plugin-commonjs": "^10.0.1",
