@@ -1,0 +1,10 @@
+pre-commit:
+    commands:
+        lint:
+            glob: "*.{js,jsx,ts,tsx}"
+            run: eslint {staged_files}
+        # git-add:
+        #     run: git add .
+        test:
+            glob: "*.{js,jsx,ts,tsx}"
+            run: jest -b --findRelatedTests {staged_files}
