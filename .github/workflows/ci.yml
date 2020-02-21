@@ -4,12 +4,11 @@ on: [push]
 
 jobs:
     build:
-        name: "${{ matrix.kind }} on ${{ matrix.os }}"
-        runs-on: ${{ matrix.os }}
+        name: "${{ matrix.kind }}"
+        runs-on: ubuntu-latest
         timeout-minutes: 60
         strategy:
             matrix:
-                os: [macOS-latest, windows-2019, ubuntu-18.04]
                 kind: ["lint", "unit_tests"]
 
         steps:
