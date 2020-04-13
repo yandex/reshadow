@@ -2,7 +2,7 @@ const path = require('path');
 const resolve = require('resolve');
 const stringHash = require('string-hash');
 
-const tags = require('./html-tags');
+const tags = require('./tags');
 
 const componentRe = /^[A-Z][a-zA-Z]*/;
 const isCustomElement = name =>
