@@ -19,7 +19,10 @@ module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
         options,
     );
 
-    const transform = createTransform({scope});
+    const transform = createTransform({
+        scope,
+        scopeBehavior: options.scopeBehaviour,
+    });
 
     return (root, result) => {
         if (
