@@ -24,8 +24,8 @@ const isSkippedPseudo = node => {
     return SKIP_PSEUDO_LIST.has(value) || value.startsWith(':nth-');
 };
 
-module.exports = ({scope, scopeBehavior}) => {
-    const isGlobalScope = scopeBehavior === 'global';
+module.exports = ({scope, scopeBehaviour}) => {
+    const isGlobalScope = scopeBehaviour === 'global';
 
     const processNamespace = node => {
         const {parent} = node;
