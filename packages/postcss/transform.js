@@ -4,7 +4,13 @@ const isPseudo = node => {
     return parser.isSelector(node) && parser.isPseudo(node.parent);
 };
 
+const LOCAL_PSEUDO = ':local';
 const GLOBAL_PSEUDO = ':global';
+
+const isLocal = node => {
+    const {value} = node.parent;
+    return value === LOCAL_PSEUDO;
+};
 
 const isGlobal = node => {
     const {value} = node.parent;
@@ -18,19 +24,30 @@ const isSkippedPseudo = node => {
     return SKIP_PSEUDO_LIST.has(value) || value.startsWith(':nth-');
 };
 
-module.exports = ({scope}) => {
+module.exports = ({scope, scopeBehaviour}) => {
+    const isGlobalScope = scopeBehaviour === 'global';
+
     const processNamespace = node => {
         const {parent} = node;
 
         if (isPseudo(parent)) {
-            if (isGlobal(parent)) {
+            if (!isGlobalScope && isGlobal(parent)) {
                 parent.parent.replaceWith(node);
                 return false;
+            }
+
+            if (isGlobalScope && isLocal(parent)) {
+                parent.parent.replaceWith(node);
+                return true;
             }
 
             if (isSkippedPseudo(parent)) {
                 return false;
             }
+        }
+
+        if (isGlobalScope) {
+            return false;
         }
 
         return (

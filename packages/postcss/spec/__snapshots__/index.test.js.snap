@@ -1,5 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`postcss global scope should global and local scope correct 1`] = `
+"content .__button {
+    color: red;
+}
+
+button[aria-hidden] {
+    opacity: 0;
+}
+
+button._disabled[|variant=normal] {
+    background-color: gray;
+}"
+`;
+
 exports[`postcss should should keep elements under the :global 1`] = `
 ".__content button {
     color: red;

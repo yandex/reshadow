@@ -3,6 +3,7 @@ const createTransform = require('./transform');
 
 const config = {
     scope: 'use',
+    scopeBehaviour: 'local',
     stats: false,
     root: false,
 };
@@ -13,13 +14,16 @@ const fromPairs = x =>
 const sortByKeys = obj => fromPairs(Object.entries(obj).sort());
 
 module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
-    const {scope, stats, root: projectRoot} = Object.assign(
+    const {scope, scopeBehaviour, stats, root: projectRoot} = Object.assign(
         {},
         config,
         options,
     );
 
-    const transform = createTransform({scope});
+    const transform = createTransform({
+        scope,
+        scopeBehaviour,
+    });
 
     return (root, result) => {
         if (

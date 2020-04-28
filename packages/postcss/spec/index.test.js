@@ -154,4 +154,26 @@ describe('postcss', () => {
             expect(code).toMatchSnapshot();
         });
     });
+
+    describe('global scope', () => {
+        const transform = createTransform({scopeBehaviour: 'global'});
+
+        it('should global and local scope correct', () => {
+            const code = transform`
+                content :local(button) {
+                    color: red;
+                }
+
+                button[aria-hidden] {
+                    opacity: 0;
+                }
+
+                button:local([disabled])[|variant=normal] {
+                    background-color: gray;
+                }
+            `;
+
+            expect(code).toMatchSnapshot();
+        });
+    });
 });
