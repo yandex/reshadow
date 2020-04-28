@@ -1,0 +1,43 @@
+name: ci
+
+on: [push]
+
+jobs:
+    build:
+        name: "${{ matrix.kind }}"
+        runs-on: ubuntu-latest
+        timeout-minutes: 60
+        strategy:
+            matrix:
+                kind: ["lint", "unit_tests"]
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Use Node.js 8.x
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "8.x"
+
+            - name: Install dependencies
+              uses: borales/actions-yarn@v2.1.0
+              with:
+                  cmd: install
+
+            - name: Running linter
+              if: matrix.kind == 'lint'
+              uses: borales/actions-yarn@v2.1.0
+              with:
+                  cmd: lint --ignore-pattern '/examples/'
+
+            - name: Running tests
+              if: matrix.kind == 'unit_tests'
+              uses: borales/actions-yarn@v2.1.0
+              with:
+                  cmd: test --coverage
+
+            - name: Check coverage
+              if: matrix.kind == 'unit_tests'
+              uses: coverallsapp/github-action@master
+              with:
+                  github-token: ${{ secrets.GITHUB_TOKEN }}

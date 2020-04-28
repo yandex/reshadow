@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.75](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.74...v0.0.1-alpha.75) (2020-04-20)
+
+
+### Features
+
+* **utils:** support svg tag names ([8aa44cc](https://github.com/lttb/reshadow/commit/8aa44cc))
+
+
+
+
+
 ## [0.0.1-alpha.74](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.73...v0.0.1-alpha.74) (2020-02-11)
 
 **Note:** Version bump only for package reshadow
