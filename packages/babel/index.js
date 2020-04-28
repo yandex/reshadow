@@ -236,41 +236,45 @@ module.exports = (babel, pluginOptions = {}) => {
 
         if (options.stringStyle) {
             let isInsideComment = false;
-            return t.templateLiteral(
-                expressions
-                    .reduce((acc, x, i) => {
-                        const index = getIndex(x, i);
+            const newQuasis = [];
+            const newExpressions = [];
 
-                        if (index !== i) return acc;
+            for (let i = 0; i < expressions.length; i++) {
+                const x = expressions[i];
+                const index = getIndex(x, i);
 
-                        isInsideComment = getIsInsideComment(
-                            isInsideComment,
-                            quasis[i].value.raw,
-                        );
+                if (index !== i) continue;
 
-                        if (isInsideComment) return acc;
+                isInsideComment = getIsInsideComment(
+                    isInsideComment,
+                    quasis[i].value.raw,
+                );
 
-                        const value =
-                            (i > 0 ? ';' : '') + getCSSVarName(index) + ':';
+                if (isInsideComment) continue;
 
-                        return acc.concat(
-                            t.templateElement({
-                                raw: value,
-                                cooked: value,
-                            }),
-                        );
-                    }, [])
-                    .concat(
-                        t.templateElement(
-                            {
-                                raw: ';',
-                                cooked: ';',
-                            },
-                            true,
-                        ),
-                    ),
-                expressions,
+                const value = (i > 0 ? ';' : '') + getCSSVarName(index) + ':';
+
+                newQuasis.push(
+                    t.templateElement({
+                        raw: value,
+                        cooked: value,
+                    }),
+                );
+
+                newExpressions.push(x);
+            }
+
+            newQuasis.push(
+                t.templateElement(
+                    {
+                        raw: ';',
+                        cooked: ';',
+                    },
+                    true,
+                ),
             );
+
+            return t.templateLiteral(newQuasis, newExpressions);
         }
 
         let isInsideComment = false;

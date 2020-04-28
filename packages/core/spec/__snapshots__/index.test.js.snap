@@ -3,7 +3,7 @@
 exports[`babel should transform the code 1`] = `
 <button
   class="__button _use--theme_normal button"
-  style="--63m3ay_0:grey"
+  style="--g8zzmi_0:grey"
 >
   <div
     class="__use--content"
@@ -22,7 +22,7 @@ exports[`babel should transform the code 2`] = `
 <button
   class="__button _type_submit _disabled _use--theme_normal button"
   disabled=""
-  style="--63m3ay_0:grey"
+  style="--g8zzmi_0:grey"
   type="submit"
 >
   <div
