@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {KEYS, map, use, create} from '@reshadow/core';
 import {createStyled, css, keyframes} from '@reshadow/runtime';
-import tags from '@reshadow/utils/html-tags';
+import tags from '@reshadow/utils/tags';
 
 export function getDisplayName(Base) {
     return Base.displayName || Base.name || 'Component';

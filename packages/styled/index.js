@@ -7,7 +7,7 @@ import {
     createCSS,
 } from '@reshadow/runtime';
 import coreStyled, {KEYS, map} from '@reshadow/core';
-import tags from '@reshadow/utils/html-tags';
+import tags from '@reshadow/utils/tags';
 import {ThemeContext} from 'theming';
 import isReactProp from 'is-react-prop';
 
@@ -230,7 +230,7 @@ tags.forEach(tag => {
 });
 
 export * from 'theming';
-export {createGlobalStyle} from '@reshadow/styled/global';
+export {createGlobalStyle} from './global';
 
 export function isStyledComponent(target) {
     return target && typeof target.styledComponentId === 'string';
