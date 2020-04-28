@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.76](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.75...v0.0.1-alpha.76) (2020-04-28)
+
+
+### Bug Fixes
+
+* correct scopeBehaviour spelling ([29d7406](https://github.com/lttb/reshadow/commit/29d74068b2219d19171a60e9595f355cd1e1c777))
+* **postcss:** scope detection ([39f0198](https://github.com/lttb/reshadow/commit/39f0198a228f5c12e537deeedd8fd30bd7c99541))
+
+
+
+
+
 ## [0.0.1-alpha.72](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.71...v0.0.1-alpha.72) (2019-11-20)
 
 

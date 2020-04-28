@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.76](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.75...v0.0.1-alpha.76) (2020-04-28)
+
+
+### Bug Fixes
+
+* **react, styled:** fix tags import ([7ae9a85](https://github.com/lttb/reshadow/commit/7ae9a85c59958307ab846e2171d0fdb9c1685c9c))
+
+
+
+
+
 ## [0.0.1-alpha.75](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.74...v0.0.1-alpha.75) (2020-04-20)
 
 **Note:** Version bump only for package @reshadow/styled

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.76](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.75...v0.0.1-alpha.76) (2020-04-28)
+
+
+### Bug Fixes
+
+* **babel:** fix quasis count ([1a0b16d](https://github.com/lttb/reshadow/commit/1a0b16d33947dd11ba0dcf9e9000350f5021933f))
+
+
+
+
+
 ## [0.0.1-alpha.75](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.74...v0.0.1-alpha.75) (2020-04-20)
 
 **Note:** Version bump only for package @reshadow/babel

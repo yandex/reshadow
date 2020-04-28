@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.76](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.75...v0.0.1-alpha.76) (2020-04-28)
+
+
+### Bug Fixes
+
+* correct scopeBehaviour spelling ([29d7406](https://github.com/lttb/reshadow/commit/29d74068b2219d19171a60e9595f355cd1e1c777))
+* **babel:** fix quasis count ([1a0b16d](https://github.com/lttb/reshadow/commit/1a0b16d33947dd11ba0dcf9e9000350f5021933f))
+* **postcss:** scope detection ([39f0198](https://github.com/lttb/reshadow/commit/39f0198a228f5c12e537deeedd8fd30bd7c99541))
+* **react, styled:** fix tags import ([7ae9a85](https://github.com/lttb/reshadow/commit/7ae9a85c59958307ab846e2171d0fdb9c1685c9c))
+
+
+### Features
+
+* update README badges ([774ce75](https://github.com/lttb/reshadow/commit/774ce7540ada2748d8ce9aa1373d761d4ac5da79))
+* **ci:** Add matrix of operating systems ([1e0c000](https://github.com/lttb/reshadow/commit/1e0c00041d94ec5e285157188b3412adb0966642))
+* **ci:** CI build fixes ([9298353](https://github.com/lttb/reshadow/commit/92983537f5de414fc2898962475326203e320bae))
+* **ci:** Fix GitHub Actions CI build ([1dcd57a](https://github.com/lttb/reshadow/commit/1dcd57af1300ae27a7e2393f5d4c37de7f6dcd74))
+* **ci:** Fix matrix.kind naming on task ([5d9eed5](https://github.com/lttb/reshadow/commit/5d9eed5bf83ef83ed99effb9c3f3b926b75ab5c4))
+* **ci:** Remove Travis CI config ([2b26835](https://github.com/lttb/reshadow/commit/2b26835d6d37f327773eed8f1854aa05561a577a))
+* **ci:** Removed build job ([53a4bc1](https://github.com/lttb/reshadow/commit/53a4bc1bbdd42862f85e2be476ae62ecaee480e6))
+* **ci:** Removed OS matrix ([a553fb0](https://github.com/lttb/reshadow/commit/a553fb0564d1c57c6321e4faa285c71eab32e933))
+* **ci:** Renamed main.yml to ci.yml ([8abaa16](https://github.com/lttb/reshadow/commit/8abaa167ad6b3ac2e2071939d7967671cef10b70))
+* **ci:** Reworked with matrix strategy ([1b9bf4a](https://github.com/lttb/reshadow/commit/1b9bf4a832db610ac07be3b159bd41fe0d306ce9))
+* **ci:** Updated version of yarn action ([55219a8](https://github.com/lttb/reshadow/commit/55219a8979ba5238859af393b132a9ad14a1ba34))
+* **ci:** Use GitHub Actions ([7bf9bb7](https://github.com/lttb/reshadow/commit/7bf9bb7746a929fc0115fcfff108ed1a2113ae0b))
+* **git-hooks:** Cleanup package.json ([b90b56a](https://github.com/lttb/reshadow/commit/b90b56a3c01ebe804c4c0de0f18dc743ce138ead))
+* **git-hooks:** Installed lefthook package ([46d561e](https://github.com/lttb/reshadow/commit/46d561e271c710610fa1bd4d0c6a5f178993b4dc))
+* **git-hooks:** lefthook.yml ([ebb664d](https://github.com/lttb/reshadow/commit/ebb664dfc85aeff80dc74c8eba70fdb6a68a8588))
+* **git-hooks:** lefthook.yml ([f81f7d5](https://github.com/lttb/reshadow/commit/f81f7d5e4b92ea00a89a8999a11873375002d91a))
+* **git-hooks:** Removed husky package ([540cb3e](https://github.com/lttb/reshadow/commit/540cb3ea5374ae1812052ab803a43eaf388127d6))
+* **git-hooks:** Removed lint-staged package ([ff9e627](https://github.com/lttb/reshadow/commit/ff9e6272f2e5a66adf234d70b230d0667c942e21))
+
+
+
+
+
 ## [0.0.1-alpha.75](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.74...v0.0.1-alpha.75) (2020-04-20)
 
 
