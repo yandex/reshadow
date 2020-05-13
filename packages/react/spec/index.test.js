@@ -234,4 +234,20 @@ describe('react', () => {
         expect(wrapper.render()).toMatchSnapshot();
         expect(getStyles()).toMatchSnapshot();
     });
+
+    it('should work with Fragments', () => {
+        const Button = ({children}) => styled`
+            button {
+                margin: 10px;
+            }
+        `(
+            <>
+                <button>{children}</button>
+            </>,
+        );
+
+        const wrapper = shallow(<Button>click me</Button>);
+        expect(wrapper.render()).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
 });
