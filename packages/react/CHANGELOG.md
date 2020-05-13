@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.77](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.76...v0.0.1-alpha.77) (2020-05-13)
+
+
+### Bug Fixes
+
+* **react:** support React.Fragment ([ba71466](https://github.com/lttb/reshadow/commit/ba714660d711ca4c7ddd20aed6be98bfe4af7b33))
+
+
+
+
+
 ## [0.0.1-alpha.76](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.75...v0.0.1-alpha.76) (2020-04-28)
 
 
