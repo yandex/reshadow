@@ -158,3 +158,13 @@ exports[`react should apply styles 1`] = `
 `;
 
 exports[`react should apply styles 2`] = `".__button_olz31h{color:red;}"`;
+
+exports[`react should work with Fragments 1`] = `
+<button
+  class="__button_2wxhvw"
+>
+  click me
+</button>
+`;
+
+exports[`react should work with Fragments 2`] = `".__button_2wxhvw{margin:10px;}"`;
