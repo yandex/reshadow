@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.78](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.77...v0.0.1-alpha.78) (2020-06-01)
+
+
+### Bug Fixes
+
+* **react:** support nullable elements ([3a20b2e](https://github.com/lttb/reshadow/commit/3a20b2ef254106ee49841388061bd1e72e457384))
+
+
+
+
+
 ## [0.0.1-alpha.77](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.76...v0.0.1-alpha.77) (2020-05-13)
 
 
