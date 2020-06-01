@@ -43,6 +43,10 @@ const reactStyled = createStyled(elem => {
     const style = styled[KEYS.__style__];
     let result = styled(elem);
 
+    if (result === null || result === undefined) {
+        return result;
+    }
+
     /**
      * At the moment, we just skip styles inlining with root Fragments
      * TODO(lttb): support dynamic and inline styles for Components with Fragments root node
@@ -53,7 +57,7 @@ const reactStyled = createStyled(elem => {
 
     if (style && result) {
         result = React.cloneElement(result, {
-            style: Object.assign({}, style, result.props.style),
+            style: Object.assign({}, style, result.props && result.props.style),
         });
     }
     return result;
