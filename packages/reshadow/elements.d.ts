@@ -1,5 +1,5 @@
-type CustomElement<T> = T extends any
-  ? ({ as: T } & JSX.IntrinsicElements[T])
+type CustomElement<T = 'div'> = T extends any
+  ? ({ as?: T } & JSX.IntrinsicElements[T])
   : never;
 
 declare namespace JSX {
