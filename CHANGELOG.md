@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-issue-118.1](https://github.com/lttb/reshadow/compare/v0.0.1-issue-118.0...v0.0.1-issue-118.1) (2020-06-05)
+
+
+### Bug Fixes
+
+* **runtime:** fix variables fallback ([4060a11](https://github.com/lttb/reshadow/commit/4060a11bc2c247fc75c2718d657f220bf576e039))
+
+
+
+
+
 ## [0.0.1-issue-118.0](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.78...v0.0.1-issue-118.0) (2020-06-05)
 
 
