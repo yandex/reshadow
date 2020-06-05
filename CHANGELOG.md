@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-issue-118.0](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.78...v0.0.1-issue-118.0) (2020-06-05)
+
+
+### Features
+
+* support publish build ([57c59e9](https://github.com/lttb/reshadow/commit/57c59e932055dfa931ebe062eef21ed77c78f1cf))
+* **runtime:** support dynamic variables fallback, [#118](https://github.com/lttb/reshadow/issues/118) ([034fd91](https://github.com/lttb/reshadow/commit/034fd911bcbdb479d33bf3955360bb5924f21e58))
+
+
+
+
+
 ## [0.0.1-alpha.79](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.78...v0.0.1-alpha.79) (2020-06-05)
 
 
