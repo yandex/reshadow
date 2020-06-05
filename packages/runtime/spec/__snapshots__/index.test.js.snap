@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`runtime should use dynamic variables fallback 1`] = `".__button_1pacrc6{color:red;}"`;
+exports[`runtime should use dynamic variables fallback 1`] = `".__button_812yns{padding:2rem 4rem;color:red;border:0.5rem solid;}"`;
 
 exports[`runtime should work with keyframes 1`] = `"_qrjiv5"`;
 

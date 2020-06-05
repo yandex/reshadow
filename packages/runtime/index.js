@@ -59,8 +59,7 @@ const createCSS = (options = {}) => {
                 mixinTokens.push(value);
                 Object.assign(mixinUses, value[KEYS.__use__]);
             } else if (variablesFallback) {
-                str[i] = value;
-                continue;
+                mixins[i] = value;
             } else {
                 const name = '--' + hash + '_' + i;
 
@@ -88,8 +87,6 @@ const createCSS = (options = {}) => {
             for (let i = 1; i < arguments.length; i++) {
                 if (i in mixins) {
                     values.push(mixins[i]);
-                } else if (variablesFallback) {
-                    continue;
                 } else {
                     values.push('var(' + keys[pointer] + ')');
                     pointer++;

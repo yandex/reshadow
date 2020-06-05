@@ -40,7 +40,9 @@ describe('runtime', () => {
 
         css`
             button {
+                padding: 2rem 4rem;
                 color: ${'red'};
+                border: 0.5rem solid;
             }
         `;
 
