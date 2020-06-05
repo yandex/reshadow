@@ -60,6 +60,7 @@ const createCSS = (options = {}) => {
                 Object.assign(mixinUses, value[KEYS.__use__]);
             } else if (variablesFallback) {
                 mixins[i] = value;
+                mixinsHash += '_' + value;
             } else {
                 const name = '--' + hash + '_' + i;
 
