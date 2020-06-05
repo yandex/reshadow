@@ -17,6 +17,7 @@
     "homepage": "https://reshadow.dev",
     "scripts": {
         "build": "npx lerna run --scope '@reshadow/*' build && npx lerna run --scope 'reshadow' build",
+        "prepublishOnly": "lerna run build",
         "test": "jest",
         "coveralls": "cat ./coverage/lcov.info | coveralls",
         "lint": "eslint --ext .jsx,.js ."
@@ -50,7 +51,7 @@
         "jest": "25.4.0",
         "jest-environment-enzyme": "7.1.2",
         "jest-enzyme": "7.1.2",
-        "lerna": "^3.16.1",
+        "lerna": "3.22.0",
         "prettier": "^1.18.2",
         "rollup": "^1.17.0",
         "rollup-plugin-commonjs": "^10.0.1",
