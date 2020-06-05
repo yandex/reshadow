@@ -8,6 +8,7 @@ const getStyles = () =>
         .join('');
 
 let keyframes;
+let css;
 
 describe('runtime', () => {
     beforeEach(() => {
@@ -16,7 +17,7 @@ describe('runtime', () => {
         });
 
         jest.isolateModules(() => {
-            ({keyframes} = require('..'));
+            ({keyframes, css} = require('..'));
         });
     });
 
@@ -31,6 +32,18 @@ describe('runtime', () => {
         `;
 
         expect(pulse).toMatchSnapshot();
+        expect(getStyles()).toMatchSnapshot();
+    });
+
+    it('should use dynamic variables fallback', () => {
+        css.setOptions({variablesFallback: true});
+
+        css`
+            button {
+                color: ${'red'};
+            }
+        `;
+
         expect(getStyles()).toMatchSnapshot();
     });
 });

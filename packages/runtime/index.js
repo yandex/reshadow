@@ -13,16 +13,19 @@ const checkMixin = code => {
 
 const unitRe = /^[\s\n\r]*(cm|mm|in|px|pt|pc|em|ex|ch|rem|vw|vh|vmin|vmax|%)[\s\n\r]*[,;)]/;
 
-const createCSS = ({
-    parse = defaultParse,
-    elements = true,
-    attributes = true,
-    classes = true,
-    onlyNamespaced = false,
-} = {}) => {
+const createCSS = (options = {}) => {
     const cache = {};
 
     function css() {
+        const {
+            parse = defaultParse,
+            elements = true,
+            attributes = true,
+            classes = true,
+            onlyNamespaced = false,
+            variablesFallback = false,
+        } = options;
+
         const str = [...arguments[0]];
         const hash = stringHash(str.join('')).toString(36);
         let mixinsHash = '';
@@ -55,6 +58,9 @@ const createCSS = ({
 
                 mixinTokens.push(value);
                 Object.assign(mixinUses, value[KEYS.__use__]);
+            } else if (variablesFallback) {
+                str[i] = value;
+                continue;
             } else {
                 const name = '--' + hash + '_' + i;
 
@@ -82,6 +88,8 @@ const createCSS = ({
             for (let i = 1; i < arguments.length; i++) {
                 if (i in mixins) {
                     values.push(mixins[i]);
+                } else if (variablesFallback) {
+                    continue;
                 } else {
                     values.push('var(' + keys[pointer] + ')');
                     pointer++;
@@ -116,6 +124,10 @@ const createCSS = ({
         tokens[KEYS.__style__] = Object.assign(vars, mixinVars);
         return tokens;
     }
+
+    css.setOptions = newOptions => {
+        Object.assign(options, newOptions);
+    };
 
     return css;
 };
