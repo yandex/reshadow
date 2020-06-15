@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-issue-119.0](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.78...v0.0.1-issue-119.0) (2020-06-15)
+
+
+### Features
+
+* **webpack:** support module.css postfix, resolve [#119](https://github.com/lttb/reshadow/issues/119) ([5844ca1](https://github.com/lttb/reshadow/commit/5844ca1dad96eb986ea34ff04ded2fe0ece2979f))
+
+
+
+
+
 ## [0.0.1-alpha.78](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.77...v0.0.1-alpha.78) (2020-06-01)
 
 **Note:** Version bump only for package @reshadow/webpack

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-issue-119.0](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.78...v0.0.1-issue-119.0) (2020-06-15)
+
+**Note:** Version bump only for package @reshadow/styled
+
+
+
+
+
 ## [0.0.1-alpha.78](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.77...v0.0.1-alpha.78) (2020-06-01)
 
 **Note:** Version bump only for package @reshadow/styled
