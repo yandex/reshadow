@@ -36,7 +36,12 @@ export default (entry, options = {}) => {
                     test: /\.js$/,
                     include: [__dirname],
                     use: [
-                        path.resolve(__dirname, '../loader.js'),
+                        {
+                            loader: path.resolve(__dirname, '../loader.js'),
+                            options: {
+                                modules: true,
+                            },
+                        },
                         {
                             loader: 'babel-loader',
                             options: {

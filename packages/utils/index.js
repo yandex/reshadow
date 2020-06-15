@@ -20,4 +20,5 @@ module.exports = {
     resolveDependency,
     isCustomElement,
     getFileHash,
+    stringHash,
 };
