@@ -31,10 +31,13 @@ async function loader(source, inputSourceMap) {
         options ||
         Object.assign(
             {
-                getFilepath: filepath => {
-                    const hash = `${utils.getFileHash(filepath)}_${++index}`;
-                    const filename = `${hash}.css`;
+                modules: false,
+                getFilename: (filepath, code) => {
+                    const codeHash = utils.stringHash(code);
 
+                    return `${codeHash}${options.modules ? '.module' : ''}.css`;
+                },
+                getFilepath: filename => {
                     return path.resolve(cacheDirectory, filename);
                 },
                 virtualFS: true,
@@ -80,8 +83,6 @@ async function loader(source, inputSourceMap) {
 
     const {resourcePath} = this;
 
-    let index = 0;
-
     const queue = [];
 
     const result = source
@@ -105,19 +106,18 @@ async function loader(source, inputSourceMap) {
                 let [, code] = codeBlock.match(
                     /__inner_css_start__\*\/([\s\S]*?)\/\*__inner_css_end__/,
                 );
-                code = code.trim().replace(/^[`'"]([\s\S]*?)[`'"]$/, '$1');
+                code = code
+                    .trim()
+                    .replace(/^[`'"]([\s\S]*?)[`'"]$/, '$1')
+                    .replace(/\\"/g, '"')
+                    .replace(/\\'/g, "'")
+                    .replace(/\\n/g, '\n');
 
-                const filepath = options.getFilepath(resourcePath);
-
-                queue.push(
-                    writeModule(
-                        filepath,
-                        code
-                            .replace(/\\"/g, '"')
-                            .replace(/\\'/g, "'")
-                            .replace(/\\n/g, '\n'),
-                    ),
+                const filepath = options.getFilepath(
+                    options.getFilename(resourcePath, code),
                 );
+
+                queue.push(writeModule(filepath, code));
 
                 const [requirePath] = filepath.split('node_modules/').slice(-1);
 
