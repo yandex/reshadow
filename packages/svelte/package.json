@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/svelte",
-    "version": "0.0.1-alpha.80",
+    "version": "0.0.1-alpha.81",
     "description": "reshadow svelte",
     "main": "index.js",
     "repository": {
@@ -24,8 +24,8 @@
         "@babel/parser": "^7.5.5",
         "@babel/traverse": "^7.5.5",
         "@babel/types": "^7.5.5",
-        "@reshadow/babel": "0.0.1-alpha.80",
-        "@reshadow/core": "0.0.1-alpha.80",
+        "@reshadow/babel": "0.0.1-alpha.81",
+        "@reshadow/core": "0.0.1-alpha.81",
         "common-tags": "1.8.0",
         "svelte": "^3.6.7"
     }
