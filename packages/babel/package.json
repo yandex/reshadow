@@ -31,7 +31,7 @@
         "css-modules-loader-core": "^1.1.0",
         "cssnano": "^4.1.10",
         "generic-names": "^2.0.1",
-        "postcss": "^7.0.17",
+        "postcss": "^8.2.10",
         "postcss-import-sync2": "^1.1.0",
         "postcss-mixins": "^6.2.2",
         "postcss-modules-extract-imports": "^2.0.0",
