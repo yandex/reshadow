@@ -10,7 +10,7 @@
         "url": "git+https://github.com/lttb/reshadow.git"
     },
     "author": "Kenzhaev Artur <kenzhaev.artur@gmail.com>",
-    "license": "MIT",
+    "license": "MPL-2.0",
     "bugs": {
         "url": "https://github.com/lttb/reshadow/issues"
     },
