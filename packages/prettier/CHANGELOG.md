@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1-alpha.82](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.81...v0.0.1-alpha.82) (2022-02-11)
+
+**Note:** Version bump only for package @reshadow/prettier
+
+
+
+
+
 ## [0.0.1-alpha.81](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.80...v0.0.1-alpha.81) (2021-04-15)
 
 **Note:** Version bump only for package @reshadow/prettier

@@ -1,6 +1,6 @@
 {
     "name": "@reshadow/styled",
-    "version": "0.0.1-alpha.81",
+    "version": "0.0.1-alpha.82",
     "description": "reshadow styled-components API",
     "main": "index.js",
     "repository": {
@@ -20,10 +20,10 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@reshadow/core": "0.0.1-alpha.81",
-        "@reshadow/react": "0.0.1-alpha.81",
-        "@reshadow/runtime": "0.0.1-alpha.81",
-        "@reshadow/utils": "0.0.1-alpha.81",
+        "@reshadow/core": "^0.0.1-alpha.82",
+        "@reshadow/react": "^0.0.1-alpha.82",
+        "@reshadow/runtime": "^0.0.1-alpha.82",
+        "@reshadow/utils": "^0.0.1-alpha.82",
         "is-react-prop": "1.0.0",
         "stylis": "3.5.4",
         "theming": "3.2.0"
