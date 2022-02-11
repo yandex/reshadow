@@ -8754,7 +8754,7 @@ postcss-image-set-function@^3.0.1:
     postcss "^7.0.2"
     postcss-values-parser "^2.0.0"
 
-postcss-import-sync2@^1.1.0:
+postcss-import-sync2@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/postcss-import-sync2/-/postcss-import-sync2-1.1.0.tgz#768fa23bc7e2248d0560553e42e75e38c841b2d6"
   integrity sha512-wPjRneS2QUqd8eA2lDeZeQMAqk232aha42XFlEY4O3MMOoZ43VWH4npPt0F7GC7WT7oEIjuS2W7CyH8lgHczOw==
