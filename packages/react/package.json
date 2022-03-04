@@ -20,9 +20,9 @@
         "build": "../../build.sh"
     },
     "dependencies": {
-        "@reshadow/core": "^0.0.1-alpha.82",
-        "@reshadow/runtime": "^0.0.1-alpha.82",
-        "@reshadow/utils": "^0.0.1-alpha.82"
+        "@reshadow/core": "0.0.1-alpha.82",
+        "@reshadow/runtime": "0.0.1-alpha.82",
+        "@reshadow/utils": "0.0.1-alpha.82"
     },
     "optionalDependencies": {
         "react": ">=15"
