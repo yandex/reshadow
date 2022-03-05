@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "@babel/types": "^7.5.5",
-        "@reshadow/utils": "^0.0.1-alpha.82"
+        "@reshadow/utils": "0.0.1-alpha.82"
     },
     "devDependencies": {
         "eslint": "^6.0.1"
