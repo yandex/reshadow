@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.1](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.82...v0.0.1) (2022-03-09)
+
+**Note:** Version bump only for package @reshadow/babel
+
+
+
+
+
 ## [0.0.1-alpha.82](https://github.com/lttb/reshadow/compare/v0.0.1-alpha.81...v0.0.1-alpha.82) (2022-02-11)
 
 **Note:** Version bump only for package @reshadow/babel
