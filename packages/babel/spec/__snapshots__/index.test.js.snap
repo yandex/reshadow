@@ -470,7 +470,9 @@ const styled_c8 = create([(
 /*__reshadow_css_start__*/
 __css__(
 /*__inner_css_start__*/
-\`.___button_1n8fw_1{display:grid}\`
+\`.___button_1n8fw_1 {
+    display: grid;
+}\`
 /*__inner_css_end__*/
 , \\"1n8fwd2\\")
 /*__reshadow_css_end__*/
@@ -497,7 +499,6 @@ const styled_c8 = create([(
 __css__(
 /*__inner_css_start__*/
 \`.___button_ltzzv_1 {
-    -webkit-transition: 1s;
     transition: 1s;
 }\`
 /*__inner_css_end__*/
