@@ -32,7 +32,7 @@
         "extract-loader": "^3.1.0",
         "file-loader": "^4.1.0",
         "memory-fs": "^0.4.1",
-        "postcss-loader": "^3.0.0",
+        "postcss-loader": "^4.0.3",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
         "reshadow": "0.0.1",

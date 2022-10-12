@@ -53,7 +53,7 @@ const syncPlugin = plugin => (root, result) => {
     const {SynchronousPromise} = require('synchronous-promise');
     const realPromise = global.Promise;
     global.Promise = SynchronousPromise;
-    plugin(root, result);
+    postcss([plugin]).process(root, result);
     global.Promise = realPromise;
 };
 

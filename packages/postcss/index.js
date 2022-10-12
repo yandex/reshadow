@@ -1,4 +1,3 @@
-const postcss = require('postcss');
 const createTransform = require('./transform');
 
 const config = {
@@ -13,7 +12,7 @@ const fromPairs = x =>
 
 const sortByKeys = obj => fromPairs(Object.entries(obj).sort());
 
-module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
+const plugin = (options = {}) => {
     const {scope, scopeBehaviour, stats, root: projectRoot} = Object.assign(
         {},
         config,
@@ -25,56 +24,63 @@ module.exports = postcss.plugin('postcss-reshadow', (options = {}) => {
         scopeBehaviour,
     });
 
-    return (root, result) => {
-        if (
-            projectRoot &&
-            typeof result.opts.from === 'string' &&
-            !result.opts.from.startsWith(projectRoot)
-        )
-            return;
-
-        const elements = {};
-        transform.state = {elements};
-
-        root.walkRules(ruleDecl => {
-            const rule = ruleDecl;
-
+    return {
+        postcssPlugin: 'postcss-reshadow',
+        Once(root, result) {
             if (
-                rule.parent.type === 'atrule' &&
-                rule.parent.name.endsWith('keyframes')
-            ) {
+                projectRoot &&
+                typeof result.opts.from === 'string' &&
+                !result.opts.from.startsWith(projectRoot)
+            )
                 return;
-            }
 
-            rule.selector = rule.selector.replace(
-                /]\\?=(['"].*?['"]|[\w]+)/g,
-                '=$1]',
-            );
+            const elements = {};
+            transform.state = {elements};
 
-            const selector = transform.run(rule);
+            root.walkRules(ruleDecl => {
+                const rule = ruleDecl;
 
-            rule.selector = selector;
-        });
+                if (
+                    rule.parent.type === 'atrule' &&
+                    rule.parent.name.endsWith('keyframes')
+                ) {
+                    return;
+                }
 
-        Object.entries(elements).forEach(([, value]) => {
-            const {mods, props} = value;
+                rule.selector = rule.selector.replace(
+                    /]\\?=(['"].*?['"]|[\w]+)/g,
+                    '=$1]',
+                );
 
-            value.mods = sortByKeys(mods);
-            value.props = sortByKeys(props);
-        });
+                const selector = transform.run(rule);
 
-        if (stats) {
-            root.append({
-                name: 'value',
-                params: `__elements__: '${JSON.stringify(
-                    elements,
-                    (key, value) => {
-                        if (value instanceof Set) return Array.from(value);
-
-                        return value;
-                    },
-                )}'`,
+                rule.selector = selector;
             });
-        }
+
+            Object.entries(elements).forEach(([, value]) => {
+                const {mods, props} = value;
+
+                value.mods = sortByKeys(mods);
+                value.props = sortByKeys(props);
+            });
+
+            if (stats) {
+                root.append({
+                    name: 'value',
+                    params: `__elements__: '${JSON.stringify(
+                        elements,
+                        (key, value) => {
+                            if (value instanceof Set) return Array.from(value);
+
+                            return value;
+                        },
+                    )}'`,
+                });
+            }
+        },
     };
-});
+};
+
+plugin.postcss = true;
+
+module.exports = plugin;
